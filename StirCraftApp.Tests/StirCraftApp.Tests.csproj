@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StirCraftApp.Api\StirCraftApp.Api.csproj" />
+    <ProjectReference Include="..\StirCraftApp.Application\StirCraftApp.Application.csproj" />
+    <ProjectReference Include="..\StirCraftApp.Domain\StirCraftApp.Domain.csproj" />
+    <ProjectReference Include="..\StirCraftApp.Infrastructure\StirCraftApp.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
