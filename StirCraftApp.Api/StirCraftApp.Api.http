@@ -1,0 +1,6 @@
+@StirCraftApp.Api_HostAddress = http://localhost:5264
+
+GET {{StirCraftApp.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
