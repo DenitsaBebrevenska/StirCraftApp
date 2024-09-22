@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StirCraftApp.Application\StirCraftApp.Application.csproj" />
     <ProjectReference Include="..\StirCraftApp.Domain\StirCraftApp.Domain.csproj" />
   </ItemGroup>
 

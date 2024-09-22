@@ -12,12 +12,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StirCraftApp.Application\StirCraftApp.Application.csproj" />
-    <ProjectReference Include="..\StirCraftApp.Domain\StirCraftApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>
