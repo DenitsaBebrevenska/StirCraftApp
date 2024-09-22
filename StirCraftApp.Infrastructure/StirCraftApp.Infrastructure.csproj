@@ -21,4 +21,8 @@
     <ProjectReference Include="..\StirCraftApp.Domain\StirCraftApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>
