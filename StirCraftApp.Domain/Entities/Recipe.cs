@@ -3,10 +3,9 @@
 namespace StirCraftApp.Domain.Entities;
 public class Recipe : BaseEntity
 {
-
 	public required string Name { get; set; }
 
-	public string Description { get; set; }
+	public required string Description { get; set; }
 
 	public int Likes { get; set; }
 
