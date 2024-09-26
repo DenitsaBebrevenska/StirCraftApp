@@ -10,4 +10,5 @@ public class Cook : BaseEntity
 	public int RankingPoints { get; set; }
 
 	public Rank Rank { get; set; }
+
 }

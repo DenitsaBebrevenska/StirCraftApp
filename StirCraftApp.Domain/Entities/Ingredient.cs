@@ -6,4 +6,5 @@ public class Ingredient : BaseEntity
 	public bool IsAllergen { get; set; }
 
 	public bool IsVegan { get; set; }
+
 }

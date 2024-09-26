@@ -1,7 +1,8 @@
-﻿using StirCraftApp.Domain.Enums;
+﻿using StirCraftApp.Domain.Contracts;
+using StirCraftApp.Domain.Enums;
 
 namespace StirCraftApp.Domain.Entities;
-public class Recipe : BaseEntity
+public class Recipe : BaseEntity, ISoftDeletable
 {
 	public required string Name { get; set; }
 
@@ -18,4 +19,7 @@ public class Recipe : BaseEntity
 	public DateTime CreatedOn { get; set; }
 
 	public DateTime UpdatedOn { get; set; }
+
+	public bool IsDeleted { get; set; }
+	public int IsDeletedBy { get; set; }
 }
