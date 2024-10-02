@@ -2,6 +2,11 @@
 public static class EntityConstraints
 {
 	//not sure if those will stay in domain...
+
+	//Category
+	public const int CategoryMinLength = 3;
+	public const int CategoryMaxLength = 20;
+
 	//Comment
 	public const int CommentTitleMinLength = 2;
 	public const int CommentTitleMaxLength = 20;
@@ -19,6 +24,14 @@ public static class EntityConstraints
 	//Ingredient
 	public const int IngredientNameMinLength = 2;
 	public const int IngredientNameMaxLength = 100;
+
+	//List
+	public const int ShoppingListNameMinLength = 2;
+	public const int ShoppingListNameMaxLength = 25;
+
+	//Rank
+	public const int RankTitleMinLength = 3;
+	public const int RankTitleMaxLength = 30;
 
 	//Recipe
 	public const int RecipeNameMinLength = 2;
