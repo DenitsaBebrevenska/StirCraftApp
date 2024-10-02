@@ -30,6 +30,10 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
+		builder.Entity<Recipe>()
+			.HasMany<AppUser>()
+			.WithMany(u => u.FavoriteRecipes);
+
 		builder.Entity<Cook>()
 			.HasOne<AppUser>()
 			.WithOne()
@@ -39,13 +43,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.HasOne<AppUser>()
 			.WithOne()
 			.HasForeignKey<Comment>(c => c.UserId);
-
-
-		builder.Entity<RecipeRating>()
-			.HasOne<Recipe>()
-			.WithMany(r => r.RecipeRatings)
-			.HasForeignKey(rr => rr.RecipeId)
-			.OnDelete(DeleteBehavior.ClientNoAction);
 
 		builder.Entity<Reply>()
 			.HasOne<AppUser>()
@@ -59,8 +56,8 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 		builder.Entity<RecipeRating>()
 			.HasOne<AppUser>()
-			.WithOne()
-			.HasForeignKey<RecipeRating>(rr => rr.UserId);
+			.WithMany(r => r.RecipesRatings)
+			.HasForeignKey(rr => rr.UserId);
 
 		var allEntityTypes = builder
 			.Model
