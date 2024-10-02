@@ -84,15 +84,25 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 				.MakeGenericMethod(entityType.ClrType);
 
 			method?.Invoke(null, new object[] { builder });
+
+			ApplyFilteredIndex(builder, entityType.ClrType);
 		}
 
 		base.OnModelCreating(builder);
 	}
 
-	private static void ApplySoftDeleteFilter<TEntity>(ModelBuilder builder) where TEntity : class, ISoftDeletable
+	private static void ApplySoftDeleteFilter<TEntity>(ModelBuilder builder) where TEntity : class
 	{
 		builder.Entity<TEntity>()
-			.HasQueryFilter(e => !e.IsDeleted);
+			.HasQueryFilter(e => EF.Property<bool>(e, "IsDeleted") == false);
+	}
+
+	private static void ApplyFilteredIndex(ModelBuilder builder, Type entityType)
+	{
+		var entityBuilder = builder.Entity(entityType);
+
+		entityBuilder.HasIndex(nameof(ISoftDeletable.IsDeleted))
+			.HasFilter($"[{nameof(ISoftDeletable.IsDeleted)}] = 0");
 	}
 
 }
