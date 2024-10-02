@@ -5,5 +5,5 @@ public class RecipeRating : BaseEntity
 
 	public int RecipeId { get; set; }
 
-	public int UserId { get; set; }
+	public required string UserId { get; set; }
 }

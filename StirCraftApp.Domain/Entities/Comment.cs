@@ -1,11 +1,10 @@
-﻿using StirCraftApp.Domain.Contracts;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constraints.EntityConstraints;
 
 namespace StirCraftApp.Domain.Entities;
-public sealed class Comment : BaseEntity, ISoftDeletable
+public class Comment : BaseEntity
 {
-	public int UserId { get; set; }
+	public required string UserId { get; set; }
 
 	public int RecipeId { get; set; }
 
@@ -14,6 +13,5 @@ public sealed class Comment : BaseEntity, ISoftDeletable
 
 	[MaxLength(CommentBodyMaxLength)]
 	public required string Body { get; set; }
-	public bool IsDeleted { get; set; }
-	public int IsDeletedBy { get; set; }
+	public virtual ICollection<Reply> Replies { get; set; } = new List<Reply>();
 }

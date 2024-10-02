@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace StirCraftApp.Domain.Entities;
-using static StirCraftApp.Domain.Constraints.EntityConstraints;
+using static Constraints.EntityConstraints;
 
 public class Cook : BaseEntity
 {
-	public int UserId { get; set; }
+	public required string UserId { get; set; }
 
 	[MaxLength(CookAboutMaxLength)]
 	public required string About { get; set; }

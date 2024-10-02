@@ -8,4 +8,6 @@ public class RecipeIngredient : BaseEntity
 	public MeasurementUnit? MeasurementUnit { get; set; }
 
 	public int RecipeId { get; set; }
+
+	public virtual ICollection<ShoppingList> ShoppingLists { get; set; } = new List<ShoppingList>();
 }

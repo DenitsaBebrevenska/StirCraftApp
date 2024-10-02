@@ -12,5 +12,4 @@ public class Ingredient : BaseEntity
 	public bool IsVegan { get; set; }
 
 	public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
-
 }
