@@ -3,7 +3,7 @@
 namespace StirCraftApp.Domain.ValueObjects;
 public class RankPoints
 {
-	public int Points { get; }
+	private int Points { get; }
 
 	public RankPoints(int points)
 	{

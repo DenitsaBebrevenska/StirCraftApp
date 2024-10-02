@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StirCraftApp.Domain.Contracts;
+﻿namespace StirCraftApp.Domain.Contracts;
 internal interface IUnitOfWork
 {
+	//maybe the repository will be changed so it will be as well unit of work
 }

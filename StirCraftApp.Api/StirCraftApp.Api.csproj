@@ -20,4 +20,8 @@
     <ProjectReference Include="..\StirCraftApp.Infrastructure\StirCraftApp.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
