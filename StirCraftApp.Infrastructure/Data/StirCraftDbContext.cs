@@ -40,6 +40,13 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.WithOne()
 			.HasForeignKey<Comment>(c => c.UserId);
 
+
+		builder.Entity<RecipeRating>()
+			.HasOne<Recipe>()
+			.WithMany(r => r.RecipeRatings)
+			.HasForeignKey(rr => rr.RecipeId)
+			.OnDelete(DeleteBehavior.ClientNoAction);
+
 		builder.Entity<Reply>()
 			.HasOne<AppUser>()
 			.WithOne()
@@ -47,17 +54,27 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 		builder.Entity<ShoppingList>()
 			.HasOne<AppUser>()
-			.WithOne()
-			.HasForeignKey<ShoppingList>(s => s.UserId);
+			.WithMany(u => u.ShoppingLists)
+			.HasForeignKey(s => s.UserId);
 
 		builder.Entity<RecipeRating>()
 			.HasOne<AppUser>()
 			.WithOne()
 			.HasForeignKey<RecipeRating>(rr => rr.UserId);
 
-		var softDeletables = builder
+		var allEntityTypes = builder
 			.Model
-			.GetEntityTypes()
+			.GetEntityTypes();
+
+		foreach (var entityType in allEntityTypes)
+		{
+			foreach (var fk in entityType.GetForeignKeys())
+			{
+				fk.DeleteBehavior = DeleteBehavior.ClientNoAction;
+			}
+		}
+
+		var softDeletables = allEntityTypes
 			.Where(et => typeof(ISoftDeletable).IsAssignableFrom(et.ClrType));
 
 		foreach (var entityType in softDeletables)
@@ -69,11 +86,8 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			method?.Invoke(null, new object[] { builder });
 		}
 
-
 		base.OnModelCreating(builder);
-
 	}
-
 
 	private static void ApplySoftDeleteFilter<TEntity>(ModelBuilder builder) where TEntity : class, ISoftDeletable
 	{
