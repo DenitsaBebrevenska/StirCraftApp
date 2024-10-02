@@ -3,11 +3,11 @@ public interface ISoftDeletable
 {
 	bool IsDeleted { get; set; }
 
-	int IsDeletedBy { get; set; }
+	DateTime? DeletedOnUtc { get; set; }
 
 	public void Undo()
 	{
 		IsDeleted = false;
-		IsDeletedBy = default;
+		DeletedOnUtc = null;
 	}
 }
