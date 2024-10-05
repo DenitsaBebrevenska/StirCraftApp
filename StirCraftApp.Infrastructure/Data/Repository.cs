@@ -1,36 +1,33 @@
-﻿using StirCraftApp.Domain.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Infrastructure.Data;
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+public class Repository<TEntity>(StirCraftDbContext context) : IRepository<TEntity>
+	where TEntity : BaseEntity
 {
-	public async Task<TEntity> GetAsync(int id)
-	{
-		throw new NotImplementedException();
-	}
+	private DbSet<TEntity> GetDbSet()
+		=> context.Set<TEntity>();
+
+	public async Task<TEntity?> GetByIdAsync(int id)
+		=> await GetDbSet()
+			.FindAsync(id);
 
 	public async Task<IEnumerable<TEntity>> GetAllAsync()
-	{
-		throw new NotImplementedException();
-	}
+		=> await GetDbSet()
+			.ToListAsync();
 
 	public async Task<IEnumerable<TEntity>> GetAllAsReadOnlyAsync()
-	{
-		throw new NotImplementedException();
-	}
+		=> await GetDbSet()
+			.AsNoTracking()
+			.ToListAsync();
 
 	public async Task AddAsync(TEntity entity)
-	{
-		throw new NotImplementedException();
-	}
+		=> await context.AddAsync(entity);
 
-	public async Task UpdateAsync(TEntity entity)
-	{
-		throw new NotImplementedException();
-	}
+	public void Delete(TEntity obj)
+		=> context.Remove(obj);
 
-	public async Task DeleteAsync(int id)
-	{
-		throw new NotImplementedException();
-	}
+	public async Task SaveAllChangesAsync()
+		=> await context.SaveChangesAsync();
 }
