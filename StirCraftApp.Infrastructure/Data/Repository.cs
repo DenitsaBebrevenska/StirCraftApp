@@ -17,16 +17,24 @@ public class Repository<TEntity>(StirCraftDbContext context) : IRepository<TEnti
 		=> await GetDbSet()
 			.ToListAsync();
 
-	public async Task<IEnumerable<TEntity>> GetAllAsReadOnlyAsync()
+	public async Task<IReadOnlyList<TEntity>> GetAllAsReadOnlyAsync()
 		=> await GetDbSet()
 			.AsNoTracking()
 			.ToListAsync();
 
 	public async Task AddAsync(TEntity entity)
-		=> await context.AddAsync(entity);
+		=> await GetDbSet()
+			.AddAsync(entity);
 
 	public void Delete(TEntity obj)
-		=> context.Remove(obj);
+		=> GetDbSet()
+			.Remove(obj);
+
+	public void Update(TEntity entity)
+	{
+		GetDbSet().Attach(entity);
+		context.Entry(entity).State = EntityState.Modified;
+	}
 
 	public async Task SaveAllChangesAsync()
 		=> await context.SaveChangesAsync();
