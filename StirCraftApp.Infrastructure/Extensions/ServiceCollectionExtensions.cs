@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Infrastructure.Data;
 using StirCraftApp.Infrastructure.Data.Interceptors;
 
@@ -15,6 +16,8 @@ public static class ServiceCollectionExtensions
 
 		services.AddDbContext<StirCraftDbContext>(options => options.UseSqlServer(connectionString)
 			.AddInterceptors(new SoftDeleteInterceptor()));
+
+		services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 		return services;
 	}
