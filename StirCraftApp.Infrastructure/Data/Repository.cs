@@ -13,6 +13,10 @@ public class Repository<TEntity>(StirCraftDbContext context) : IRepository<TEnti
 		=> await GetDbSet()
 			.FindAsync(id);
 
+	public async Task<TEntity?> GetEntityWithSpecAsync(ISpecification<TEntity> spec)
+		=> await ApplySpecification(spec)
+			.FirstOrDefaultAsync();
+
 	public async Task<IEnumerable<TEntity>> GetAllAsync()
 		=> await GetDbSet()
 			.ToListAsync();
@@ -20,6 +24,10 @@ public class Repository<TEntity>(StirCraftDbContext context) : IRepository<TEnti
 	public async Task<IReadOnlyList<TEntity>> GetAllAsReadOnlyAsync()
 		=> await GetDbSet()
 			.AsNoTracking()
+			.ToListAsync();
+
+	public async Task<IEnumerable<TEntity>> GetAllWithSpecAsync(ISpecification<TEntity> spec)
+		=> await ApplySpecification(spec)
 			.ToListAsync();
 
 	public async Task AddAsync(TEntity entity)
@@ -38,4 +46,11 @@ public class Repository<TEntity>(StirCraftDbContext context) : IRepository<TEnti
 
 	public async Task SaveAllChangesAsync()
 		=> await context.SaveChangesAsync();
+
+	private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
+	{
+		var query = GetDbSet()
+			.AsQueryable();
+		return SpecificationEvaluator<TEntity>.GetQuery(query, spec);
+	}
 }
