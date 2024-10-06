@@ -22,4 +22,18 @@ public class RecipesController : ControllerBase
 
 		return Ok(recipes);
 	}
+
+	[HttpGet("{id:int}")]
+	public async Task<IActionResult> GetRecipe(int id)
+	{
+		var recipe = await _recipeRepository
+			.GetByIdAsync(id);
+
+		if (recipe == null)
+		{
+			return NotFound();
+		}
+
+		return Ok(recipe);
+	}
 }
