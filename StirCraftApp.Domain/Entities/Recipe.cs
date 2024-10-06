@@ -21,6 +21,11 @@ public class Recipe : BaseEntity
 
 	public DateTime UpdatedOn { get; set; }
 
+	public bool IsAdminApproved { get; set; }
+
+	[MaxLength(RecipeAdminNotesMaxLength)]
+	public string? AdminNotes { get; set; }
+
 	public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 	public virtual ICollection<RecipeRating> RecipeRatings { get; set; } = new List<RecipeRating>();
 

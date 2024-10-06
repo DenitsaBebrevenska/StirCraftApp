@@ -38,6 +38,8 @@ public static class EntityConstraints
 	public const int RecipeNameMaxLength = 100;
 	public const int RecipeDescriptionMinLength = 50;
 	public const int RecipeDescriptionMaxLength = 2_000;
+	public const int RecipeAdminNotesMinLength = 2;
+	public const int RecipeAdminNotesMaxLength = 250;
 
 	//Image that will stay if is in user control
 	public const int ImageUrlMaxLength = 2_048;
