@@ -1,4 +1,6 @@
 using Microsoft.OpenApi.Models;
+using StirCraftApp.Infrastructure.Data;
+using StirCraftApp.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,11 @@ builder.Services.AddSwaggerGen(c =>
 	});
 });
 
+builder.Services.AddAuthorization();
+builder.Services.AddIdentityApiEndpoints<AppUser>()
+	.AddEntityFrameworkStores<StirCraftDbContext>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,5 +44,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapIdentityApi<AppUser>();
 
 app.Run();
