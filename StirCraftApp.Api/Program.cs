@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using StirCraftApp.Infrastructure.Data;
 using StirCraftApp.Infrastructure.Identity;
@@ -24,6 +25,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>()
+	.AddRoles<IdentityRole>()
 	.AddEntityFrameworkStores<StirCraftDbContext>();
 
 
@@ -44,6 +46,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapIdentityApi<AppUser>();
+app.MapGroup("api").MapIdentityApi<AppUser>();
 
 app.Run();
