@@ -44,9 +44,6 @@ public class Repository<TEntity>(StirCraftDbContext context) : IRepository<TEnti
 		context.Entry(entity).State = EntityState.Modified;
 	}
 
-	public async Task SaveAllChangesAsync()
-		=> await context.SaveChangesAsync();
-
 	private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
 	{
 		var query = GetDbSet()
