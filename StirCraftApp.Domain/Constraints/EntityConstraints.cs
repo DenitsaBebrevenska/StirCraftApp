@@ -49,4 +49,9 @@ public static class EntityConstraints
 	public const int UnitNameMaxLength = 20;
 	public const int UnitAbbreviationMinLength = 1;
 	public const int UnitAbbreviationMaxLength = 5;
+
+	//User
+	public const int UserDisplayNameMinLength = 3;
+	public const int UserDisplayNameMaxLength = 100;
+
 }

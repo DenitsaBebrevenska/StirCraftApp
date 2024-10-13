@@ -7,6 +7,9 @@ using static StirCraftApp.Domain.Constraints.EntityConstraints;
 namespace StirCraftApp.Infrastructure.Identity;
 public class AppUser : IdentityUser, ISoftDeletable
 {
+	[MaxLength(UserDisplayNameMaxLength)]
+	public string? DisplayName { get; set; }
+
 	[MaxLength(ImageUrlMaxLength)]
 	public string? AvatarUrl { get; set; }
 	public virtual ICollection<Recipe> FavoriteRecipes { get; set; } = new List<Recipe>();
