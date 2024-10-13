@@ -39,6 +39,11 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.WithOne()
 			.HasForeignKey<Cook>(c => c.UserId);
 
+		builder.Entity<Cook>()
+			.HasOne<CookingRank>()
+			.WithMany(r => r.CooksWithThatRank)
+			.HasForeignKey(c => c.CookingRankId);
+
 		builder.Entity<Comment>()
 			.HasOne<AppUser>()
 			.WithOne()
@@ -56,8 +61,17 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 		builder.Entity<RecipeRating>()
 			.HasOne<AppUser>()
-			.WithMany(r => r.RecipesRatings)
+			.WithMany(u => u.RecipesRatings)
 			.HasForeignKey(rr => rr.UserId);
+
+		builder.Entity<RecipeIngredient>()
+			.HasOne<MeasurementUnit>()
+			.WithMany(m => m.RecipeIngredients)
+			.HasForeignKey(ri => ri.MeasurementUnitId);
+
+		builder.Entity<AppUser>()
+			.HasIndex(u => u.DisplayName)
+			.IsUnique();
 
 		var allEntityTypes = builder
 			.Model

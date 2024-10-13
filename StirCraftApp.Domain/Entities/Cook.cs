@@ -12,7 +12,7 @@ public class Cook : BaseEntity
 
 	public uint RankingPoints { get; set; }
 
-	public required CookingRank Rank { get; set; }
+	public int CookingRankId { get; set; }
 
 	public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
 
