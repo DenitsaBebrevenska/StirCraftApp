@@ -9,7 +9,10 @@ public class Ingredient : BaseEntity
 
 	public bool IsAllergen { get; set; }
 
-	public bool IsVegan { get; set; }
+	[MaxLength(IngredientPluralNameMaxLength)]
+	public string? NameInPlural { get; set; }
+
+	public virtual ICollection<MeasurementUnit> PossibleMeasurementUnits { get; set; } = new List<MeasurementUnit>();
 
 	public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }

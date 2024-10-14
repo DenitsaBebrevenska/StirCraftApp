@@ -9,7 +9,7 @@ public class Recipe : BaseEntity
 	public required string Name { get; set; }
 
 	[MaxLength(RecipeDescriptionMaxLength)]
-	public required string Description { get; set; }
+	public required string PreparationSteps { get; set; }
 
 	public uint Likes { get; set; }
 

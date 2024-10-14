@@ -24,6 +24,8 @@ public static class EntityConstraints
 	//Ingredient
 	public const int IngredientNameMinLength = 2;
 	public const int IngredientNameMaxLength = 100;
+	public const int IngredientPluralNameMinLength = 3;
+	public const int IngredientPluralNameMaxLength = 104;
 
 	//List
 	public const int ShoppingListNameMinLength = 2;

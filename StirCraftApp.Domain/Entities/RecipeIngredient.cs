@@ -3,7 +3,7 @@ public class RecipeIngredient : BaseEntity
 {
 	public int IngredientId { get; set; }
 
-	public uint Quantity { get; set; }
+	public uint? Quantity { get; set; }
 
 	public int? MeasurementUnitId { get; set; }
 
