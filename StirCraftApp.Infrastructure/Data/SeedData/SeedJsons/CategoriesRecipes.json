@@ -1,0 +1,42 @@
+[
+  {
+    "CategoriesId": 4,
+    "RecipesId": 1
+  },
+  {
+    "CategoriesId": 8,
+    "RecipesId": 1
+  },
+  {
+    "CategoriesId": 9,
+    "RecipesId": 2
+  },
+  {
+    "CategoriesId": 10,
+    "RecipesId": 2
+  },
+  {
+    "CategoriesId": 6,
+    "RecipesId": 2
+  },
+  {
+    "CategoriesId": 11,
+    "RecipesId": 3
+  },
+  {
+    "CategoriesId": 16,
+    "RecipesId": 3
+  },
+  {
+    "CategoriesId": 18,
+    "RecipesId": 4
+  },
+  {
+    "CategoriesId": 16,
+    "RecipesId": 4
+  },
+  {
+    "CategoriesId": 21,
+    "RecipesId": 5
+  }
+]

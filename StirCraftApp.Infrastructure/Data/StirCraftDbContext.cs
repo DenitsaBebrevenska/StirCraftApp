@@ -28,6 +28,8 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 	public DbSet<Reply> Replies { get; set; } = null!;
 
+	public DbSet<CookingRank> CookingRanks { get; set; } = null!;
+
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
 		builder.Entity<Recipe>()
@@ -68,6 +70,10 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.HasOne<MeasurementUnit>()
 			.WithMany(m => m.RecipeIngredients)
 			.HasForeignKey(ri => ri.MeasurementUnitId);
+
+		builder.Entity<MeasurementUnit>()
+			.HasMany(mu => mu.IngredientsThatCanHaveThatUnit)
+			.WithMany(i => i.PossibleMeasurementUnits);
 
 		builder.Entity<AppUser>()
 			.HasIndex(u => u.DisplayName)

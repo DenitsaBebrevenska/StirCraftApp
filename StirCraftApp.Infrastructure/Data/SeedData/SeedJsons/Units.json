@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "Name": "Gram",
+    "Abbreviation": "g"
+  },
+  {
+    "Id": 2,
+    "Name": "Kilogram",
+    "Abbreviation": "kg"
+  },
+  {
+    "Id": 3,
+    "Name": "Milligram",
+    "Abbreviation": "mg"
+  },
+  {
+    "Id": 4,
+    "Name": "Ounce",
+    "Abbreviation": "oz"
+  },
+  {
+    "Id": 5,
+    "Name": "Pound",
+    "Abbreviation": "lb"
+  },
+  {
+    "Id": 6,
+    "Name": "Liter",
+    "Abbreviation": "L"
+  },
+  {
+    "Id": 7,
+    "Name": "Milliliter",
+    "Abbreviation": "mL"
+  },
+  {
+    "Id": 8,
+    "Name": "Teaspoon",
+    "Abbreviation": "tsp"
+  },
+  {
+    "Id": 9,
+    "Name": "Tablespoon",
+    "Abbreviation": "tbsp"
+  },
+  {
+    "Id": 10,
+    "Name": "Cup",
+    "Abbreviation": "cup"
+  },
+  {
+    "Id": 11,
+    "Name": "Fluid Ounce",
+    "Abbreviation": "fl oz"
+  }
+]
