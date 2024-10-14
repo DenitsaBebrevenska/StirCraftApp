@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StirCraftApp.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StirCraftApp.Infrastructure.Data;
 namespace StirCraftApp.Infrastructure.Migrations
 {
     [DbContext(typeof(StirCraftDbContext))]
-    partial class StirCraftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241014090831_NewColumnsIngredientsAndUnitsRelations")]
+    partial class NewColumnsIngredientsAndUnitsRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("FavoriteRecipesId");
 
-                    b.ToTable("AppUserRecipe", (string)null);
+                    b.ToTable("AppUserRecipe");
                 });
 
             modelBuilder.Entity("CategoryRecipe", b =>
@@ -49,7 +52,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("RecipesId");
 
-                    b.ToTable("CategoryRecipe", (string)null);
+                    b.ToTable("CategoryRecipe");
                 });
 
             modelBuilder.Entity("IngredientMeasurementUnit", b =>
@@ -64,7 +67,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("PossibleMeasurementUnitsId");
 
-                    b.ToTable("IngredientMeasurementUnit", (string)null);
+                    b.ToTable("IngredientMeasurementUnit");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -212,7 +215,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("ShoppingListsId");
 
-                    b.ToTable("RecipeIngredientShoppingList", (string)null);
+                    b.ToTable("RecipeIngredientShoppingList");
                 });
 
             modelBuilder.Entity("RecipeRecipeIngredient", b =>
@@ -227,7 +230,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("RecipesId");
 
-                    b.ToTable("RecipeRecipeIngredient", (string)null);
+                    b.ToTable("RecipeRecipeIngredient");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Category", b =>
@@ -254,7 +257,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Comment", b =>
@@ -298,7 +301,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Cook", b =>
@@ -340,7 +343,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Cooks", (string)null);
+                    b.ToTable("Cooks");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.CookingRank", b =>
@@ -370,7 +373,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("CookingRank", (string)null);
+                    b.ToTable("CookingRank");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Ingredient", b =>
@@ -404,7 +407,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("Ingredients", (string)null);
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.MeasurementUnit", b =>
@@ -436,7 +439,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("MeasurementUnits", (string)null);
+                    b.ToTable("MeasurementUnits");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Recipe", b =>
@@ -492,7 +495,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeImage", b =>
@@ -524,7 +527,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeImages", (string)null);
+                    b.ToTable("RecipeImages");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeIngredient", b =>
@@ -562,7 +565,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("MeasurementUnitId");
 
-                    b.ToTable("RecipeIngredients", (string)null);
+                    b.ToTable("RecipeIngredients");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeRating", b =>
@@ -598,7 +601,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RecipeRatings", (string)null);
+                    b.ToTable("RecipeRatings");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Reply", b =>
@@ -637,7 +640,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Replies", (string)null);
+                    b.ToTable("Replies");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
@@ -669,7 +672,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingList", (string)null);
+                    b.ToTable("ShoppingList");
                 });
 
             modelBuilder.Entity("StirCraftApp.Infrastructure.Identity.AppUser", b =>
