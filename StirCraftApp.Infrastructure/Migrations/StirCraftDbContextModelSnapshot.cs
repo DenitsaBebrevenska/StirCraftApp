@@ -34,7 +34,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("FavoriteRecipesId");
 
-                    b.ToTable("AppUserRecipe");
+                    b.ToTable("AppUserRecipe", (string)null);
                 });
 
             modelBuilder.Entity("CategoryRecipe", b =>
@@ -49,7 +49,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("RecipesId");
 
-                    b.ToTable("CategoryRecipe");
+                    b.ToTable("CategoryRecipe", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -187,23 +187,17 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             modelBuilder.Entity("RecipeIngredientShoppingList", b =>
                 {
+                    b.Property<int>("RecipeIngredientsId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ShoppingListsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IngredientsRecipeId")
-                        .HasColumnType("int");
+                    b.HasKey("RecipeIngredientsId", "ShoppingListsId");
 
-                    b.Property<int>("IngredientsMeasurementUnitId")
-                        .HasColumnType("int");
+                    b.HasIndex("ShoppingListsId");
 
-                    b.Property<int>("IngredientsIngredientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ShoppingListsId", "IngredientsRecipeId", "IngredientsMeasurementUnitId", "IngredientsIngredientId");
-
-                    b.HasIndex("IngredientsRecipeId", "IngredientsMeasurementUnitId", "IngredientsIngredientId");
-
-                    b.ToTable("RecipeIngredientShoppingList");
+                    b.ToTable("RecipeIngredientShoppingList", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Category", b =>
@@ -230,7 +224,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Comment", b =>
@@ -274,7 +268,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Cook", b =>
@@ -316,7 +310,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Cooks");
+                    b.ToTable("Cooks", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.CookingRank", b =>
@@ -346,7 +340,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("CookingRanks");
+                    b.ToTable("CookingRanks", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Ingredient", b =>
@@ -383,7 +377,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.MeasurementUnit", b =>
@@ -421,7 +415,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("MeasurementUnits");
+                    b.ToTable("MeasurementUnits", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Recipe", b =>
@@ -477,7 +471,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeImage", b =>
@@ -509,33 +503,36 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeImages");
+                    b.ToTable("RecipeImages", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeIngredient", b =>
                 {
-                    b.Property<int>("RecipeId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("MeasurementUnitId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IngredientId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DeletedOnUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("IngredientId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("MeasurementUnitId")
+                        .HasColumnType("int");
+
                     b.Property<long?>("Quantity")
                         .HasColumnType("bigint");
 
-                    b.HasKey("RecipeId", "MeasurementUnitId", "IngredientId");
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("IngredientId");
 
@@ -544,7 +541,9 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("MeasurementUnitId");
 
-                    b.ToTable("RecipeIngredients");
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("RecipeIngredients", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeRating", b =>
@@ -580,7 +579,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RecipeRatings");
+                    b.ToTable("RecipeRatings", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Reply", b =>
@@ -619,7 +618,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Replies");
+                    b.ToTable("Replies", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
@@ -651,7 +650,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingList");
+                    b.ToTable("ShoppingList", (string)null);
                 });
 
             modelBuilder.Entity("StirCraftApp.Infrastructure.Identity.AppUser", b =>
@@ -823,15 +822,15 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             modelBuilder.Entity("RecipeIngredientShoppingList", b =>
                 {
-                    b.HasOne("StirCraftApp.Domain.Entities.ShoppingList", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.RecipeIngredient", null)
                         .WithMany()
-                        .HasForeignKey("ShoppingListsId")
+                        .HasForeignKey("RecipeIngredientsId")
                         .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Domain.Entities.RecipeIngredient", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.ShoppingList", null)
                         .WithMany()
-                        .HasForeignKey("IngredientsRecipeId", "IngredientsMeasurementUnitId", "IngredientsIngredientId")
+                        .HasForeignKey("ShoppingListsId")
                         .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
                 });
@@ -895,8 +894,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasOne("StirCraftApp.Domain.Entities.MeasurementUnit", null)
                         .WithMany("RecipeIngredients")
                         .HasForeignKey("MeasurementUnitId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("StirCraftApp.Domain.Entities.Recipe", null)
                         .WithMany("RecipeIngredients")

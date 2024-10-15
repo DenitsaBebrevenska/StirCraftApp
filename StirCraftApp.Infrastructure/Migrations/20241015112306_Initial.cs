@@ -94,6 +94,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsAllergen = table.Column<bool>(type: "bit", nullable: false),
                     NameInPlural = table.Column<string>(type: "nvarchar(104)", maxLength: 104, nullable: true),
+                    IsSolid = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -110,6 +111,8 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Abbreviation = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    IsLiquidSpecific = table.Column<bool>(type: "bit", nullable: false),
+                    IsSolidSpecific = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -274,28 +277,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IngredientMeasurementUnit",
-                columns: table => new
-                {
-                    IngredientsId = table.Column<int>(type: "int", nullable: false),
-                    MeasurementUnitsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IngredientMeasurementUnit", x => new { x.IngredientsId, x.MeasurementUnitsId });
-                    table.ForeignKey(
-                        name: "FK_IngredientMeasurementUnit_Ingredients_IngredientsId",
-                        column: x => x.IngredientsId,
-                        principalTable: "Ingredients",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_IngredientMeasurementUnit_MeasurementUnits_MeasurementUnitsId",
-                        column: x => x.MeasurementUnitsId,
-                        principalTable: "MeasurementUnits",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Recipes",
                 columns: table => new
                 {
@@ -420,17 +401,18 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "RecipeIngredients",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     IngredientId = table.Column<int>(type: "int", nullable: false),
-                    MeasurementUnitId = table.Column<int>(type: "int", nullable: false),
-                    RecipeId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<long>(type: "bigint", nullable: true),
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    MeasurementUnitId = table.Column<int>(type: "int", nullable: true),
+                    RecipeId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeIngredients", x => new { x.RecipeId, x.MeasurementUnitId, x.IngredientId });
+                    table.PrimaryKey("PK_RecipeIngredients", x => x.Id);
                     table.ForeignKey(
                         name: "FK_RecipeIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
@@ -506,19 +488,17 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "RecipeIngredientShoppingList",
                 columns: table => new
                 {
-                    ShoppingListsId = table.Column<int>(type: "int", nullable: false),
-                    IngredientsRecipeId = table.Column<int>(type: "int", nullable: false),
-                    IngredientsMeasurementUnitId = table.Column<int>(type: "int", nullable: false),
-                    IngredientsIngredientId = table.Column<int>(type: "int", nullable: false)
+                    RecipeIngredientsId = table.Column<int>(type: "int", nullable: false),
+                    ShoppingListsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeIngredientShoppingList", x => new { x.ShoppingListsId, x.IngredientsRecipeId, x.IngredientsMeasurementUnitId, x.IngredientsIngredientId });
+                    table.PrimaryKey("PK_RecipeIngredientShoppingList", x => new { x.RecipeIngredientsId, x.ShoppingListsId });
                     table.ForeignKey(
-                        name: "FK_RecipeIngredientShoppingList_RecipeIngredients_IngredientsRecipeId_IngredientsMeasurementUnitId_IngredientsIngredientId",
-                        columns: x => new { x.IngredientsRecipeId, x.IngredientsMeasurementUnitId, x.IngredientsIngredientId },
+                        name: "FK_RecipeIngredientShoppingList_RecipeIngredients_RecipeIngredientsId",
+                        column: x => x.RecipeIngredientsId,
                         principalTable: "RecipeIngredients",
-                        principalColumns: new[] { "RecipeId", "MeasurementUnitId", "IngredientId" });
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_RecipeIngredientShoppingList_ShoppingList_ShoppingListsId",
                         column: x => x.ShoppingListsId,
@@ -635,11 +615,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_IngredientMeasurementUnit_MeasurementUnitsId",
-                table: "IngredientMeasurementUnit",
-                column: "MeasurementUnitsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Ingredients_IsDeleted",
                 table: "Ingredients",
                 column: "IsDeleted",
@@ -679,9 +654,14 @@ namespace StirCraftApp.Infrastructure.Migrations
                 column: "MeasurementUnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngredientShoppingList_IngredientsRecipeId_IngredientsMeasurementUnitId_IngredientsIngredientId",
+                name: "IX_RecipeIngredients_RecipeId",
+                table: "RecipeIngredients",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipeIngredientShoppingList_ShoppingListsId",
                 table: "RecipeIngredientShoppingList",
-                columns: new[] { "IngredientsRecipeId", "IngredientsMeasurementUnitId", "IngredientsIngredientId" });
+                column: "ShoppingListsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeRatings_IsDeleted",
@@ -762,9 +742,6 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "CategoryRecipe");
-
-            migrationBuilder.DropTable(
-                name: "IngredientMeasurementUnit");
 
             migrationBuilder.DropTable(
                 name: "RecipeImages");

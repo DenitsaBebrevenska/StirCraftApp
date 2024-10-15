@@ -8,4 +8,6 @@ public class RecipeImage : BaseEntity
 	public required string Url { get; set; }
 
 	public int RecipeId { get; set; }
+
+	public virtual required Recipe Recipe { get; set; }
 }

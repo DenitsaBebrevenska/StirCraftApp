@@ -14,6 +14,8 @@ public class Cook : BaseEntity
 
 	public int CookingRankId { get; set; }
 
+	public virtual required CookingRank CookingRank { get; set; }
+
 	public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
 
 }

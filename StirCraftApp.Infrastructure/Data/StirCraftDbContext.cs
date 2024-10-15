@@ -41,11 +41,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.WithOne()
 			.HasForeignKey<Cook>(c => c.UserId);
 
-		builder.Entity<Cook>()
-			.HasOne<CookingRank>()
-			.WithMany(r => r.CooksWithThatRank)
-			.HasForeignKey(c => c.CookingRankId);
-
 		builder.Entity<Comment>()
 			.HasOne<AppUser>()
 			.WithOne()
@@ -65,33 +60,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.HasOne<AppUser>()
 			.WithMany(u => u.RecipesRatings)
 			.HasForeignKey(rr => rr.UserId);
-
-		builder.Entity<RecipeIngredient>()
-			.HasKey(ri => new
-			{
-				ri.RecipeId,
-				ri.MeasurementUnitId,
-				ri.IngredientId
-			});
-
-		builder.Entity<RecipeIngredient>()
-			.HasOne<Recipe>()
-			.WithMany(r => r.RecipeIngredients)
-			.HasForeignKey(ri => ri.RecipeId);
-
-		builder.Entity<RecipeIngredient>()
-			.HasOne<Ingredient>()
-			.WithMany(i => i.RecipeIngredients)
-			.HasForeignKey(ri => ri.IngredientId);
-
-		builder.Entity<RecipeIngredient>()
-			.HasOne<MeasurementUnit>()
-			.WithMany(mu => mu.RecipeIngredients)
-			.HasForeignKey(ri => ri.MeasurementUnitId);
-
-		builder.Entity<Ingredient>()
-			.HasMany(i => i.MeasurementUnits)
-			.WithMany(mu => mu.Ingredients);
 
 		builder.Entity<AppUser>()
 			.HasIndex(u => u.DisplayName)

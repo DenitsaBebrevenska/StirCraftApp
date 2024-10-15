@@ -8,6 +8,8 @@ public class Reply : BaseEntity
 
 	public int CommentId { get; set; }
 
+	public virtual required Comment Comment { get; set; }
+
 	[MaxLength(ReplyBodyMaxLength)]
 	public required string Body { get; set; }
 }
