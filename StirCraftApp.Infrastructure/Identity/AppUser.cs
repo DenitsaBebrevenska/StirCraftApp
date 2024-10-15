@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using StirCraftApp.Infrastructure.Data.JoinedTables;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constraints.EntityConstraints;
 
@@ -12,7 +13,7 @@ public class AppUser : IdentityUser, ISoftDeletable
 
 	[MaxLength(ImageUrlMaxLength)]
 	public string? AvatarUrl { get; set; }
-	public virtual ICollection<Recipe> FavoriteRecipes { get; set; } = new List<Recipe>();
+	public virtual ICollection<UserFavoriteRecipe> FavoriteRecipes { get; set; } = new List<UserFavoriteRecipe>();
 
 	public virtual ICollection<ShoppingList> ShoppingLists { get; set; } = new List<ShoppingList>();
 

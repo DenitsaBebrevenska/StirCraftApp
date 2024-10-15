@@ -60,6 +60,21 @@ public static class SeedDataHelper
 		{
 			await context.CookingRanks.AddRangeAsync(cookingRanks);
 		}
+
+		//Seed Units
+		var measurementUnits = await LoadJsonDataAsync<MeasurementUnit>("Units");
+		if (measurementUnits != null)
+		{
+			await context.MeasurementUnits.AddRangeAsync(measurementUnits);
+		}
+
+		//Seed Recipes
+		var recipes = await LoadJsonDataAsync<Recipe>("Recipes");
+		if (recipes != null)
+		{
+			await context.Recipes.AddRangeAsync(recipes);
+		}
+
 	}
 
 	private static async Task<List<T>?> LoadJsonDataAsync<T>(string fileName) where T : class

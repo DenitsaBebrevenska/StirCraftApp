@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using StirCraftApp.Infrastructure.Data.JoinedTables;
 using StirCraftApp.Infrastructure.Identity;
 using System.Reflection;
 
@@ -30,12 +31,16 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 	public DbSet<CookingRank> CookingRanks { get; set; } = null!;
 
+	public DbSet<ShoppingList> ShoppingLists { get; set; } = null!;
+
+	public DbSet<UserFavoriteRecipe> UsersFavoriteRecipes { get; set; } = null!;
+
+	public DbSet<CategoryRecipe> CategoriesRecipes { get; set; } = null!;
+
+	public DbSet<ShoppingListRecipeIngredient> ShoppingListsRecipeIngredients { get; set; } = null!;
+
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
-		builder.Entity<Recipe>()
-			.HasMany<AppUser>()
-			.WithMany(u => u.FavoriteRecipes);
-
 		builder.Entity<Cook>()
 			.HasOne<AppUser>()
 			.WithOne()
@@ -61,6 +66,15 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.WithMany(u => u.RecipesRatings)
 			.HasForeignKey(rr => rr.UserId);
 
+		builder.Entity<UserFavoriteRecipe>()
+			.HasKey(ufr => new { ufr.UserId, ufr.RecipeId });
+
+		builder.Entity<CategoryRecipe>()
+			.HasKey(cr => new { cr.CategoryId, cr.RecipeId });
+
+		builder.Entity<ShoppingListRecipeIngredient>()
+			.HasKey(slri => new { slri.ShoppingListId, slri.RecipeIngredientId });
+
 		builder.Entity<AppUser>()
 			.HasIndex(u => u.DisplayName)
 			.IsUnique();
@@ -73,9 +87,18 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 		{
 			foreach (var fk in entityType.GetForeignKeys())
 			{
-				fk.DeleteBehavior = DeleteBehavior.ClientNoAction;
+				fk.DeleteBehavior = DeleteBehavior.NoAction;
 			}
 		}
+
+		builder.Entity<UserFavoriteRecipe>()
+			.HasQueryFilter(ufr => !ufr.AppUser.IsDeleted && !ufr.Recipe.IsDeleted);
+
+		builder.Entity<CategoryRecipe>()
+			.HasQueryFilter(cr => !cr.Category.IsDeleted && !cr.Recipe.IsDeleted);
+
+		builder.Entity<ShoppingListRecipeIngredient>()
+			.HasQueryFilter(slri => !slri.ShoppingList.IsDeleted && !slri.RecipeIngredient.IsDeleted);
 
 		var softDeletables = allEntityTypes
 			.Where(et => typeof(ISoftDeletable).IsAssignableFrom(et.ClrType));

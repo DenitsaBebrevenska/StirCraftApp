@@ -15,5 +15,4 @@ public class RecipeIngredient : BaseEntity
 
 	public virtual required Recipe Recipe { get; set; }
 
-	public virtual ICollection<ShoppingList> ShoppingLists { get; set; } = new List<ShoppingList>();
 }
