@@ -1,0 +1,27 @@
+[
+  {
+    "Value": 5,
+    "RecipeId": 3,
+    "UserId": "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
+  },
+  {
+    "Value": 4,
+    "RecipeId": 2,
+    "UserId": "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
+  },
+  {
+    "Value": 5,
+    "RecipeId": 5,
+    "UserId": "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
+  },
+  {
+    "Value": 5,
+    "RecipeId": 1,
+    "UserId": "4da529bf-a96a-47fa-862c-52bf3e4b0e32"
+  },
+  {
+    "Value": 5,
+    "RecipeId": 4,
+    "UserId": "f44c3f06-172b-491e-b71d-8672ac7595cb"
+  }
+]

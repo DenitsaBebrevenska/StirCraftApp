@@ -2,56 +2,78 @@
   {
     "Id": 1,
     "Name": "Gram",
-    "Abbreviation": "g"
+    "Abbreviation": "g",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": true
   },
   {
     "Id": 2,
     "Name": "Kilogram",
-    "Abbreviation": "kg"
+    "Abbreviation": "kg",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": true
   },
   {
     "Id": 3,
     "Name": "Milligram",
-    "Abbreviation": "mg"
+    "Abbreviation": "mg",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": true
   },
   {
     "Id": 4,
     "Name": "Ounce",
-    "Abbreviation": "oz"
+    "Abbreviation": "oz",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": true
   },
   {
     "Id": 5,
     "Name": "Pound",
-    "Abbreviation": "lb"
+    "Abbreviation": "lb",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": true
   },
   {
     "Id": 6,
     "Name": "Liter",
-    "Abbreviation": "L"
+    "Abbreviation": "L",
+    "IsLiquidSpecific": true,
+    "IsSolidSpecific": false
   },
   {
     "Id": 7,
     "Name": "Milliliter",
-    "Abbreviation": "mL"
+    "Abbreviation": "mL",
+    "IsLiquidSpecific": true,
+    "IsSolidSpecific": false
   },
   {
     "Id": 8,
     "Name": "Teaspoon",
-    "Abbreviation": "tsp"
+    "Abbreviation": "tsp",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": false
   },
   {
     "Id": 9,
     "Name": "Tablespoon",
-    "Abbreviation": "tbsp"
+    "Abbreviation": "tbsp",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": false
   },
   {
     "Id": 10,
     "Name": "Cup",
-    "Abbreviation": "cup"
+    "Abbreviation": "cup",
+    "IsLiquidSpecific": false,
+    "IsSolidSpecific": false
   },
   {
     "Id": 11,
     "Name": "Fluid Ounce",
-    "Abbreviation": "fl oz"
+    "Abbreviation": "fl oz",
+    "IsLiquidSpecific": true,
+    "IsSolidSpecific": false
   }
 ]
