@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StirCraftApp.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StirCraftApp.Infrastructure.Data;
 namespace StirCraftApp.Infrastructure.Migrations
 {
     [DbContext(typeof(StirCraftDbContext))]
-    partial class StirCraftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241015105531_RemovedRelationshipBetweenIngredientAndUnits")]
+    partial class RemovedRelationshipBetweenIngredientAndUnits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -406,9 +409,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsLiquidSpecific")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSolidSpecific")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
