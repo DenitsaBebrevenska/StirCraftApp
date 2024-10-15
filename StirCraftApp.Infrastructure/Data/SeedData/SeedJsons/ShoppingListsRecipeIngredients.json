@@ -1,0 +1,82 @@
+[
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 18
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 19
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 20
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 21
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 22
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 23
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 24
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 25
+  },
+  {
+    "ShoppingListId": 1,
+    "RecipeIngredientId": 26
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 7
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 8
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 9
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 10
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 11
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 12
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 13
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 14
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 15
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 16
+  },
+  {
+    "ShoppingListId": 2,
+    "RecipeIngredientId": 17
+  }
+]

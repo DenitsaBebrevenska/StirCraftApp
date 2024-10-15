@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Identity;
 using System.Text.Json;
 
@@ -12,100 +11,98 @@ public static class SeedDataHelper
 	public static async Task SeedAllAsync(StirCraftDbContext context)
 	{
 		//what would be a good check if the db is seeded at all?
-		if (await context.Recipes.AnyAsync())
+		if (await context.Users.AnyAsync())
 		{
 			return;
 		}
 
-		//Seed Users
-		var users = await CreateTestUsersAsync();
-
-		if (users != null)
-		{
-			await context.Users.AddRangeAsync(users);
-		}
-
 		//Seed Roles
-		var roles = await LoadJsonDataAsync<IdentityRole>("Roles");
+		await SeedTable("Roles", context.Roles);
 
-		if (roles != null)
-		{
-			await context.Roles.AddRangeAsync(roles);
-		}
+		//Seed Users
+		await SeedTable("Users", context.Users);
 
 		//Attach users to roles
-		var usersRoles = await LoadJsonDataAsync<IdentityUserClaim<string>>("UsersRoles");
-		if (usersRoles != null)
-		{
-			await context.UserClaims.AddRangeAsync(usersRoles);
-		}
+		await SeedTable("UsersRoles", context.UserRoles);
 
 		//Seed Categories
-		var categories = await LoadJsonDataAsync<Category>("Categories");
-		if (categories != null)
-		{
-			await context.Categories.AddRangeAsync(categories);
-		}
+		await SeedTable("Categories", context.Categories);
 
 		//Seed Ingredients
-		var ingredients = await LoadJsonDataAsync<Ingredient>("Ingredients");
-		if (ingredients != null)
-		{
-			await context.Ingredients.AddRangeAsync(ingredients);
-		}
+		await SeedTable("Ingredients", context.Ingredients);
 
 		//Seed Ranks
-		var cookingRanks = await LoadJsonDataAsync<CookingRank>("Ranks");
-		if (cookingRanks != null)
-		{
-			await context.CookingRanks.AddRangeAsync(cookingRanks);
-		}
+		await SeedTable("Ranks", context.CookingRanks);
 
 		//Seed Units
-		var measurementUnits = await LoadJsonDataAsync<MeasurementUnit>("Units");
-		if (measurementUnits != null)
-		{
-			await context.MeasurementUnits.AddRangeAsync(measurementUnits);
-		}
+		await SeedTable("Units", context.MeasurementUnits);
+
+		//Seed Cooks
+		await SeedTable("Cooks", context.Cooks);
 
 		//Seed Recipes
-		var recipes = await LoadJsonDataAsync<Recipe>("Recipes");
-		if (recipes != null)
-		{
-			await context.Recipes.AddRangeAsync(recipes);
-		}
+		await SeedTable("Recipes", context.Recipes);
 
+		//Seed RecipeRatings
+		await SeedTable("RecipeRatings", context.RecipeRatings);
+
+		//Seed RecipeImages
+		await SeedTable("RecipeImages", context.RecipeImages);
+
+		//Seed RecipeIngredients
+		await SeedTable("RecipeIngredients", context.RecipeIngredients);
+
+		//Seed UsersFavoriteRecipes
+		await SeedTable("UsersFavoriteRecipes", context.UsersFavoriteRecipes);
+
+		//Seed CategoriesRecipes
+		await SeedTable("CategoriesRecipes", context.CategoriesRecipes);
+
+		//Seed Comments
+		await SeedTable("Comments", context.Comments);
+
+		//Seed Replies
+		await SeedTable("Replies", context.Replies);
+
+		//Seed ShoppingLists
+		await SeedTable("ShoppingLists", context.ShoppingLists);
+
+		//Seed ShoppingListsRecipeIngredients
+		await SeedTable("ShoppingListsRecipeIngredients", context.ShoppingListsRecipeIngredients);
 	}
 
-	private static async Task<List<T>?> LoadJsonDataAsync<T>(string fileName) where T : class
+	private static async Task<List<T>> LoadJsonDataAsync<T>(string fileName) where T : class
 	{
 		if (!File.Exists($"{BaseFolderPath}/{fileName}"))
 		{
-			return null;
+			throw new ArgumentException($"File does not exist {BaseFolderPath}/{fileName}");
 		}
 
 		var json = await File.ReadAllTextAsync($"{BaseFolderPath}/{fileName}");
 
-		return JsonSerializer.Deserialize<List<T>>(json);
+		return JsonSerializer.Deserialize<List<T>>(json) ?? throw new NullReferenceException($"Failed to read {fileName}.json");
 	}
 
-	private static async Task<List<AppUser>?> CreateTestUsersAsync()
+	private static async Task SeedTable<T>(string fileName, DbSet<T> targetTable) where T : class
+	{
+		var entries = await LoadJsonDataAsync<T>(fileName);
+
+		if (fileName == "Users")
+		{
+			SetTestUsersHashedPasswords((entries as List<AppUser>)!);
+		}
+
+		await targetTable.AddRangeAsync(entries);
+	}
+
+	private static void SetTestUsersHashedPasswords(List<AppUser> users)
 	{
 		var hasher = new PasswordHasher<AppUser>();
 
-		var users = await LoadJsonDataAsync<AppUser>($"{BaseFolderPath}/Users.json");
-
-		if (users != null)
+		for (var index = 1; index <= users.Count; index++)
 		{
-			for (var index = 1; index <= users.Count; index++)
-			{
-				var user = users[index];
-				user.PasswordHash = hasher.HashPassword(user, $"Test@{index}");
-			}
-
-			return users;
+			var user = users[index];
+			user.PasswordHash = hasher.HashPassword(user, $"Test@{index}");
 		}
-
-		return null;
 	}
 }
