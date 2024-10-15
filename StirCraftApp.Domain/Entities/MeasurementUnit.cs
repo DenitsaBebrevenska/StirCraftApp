@@ -10,7 +10,7 @@ public class MeasurementUnit : BaseEntity
 	[MaxLength(UnitAbbreviationMaxLength)]
 	public required string Abbreviation { get; set; }
 
-	public virtual ICollection<Ingredient> IngredientsThatCanHaveThatUnit { get; set; } = new List<Ingredient>();
+	public virtual ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
 	public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }

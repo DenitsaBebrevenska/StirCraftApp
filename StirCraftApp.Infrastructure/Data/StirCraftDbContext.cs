@@ -67,13 +67,31 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.HasForeignKey(rr => rr.UserId);
 
 		builder.Entity<RecipeIngredient>()
+			.HasKey(ri => new
+			{
+				ri.RecipeId,
+				ri.MeasurementUnitId,
+				ri.IngredientId
+			});
+
+		builder.Entity<RecipeIngredient>()
+			.HasOne<Recipe>()
+			.WithMany(r => r.RecipeIngredients)
+			.HasForeignKey(ri => ri.RecipeId);
+
+		builder.Entity<RecipeIngredient>()
+			.HasOne<Ingredient>()
+			.WithMany(i => i.RecipeIngredients)
+			.HasForeignKey(ri => ri.IngredientId);
+
+		builder.Entity<RecipeIngredient>()
 			.HasOne<MeasurementUnit>()
-			.WithMany(m => m.RecipeIngredients)
+			.WithMany(mu => mu.RecipeIngredients)
 			.HasForeignKey(ri => ri.MeasurementUnitId);
 
-		builder.Entity<MeasurementUnit>()
-			.HasMany(mu => mu.IngredientsThatCanHaveThatUnit)
-			.WithMany(i => i.PossibleMeasurementUnits);
+		builder.Entity<Ingredient>()
+			.HasMany(i => i.MeasurementUnits)
+			.WithMany(mu => mu.Ingredients);
 
 		builder.Entity<AppUser>()
 			.HasIndex(u => u.DisplayName)

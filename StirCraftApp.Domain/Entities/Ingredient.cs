@@ -12,7 +12,7 @@ public class Ingredient : BaseEntity
 	[MaxLength(IngredientPluralNameMaxLength)]
 	public string? NameInPlural { get; set; }
 
-	public virtual ICollection<MeasurementUnit> PossibleMeasurementUnits { get; set; } = new List<MeasurementUnit>();
+	public virtual ICollection<MeasurementUnit> MeasurementUnits { get; set; } = new List<MeasurementUnit>();
 
 	public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }

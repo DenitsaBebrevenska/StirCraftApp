@@ -30,6 +30,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     AvatarUrl = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -69,7 +70,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CookingRank",
+                name: "CookingRanks",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -81,7 +82,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CookingRank", x => x.Id);
+                    table.PrimaryKey("PK_CookingRanks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,7 +93,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsAllergen = table.Column<bool>(type: "bit", nullable: false),
-                    IsVegan = table.Column<bool>(type: "bit", nullable: false),
+                    NameInPlural = table.Column<string>(type: "nvarchar(104)", maxLength: 104, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -253,7 +254,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     About = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     RankingPoints = table.Column<long>(type: "bigint", nullable: false),
-                    RankId = table.Column<int>(type: "int", nullable: false),
+                    CookingRankId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -266,9 +267,31 @@ namespace StirCraftApp.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Cooks_CookingRank_RankId",
-                        column: x => x.RankId,
-                        principalTable: "CookingRank",
+                        name: "FK_Cooks_CookingRanks_CookingRankId",
+                        column: x => x.CookingRankId,
+                        principalTable: "CookingRanks",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IngredientMeasurementUnit",
+                columns: table => new
+                {
+                    IngredientsId = table.Column<int>(type: "int", nullable: false),
+                    MeasurementUnitsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IngredientMeasurementUnit", x => new { x.IngredientsId, x.MeasurementUnitsId });
+                    table.ForeignKey(
+                        name: "FK_IngredientMeasurementUnit_Ingredients_IngredientsId",
+                        column: x => x.IngredientsId,
+                        principalTable: "Ingredients",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_IngredientMeasurementUnit_MeasurementUnits_MeasurementUnitsId",
+                        column: x => x.MeasurementUnitsId,
+                        principalTable: "MeasurementUnits",
                         principalColumn: "Id");
                 });
 
@@ -279,12 +302,14 @@ namespace StirCraftApp.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    PreparationSteps = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     Likes = table.Column<long>(type: "bigint", nullable: false),
                     DifficultyLevel = table.Column<int>(type: "int", nullable: false),
                     CookId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsAdminApproved = table.Column<bool>(type: "bit", nullable: false),
+                    AdminNotes = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -395,18 +420,17 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "RecipeIngredients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     IngredientId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<long>(type: "bigint", nullable: false),
-                    MeasurementUnitId = table.Column<int>(type: "int", nullable: true),
+                    MeasurementUnitId = table.Column<int>(type: "int", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<long>(type: "bigint", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeIngredients", x => x.Id);
+                    table.PrimaryKey("PK_RecipeIngredients", x => new { x.RecipeId, x.MeasurementUnitId, x.IngredientId });
                     table.ForeignKey(
                         name: "FK_RecipeIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
@@ -482,17 +506,19 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "RecipeIngredientShoppingList",
                 columns: table => new
                 {
-                    IngredientsId = table.Column<int>(type: "int", nullable: false),
-                    ShoppingListsId = table.Column<int>(type: "int", nullable: false)
+                    ShoppingListsId = table.Column<int>(type: "int", nullable: false),
+                    IngredientsRecipeId = table.Column<int>(type: "int", nullable: false),
+                    IngredientsMeasurementUnitId = table.Column<int>(type: "int", nullable: false),
+                    IngredientsIngredientId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeIngredientShoppingList", x => new { x.IngredientsId, x.ShoppingListsId });
+                    table.PrimaryKey("PK_RecipeIngredientShoppingList", x => new { x.ShoppingListsId, x.IngredientsRecipeId, x.IngredientsMeasurementUnitId, x.IngredientsIngredientId });
                     table.ForeignKey(
-                        name: "FK_RecipeIngredientShoppingList_RecipeIngredients_IngredientsId",
-                        column: x => x.IngredientsId,
+                        name: "FK_RecipeIngredientShoppingList_RecipeIngredients_IngredientsRecipeId_IngredientsMeasurementUnitId_IngredientsIngredientId",
+                        columns: x => new { x.IngredientsRecipeId, x.IngredientsMeasurementUnitId, x.IngredientsIngredientId },
                         principalTable: "RecipeIngredients",
-                        principalColumn: "Id");
+                        principalColumns: new[] { "RecipeId", "MeasurementUnitId", "IngredientId" });
                     table.ForeignKey(
                         name: "FK_RecipeIngredientShoppingList_ShoppingList_ShoppingListsId",
                         column: x => x.ShoppingListsId,
@@ -538,6 +564,13 @@ namespace StirCraftApp.Infrastructure.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_DisplayName",
+                table: "AspNetUsers",
+                column: "DisplayName",
+                unique: true,
+                filter: "[DisplayName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_IsDeleted",
                 table: "AspNetUsers",
                 column: "IsDeleted",
@@ -579,10 +612,15 @@ namespace StirCraftApp.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CookingRank_IsDeleted",
-                table: "CookingRank",
+                name: "IX_CookingRanks_IsDeleted",
+                table: "CookingRanks",
                 column: "IsDeleted",
                 filter: "[IsDeleted] = 0");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cooks_CookingRankId",
+                table: "Cooks",
+                column: "CookingRankId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cooks_IsDeleted",
@@ -591,15 +629,15 @@ namespace StirCraftApp.Infrastructure.Migrations
                 filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cooks_RankId",
-                table: "Cooks",
-                column: "RankId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cooks_UserId",
                 table: "Cooks",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IngredientMeasurementUnit_MeasurementUnitsId",
+                table: "IngredientMeasurementUnit",
+                column: "MeasurementUnitsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingredients_IsDeleted",
@@ -641,14 +679,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                 column: "MeasurementUnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngredients_RecipeId",
-                table: "RecipeIngredients",
-                column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngredientShoppingList_ShoppingListsId",
+                name: "IX_RecipeIngredientShoppingList_IngredientsRecipeId_IngredientsMeasurementUnitId_IngredientsIngredientId",
                 table: "RecipeIngredientShoppingList",
-                column: "ShoppingListsId");
+                columns: new[] { "IngredientsRecipeId", "IngredientsMeasurementUnitId", "IngredientsIngredientId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeRatings_IsDeleted",
@@ -731,6 +764,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "CategoryRecipe");
 
             migrationBuilder.DropTable(
+                name: "IngredientMeasurementUnit");
+
+            migrationBuilder.DropTable(
                 name: "RecipeImages");
 
             migrationBuilder.DropTable(
@@ -773,7 +809,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "CookingRank");
+                name: "CookingRanks");
         }
     }
 }

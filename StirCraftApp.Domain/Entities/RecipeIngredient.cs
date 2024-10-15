@@ -9,7 +9,5 @@ public class RecipeIngredient : BaseEntity
 
 	public int RecipeId { get; set; }
 
-	public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
-
 	public virtual ICollection<ShoppingList> ShoppingLists { get; set; } = new List<ShoppingList>();
 }
