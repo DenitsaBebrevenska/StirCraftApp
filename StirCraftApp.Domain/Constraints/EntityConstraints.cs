@@ -5,7 +5,7 @@ public static class EntityConstraints
 
 	//Category
 	public const int CategoryMinLength = 3;
-	public const int CategoryMaxLength = 20;
+	public const int CategoryMaxLength = 100;
 
 	//Comment
 	public const int CommentTitleMinLength = 2;
