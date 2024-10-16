@@ -1,41 +1,35 @@
 [
   {
-    "Id": 1,
     "Name": "flour",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 2,
     "Name": "egg",
     "IsAllergen": true,
     "NameInPlural": "eggs",
     "IsSolid": true
   },
   {
-    "Id": 3,
     "Name": "sugar",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 4,
     "Name": "milk",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": false
   },
   {
-    "Id": 5,
     "Name": "salt",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 6,
     "Name": "butter",
     "IsAllergen": true,
     "NameInPlural": null,
@@ -49,378 +43,324 @@
     "IsSolid": false
   },
   {
-    "Id": 8,
     "Name": "tomato",
     "IsAllergen": false,
     "NameInPlural": "tomatoes",
     "IsSolid": true
   },
   {
-    "Id": 9,
     "Name": "garlic",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 10,
     "Name": "onion",
     "IsAllergen": false,
     "NameInPlural": "onions",
     "IsSolid": true
   },
   {
-    "Id": 11,
     "Name": "chicken breast",
     "IsAllergen": false,
     "NameInPlural": "chicken breasts",
     "IsSolid": true
   },
   {
-    "Id": 12,
     "Name": "ground beef",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 13,
     "Name": "carrot",
     "IsAllergen": false,
     "NameInPlural": "carrots",
     "IsSolid": true
   },
   {
-    "Id": 14,
     "Name": "celery",
     "IsAllergen": true,
     "NameInPlural": "celeries",
     "IsSolid": true
   },
   {
-    "Id": 15,
     "Name": "almond",
     "IsAllergen": true,
     "NameInPlural": "almonds",
     "IsSolid": true
   },
   {
-    "Id": 16,
     "Name": "peanut",
     "IsAllergen": true,
     "NameInPlural": "peanuts",
     "IsSolid": true
   },
   {
-    "Id": 17,
     "Name": "soy sauce",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": false
   },
   {
-    "Id": 18,
     "Name": "lemon",
     "IsAllergen": false,
     "NameInPlural": "lemons",
     "IsSolid": true
   },
   {
-    "Id": 19,
     "Name": "lime",
     "IsAllergen": false,
     "NameInPlural": "limes",
     "IsSolid": true
   },
   {
-    "Id": 20,
     "Name": "basil",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 21,
     "Name": "parsley",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 22,
     "Name": "mushroom",
     "IsAllergen": false,
     "NameInPlural": "mushrooms",
     "IsSolid": true
   },
   {
-    "Id": 23,
     "Name": "spinach",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 24,
     "Name": "coconut milk",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": false
   },
   {
-    "Id": 25,
     "Name": "shrimp",
     "IsAllergen": true,
     "NameInPlural": "shrimps",
     "IsSolid": true
   },
   {
-    "Id": 26,
     "Name": "salmon",
     "IsAllergen": false,
     "NameInPlural": "salmons",
     "IsSolid": true
   },
   {
-    "Id": 27,
     "Name": "tofu",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 28,
     "Name": "chickpeas",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 29,
     "Name": "potato",
     "IsAllergen": false,
     "NameInPlural": "potatoes",
     "IsSolid": true
   },
   {
-    "Id": 30,
     "Name": "rice",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 31,
     "Name": "pasta",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 32,
     "Name": "broccoli",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 33,
     "Name": "cauliflower",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 34,
     "Name": "green beans",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 35,
     "Name": "zucchini",
     "IsAllergen": false,
     "NameInPlural": "zucchinis",
     "IsSolid": true
   },
   {
-    "Id": 36,
     "Name": "corn",
     "IsAllergen": false,
     "NameInPlural": "corns",
     "IsSolid": true
   },
   {
-    "Id": 37,
     "Name": "cheese",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 38,
     "Name": "cream",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 39,
     "Name": "yogurt",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 40,
     "Name": "honey",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": false
   },
   {
-    "Id": 41,
     "Name": "maple syrup",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": false
   },
   {
-    "Id": 42,
     "Name": "baking powder",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 43,
     "Name": "yeast",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 44,
     "Name": "cinnamon",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 45,
     "Name": "cumin",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 46,
     "Name": "ginger",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 47,
     "Name": "vanilla extract",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": false
   },
   {
-    "Id": 48,
     "Name": "black pepper",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 49,
     "Name": "oregano",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 50,
     "Name": "paprika",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 51,
     "Name": "spaghetti",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 52,
     "Name": "chili flakes",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 53,
     "Name": "chili powder",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 54,
     "Name": "quinoa",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 55,
     "Name": "cucumber",
     "IsAllergen": false,
     "NameInPlural": "cucumbers",
     "IsSolid": true
   },
   {
-    "Id": 56,
     "Name": "cherry tomato",
     "IsAllergen": false,
     "NameInPlural": "cherry tomatoes",
     "IsSolid": true
   },
   {
-    "Id": 57,
     "Name": "red onion",
     "IsAllergen": false,
     "NameInPlural": "red onions",
     "IsSolid": true
   },
   {
-    "Id": 58,
     "Name": "avocado",
     "IsAllergen": false,
     "NameInPlural": "avocadoes",
     "IsSolid": true
   },
   {
-    "Id": 59,
     "Name": "tahini",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 60,
     "Name": "cilantro",
     "IsAllergen": false,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 61,
     "Name": "almond flour",
     "IsAllergen": true,
     "NameInPlural": null,
@@ -434,56 +374,48 @@
     "IsSolid": true
   },
   {
-    "Id": 63,
     "Name": "taco shell",
     "IsAllergen": true,
     "NameInPlural": "taco shells",
     "IsSolid": true
   },
   {
-    "Id": 64,
     "Name": "tortilla",
     "IsAllergen": true,
     "NameInPlural": "tortillas",
     "IsSolid": true
   },
   {
-    "Id": 65,
     "Name": "egg noodles",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 66,
     "Name": "mustard",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 67,
     "Name": "Worcestershire sauce",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": false
   },
   {
-    "Id": 68,
     "Name": "sour cream",
     "IsAllergen": true,
     "NameInPlural": null,
     "IsSolid": true
   },
   {
-    "Id": 69,
     "Name": "jalapeño",
     "IsAllergen": false,
     "NameInPlural": "jalapeños",
     "IsSolid": true
   },
   {
-    "Id": 70,
     "Name": "beef",
     "IsAllergen": false,
     "NameInPlural": null,

@@ -1,20 +1,17 @@
 [
   {
-    "Id": 1,
     "UserId": "f44c3f06-172b-491e-b71d-8672ac7595cb",
     "About": "I am a home cook with love for classic comfort foods. I often experiment with traditional recipes, adding my personal twist to create something familiar yet unique.",
     "RankingPoints": 10,
     "CookingRankId": 1
   },
   {
-    "Id": 2,
     "UserId": "98f61b51-9ae7-4107-a247-29d1c68a7d32",
     "About": "Inspired by my travels, I enjoy combining fresh, vibrant ingredients like olive oil, herbs, and seafood to create dishes that are both healthy and full of flavor. My philosophy in cooking revolves around simplicity. I love the Mediterranean Cuisine.",
     "RankingPoints": 1200,
     "CookingRankId": 3
   },
   {
-    "Id": 3,
     "UserId": "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
     "About": "I am passionate about modern fusion cuisine, blending flavors and techniques from around the world. I think of myself as quite innovative in the use of seasonal ingredients and attention to detail, making every meal an unforgettable experience. Also I excel at Asian cuisine, you can call me Senpai!",
     "RankingPoints": 2200,

@@ -6,16 +6,11 @@ using System.Text.Json;
 namespace StirCraftApp.Infrastructure.Data.SeedData;
 public static class SeedDataHelper
 {
-	private const string BaseFolderPath = "SeedData/SeedJsons";
+	private static readonly string BaseFolderPath =
+		Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\StirCraftApp\StirCraftApp.Infrastructure\Data\SeedData\SeedJsons"));
 
 	public static async Task SeedAllAsync(StirCraftDbContext context)
 	{
-		//what would be a good check if the db is seeded at all?
-		if (await context.Users.AnyAsync())
-		{
-			return;
-		}
-
 		//Seed Roles
 		await SeedTable("Roles", context.Roles);
 
@@ -59,32 +54,42 @@ public static class SeedDataHelper
 		await SeedTable("CategoriesRecipes", context.CategoriesRecipes);
 
 		//Seed Comments
-		await SeedTable("Comments", context.Comments);
+		await SeedTable("UsersRecipeComments", context.Comments);
 
 		//Seed Replies
-		await SeedTable("Replies", context.Replies);
+		await SeedTable("UsersCommentsReplies", context.Replies);
 
 		//Seed ShoppingLists
 		await SeedTable("ShoppingLists", context.ShoppingLists);
 
 		//Seed ShoppingListsRecipeIngredients
 		await SeedTable("ShoppingListsRecipeIngredients", context.ShoppingListsRecipeIngredients);
+
+		//Save All changes if we`ve reached thus far
+		await context.SaveChangesAsync();
 	}
 
 	private static async Task<List<T>> LoadJsonDataAsync<T>(string fileName) where T : class
 	{
-		if (!File.Exists($"{BaseFolderPath}/{fileName}"))
+		var filePath = Path.Combine(BaseFolderPath, $"{fileName}.json");
+
+		if (!File.Exists(filePath))
 		{
-			throw new ArgumentException($"File does not exist {BaseFolderPath}/{fileName}");
+			throw new ArgumentException($"File does not exist {filePath}");
 		}
 
-		var json = await File.ReadAllTextAsync($"{BaseFolderPath}/{fileName}");
+		var json = await File.ReadAllTextAsync(filePath);
 
 		return JsonSerializer.Deserialize<List<T>>(json) ?? throw new NullReferenceException($"Failed to read {fileName}.json");
 	}
 
 	private static async Task SeedTable<T>(string fileName, DbSet<T> targetTable) where T : class
 	{
+		if (await targetTable.AnyAsync())
+		{
+			throw new ArgumentException($"{nameof(targetTable)} is seeded already.");
+		}
+
 		var entries = await LoadJsonDataAsync<T>(fileName);
 
 		if (fileName == "Users")
@@ -101,7 +106,7 @@ public static class SeedDataHelper
 
 		for (var index = 1; index <= users.Count; index++)
 		{
-			var user = users[index];
+			var user = users[index - 1];
 			user.PasswordHash = hasher.HashPassword(user, $"Test@{index}");
 		}
 	}

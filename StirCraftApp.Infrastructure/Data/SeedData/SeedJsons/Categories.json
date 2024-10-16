@@ -1,86 +1,65 @@
 [
     {
-        "Id": 1,
         "Name": "Asian Cuisine"
     },
     {
-        "Id": 2,
         "Name": "Dessert"
     },
     {
-        "Id": 3,
         "Name": "Amuse Bouche"
     },
     {
-        "Id": 4,
         "Name": "Italian Cuisine"
     },
     {
-        "Id": 5,
         "Name": "Grill & Barbecue"
     },
     {
-        "Id": 6,
         "Name": "Salads"
     },
     {
-        "Id": 7,
         "Name": "Seafood"
     },
     {
-        "Id": 8,
         "Name": "Pasta"
     },
     {
-        "Id": 9,
         "Name": "Vegetarian"
     },
     {
-        "Id": 10,
         "Name": "Vegan"
     },
     {
-        "Id": 11,
         "Name": "Breakfast"
     },
     {
-        "Id": 12,
         "Name": "Soups & Stews"
     },
     {
-        "Id": 13,
         "Name": "Snacks"
     },
     {
-        "Id": 14,
         "Name": "Beverages"
     },
     {
-        "Id": 15,
         "Name": "Appetizers"
     },
     {
-        "Id": 16,
         "Name": "Comfort Food"
     },
     {
-        "Id": 17,
         "Name": "French Cuisine"
     },
     {
-        "Id": 18,
         "Name": "Mexican Cuisine"
     },
     {
-        "Id": 19,
         "Name": "Mediterranean Cuisine"
     },
     {
-        "Id": 20,
         "Name": "Baking & Pastries"
     },
     {
-        "Id": 21,
         "Name": "Russian Cuisine"
     }
 ]
