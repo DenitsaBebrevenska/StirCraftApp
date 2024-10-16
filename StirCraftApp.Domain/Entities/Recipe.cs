@@ -17,7 +17,7 @@ public class Recipe : BaseEntity
 
 	public int CookId { get; set; }
 
-	public virtual required Cook Cook { get; set; }
+	public virtual Cook Cook { get; set; } = null!;
 
 	public DateTime CreatedOn { get; set; }
 

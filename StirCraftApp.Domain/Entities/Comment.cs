@@ -8,7 +8,7 @@ public class Comment : BaseEntity
 
 	public int RecipeId { get; set; }
 
-	public virtual required Recipe Recipe { get; set; }
+	public virtual Recipe Recipe { get; set; } = null!;
 
 	[MaxLength(CommentTitleMaxLength)]
 	public required string Title { get; set; }

@@ -8,7 +8,7 @@ public class Reply : BaseEntity
 
 	public int CommentId { get; set; }
 
-	public virtual required Comment Comment { get; set; }
+	public virtual Comment Comment { get; set; } = null!;
 
 	[MaxLength(ReplyBodyMaxLength)]
 	public required string Body { get; set; }

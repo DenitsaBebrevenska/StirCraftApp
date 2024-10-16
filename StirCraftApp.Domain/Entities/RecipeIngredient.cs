@@ -3,7 +3,7 @@ public class RecipeIngredient : BaseEntity
 {
 	public int IngredientId { get; set; }
 
-	public virtual required Ingredient Ingredient { get; set; }
+	public virtual Ingredient Ingredient { get; set; } = null!;
 
 	public uint? Quantity { get; set; }
 
@@ -13,6 +13,6 @@ public class RecipeIngredient : BaseEntity
 
 	public int RecipeId { get; set; }
 
-	public virtual required Recipe Recipe { get; set; }
+	public virtual Recipe Recipe { get; set; } = null!;
 
 }
