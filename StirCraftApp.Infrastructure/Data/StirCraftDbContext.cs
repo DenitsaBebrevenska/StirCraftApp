@@ -48,13 +48,13 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 		builder.Entity<Comment>()
 			.HasOne<AppUser>()
-			.WithOne()
-			.HasForeignKey<Comment>(c => c.UserId);
+			.WithMany(u => u.Comments)
+			.HasForeignKey(c => c.UserId);
 
 		builder.Entity<Reply>()
 			.HasOne<AppUser>()
-			.WithOne()
-			.HasForeignKey<Reply>(r => r.UserId);
+			.WithMany(r => r.Replies)
+			.HasForeignKey(r => r.UserId);
 
 		builder.Entity<ShoppingList>()
 			.HasOne<AppUser>()
@@ -65,15 +65,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.HasOne<AppUser>()
 			.WithMany(u => u.RecipesRatings)
 			.HasForeignKey(rr => rr.UserId);
-
-		builder.Entity<UserFavoriteRecipe>()
-			.HasKey(ufr => new { ufr.UserId, ufr.RecipeId });
-
-		builder.Entity<CategoryRecipe>()
-			.HasKey(cr => new { cr.CategoryId, cr.RecipeId });
-
-		builder.Entity<ShoppingListRecipeIngredient>()
-			.HasKey(slri => new { slri.ShoppingListId, slri.RecipeIngredientId });
 
 		builder.Entity<AppUser>()
 			.HasIndex(u => u.DisplayName)

@@ -1,49 +1,55 @@
 [
   {
     "Id": "f44c3f06-172b-491e-b71d-8672ac7595cb",
+    "DisplayName": "ChefBob",
     "UserName": "bob@example.com",
     "NormalizedUserName": "BOB@EXAMPLE.COM",
     "Email": "bob@example.com",
     "NormalizedEmail": "BOB@EXAMPLE.COM",
     "AvatarUrl": "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
-  {
-    "Id": "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
-    "UserName": "kate@example.com",
-    "NormalizedUserName": "KATE@EXAMPLE.COM",
-    "Email": "kate@example.com",
-    "NormalizedEmail": "KATE@EXAMPLE.COM",
-    "AvatarUrl": "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    "Id": "98f61b51-9ae7-4107-a247-29d1c68a7d32",
-    "UserName": "adrian@example.com",
-    "NormalizedUserName": "ADRIAN@EXAMPLE.COM",
-    "Email": "adrian@example.com",
-    "NormalizedEmail": "ADRIAN@EXAMPLE.COM",
-    "AvatarUrl": "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    "Id": "4da529bf-a96a-47fa-862c-52bf3e4b0e32",
-    "UserName": "zelda@example.com",
-    "NormalizedUserName": "ZELDA@EXAMPLE.COM",
-    "Email": "zelda@example.com",
-    "NormalizedEmail": "ZELDA@EXAMPLE.COM",
-    "AvatarUrl": "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    "Id": "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
-    "UserName": "galadriel@example.com",
-    "NormalizedUserName": "GALADRIEL@EXAMPLE.COM",
-    "Email": "galadriel@example.com",
-    "NormalizedEmail": "GALADRIEL@EXAMPLE.COM",
-    "AvatarUrl": "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    "Id": "6d362fcc-dc94-4385-8b38-844527a2c579",
-    "UserName": "admin@example.com",
-    "NormalizedUserName": "ADMIN@EXAMPLE.COM",
-    "Email": "admin@example.com",
-    "NormalizedEmail": "ADMIN@EXAMPLE.COM"
-  }
+    {
+        "Id": "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
+        "DisplayName": "KateMiddleton",
+        "UserName": "kate@example.com",
+        "NormalizedUserName": "KATE@EXAMPLE.COM",
+        "Email": "kate@example.com",
+        "NormalizedEmail": "KATE@EXAMPLE.COM",
+        "AvatarUrl": "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "Id": "98f61b51-9ae7-4107-a247-29d1c68a7d32",
+        "UserName": "adrian@example.com",
+        "DisplayName": "AdrianTheAdventurer",
+        "NormalizedUserName": "ADRIAN@EXAMPLE.COM",
+        "Email": "adrian@example.com",
+        "NormalizedEmail": "ADRIAN@EXAMPLE.COM",
+        "AvatarUrl": "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "Id": "3b3c303f-b227-48d8-a30d-1932e90b058a",
+        "DisplayName": "LoveLink",
+        "UserName": "zelda@example.com",
+        "NormalizedUserName": "ZELDA@EXAMPLE.COM",
+        "Email": "zelda@example.com",
+        "NormalizedEmail": "ZELDA@EXAMPLE.COM",
+        "AvatarUrl": "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "Id": "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
+        "DisplayName": "ThePowerOfMorgoth",
+        "UserName": "galadriel@example.com",
+        "NormalizedUserName": "GALADRIEL@EXAMPLE.COM",
+        "Email": "galadriel@example.com",
+        "NormalizedEmail": "GALADRIEL@EXAMPLE.COM",
+        "AvatarUrl": "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "Id": "6d362fcc-dc94-4385-8b38-844527a2c579",
+        "DisplayName": "StirCraftAdmin",
+        "UserName": "admin@example.com",
+        "NormalizedUserName": "ADMIN@EXAMPLE.COM",
+        "Email": "admin@example.com",
+        "NormalizedEmail": "ADMIN@EXAMPLE.COM"
+    }
 ]

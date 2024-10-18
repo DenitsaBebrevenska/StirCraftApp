@@ -1,6 +1,9 @@
-﻿using StirCraftApp.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Infrastructure.Data.JoinedTables;
+
+[PrimaryKey(nameof(ShoppingListId), nameof(RecipeIngredientId))]
 public class ShoppingListRecipeIngredient
 {
 	public int ShoppingListId { get; set; }

@@ -19,7 +19,7 @@ public static class EntityConstraints
 
 	//Cook
 	public const int CookAboutMinLength = 10;
-	public const int CookAboutMaxLength = 200;
+	public const int CookAboutMaxLength = 500;
 
 	//Ingredient
 	public const int IngredientNameMinLength = 2;

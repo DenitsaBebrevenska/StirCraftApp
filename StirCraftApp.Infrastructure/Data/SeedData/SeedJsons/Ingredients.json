@@ -36,7 +36,6 @@
     "IsSolid": true
   },
   {
-    "Id": 7,
     "Name": "olive oil",
     "IsAllergen": false,
     "NameInPlural": null,
@@ -367,7 +366,6 @@
     "IsSolid": true
   },
   {
-    "Id": 62,
     "Name": "berries mix",
     "IsAllergen": true,
     "NameInPlural": null,

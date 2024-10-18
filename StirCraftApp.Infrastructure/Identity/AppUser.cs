@@ -18,6 +18,10 @@ public class AppUser : IdentityUser, ISoftDeletable
 	public virtual ICollection<ShoppingList> ShoppingLists { get; set; } = new List<ShoppingList>();
 
 	public virtual ICollection<RecipeRating> RecipesRatings { get; set; } = new List<RecipeRating>();
+
+	public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
+	public virtual ICollection<Reply> Replies { get; set; } = new List<Reply>();
 	public bool IsDeleted { get; set; }
 	public DateTime? DeletedOnUtc { get; set; }
 }

@@ -11,62 +11,105 @@ public static class SeedDataHelper
 
 	public static async Task SeedAllAsync(StirCraftDbContext context)
 	{
-		//Seed Roles
-		await SeedTable("Roles", context.Roles);
+		//check by critical page if db is seeded at all
+		if (await context.Users.AnyAsync() || await context.Roles.AnyAsync())
+		{
+			Console.WriteLine("Database is already seeded.");
+			return;
+		}
 
-		//Seed Users
-		await SeedTable("Users", context.Users);
+		await using var transaction = await context.Database.BeginTransactionAsync();
 
-		//Attach users to roles
-		await SeedTable("UsersRoles", context.UserRoles);
+		try
+		{
+			//Seed Roles
+			await SeedTable("Roles", context.Roles);
 
-		//Seed Categories
-		await SeedTable("Categories", context.Categories);
+			//Seed Users
+			await SeedTable("Users", context.Users);
 
-		//Seed Ingredients
-		await SeedTable("Ingredients", context.Ingredients);
+			//Attach users to roles
+			await SeedTable("UsersRoles", context.UserRoles);
 
-		//Seed Ranks
-		await SeedTable("Ranks", context.CookingRanks);
+			//Seed Categories
+			await SeedTable("Categories", context.Categories);
 
-		//Seed Units
-		await SeedTable("Units", context.MeasurementUnits);
+			//Seed Ingredients
+			await SeedTable("Ingredients", context.Ingredients);
 
-		//Seed Cooks
-		await SeedTable("Cooks", context.Cooks);
+			//Seed Ranks
+			await SeedTable("Ranks", context.CookingRanks);
 
-		//Seed Recipes
-		await SeedTable("Recipes", context.Recipes);
+			//Seed Units
+			await SeedTable("Units", context.MeasurementUnits);
 
-		//Seed RecipeRatings
-		await SeedTable("RecipeRatings", context.RecipeRatings);
+			//save here
+			await context.SaveChangesAsync();
 
-		//Seed RecipeImages
-		await SeedTable("RecipeImages", context.RecipeImages);
+			//Seed Cooks
+			await SeedTable("Cooks", context.Cooks);
 
-		//Seed RecipeIngredients
-		await SeedTable("RecipeIngredients", context.RecipeIngredients);
+			//Seed Recipes
+			await SeedTable("Recipes", context.Recipes);
 
-		//Seed UsersFavoriteRecipes
-		await SeedTable("UsersFavoriteRecipes", context.UsersFavoriteRecipes);
+			//save here
+			await context.SaveChangesAsync();
 
-		//Seed CategoriesRecipes
-		await SeedTable("CategoriesRecipes", context.CategoriesRecipes);
+			//Seed RecipeRatings
+			await SeedTable("RecipeRatings", context.RecipeRatings);
 
-		//Seed Comments
-		await SeedTable("UsersRecipeComments", context.Comments);
+			//save here
+			await context.SaveChangesAsync();
 
-		//Seed Replies
-		await SeedTable("UsersCommentsReplies", context.Replies);
+			//Seed RecipeImages
+			await SeedTable("RecipeImages", context.RecipeImages);
 
-		//Seed ShoppingLists
-		await SeedTable("ShoppingLists", context.ShoppingLists);
+			//save here
+			await context.SaveChangesAsync();
 
-		//Seed ShoppingListsRecipeIngredients
-		await SeedTable("ShoppingListsRecipeIngredients", context.ShoppingListsRecipeIngredients);
+			//Seed RecipeIngredients
+			await SeedTable("RecipeIngredients", context.RecipeIngredients);
 
-		//Save All changes if we`ve reached thus far
-		await context.SaveChangesAsync();
+			//save here
+			await context.SaveChangesAsync();
+
+			//Seed UsersFavoriteRecipes
+			await SeedTable("UsersFavoriteRecipes", context.UsersFavoriteRecipes);
+
+			//save here
+			await context.SaveChangesAsync();
+
+			//Seed CategoriesRecipes
+			await SeedTable("CategoriesRecipes", context.CategoriesRecipes);
+
+			//save here
+			await context.SaveChangesAsync();
+
+			//Seed Comments
+			await SeedTable("Comments", context.Comments);
+
+			//save here
+			await context.SaveChangesAsync();
+
+			//Seed Replies
+			await SeedTable("UsersCommentsReplies", context.Replies);
+
+			//Seed ShoppingLists
+			await SeedTable("ShoppingLists", context.ShoppingLists);
+
+			//Seed ShoppingListsRecipeIngredients
+			await SeedTable("ShoppingListsRecipeIngredients", context.ShoppingListsRecipeIngredients);
+
+			await transaction.CommitAsync();
+			Console.WriteLine("Database seeding success.");
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Seeding failed: {ex.Message}");
+			await transaction.RollbackAsync();
+			throw;
+		}
+
 	}
 
 	private static async Task<List<T>> LoadJsonDataAsync<T>(string fileName) where T : class
@@ -80,16 +123,12 @@ public static class SeedDataHelper
 
 		var json = await File.ReadAllTextAsync(filePath);
 
-		return JsonSerializer.Deserialize<List<T>>(json) ?? throw new NullReferenceException($"Failed to read {fileName}.json");
+		return JsonSerializer.Deserialize<List<T>>(json)
+			   ?? throw new NullReferenceException($"Failed to read {fileName}.json");
 	}
 
 	private static async Task SeedTable<T>(string fileName, DbSet<T> targetTable) where T : class
 	{
-		if (await targetTable.AnyAsync())
-		{
-			throw new ArgumentException($"{nameof(targetTable)} is seeded already.");
-		}
-
 		var entries = await LoadJsonDataAsync<T>(fileName);
 
 		if (fileName == "Users")
