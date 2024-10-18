@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using StirCraftApp.Infrastructure.Data.EntityConfigurations;
 using StirCraftApp.Infrastructure.Data.JoinedTables;
 using StirCraftApp.Infrastructure.Identity;
 using System.Reflection;
@@ -41,6 +42,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
+		//Defining all AppUser connections since the Domain is kept without references
 		builder.Entity<Cook>()
 			.HasOne<AppUser>()
 			.WithOne()
@@ -66,6 +68,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.WithMany(u => u.RecipesRatings)
 			.HasForeignKey(rr => rr.UserId);
 
+		//Adding unique display name
 		builder.Entity<AppUser>()
 			.HasIndex(u => u.DisplayName)
 			.IsUnique();
@@ -74,6 +77,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			.Model
 			.GetEntityTypes();
 
+		//Delete behavior no action for all FK
 		foreach (var entityType in allEntityTypes)
 		{
 			foreach (var fk in entityType.GetForeignKeys())
@@ -82,6 +86,8 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 			}
 		}
 
+		//Joined tables explicit filters so that I don`t get unexpected results
+		//when just one of the referenced entities is soft deleted
 		builder.Entity<UserFavoriteRecipe>()
 			.HasQueryFilter(ufr => !ufr.AppUser.IsDeleted && !ufr.Recipe.IsDeleted);
 
@@ -104,6 +110,26 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
 			ApplyFilteredIndex(builder, entityType.ClrType);
 		}
+
+		//applying configurations
+		builder.ApplyConfiguration(new AppUserConfiguration());
+		builder.ApplyConfiguration(new RolesConfiguration());
+		builder.ApplyConfiguration(new UsersRolesConfiguration());
+		builder.ApplyConfiguration(new CategoryConfiguration());
+		builder.ApplyConfiguration(new IngredientConfiguration());
+		builder.ApplyConfiguration(new CookingRankConfiguration());
+		builder.ApplyConfiguration(new MeasurementUnitConfiguration());
+		builder.ApplyConfiguration(new CookConfiguration());
+		builder.ApplyConfiguration(new RecipeConfiguration());
+		builder.ApplyConfiguration(new RecipeRatingConfiguration());
+		builder.ApplyConfiguration(new RecipeImageConfiguration());
+		builder.ApplyConfiguration(new RecipeIngredientConfiguration());
+		builder.ApplyConfiguration(new UsersFavoriteRecipesConfiguration());
+		builder.ApplyConfiguration(new CategoryRecipeConfiguration());
+		builder.ApplyConfiguration(new CommentConfiguration());
+		builder.ApplyConfiguration(new ReplyConfiguration());
+		builder.ApplyConfiguration(new ShoppingListConfiguration());
+		builder.ApplyConfiguration(new ShoppingListRecipeIngredientConfiguration());
 
 		base.OnModelCreating(builder);
 	}

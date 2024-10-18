@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using StirCraftApp.Infrastructure.Data;
-using StirCraftApp.Infrastructure.Data.SeedData;
 using StirCraftApp.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,24 +29,6 @@ builder.Services.AddIdentityApiEndpoints<AppUser>()
 
 var app = builder.Build();
 
-try
-{
-	using var scope = app.Services.CreateScope();
-	var services = scope.ServiceProvider;
-	var context = services.GetRequiredService<StirCraftDbContext>();
-
-	// Apply any pending migrations
-	await context.Database.MigrateAsync();
-
-	// Seed the database if it is not already seeded
-	await SeedDataHelper.SeedAllAsync(context);
-
-}
-catch (Exception ex)
-{
-	Console.WriteLine(ex);
-	//do I want to throw?
-}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

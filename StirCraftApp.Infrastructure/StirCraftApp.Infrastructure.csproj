@@ -21,8 +21,4 @@
     <ProjectReference Include="..\StirCraftApp.Domain\StirCraftApp.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\EntityConfigurations\" />
-  </ItemGroup>
-
 </Project>

@@ -60,7 +60,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -228,7 +228,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingList",
+                name: "ShoppingLists",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -240,9 +240,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingList", x => x.Id);
+                    table.PrimaryKey("PK_ShoppingLists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShoppingList_AspNetUsers_UserId",
+                        name: "FK_ShoppingLists_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -255,7 +255,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    About = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    About = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     RankingPoints = table.Column<long>(type: "bigint", nullable: false),
                     CookingRankId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -305,45 +305,23 @@ namespace StirCraftApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppUserRecipe",
+                name: "CategoriesRecipes",
                 columns: table => new
                 {
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FavoriteRecipesId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    RecipeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserRecipe", x => new { x.AppUserId, x.FavoriteRecipesId });
+                    table.PrimaryKey("PK_CategoriesRecipes", x => new { x.CategoryId, x.RecipeId });
                     table.ForeignKey(
-                        name: "FK_AppUserRecipe_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_AppUserRecipe_Recipes_FavoriteRecipesId",
-                        column: x => x.FavoriteRecipesId,
-                        principalTable: "Recipes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CategoryRecipe",
-                columns: table => new
-                {
-                    CategoriesId = table.Column<int>(type: "int", nullable: false),
-                    RecipesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoryRecipe", x => new { x.CategoriesId, x.RecipesId });
-                    table.ForeignKey(
-                        name: "FK_CategoryRecipe_Categories_CategoriesId",
-                        column: x => x.CategoriesId,
+                        name: "FK_CategoriesRecipes_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CategoryRecipe_Recipes_RecipesId",
-                        column: x => x.RecipesId,
+                        name: "FK_CategoriesRecipes_Recipes_RecipeId",
+                        column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id");
                 });
@@ -458,6 +436,28 @@ namespace StirCraftApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersFavoriteRecipes",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RecipeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersFavoriteRecipes", x => new { x.UserId, x.RecipeId });
+                    table.ForeignKey(
+                        name: "FK_UsersFavoriteRecipes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UsersFavoriteRecipes_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Replies",
                 columns: table => new
                 {
@@ -485,31 +485,26 @@ namespace StirCraftApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecipeIngredientShoppingList",
+                name: "ShoppingListsRecipeIngredients",
                 columns: table => new
                 {
-                    RecipeIngredientsId = table.Column<int>(type: "int", nullable: false),
-                    ShoppingListsId = table.Column<int>(type: "int", nullable: false)
+                    ShoppingListId = table.Column<int>(type: "int", nullable: false),
+                    RecipeIngredientId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeIngredientShoppingList", x => new { x.RecipeIngredientsId, x.ShoppingListsId });
+                    table.PrimaryKey("PK_ShoppingListsRecipeIngredients", x => new { x.ShoppingListId, x.RecipeIngredientId });
                     table.ForeignKey(
-                        name: "FK_RecipeIngredientShoppingList_RecipeIngredients_RecipeIngredientsId",
-                        column: x => x.RecipeIngredientsId,
+                        name: "FK_ShoppingListsRecipeIngredients_RecipeIngredients_RecipeIngredientId",
+                        column: x => x.RecipeIngredientId,
                         principalTable: "RecipeIngredients",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_RecipeIngredientShoppingList_ShoppingList_ShoppingListsId",
-                        column: x => x.ShoppingListsId,
-                        principalTable: "ShoppingList",
+                        name: "FK_ShoppingListsRecipeIngredients_ShoppingLists_ShoppingListId",
+                        column: x => x.ShoppingListId,
+                        principalTable: "ShoppingLists",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppUserRecipe_FavoriteRecipesId",
-                table: "AppUserRecipe",
-                column: "FavoriteRecipesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -570,9 +565,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                 filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryRecipe_RecipesId",
-                table: "CategoryRecipe",
-                column: "RecipesId");
+                name: "IX_CategoriesRecipes_RecipeId",
+                table: "CategoriesRecipes",
+                column: "RecipeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_IsDeleted",
@@ -588,8 +583,7 @@ namespace StirCraftApp.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",
                 table: "Comments",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CookingRanks_IsDeleted",
@@ -659,11 +653,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngredientShoppingList_ShoppingListsId",
-                table: "RecipeIngredientShoppingList",
-                column: "ShoppingListsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RecipeRatings_IsDeleted",
                 table: "RecipeRatings",
                 column: "IsDeleted",
@@ -704,27 +693,33 @@ namespace StirCraftApp.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Replies_UserId",
                 table: "Replies",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingList_IsDeleted",
-                table: "ShoppingList",
+                name: "IX_ShoppingLists_IsDeleted",
+                table: "ShoppingLists",
                 column: "IsDeleted",
                 filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingList_UserId",
-                table: "ShoppingList",
+                name: "IX_ShoppingLists_UserId",
+                table: "ShoppingLists",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingListsRecipeIngredients_RecipeIngredientId",
+                table: "ShoppingListsRecipeIngredients",
+                column: "RecipeIngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersFavoriteRecipes_RecipeId",
+                table: "UsersFavoriteRecipes",
+                column: "RecipeId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AppUserRecipe");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -741,13 +736,10 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CategoryRecipe");
+                name: "CategoriesRecipes");
 
             migrationBuilder.DropTable(
                 name: "RecipeImages");
-
-            migrationBuilder.DropTable(
-                name: "RecipeIngredientShoppingList");
 
             migrationBuilder.DropTable(
                 name: "RecipeRatings");
@@ -756,19 +748,25 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "Replies");
 
             migrationBuilder.DropTable(
+                name: "ShoppingListsRecipeIngredients");
+
+            migrationBuilder.DropTable(
+                name: "UsersFavoriteRecipes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "RecipeIngredients");
 
             migrationBuilder.DropTable(
-                name: "ShoppingList");
-
-            migrationBuilder.DropTable(
-                name: "Comments");
+                name: "ShoppingLists");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");

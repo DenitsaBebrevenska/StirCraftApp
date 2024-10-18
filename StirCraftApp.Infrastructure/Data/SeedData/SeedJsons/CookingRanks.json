@@ -1,29 +1,36 @@
 [
   {
+    "Id": 1,
     "Title": "StirCraftNovice",
     "RequiredPoints": 0
   },
   {
+    "Id": 2,
     "Title": "StirSpecialist",
     "RequiredPoints": 500
   },
   {
+    "Id": 3,
     "Title": "FlavorOperative",
     "RequiredPoints": 1000
   },
   {
+    "Id": 4,
     "Title": "SeasonedCommander",
     "RequiredPoints": 1500
   },
   {
+    "Id": 5,
     "Title": "MasterOfStirCraft",
     "RequiredPoints": 2000
   },
   {
+    "Id": 6,
     "Title": "CulinaryOverlord",
     "RequiredPoints": 3000
   },
   {
+    "Id": 7,
     "Title": "StirCraftGod",
     "RequiredPoints": 5000
   }

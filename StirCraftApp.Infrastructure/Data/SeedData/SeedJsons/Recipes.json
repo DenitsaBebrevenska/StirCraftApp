@@ -1,5 +1,6 @@
 [
   {
+    "Id": 1,
     "Name": "Spaghetti Aglio e Olio",
     "PreparationSteps": "Cook the spaghetti in salted boiling water until al dente. Reserve some pasta water before draining. Heat olive oil in a pan over medium heat, then add thinly sliced garlic and chili flakes. Sauté until fragrant but not browned.Add the cooked spaghetti to the pan and toss with the garlic oil. Add reserved pasta water to loosen the sauce if needed. Season with salt and pepper to taste, garnish with fresh parsley, and serve.",
     "Likes": 4,
@@ -11,6 +12,7 @@
     "AdminNotes": null
   },
   {
+    "Id": 2,
     "Name": "Quinoa Salad",
     "PreparationSteps": "Cook quinoa in water (you can use vegetable broth if you like). Let it cool. In a large bowl, combine diced cucumber, cherry tomatoes, red onion, and avocado. Add the cooled quinoa and mix well. In a small bowl, whisk together lemon juice, olive oil, tahini, salt, and pepper. Pour the dressing over the salad and toss. Garnish with fresh herbs like parsley and cilantro and serve chilled.",
     "Likes": 10,
@@ -22,6 +24,7 @@
     "AdminNotes": null
   },
   {
+    "Id": 3,
     "Name": "Gluten-Free Almond Pancakes",
     "PreparationSteps": "In a bowl, whisk together almond flour, eggs, baking powder, vanilla extract, and a pinch of salt until smooth. Heat a non-stick pan over medium heat and grease lightly with butter. Pour small amounts of batter onto the pan and cook until bubbles form on the surface, then flip and cook the other side until golden brown. Serve pancakes with fresh berries, maple syrup, and a sprinkle of almond slices for garnish.",
     "Likes": 30,
@@ -33,6 +36,7 @@
     "AdminNotes": null
   },
   {
+    "Id": 4,
     "Name": "Spicy Chicken Tacos",
     "PreparationSteps": "Marinate chicken breast in a mixture of chili powder, cumin, paprika, garlic, lime juice, and olive oil for at least 30 minutes. Cook the marinated chicken in a pan over medium heat until fully cooked and slightly charred. Warm the taco shells in the oven or on a pan. Assemble the tacos by adding chicken, finely chopped ripe tomatoes, onion, cilantro, jalapeño, and lime, and avocado.",
     "Likes": 3,
@@ -44,6 +48,7 @@
     "AdminNotes": null
   },
   {
+    "Id": 5,
     "Name": "Classic Beef Stroganoff",
     "PreparationSteps": "Cook egg noodles according to package instructions, drain, and set aside. In a large pan, brown strips of beef in butter over high heat. Remove from the pan and set aside. In the same pan, sauté onions and mushrooms until softened. Add garlic and cook for another minute. Stir in beef broth, mustard, and Worcestershire sauce, then return the beef to the pan. Reduce heat, stir in sour cream, and simmer until the sauce thickens. Serve the beef stroganoff over egg noodles, garnished with fresh parsley.",
     "Likes": 10,
