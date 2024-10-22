@@ -1,4 +1,5 @@
-﻿using StirCraftApp.Domain.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Infrastructure.Data
@@ -21,6 +22,15 @@ namespace StirCraftApp.Infrastructure.Data
             {
                 query = query.OrderBy(spec.OrderByDesc);
             }
+
+            //Eager loading
+            query = spec.Includes
+                .Aggregate(query, (current, include)
+                    => current.Include(include));
+
+            query = spec.IncludeStrings
+                .Aggregate(query, (current, include)
+                    => current.Include(include));
 
             return query;
         }
