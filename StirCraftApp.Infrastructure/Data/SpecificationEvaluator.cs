@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StirCraftApp.Domain.Contracts;
-using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Infrastructure.Data
 {
-    public class SpecificationEvaluator<T> where T : BaseEntity
+    public class SpecificationEvaluator<T> where T : class
     {
         public static IQueryable<T> GetQuery(IQueryable<T> query, ISpecification<T> spec)
         {
@@ -35,7 +34,7 @@ namespace StirCraftApp.Infrastructure.Data
             return query;
         }
 
-        public static IQueryable<TResult> GetQuery<TSpec, TResult>(IQueryable<T> query, ISpecification<T, TResult> spec)
+        public static IQueryable<TResult> GetQuery<T, TResult>(IQueryable<T> query, ISpecification<T, TResult> spec)
         {
             if (spec.Criteria != null)
             {

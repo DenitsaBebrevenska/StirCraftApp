@@ -1,16 +1,14 @@
-﻿using StirCraftApp.Domain.Entities;
-
-namespace StirCraftApp.Domain.Contracts;
-public interface IRepository<TEntity> where TEntity : BaseEntity
+﻿namespace StirCraftApp.Domain.Contracts;
+public interface IRepository<T> where T : class
 {
-    Task<TEntity?> GetByIdAsync(int id);
-    Task<TEntity?> GetEntityWithSpecAsync(ISpecification<TEntity> spec);
-    Task<IEnumerable<TEntity>> GetAllAsync();
-    Task<IReadOnlyList<TEntity>> GetAllAsReadOnlyAsync();
-    Task<IEnumerable<TEntity>> GetAllWithSpecAsync(ISpecification<TEntity> spec);
-    Task<TResult?> GetEntityWithSpecAsync<TResult>(ISpecification<TEntity, TResult> spec);
-    Task<IEnumerable<TResult>> GetAllWithSpecAsync<TResult>(ISpecification<TEntity, TResult> spec);
-    Task AddAsync(TEntity entity);
-    void Delete(TEntity entity);
-    void Update(TEntity entity);
+    Task<T?> GetByIdAsync(int id);
+    Task<T?> GetEntityWithSpecAsync(ISpecification<T> spec);
+    Task<IEnumerable<T>> GetAllAsync();
+    Task<IReadOnlyList<T>> GetAllAsReadOnlyAsync();
+    Task<IEnumerable<T>> GetAllWithSpecAsync(ISpecification<T> spec);
+    Task<TResult?> GetEntityWithSpecAsync<TResult>(ISpecification<T, TResult> spec);
+    Task<IEnumerable<TResult>> GetAllWithSpecAsync<TResult>(ISpecification<T, TResult> spec);
+    Task AddAsync(T entity);
+    void Delete(T entity);
+    void Update(T entity);
 }

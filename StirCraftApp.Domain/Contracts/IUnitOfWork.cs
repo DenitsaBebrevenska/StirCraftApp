@@ -1,10 +1,8 @@
-﻿using StirCraftApp.Domain.Entities;
-
-namespace StirCraftApp.Domain.Contracts;
+﻿namespace StirCraftApp.Domain.Contracts;
 public interface IUnitOfWork
 {
-	//not going for IDisposable, the DI will take care
-	IRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
-	Task CompleteAsync();
+    //not going for IDisposable, the DI will take care
+    IRepository<T> Repository<T>() where T : class;
+    Task CompleteAsync();
 
 }
