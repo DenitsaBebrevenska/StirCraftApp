@@ -9,7 +9,7 @@ public class UnitOfWork(StirCraftDbContext context) : IUnitOfWork
     {
         var type = typeof(T).Name;
 
-        return (Repository<T>)_repositories.GetOrAdd(type, t =>
+        return (IRepository<T>)_repositories.GetOrAdd(type, t =>
         {
             var repositoryType = typeof(Repository<>).MakeGenericType(typeof(T));
             return Activator.CreateInstance(repositoryType, context)
@@ -17,8 +17,8 @@ public class UnitOfWork(StirCraftDbContext context) : IUnitOfWork
         });
     }
 
-    public async Task CompleteAsync()
+    public async Task<bool> CompleteAsync()
     {
-        await context.SaveChangesAsync();
+        return await context.SaveChangesAsync() > 0;
     }
 }
