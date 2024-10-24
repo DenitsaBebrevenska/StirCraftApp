@@ -10,6 +10,9 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecif
     public Expression<Func<T, object>>? OrderByDesc { get; private set; }
     public List<Expression<Func<T, object>>> Includes { get; private set; } = [];
     public List<string> IncludeStrings { get; } = [];
+    public int Take { get; private set; }
+    public int Skip { get; private set; }
+    public bool IsPaginationEnabled { get; private set; }
 
     protected void AddInclude(Expression<Func<T, object>> includeExpression)
     {
@@ -28,6 +31,13 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecif
     protected void AddOrderByDesc(Expression<Func<T, object>> orderByDescExpression)
     {
         OrderByDesc = orderByDescExpression;
+    }
+
+    protected void AddPaging(int skip, int take)
+    {
+        Skip = skip;
+        Take = take;
+        IsPaginationEnabled = true;
     }
 }
 

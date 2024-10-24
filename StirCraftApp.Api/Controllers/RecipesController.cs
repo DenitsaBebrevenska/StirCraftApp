@@ -1,39 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StirCraftApp.Domain.Contracts;
+using StirCraftApp.Application.Contracts;
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class RecipesController : ControllerBase
+public class RecipesController(IService<Recipe> recipeService) : ControllerBase
 {
-	private readonly IRepository<Recipe> _recipeRepository;
-	//use repo for now to test out
-	public RecipesController(IRepository<Recipe> recipeRepository)
-	{
-		_recipeRepository = recipeRepository;
-	}
+    //get recipes with specs and not, get recipe by id, create recipe, edit recipe, delete recipe
+    //[HttpGet]
+    ////public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams? specParams)
+    //{
+    //    var recipes = recipeService
+    //        .GetAllWithSpecAsync(specParams.)
+    //    return Ok();
+    //}
 
-	[HttpGet]
-	public async Task<IActionResult> GetRecipes()
-	{
-		var recipes = await _recipeRepository
-			.GetAllAsync();
+    //[HttpGet("{id:int}")]
+    //public async Task<IActionResult> GetRecipe(int id)
+    //{
+    //    var recipe = await _recipeRepository
+    //        .GetByIdAsync(id);
 
-		return Ok(recipes);
-	}
+    //    if (recipe == null)
+    //    {
+    //        return NotFound();
+    //    }
 
-	[HttpGet("{id:int}")]
-	public async Task<IActionResult> GetRecipe(int id)
-	{
-		var recipe = await _recipeRepository
-			.GetByIdAsync(id);
-
-		if (recipe == null)
-		{
-			return NotFound();
-		}
-
-		return Ok(recipe);
-	}
+    //    return Ok(recipe);
+    //}
 }

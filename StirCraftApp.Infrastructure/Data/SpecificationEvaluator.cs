@@ -22,6 +22,12 @@ namespace StirCraftApp.Infrastructure.Data
                 query = query.OrderBy(spec.OrderByDesc);
             }
 
+            if (spec.IsPaginationEnabled)
+            {
+                query = query.Skip(spec.Skip)
+                    .Take(spec.Take);
+            }
+
             //Eager loading
             query = spec.Includes
                 .Aggregate(query, (current, include)
@@ -56,6 +62,12 @@ namespace StirCraftApp.Infrastructure.Data
             if (spec.Select != null)
             {
                 selectQuery = query.Select(spec.Select);
+            }
+
+            if (spec.IsPaginationEnabled)
+            {
+                selectQuery = query.Skip(spec.Skip)
+                    .Take(spec.Take) as IQueryable<TResult>;
             }
 
             return selectQuery ?? query.Cast<TResult>();

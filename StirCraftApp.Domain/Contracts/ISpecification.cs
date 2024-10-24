@@ -12,6 +12,12 @@ public interface ISpecification<T>
     List<Expression<Func<T, object>>> Includes { get; }
 
     List<string> IncludeStrings { get; } //for ThenInclude
+
+    int Take { get; }
+
+    int Skip { get; }
+
+    bool IsPaginationEnabled { get; }
 }
 
 public interface ISpecification<T, TResult> : ISpecification<T>

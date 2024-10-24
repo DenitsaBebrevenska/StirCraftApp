@@ -3,14 +3,17 @@
 namespace StirCraftApp.Domain.Specifications;
 public class RecipeSpecification : BaseSpecification<Recipe>
 {
-    //a recipe could be filtered by name, category/categories, difficulty level, maybe cook name?, sort by likes
-    public RecipeSpecification(string? name, string? difficultyLevel, string? sort)
+    //a recipe could be filtered by name, category/categories, difficulty level,
+    //sort by likes or default
+    public RecipeSpecification(RecipeSpecParams specParams)
     : base(r =>
-        (string.IsNullOrWhiteSpace(name) || r.Name == name) &&
-        (string.IsNullOrWhiteSpace(difficultyLevel) || string.Equals(r.DifficultyLevel.ToString().ToLower(),
-            difficultyLevel.ToLower(), StringComparison.InvariantCulture)))
+        (string.IsNullOrWhiteSpace(specParams.RecipeName) || r.Name.ToLower().Contains(specParams.RecipeName)) &&
+        !specParams.Categories.Any() || specParams.Categories.Contains(r.Name) &&
+        !specParams.DifficultyLevels.Any() || specParams.DifficultyLevels.Contains(r.DifficultyLevel.ToString().ToLower()))
     {
-        switch (sort)
+        AddPaging(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
+
+        switch (specParams.Sort)
         {
             case "likesAsc":
                 AddOrderBy(r => r.Likes);
