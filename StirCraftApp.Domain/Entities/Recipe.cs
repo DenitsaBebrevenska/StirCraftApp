@@ -5,33 +5,35 @@ using static StirCraftApp.Domain.Constraints.EntityConstraints;
 namespace StirCraftApp.Domain.Entities;
 public class Recipe : BaseEntity
 {
-	[MaxLength(RecipeNameMaxLength)]
-	public required string Name { get; set; }
+    [MaxLength(RecipeNameMaxLength)]
+    public required string Name { get; set; }
 
-	[MaxLength(RecipeDescriptionMaxLength)]
-	public required string PreparationSteps { get; set; }
+    [MaxLength(RecipeDescriptionMaxLength)]
+    public required string PreparationSteps { get; set; }
 
-	public uint Likes { get; set; }
+    public uint Likes { get; set; }
 
-	public DifficultyLevel DifficultyLevel { get; set; }
+    public DifficultyLevel DifficultyLevel { get; set; }
 
-	public int CookId { get; set; }
+    public int CookId { get; set; }
 
-	public virtual Cook Cook { get; set; } = null!;
+    public virtual Cook Cook { get; set; } = null!;
 
-	public DateTime CreatedOn { get; set; }
+    public DateTime CreatedOn { get; set; }
 
-	public DateTime UpdatedOn { get; set; }
+    public DateTime UpdatedOn { get; set; }
 
-	public bool IsAdminApproved { get; set; }
+    public bool IsAdminApproved { get; set; }
 
-	[MaxLength(RecipeAdminNotesMaxLength)]
-	public string? AdminNotes { get; set; }
+    [MaxLength(RecipeAdminNotesMaxLength)]
+    public string? AdminNotes { get; set; }
 
-	public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
-	public virtual ICollection<RecipeRating> RecipeRatings { get; set; } = new List<RecipeRating>();
+    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
-	public virtual ICollection<RecipeImage> RecipeImages { get; set; } = new List<RecipeImage>();
+    public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
+    public virtual ICollection<RecipeRating> RecipeRatings { get; set; } = new List<RecipeRating>();
 
-	public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public virtual ICollection<RecipeImage> RecipeImages { get; set; } = new List<RecipeImage>();
+
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 }
