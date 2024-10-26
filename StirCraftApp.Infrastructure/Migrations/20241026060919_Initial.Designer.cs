@@ -12,7 +12,7 @@ using StirCraftApp.Infrastructure.Data;
 namespace StirCraftApp.Infrastructure.Migrations
 {
     [DbContext(typeof(StirCraftDbContext))]
-    [Migration("20241018182053_Initial")]
+    [Migration("20241026060919_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -404,9 +404,6 @@ namespace StirCraftApp.Infrastructure.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<long>("Likes")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -962,15 +959,15 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", "AppUser")
+                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", "User")
                         .WithMany("FavoriteRecipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
-
                     b.Navigation("Recipe");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Comment", b =>

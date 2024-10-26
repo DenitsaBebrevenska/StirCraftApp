@@ -8,6 +8,4 @@ public class ShoppingList : BaseEntity
 
     [MaxLength(ShoppingListNameMaxLength)]
     public string? Name { get; set; }
-
-    public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }

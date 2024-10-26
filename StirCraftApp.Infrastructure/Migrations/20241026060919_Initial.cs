@@ -284,7 +284,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PreparationSteps = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    Likes = table.Column<long>(type: "bigint", nullable: false),
                     DifficultyLevel = table.Column<int>(type: "int", nullable: false),
                     CookId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),

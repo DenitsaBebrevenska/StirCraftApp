@@ -11,8 +11,6 @@ public class Recipe : BaseEntity
     [MaxLength(RecipeDescriptionMaxLength)]
     public required string PreparationSteps { get; set; }
 
-    public uint Likes { get; set; }
-
     public DifficultyLevel DifficultyLevel { get; set; }
 
     public int CookId { get; set; }
@@ -27,8 +25,6 @@ public class Recipe : BaseEntity
 
     [MaxLength(RecipeAdminNotesMaxLength)]
     public string? AdminNotes { get; set; }
-
-    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
     public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
     public virtual ICollection<RecipeRating> RecipeRatings { get; set; } = new List<RecipeRating>();

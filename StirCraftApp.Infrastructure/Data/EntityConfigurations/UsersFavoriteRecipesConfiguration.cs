@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Infrastructure.Data.JoinedTables;
 using StirCraftApp.Infrastructure.Data.SeedData;
 

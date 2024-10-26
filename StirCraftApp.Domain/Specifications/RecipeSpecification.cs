@@ -15,11 +15,8 @@ public class RecipeSpecification : BaseSpecification<Recipe>
 
         switch (specParams.Sort)
         {
-            case "likesAsc":
-                AddOrderBy(r => r.Likes);
-                break;
             case "likesDesc":
-                AddOrderByDesc(r => r.Likes);
+                AddOrderByDesc(r => r.Name);
                 break;
             default:
                 AddOrderBy(r => r.Name);

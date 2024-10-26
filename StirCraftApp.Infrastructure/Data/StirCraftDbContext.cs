@@ -111,7 +111,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
             ApplyFilteredIndex(builder, entityType.ClrType);
         }
 
-        //applying configurations
+        //applying configurations to seed data
         builder.ApplyConfiguration(new AppUserConfiguration());
         builder.ApplyConfiguration(new RolesConfiguration());
         builder.ApplyConfiguration(new UsersRolesConfiguration());

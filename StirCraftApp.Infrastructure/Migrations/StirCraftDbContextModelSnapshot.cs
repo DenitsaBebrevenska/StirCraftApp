@@ -1361,9 +1361,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<long>("Likes")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -1395,7 +1392,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             DifficultyLevel = 1,
                             IsAdminApproved = true,
                             IsDeleted = false,
-                            Likes = 4L,
                             Name = "Spaghetti Aglio e Olio",
                             PreparationSteps = "Cook the spaghetti in salted boiling water until al dente. Reserve some pasta water before draining. Heat olive oil in a pan over medium heat, then add thinly sliced garlic and chili flakes. Sauté until fragrant but not browned.Add the cooked spaghetti to the pan and toss with the garlic oil. Add reserved pasta water to loosen the sauce if needed. Season with salt and pepper to taste, garnish with fresh parsley, and serve.",
                             UpdatedOn = new DateTime(2024, 10, 6, 12, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1408,7 +1404,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             DifficultyLevel = 2,
                             IsAdminApproved = true,
                             IsDeleted = false,
-                            Likes = 10L,
                             Name = "Quinoa Salad",
                             PreparationSteps = "Cook quinoa in water (you can use vegetable broth if you like). Let it cool. In a large bowl, combine diced cucumber, cherry tomatoes, red onion, and avocado. Add the cooled quinoa and mix well. In a small bowl, whisk together lemon juice, olive oil, tahini, salt, and pepper. Pour the dressing over the salad and toss. Garnish with fresh herbs like parsley and cilantro and serve chilled.",
                             UpdatedOn = new DateTime(2024, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1421,7 +1416,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             DifficultyLevel = 2,
                             IsAdminApproved = true,
                             IsDeleted = false,
-                            Likes = 30L,
                             Name = "Gluten-Free Almond Pancakes",
                             PreparationSteps = "In a bowl, whisk together almond flour, eggs, baking powder, vanilla extract, and a pinch of salt until smooth. Heat a non-stick pan over medium heat and grease lightly with butter. Pour small amounts of batter onto the pan and cook until bubbles form on the surface, then flip and cook the other side until golden brown. Serve pancakes with fresh berries, maple syrup, and a sprinkle of almond slices for garnish.",
                             UpdatedOn = new DateTime(2024, 8, 22, 12, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1434,7 +1428,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             DifficultyLevel = 2,
                             IsAdminApproved = true,
                             IsDeleted = false,
-                            Likes = 3L,
                             Name = "Spicy Chicken Tacos",
                             PreparationSteps = "Marinate chicken breast in a mixture of chili powder, cumin, paprika, garlic, lime juice, and olive oil for at least 30 minutes. Cook the marinated chicken in a pan over medium heat until fully cooked and slightly charred. Warm the taco shells in the oven or on a pan. Assemble the tacos by adding chicken, finely chopped ripe tomatoes, onion, cilantro, jalapeño, and lime, and avocado.",
                             UpdatedOn = new DateTime(2024, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1447,7 +1440,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             DifficultyLevel = 3,
                             IsAdminApproved = true,
                             IsDeleted = false,
-                            Likes = 10L,
                             Name = "Classic Beef Stroganoff",
                             PreparationSteps = "Cook egg noodles according to package instructions, drain, and set aside. In a large pan, brown strips of beef in butter over high heat. Remove from the pan and set aside. In the same pan, sauté onions and mushrooms until softened. Add garlic and cook for another minute. Stir in beef broth, mustard, and Worcestershire sauce, then return the beef to the pan. Reduce heat, stir in sour cream, and simmer until the sauce thickens. Serve the beef stroganoff over egg noodles, garnished with fresh parsley.",
                             UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2451,7 +2443,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "40390021-3ff3-4e59-b642-cc37ae6f7cb1",
+                            ConcurrencyStamp = "dcda0eec-37b5-4651-93cf-76a68e5d598e",
                             DisplayName = "ChefBob",
                             Email = "bob@example.com",
                             EmailConfirmed = false,
@@ -2459,9 +2451,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB@EXAMPLE.COM",
                             NormalizedUserName = "BOB@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEErsKqFM3SBww7fXY5jdQEtM4IBYw7tyht9m6NYiRR7q/7GzojdYxVyzeCW6ErVhJA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAOEkkIjvAcegtAE+k82S/HIxCWeJJrENzZgYV57DZGbpW8cPIJrWYFtgdQiRNQ+vA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "def70ebb-6b0d-47e5-ae39-a7fc9eee5a5e",
+                            SecurityStamp = "f76eb20c-4e12-4ce6-9243-721a555cf832",
                             TwoFactorEnabled = false,
                             UserName = "bob@example.com"
                         },
@@ -2470,7 +2462,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "90344284-9b1f-4bcb-9836-3d1c60483f1d",
+                            ConcurrencyStamp = "7e7b8ca2-4e05-4a7e-9088-d48d8569f16c",
                             DisplayName = "KateMiddleton",
                             Email = "kate@example.com",
                             EmailConfirmed = false,
@@ -2478,9 +2470,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KATE@EXAMPLE.COM",
                             NormalizedUserName = "KATE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO/3DeC1t0IwA83XvfgEMVG36PUfE3EL5EvilGm+3tXG9dl3cztAHoIrxl5fJyKqOA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIl10MC1UYMs+SNijZi5aBY/1bFZo5vAvyHNBku/+wSCpXpuD+J47u3mUNFCqzAmtQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc4741da-203f-44de-9771-a01187d9d29e",
+                            SecurityStamp = "9c248072-a271-492c-a514-a6c3cc26209e",
                             TwoFactorEnabled = false,
                             UserName = "kate@example.com"
                         },
@@ -2489,7 +2481,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "ef563f0e-e4c3-4bca-bc22-4cae7d69d3fe",
+                            ConcurrencyStamp = "d1d0a9bb-ee12-4b8d-a8ea-cb910f73bb7e",
                             DisplayName = "AdrianTheAdventurer",
                             Email = "adrian@example.com",
                             EmailConfirmed = false,
@@ -2497,9 +2489,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADRIAN@EXAMPLE.COM",
                             NormalizedUserName = "ADRIAN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGiNONfdU6VbhvUFfQ4MXc4ugCmSYnft4ll7DCdS2PaLkcZ49WV9jlOeaaWyKZjowg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM781he74Lf9I5TnDp3i31tkfNakbAcz0X9P14W9gV/iUYkrrg0szU5jEhRhGntY9w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "76ebedb5-c503-44ca-ad50-edcd05382988",
+                            SecurityStamp = "c44ebe42-dac6-4b3e-b97f-0506e842b2f0",
                             TwoFactorEnabled = false,
                             UserName = "adrian@example.com"
                         },
@@ -2508,7 +2500,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "77c7e803-25a1-4be2-8949-12b080b3f02f",
+                            ConcurrencyStamp = "3326b1e8-de80-45c6-be0f-c987c7d4a079",
                             DisplayName = "LoveLink",
                             Email = "zelda@example.com",
                             EmailConfirmed = false,
@@ -2516,9 +2508,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZELDA@EXAMPLE.COM",
                             NormalizedUserName = "ZELDA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGHE74XM4yNdFmvV7nRZLo3Fo0Rgmfz8XgfcaQc2qBYTck5S660MhwbOsByKQBJ+2A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELGYoWJ/UA+vaCqp4GGvQts/BfUxE6r51As5xRMldNXnWo1t//uOaYe+NNbyp2EK9Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e553a832-7cff-4877-8307-644ceb18f6c0",
+                            SecurityStamp = "31dee186-c743-4324-bb9c-e001e6f641ec",
                             TwoFactorEnabled = false,
                             UserName = "zelda@example.com"
                         },
@@ -2527,7 +2519,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "b7457557-8947-4ca4-b441-f4dc7db0eb09",
+                            ConcurrencyStamp = "980b1ab4-0559-4bc5-90c2-cb4c1083550f",
                             DisplayName = "ThePowerOfMorgoth",
                             Email = "galadriel@example.com",
                             EmailConfirmed = false,
@@ -2535,9 +2527,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
                             NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIk645dFe6I4eRyDKju4Caqde861ATUaMp8EGNBNs/mkdtn13b9fT1iZElSaJgRbmA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEECYOQq4Xh1Gt7xjKEThMg0gaDiAzOWDEjFLsrHqIjCJZOjTMw2kWVjgyRtaa0PoAg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5c56e100-ac73-418e-8c92-f0b4b5679ac8",
+                            SecurityStamp = "cff70599-3fe9-4a24-84e4-e0f61e39394f",
                             TwoFactorEnabled = false,
                             UserName = "galadriel@example.com"
                         },
@@ -2545,7 +2537,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "365aed33-818e-4679-b1ff-371c268cfbcf",
+                            ConcurrencyStamp = "82c69f54-2890-45af-a9ee-196750772930",
                             DisplayName = "StirCraftAdmin",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
@@ -2553,9 +2545,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHV5LzJVaG+IzWwngbQ9dTCsGv47Uh1lx/K/Yuye2k9TGG3vPM3EbRbi0Kvg9Mf/iw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOkIpAmsNU6tdExMpolySWe8+0Sjo7JB3kYnB8FrftgGZiX3D/0+ir27Zr/fUBk9Nw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b759083c-0f6e-4ab4-8593-899f64aa2bbf",
+                            SecurityStamp = "57a327ea-bf02-441a-896e-4dda032373bb",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });
@@ -2783,15 +2775,15 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", "AppUser")
+                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", "User")
                         .WithMany("FavoriteRecipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
-
                     b.Navigation("Recipe");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Comment", b =>
