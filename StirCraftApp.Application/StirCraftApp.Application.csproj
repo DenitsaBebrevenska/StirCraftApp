@@ -8,10 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StirCraftApp.Domain\StirCraftApp.Domain.csproj" />
+    <ProjectReference Include="..\StirCraftApp.Infrastructure\StirCraftApp.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
     <Folder Include="Mappings\" />
   </ItemGroup>
 

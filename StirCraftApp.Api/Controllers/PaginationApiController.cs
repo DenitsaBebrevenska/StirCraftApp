@@ -5,7 +5,7 @@ using StirCraftApp.Domain.Contracts;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class BaseApiController : ControllerBase
+public class PaginationApiController : ControllerBase
 {
     protected async Task<IActionResult> CreatePagedResult<T>(IUnitOfWork unit,
         ISpecification<T> spec, int pageIndex, int pageSize) where T : class
