@@ -7,7 +7,7 @@ public class QuickViewRecipeDto
 
     public required string DifficultyLevel { get; set; }
 
-    public required string MainImageUrl { get; set; }
+    public string? MainImageUrl { get; set; }
 
     public required string CookName { get; set; }
 

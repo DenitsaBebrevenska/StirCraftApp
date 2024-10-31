@@ -23,7 +23,7 @@ public class RecipeService(IUnitOfWork unit) : IRecipeService
             Id = r.Id,
             Name = r.Name,
             DifficultyLevel = r.DifficultyLevel.ToString(),
-            MainImageUrl = r.RecipeImages.First().Url,
+            MainImageUrl = r.RecipeImages.FirstOrDefault()?.Url,
             CookName = users.First(u => u.Id == r.Cook.UserId).DisplayName ?? "",
             Rating = r.RecipeRatings.Average(rr => rr.Value),
             Likes = favoriteRecipes.Count(fr => fr.RecipeId == r.Id)

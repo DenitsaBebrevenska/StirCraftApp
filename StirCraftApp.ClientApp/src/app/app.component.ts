@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./layout/header/header.component";
-import { HttpClient } from '@angular/common/http';
+import { Recipe } from './shared/models/recipe';
+import { RecipesService } from './core/services/recipes.service';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +11,17 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent implements OnInit {
-  baseUrl = 'https://localhost:7222/api/';
-  private http = inject(HttpClient)
+  private recipeService = inject(RecipesService);
   title = 'StirCraftClientApp';
+  recipes: Recipe[] = [];
 
   ngOnInit(): void {
-    this.http.get(this.baseUrl + 'recipes')
+    this.recipeService.getRecipes()
       .subscribe({
-        next: data => console.log(data),
-        error: error => console.error(error),
-        complete: () => console.log('complete') 
+        next: response => this.recipes = response.data,
+        error: error => console.error(error)
       });
   }
 }
