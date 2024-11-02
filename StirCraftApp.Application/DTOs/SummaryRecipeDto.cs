@@ -1,6 +1,6 @@
 ﻿namespace StirCraftApp.Application.DTOs;
 
-public class QuickViewRecipeDto
+public class SummaryRecipeDto
 {
     public int Id { get; set; }
     public required string Name { get; set; }

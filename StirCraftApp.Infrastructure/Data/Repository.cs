@@ -16,16 +16,11 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         => await ApplySpecification(spec)
             .FirstOrDefaultAsync();
 
-    public async Task<IEnumerable<T>> GetAllAsync()
+    public async Task<IList<T>> GetAllAsync()
         => await GetDbSet()
             .ToListAsync();
 
-    public async Task<IReadOnlyList<T>> GetAllAsReadOnlyAsync()
-        => await GetDbSet()
-            .AsNoTracking()
-            .ToListAsync();
-
-    public async Task<IEnumerable<T>> GetAllWithSpecAsync(ISpecification<T> spec)
+    public async Task<IList<T>> GetAllWithSpecAsync(ISpecification<T> spec)
         => await ApplySpecification(spec)
             .ToListAsync();
 
@@ -33,7 +28,7 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
      => await ApplySpecification(spec)
          .FirstOrDefaultAsync();
 
-    public async Task<IEnumerable<TResult>> GetAllWithSpecAsync<TResult>(ISpecification<T, TResult> spec)
+    public async Task<IList<TResult>> GetAllWithSpecAsync<TResult>(ISpecification<T, TResult> spec)
         => await ApplySpecification(spec)
             .ToListAsync();
 
@@ -51,17 +46,20 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         context.Entry(entity).State = EntityState.Modified;
     }
 
+    //todo check if no tracking will cause any problem later on
     private IQueryable<T> ApplySpecification(ISpecification<T> spec)
     {
         var query = GetDbSet()
-            .AsQueryable();
+            .AsQueryable()
+            .AsNoTracking();
         return SpecificationEvaluator<T>.GetQuery(query, spec);
     }
 
     private IQueryable<TResult> ApplySpecification<TResult>(ISpecification<T, TResult> spec)
     {
         var query = GetDbSet()
-            .AsQueryable();
+            .AsQueryable()
+            .AsNoTracking();
         return SpecificationEvaluator<T>.GetQuery<T, TResult>(query, spec);
     }
 }

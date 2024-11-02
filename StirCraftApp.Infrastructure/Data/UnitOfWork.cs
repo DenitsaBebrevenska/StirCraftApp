@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 namespace StirCraftApp.Infrastructure.Data;
 public class UnitOfWork(StirCraftDbContext context) : IUnitOfWork
 {
+    //todo remove soft delete interceptor and leave unit of work to handle deletion
     private readonly ConcurrentDictionary<string, object> _repositories = new();
     public IRepository<T> Repository<T>() where T : class
     {
