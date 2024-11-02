@@ -18,6 +18,8 @@ public interface ISpecification<T>
     int Skip { get; }
 
     bool IsPaginationEnabled { get; }
+
+    bool SplitQueryEnabled { get; }
 }
 
 public interface ISpecification<T, TResult> : ISpecification<T>

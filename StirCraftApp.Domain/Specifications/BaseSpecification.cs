@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 
 namespace StirCraftApp.Domain.Specifications;
-public class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecification<T>
+public abstract class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecification<T>
 {
     protected BaseSpecification() : this(null) { }
     public Expression<Func<T, bool>>? Criteria => criteria;
@@ -13,6 +13,7 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecif
     public int Take { get; private set; }
     public int Skip { get; private set; }
     public bool IsPaginationEnabled { get; private set; }
+    public bool SplitQueryEnabled { get; private set; }
 
     protected void AddInclude(Expression<Func<T, object>> includeExpression)
     {
@@ -38,6 +39,11 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecif
         Skip = skip;
         Take = take;
         IsPaginationEnabled = true;
+    }
+
+    protected void EnableSplitQuery()
+    {
+        SplitQueryEnabled = true;
     }
 }
 

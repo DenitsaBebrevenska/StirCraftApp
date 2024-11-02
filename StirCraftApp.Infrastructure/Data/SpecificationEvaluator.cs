@@ -3,7 +3,8 @@ using StirCraftApp.Domain.Contracts;
 
 namespace StirCraftApp.Infrastructure.Data
 {
-    public class SpecificationEvaluator<T> where T : class
+    //should the class be static in best practice?
+    public static class SpecificationEvaluator<T> where T : class
     {
         public static IQueryable<T> GetQuery(IQueryable<T> query, ISpecification<T> spec)
         {
@@ -28,6 +29,11 @@ namespace StirCraftApp.Infrastructure.Data
                     .Take(spec.Take);
             }
 
+            if (spec.SplitQueryEnabled)
+            {
+                query = query.AsSplitQuery();
+            }
+
             //Eager loading
             query = spec.Includes
                 .Aggregate(query, (current, include)
@@ -40,6 +46,7 @@ namespace StirCraftApp.Infrastructure.Data
             return query;
         }
 
+        //for projection purposes
         public static IQueryable<TResult> GetQuery<T, TResult>(IQueryable<T> query, ISpecification<T, TResult> spec)
         {
             if (spec.Criteria != null)
