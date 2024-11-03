@@ -11,22 +11,15 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams? specParams)
     {
-        var spec = new RecipeSpecification(specParams);
+        var spec = new RecipeFilterSortIncludeSpecification(specParams);
         var recipes = await recipeService.GetRecipesAsync(spec);
         return Ok(recipes);
     }
 
-    //[HttpGet("{id:int}")]
-    //public async Task<IActionResult> GetRecipe(int id)
-    //{
-    //    var recipe = await _recipeRepository
-    //        .GetByIdAsync(id);
-
-    //    if (recipe == null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    return Ok(recipe);
-    //}
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetRecipe(int id)
+    {
+        var recipe = await recipeService.GetRecipeByIdAsync(id);
+        return Ok(recipe);
+    }
 }

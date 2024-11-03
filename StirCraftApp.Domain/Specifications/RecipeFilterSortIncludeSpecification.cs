@@ -1,11 +1,11 @@
 ﻿using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Domain.Specifications;
-public class RecipeSpecification : BaseSpecification<Recipe>
+public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
 {
     //a recipe could be filtered by name, category/categories, difficulty level,
     //sort by name, by difficulty level
-    public RecipeSpecification(RecipeSpecParams? specParams)
+    public RecipeFilterSortIncludeSpecification(RecipeSpecParams? specParams)
     : base(r =>
         (string.IsNullOrWhiteSpace(specParams.RecipeName) || r.Name.ToLower().Contains(specParams.RecipeName)) &&
         (!specParams.Categories.Any() || specParams.Categories.Contains(r.Name)) &&

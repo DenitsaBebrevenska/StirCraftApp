@@ -1,8 +1,9 @@
 ﻿using StirCraftApp.Application.Contracts;
 using StirCraftApp.Domain.Contracts;
+using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Services;
-public class GenericService<T>(IUnitOfWork unit) : IService<T> where T : class
+public class GenericService<T>(IUnitOfWork unit) : IService<T> where T : BaseEntity
 {
     public async Task<T?> GetByIdAsync(int id)
         => await unit.Repository<T>()
@@ -12,10 +13,9 @@ public class GenericService<T>(IUnitOfWork unit) : IService<T> where T : class
         => await unit.Repository<T>()
             .GetAllAsync();
 
-    public async Task<T?> GetWithSpecAsync(ISpecification<T> spec)
-       => await unit.Repository<T>()
-            .GetEntityWithSpecAsync(spec);
-
+    public async Task<T?> GetWithSpecAsync(ISpecification<T> spec, int id)
+        => await unit.Repository<T>()
+            .GetEntityWithSpecAsync(spec, id);
 
     public async Task<IEnumerable<T>> GetAllWithSpecAsync(ISpecification<T> spec)
         => await unit.Repository<T>()

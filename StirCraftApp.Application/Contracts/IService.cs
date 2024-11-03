@@ -8,7 +8,7 @@ public interface IService<T> where T : class
 
     Task<IEnumerable<T>> GetAllAsync();
 
-    Task<T?> GetWithSpecAsync(ISpecification<T> spec);
+    Task<T?> GetWithSpecAsync(ISpecification<T> spec, int id);
 
     Task<IEnumerable<T>> GetAllWithSpecAsync(ISpecification<T> spec);
 

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StirCraftApp.Domain.Contracts;
+using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Infrastructure.Data;
 public class Repository<T>(StirCraftDbContext context) : IRepository<T>
-    where T : class
+    where T : BaseEntity
 {
     private DbSet<T> GetDbSet()
         => context.Set<T>();
@@ -12,9 +13,9 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         => await GetDbSet()
             .FindAsync(id);
 
-    public async Task<T?> GetEntityWithSpecAsync(ISpecification<T> spec)
-        => await ApplySpecification(spec)
-            .FirstOrDefaultAsync();
+    public async Task<T?> GetEntityWithSpecAsync(ISpecification<T> spec, int id)
+         => await ApplySpecification(spec)
+            .FirstOrDefaultAsync(x => x.Id == id);
 
     public async Task<IList<T>> GetAllAsync()
         => await GetDbSet()
@@ -44,6 +45,14 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
     {
         GetDbSet().Attach(entity);
         context.Entry(entity).State = EntityState.Modified;
+    }
+
+    public async Task<bool> Exists(int id)
+    {
+        var entity = await GetDbSet()
+            .FindAsync(id);
+
+        return entity is not null;
     }
 
     //todo check if no tracking will cause any problem later on
