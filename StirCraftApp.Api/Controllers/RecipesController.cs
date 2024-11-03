@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs;
 using StirCraftApp.Domain.Specifications;
 
 namespace StirCraftApp.Api.Controllers;
@@ -21,5 +22,29 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
     {
         var recipe = await recipeService.GetRecipeByIdAsync(id);
         return Ok(recipe);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateRecipe(FormRecipeDto createRecipeDto)
+    {
+        await recipeService.CreateRecipeAsync(createRecipeDto);
+        //todo return created recipe
+        return Ok();
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateRecipe(int id, FormRecipeDto updateRecipeDto)
+    {
+        updateRecipeDto.Id = id;
+        await recipeService.UpdateRecipeAsync(updateRecipeDto);
+        //todo return updated recipe ???
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteRecipe(int id)
+    {
+        await recipeService.DeleteRecipeAsync(id);
+        return Ok();
     }
 }
