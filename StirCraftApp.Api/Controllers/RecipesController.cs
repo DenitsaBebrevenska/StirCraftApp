@@ -17,6 +17,13 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
         return Ok(recipes);
     }
 
+    [HttpGet("top3")]
+    public async Task<IActionResult> GetRecipes()
+    {
+        var recipes = await recipeService.GetTopThreeRecipes();
+        return Ok(recipes);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRecipe(int id)
     {

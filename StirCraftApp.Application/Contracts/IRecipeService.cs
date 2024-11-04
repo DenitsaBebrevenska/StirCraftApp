@@ -6,6 +6,7 @@ public interface IRecipeService
 {
     Task<DetailedRecipeDto> GetRecipeByIdAsync(int id);
     Task<PaginatedResult<SummaryRecipeDto>> GetRecipesAsync(RecipeFilterSortIncludeSpecification specParams);
+    Task<IEnumerable<SummaryRecipeDto>> GetTopThreeRecipes();
     Task CreateRecipeAsync(FormRecipeDto createRecipeDto);
     Task UpdateRecipeAsync(FormRecipeDto updateRecipeDto);
     Task DeleteRecipeAsync(int id);

@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constraints.EntityConstraints;
 
 namespace StirCraftApp.Infrastructure.Identity;
+
+//todo I probably don`t need soft deletable on this one as identity user deletion is handled by the identity framework
 public class AppUser : IdentityUser, ISoftDeletable
 {
     [MaxLength(UserDisplayNameMaxLength)]

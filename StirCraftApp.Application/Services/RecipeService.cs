@@ -99,6 +99,30 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         return paginatedResult;
     }
 
+    public async Task<IEnumerable<SummaryRecipeDto>> GetTopThreeRecipes()
+    {
+        //todo the ordering does not work, the take is fine tho
+        var spec = new RecipeTopThreeSpecification();
+        var recipes = await unit.Repository<Recipe>()
+            .GetAllWithSpecAsync(spec);
+
+        var topThree = recipes.Select(r => new SummaryRecipeDto
+        {
+            Id = r.Id,
+            Name = r.Name,
+            DifficultyLevel = r.DifficultyLevel.ToString(),
+            MainImageUrl = r.RecipeImages.FirstOrDefault()?.Url, //todo should set default image for recipe without image
+            CookName = userManager.Users.FirstOrDefault(u => u.Id == r.Cook.UserId)?.DisplayName ?? "",
+            Rating = r.RecipeRatings.Average(rr => rr.Value).ToString("F2"),
+            Likes = userManager
+                .Users
+                .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == r.Id))
+        })
+            .ToList();
+
+        return topThree;
+    }
+
     public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto)
     {
         throw new NotImplementedException();

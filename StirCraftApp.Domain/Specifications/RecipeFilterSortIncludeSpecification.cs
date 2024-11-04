@@ -3,8 +3,8 @@
 namespace StirCraftApp.Domain.Specifications;
 public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
 {
-    //a recipe could be filtered by name, category/categories, difficulty level,
-    //sort by name, by difficulty level
+    //a recipe could be filtered by name, difficulty level, categories
+    //sort by difficulty lvl, by average rating
     public RecipeFilterSortIncludeSpecification(RecipeSpecParams? specParams)
     : base(r =>
         (string.IsNullOrWhiteSpace(specParams.RecipeName) || r.Name.ToLower().Contains(specParams.RecipeName)) &&
@@ -20,6 +20,7 @@ public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
 
         AddPaging(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
 
+        //todo the ordering is not working out
         switch (specParams.Sort)
         {
             case "difficultyLevelAsc":
@@ -28,11 +29,11 @@ public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
             case "difficultyLevelDesc":
                 AddOrderByDesc(r => r.DifficultyLevel);
                 break;
-            case "nameDesc":
-                AddOrderByDesc(r => r.Name);
+            case "ratingAsc":
+                AddOrderBy(r => r.RecipeRatings.Any() ? r.RecipeRatings.Average(rr => rr.Value) : 0);
                 break;
-            default: //Name ascending is default state of ordering
-                AddOrderBy(r => r.Name);
+            default: //Rating desc is default state of ordering and for some reason that gets the other way around into asc order
+                AddOrderByDesc(r => r.RecipeRatings.Any() ? r.RecipeRatings.Average(rr => rr.Value) : 0);
                 break;
         }
     }
