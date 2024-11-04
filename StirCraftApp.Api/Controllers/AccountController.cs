@@ -23,9 +23,21 @@ public class AccountController(SignInManager<AppUser> signInManager) : Controlle
 
         if (!result.Succeeded)
         {
-            return BadRequest(result.Errors);
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(error.Code, error.Description);
+            }
+
+            return ValidationProblem();
         }
 
         return Ok();
+    }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await signInManager.SignOutAsync();
+        return Ok(); //or no content?
     }
 }
