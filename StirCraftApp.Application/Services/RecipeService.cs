@@ -109,7 +109,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
     public async Task<IEnumerable<SummaryRecipeDto>> GetTopThreeRecipes()
     {
-        //todo the ordering does not work, the take is fine tho
+        //todo probably different dto to use something for the home carousel
         var spec = new RecipeTopThreeSpecification();
         var recipes = await unit.Repository<Recipe>()
             .GetAllWithSpecAsync(spec);
@@ -124,7 +124,9 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             Rating = r.RecipeRatings.Average(rr => rr.Value).ToString("F2"),
             Likes = userManager
                 .Users
-                .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == r.Id))
+                .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == r.Id)),
+            Categories = r.CategoryRecipes.Select(cr => cr.Category.Name)
+                .ToList()
         })
             .ToList();
 

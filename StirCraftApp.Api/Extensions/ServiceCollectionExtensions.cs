@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IRecipeService, RecipeService>();
+        services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped(typeof(IService<>), typeof(GenericService<>));
 
         return services;
