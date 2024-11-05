@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StirCraftApp.Application.DTOs;
+namespace StirCraftApp.Application.DTOs.User;
 public class UserRegisterDto
 {
     [Required]

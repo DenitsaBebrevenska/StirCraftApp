@@ -1,4 +1,4 @@
-﻿namespace StirCraftApp.Application.DTOs;
+﻿namespace StirCraftApp.Application.DTOs.Recipe.Reply;
 public class CommentReplyDto
 {
     public int Id { get; set; }

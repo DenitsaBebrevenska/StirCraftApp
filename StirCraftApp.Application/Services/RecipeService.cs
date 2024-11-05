@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Application.Contracts;
-using StirCraftApp.Application.DTOs;
+using StirCraftApp.Application.DTOs.Recipe;
+using StirCraftApp.Application.DTOs.Recipe.Comment;
+using StirCraftApp.Application.DTOs.Recipe.Image;
+using StirCraftApp.Application.DTOs.Recipe.Ingredient;
+using StirCraftApp.Application.DTOs.Recipe.Reply;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications;
@@ -72,10 +76,10 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         return model;
     }
 
-    public async Task<PaginatedResult<SummaryRecipeDto>> GetRecipesAsync(RecipeFilterSortIncludeSpecification specParams)
+    public async Task<PaginatedResult<SummaryRecipeDto>> GetRecipesAsync(RecipeFilterSortIncludeSpecification spec)
     {
         var recipes = await unit.Repository<Recipe>()
-            .GetAllWithSpecAsync(specParams); ;
+            .GetAllWithSpecAsync(spec); ;
         var filtered = recipes.Select(r => new SummaryRecipeDto
         {
             Id = r.Id,
@@ -90,8 +94,8 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         })
             .ToList();
 
-        var paginatedResult = new PaginatedResult<SummaryRecipeDto>(specParams.Skip,
-            specParams.Take,
+        var paginatedResult = new PaginatedResult<SummaryRecipeDto>(spec.Skip,
+            spec.Take,
             filtered.Count(),
             filtered);
 

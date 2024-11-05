@@ -1,4 +1,4 @@
-﻿namespace StirCraftApp.Application.DTOs;
+﻿namespace StirCraftApp.Application.DTOs.Recipe;
 
 public class SummaryRecipeDto
 {

@@ -25,13 +25,13 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         => await ApplySpecification(spec)
             .ToListAsync();
 
-    public async Task<TResult?> GetEntityWithSpecAsync<TResult>(ISpecification<T, TResult> spec)
-     => await ApplySpecification(spec)
-         .FirstOrDefaultAsync();
+    //public async Task<TResult?> GetEntityWithSpecAsync<TResult>(ISpecification<T, TResult> spec)
+    // => await ApplySpecification(spec)
+    //     .FirstOrDefaultAsync();
 
-    public async Task<IList<TResult>> GetAllWithSpecAsync<TResult>(ISpecification<T, TResult> spec)
-        => await ApplySpecification(spec)
-            .ToListAsync();
+    //public async Task<IList<TResult>> GetAllWithSpecAsync<TResult>(ISpecification<T, TResult> spec)
+    //    => await ApplySpecification(spec)
+    //        .ToListAsync();
 
     public async Task AddAsync(T entity)
         => await GetDbSet()
@@ -64,11 +64,11 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         return SpecificationEvaluator<T>.GetQuery(query, spec);
     }
 
-    private IQueryable<TResult> ApplySpecification<TResult>(ISpecification<T, TResult> spec)
-    {
-        var query = GetDbSet()
-            .AsQueryable()
-            .AsNoTracking();
-        return SpecificationEvaluator<T>.GetQuery<T, TResult>(query, spec);
-    }
+    //private IQueryable<TResult> ApplySpecification<TResult>(ISpecification<T, TResult> spec)
+    //{
+    //    var query = GetDbSet()
+    //        .AsQueryable()
+    //        .AsNoTracking();
+    //    return SpecificationEvaluator<T>.GetQuery<T, TResult>(query, spec);
+    //}
 }

@@ -1,4 +1,4 @@
-﻿namespace StirCraftApp.Application.DTOs;
+﻿namespace StirCraftApp.Application.DTOs.Recipe.Ingredient;
 public class RecipeIngredientDto
 {
     public int Id { get; set; }

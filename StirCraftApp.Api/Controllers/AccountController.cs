@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using StirCraftApp.Application.DTOs;
+using StirCraftApp.Application.DTOs.User;
 using StirCraftApp.Infrastructure.Identity;
 
 namespace StirCraftApp.Api.Controllers;
@@ -11,7 +11,7 @@ public class AccountController(SignInManager<AppUser> signInManager) : Controlle
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
     {
-        //todo check if user already exists
+        //todo check if user already exists or email
         var user = new AppUser
         {
             DisplayName = userRegisterDto.DisplayName,

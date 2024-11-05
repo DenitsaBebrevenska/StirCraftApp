@@ -1,4 +1,8 @@
-﻿namespace StirCraftApp.Application.DTOs;
+﻿using StirCraftApp.Application.DTOs.Recipe.Comment;
+using StirCraftApp.Application.DTOs.Recipe.Image;
+using StirCraftApp.Application.DTOs.Recipe.Ingredient;
+
+namespace StirCraftApp.Application.DTOs.Recipe;
 public class DetailedRecipeDto
 {
     public int Id { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace StirCraftApp.Application.DTOs;
+﻿using StirCraftApp.Application.DTOs.Recipe.Reply;
+
+namespace StirCraftApp.Application.DTOs.Recipe.Comment;
 public class RecipeCommentDto
 {
     public int Id { get; set; }
