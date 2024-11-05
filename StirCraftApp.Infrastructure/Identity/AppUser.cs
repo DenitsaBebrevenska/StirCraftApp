@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
-using StirCraftApp.Infrastructure.Data.JoinedTables;
+using StirCraftApp.Domain.JoinedTables;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constraints.EntityConstraints;
 
