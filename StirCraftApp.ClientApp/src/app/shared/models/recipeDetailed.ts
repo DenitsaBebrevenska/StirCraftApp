@@ -15,5 +15,6 @@ export type RecipeDetailed = {
     images: RecipeImage[];
     rating: number;
     likes: number;
+    categories: string[];
     comments: RecipeComment[]
 }

@@ -6,4 +6,5 @@ export type RecipeShort = {
     cookName: string;
     rating: number;
     likes: number;
+    categories: string[];
 }

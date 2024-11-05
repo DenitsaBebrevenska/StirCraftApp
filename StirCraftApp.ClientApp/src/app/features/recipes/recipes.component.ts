@@ -19,10 +19,7 @@ export class RecipesComponent implements OnInit{
   ngOnInit(): void {
     this.recipeService.getRecipes()
       .subscribe({
-        next: response => {
-          this.recipes = response.data
-          //console.log(response);
-        },
+        next: response => this.recipes = response.data,
         error: error => console.error(error)
       });
   }

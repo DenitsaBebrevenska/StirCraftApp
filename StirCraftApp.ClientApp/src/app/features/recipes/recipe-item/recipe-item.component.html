@@ -18,6 +18,11 @@
   <mat-card-content>
     <p class="font-light">Difficulty level: {{ recipe.difficultyLevel }}</p>
     <p class="font-light">Rating: {{ recipe.rating }}</p>
+    <ul class="font-light">
+      Categories: @for (category of recipe.categories; track $index) {
+      <li>{{ category }}</li>
+      }
+    </ul>
   </mat-card-content>
 </mat-card>
 }

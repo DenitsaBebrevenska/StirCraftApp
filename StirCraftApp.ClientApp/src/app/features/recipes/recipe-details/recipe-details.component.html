@@ -6,6 +6,11 @@
     <p>Difficulty: {{ recipe.difficultyLevel }}</p>
     <p>Rating: {{ recipe.rating }}</p>
     <p>Likes: {{ recipe.likes }}</p>
+    <ul>
+      Categories: @for (category of recipe.categories; track $index) {
+      <li>{{ category }}</li>
+      }
+    </ul>
     <button>Like</button>
     <p>Created on: {{ recipe.createdOn }}</p>
     <p>Last updated on: {{ recipe.updatedOn }}</p>
