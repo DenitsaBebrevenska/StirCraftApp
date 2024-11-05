@@ -6,11 +6,11 @@
 <mat-card
   appearance="raised"
   routerLink="/recipes/{{ recipe.id }}"
-  class="recipe-card"
+  class="recipe-card flex-col gap-2"
 >
-  <mat-card-header>
-    <h2 class="text-sm font-semibold">{{ recipe.name }}</h2>
-    <p class="font-light">By: {{ recipe.cookName }}</p>
+  <mat-card-header class="flex-col gap-1">
+    <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
+    <p class="italic">By: {{ recipe.cookName }}</p>
   </mat-card-header>
   <div class="image-wrapper">
     <img class="object-cover" mat-card-image src="default-image.jpg" />
