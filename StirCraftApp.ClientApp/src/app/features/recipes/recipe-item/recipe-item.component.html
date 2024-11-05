@@ -1,0 +1,23 @@
+<!-- todo check if default image is rendered when server returns null for image
+ [src]="recipe.imageUrl ?? 'default-image.jpg'"
+    mat-card-image
+    alt="{{ recipe.name }} main image" -->
+@if(recipe){
+<mat-card
+  appearance="raised"
+  routerLink="/recipes/{{ recipe.id }}"
+  class="recipe-card"
+>
+  <mat-card-header>
+    <h2 class="text-sm font-semibold">{{ recipe.name }}</h2>
+    <p class="font-light">By: {{ recipe.cookName }}</p>
+  </mat-card-header>
+  <div class="image-wrapper">
+    <img class="object-cover" mat-card-image src="default-image.jpg" />
+  </div>
+  <mat-card-content>
+    <p class="font-light">Difficulty level: {{ recipe.difficultyLevel }}</p>
+    <p class="font-light">Rating: {{ recipe.rating }}</p>
+  </mat-card-content>
+</mat-card>
+}

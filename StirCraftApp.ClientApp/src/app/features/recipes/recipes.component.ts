@@ -1,16 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { RecipesService } from '../../core/services/recipes.service';
 import { Recipe } from '../../shared/models/recipe';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { RecipeItemComponent } from "./recipe-item/recipe-item.component";
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
   imports: [
-    MatCardModule, 
-    MatButtonModule
-  ],
+    RecipeItemComponent
+],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.scss'
 })
@@ -22,8 +20,8 @@ export class RecipesComponent implements OnInit{
     this.recipeService.getRecipes()
       .subscribe({
         next: response => {
-          this.recipes = response.data,
-          console.log(response);
+          this.recipes = response.data
+          //console.log(response);
         },
         error: error => console.error(error)
       });

@@ -14,4 +14,8 @@ export class RecipesService {
   getRecipes() {
     return this.http.get<Pagination<Recipe>>(this.baseUrl + 'recipes');
   }
+
+  getRecipe(id: number) {
+    return this.http.get<Recipe>(this.baseUrl + 'recipes/' + id);
+  }
 }

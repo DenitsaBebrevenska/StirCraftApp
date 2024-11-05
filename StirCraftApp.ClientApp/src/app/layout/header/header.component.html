@@ -1,16 +1,22 @@
-<header class="border-b p-3 w-full shadow-md">
+<header class="border-b py-2 px-8 w-full shadow-md">
   <div
     class="flex align-middle items-center justify-between max-w-screen-2xl mx-auto"
   >
-    <img src="logo.png" alt="StirCraft-logo" class="max-h-16" />
+    <img routerLink="/" src="logo.png" alt="StirCraft-logo" class="max-h-16" />
     <nav class="flex gap-6 my-2 text-xl font-semibold">
-      <a>Recipes</a>
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+      <a routerLink="/recipes" routerLinkActive="active">Recipes</a>
       <a>Cooks</a>
       <a>StirCraft Leaderboard</a>
     </nav>
     <div class="flex gap-6 align-middle">
-      <button mat-stroked-button class="text-amber-600">Login</button>
-      <button mat-flat-button class="text-amber-600">Register</button>
+      <button mat-stroked-button routerLink="/account/login">Login</button>
+      <button mat-flat-button routerLink="/account/register">Register</button>
     </div>
   </div>
 </header>
