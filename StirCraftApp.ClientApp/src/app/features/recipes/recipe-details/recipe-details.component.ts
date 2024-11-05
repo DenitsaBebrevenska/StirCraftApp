@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RecipesService } from '../../../core/services/recipes.service';
 import { ActivatedRoute } from '@angular/router';
-import { Recipe } from '../../../shared/models/recipe';
+import { RecipeDetailed } from '../../../shared/models/recipeDetailed';
 
 @Component({
   selector: 'app-recipe-details',
@@ -14,7 +14,7 @@ export class RecipeDetailsComponent implements OnInit{
 
   private recipeService = inject(RecipesService);
   private activatedRoute = inject(ActivatedRoute);
-  recipe?: Recipe;
+  recipe?: RecipeDetailed;
 
   ngOnInit(): void {
     this.loadRecipe();

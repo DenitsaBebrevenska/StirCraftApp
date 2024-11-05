@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Pagination } from '../../shared/models/pagination';
-import { Recipe } from '../../shared/models/recipe';
+import { RecipeShort } from '../../shared/models/recipeShort';
+import { RecipeDetailed } from '../../shared/models/recipeDetailed';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,10 @@ export class RecipesService {
   private http = inject(HttpClient);
   
   getRecipes() {
-    return this.http.get<Pagination<Recipe>>(this.baseUrl + 'recipes');
+    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes');
   }
 
   getRecipe(id: number) {
-    return this.http.get<Recipe>(this.baseUrl + 'recipes/' + id);
+    return this.http.get<RecipeDetailed>(this.baseUrl + 'recipes/' + id);
   }
 }

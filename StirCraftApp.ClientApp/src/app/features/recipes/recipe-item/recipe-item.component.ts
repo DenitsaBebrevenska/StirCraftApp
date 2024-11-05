@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../../shared/models/recipe';
+import { RecipeShort } from '../../../shared/models/recipeShort';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 
@@ -16,5 +16,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './recipe-item.component.scss'
 })
 export class RecipeItemComponent {
-  @Input() recipe?: Recipe;
+  @Input() recipe?: RecipeShort;
 }

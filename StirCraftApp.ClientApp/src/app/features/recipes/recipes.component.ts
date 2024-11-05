@@ -1,6 +1,6 @@
 import { Component, inject, OnInit} from '@angular/core';
 import { RecipesService } from '../../core/services/recipes.service';
-import { Recipe } from '../../shared/models/recipe';
+import { RecipeShort } from '../../shared/models/recipeShort';
 import { RecipeItemComponent } from "./recipe-item/recipe-item.component";
 
 @Component({
@@ -14,7 +14,7 @@ import { RecipeItemComponent } from "./recipe-item/recipe-item.component";
 })
 export class RecipesComponent implements OnInit{
   private recipeService = inject(RecipesService);
-  recipes: Recipe[] = [];
+  recipes: RecipeShort[] = [];
   
   ngOnInit(): void {
     this.recipeService.getRecipes()

@@ -1,4 +1,4 @@
-export type Recipe = {
+export type RecipeShort = {
     id: number;
     name: string;
     difficultyLevel: string;
