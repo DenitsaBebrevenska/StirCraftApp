@@ -15,6 +15,7 @@ public abstract class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) 
     public bool IsPaginationEnabled { get; private set; }
     public bool SplitQueryEnabled { get; private set; }
 
+
     protected void AddInclude(Expression<Func<T, object>> includeExpression)
     {
         Includes.Add(includeExpression);

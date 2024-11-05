@@ -1,4 +1,6 @@
-﻿namespace StirCraftApp.Domain.Entities;
+﻿using StirCraftApp.Domain.JoinedTables;
+
+namespace StirCraftApp.Domain.Entities;
 public class RecipeIngredient : BaseEntity
 {
     public int IngredientId { get; set; }
@@ -14,5 +16,7 @@ public class RecipeIngredient : BaseEntity
     public int RecipeId { get; set; }
 
     public virtual Recipe Recipe { get; set; } = null!;
+
+    public virtual ICollection<ShoppingListRecipeIngredient> ShoppingListRecipeIngredients { get; set; } = new List<ShoppingListRecipeIngredient>();
 
 }

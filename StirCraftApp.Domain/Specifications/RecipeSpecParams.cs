@@ -1,11 +1,13 @@
-﻿namespace StirCraftApp.Domain.Specifications;
+﻿using StirCraftApp.Domain.Enums;
+
+namespace StirCraftApp.Domain.Specifications;
 public class RecipeSpecParams : PagingParams
 {
     private string? _recipeName;
 
-    private List<string> _categories = new List<string>();
+    private List<string> _categories = [];
 
-    private List<string> _difficultyLevels = new List<string>();
+    private List<DifficultyLevel> _difficultyLevels = [];
 
     public string RecipeName
     {
@@ -18,16 +20,20 @@ public class RecipeSpecParams : PagingParams
         get => _categories;
         set => _categories = value.SelectMany(x => x.Split(',',
             StringSplitOptions.RemoveEmptyEntries))
+            .Select(x => x.ToLower())
             .ToList();
     }
 
-    public List<string> DifficultyLevels
+    public List<DifficultyLevel> DifficultyLevels
     {
         get => _difficultyLevels;
-        set => _difficultyLevels = value.SelectMany(x => x.Split(',',
-                StringSplitOptions.RemoveEmptyEntries))
+        set => _difficultyLevels = value
+            .Select(x => Enum.TryParse(x.ToString(), true, out DifficultyLevel level) ? level : (DifficultyLevel?)null)
+            .Where(x => x.HasValue)
+            .Select(x => x!.Value)
             .ToList();
     }
+
 
     public string? Sort { get; set; }
 

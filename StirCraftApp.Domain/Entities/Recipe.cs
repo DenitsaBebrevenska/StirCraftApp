@@ -1,4 +1,5 @@
 ﻿using StirCraftApp.Domain.Enums;
+using StirCraftApp.Domain.JoinedTables;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constraints.EntityConstraints;
 
@@ -32,4 +33,8 @@ public class Recipe : BaseEntity
     public virtual ICollection<RecipeImage> RecipeImages { get; set; } = new List<RecipeImage>();
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
+    public virtual ICollection<CategoryRecipe> CategoryRecipes { get; set; } = new List<CategoryRecipe>();
+
+    public virtual ICollection<UserFavoriteRecipe> UserFavoriteRecipes { get; set; } = new List<UserFavoriteRecipe>();
 }
