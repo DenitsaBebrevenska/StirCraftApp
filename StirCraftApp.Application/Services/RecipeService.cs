@@ -52,6 +52,9 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
                 Id = ri.Id,
                 Url = ri.Url
             }).ToList(),
+            Categories = recipe.CategoryRecipes
+                .Select(cr => cr.Category.Name)
+                .ToList(),
             Comments = recipe.Comments.Select(c => new RecipeCommentDto
             {
                 Id = c.Id,
@@ -90,7 +93,8 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             Rating = r.RecipeRatings.Average(rr => rr.Value).ToString("F2"),
             Likes = userManager
                 .Users
-                .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == r.Id))
+                .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == r.Id)),
+            Categories = r.CategoryRecipes.Select(cr => cr.Category.Name).ToList()
         })
             .ToList();
 

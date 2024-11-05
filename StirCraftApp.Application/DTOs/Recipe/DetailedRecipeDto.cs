@@ -28,4 +28,6 @@ public class DetailedRecipeDto
     public ICollection<RecipeImageDto> Images { get; set; } = [];
 
     public ICollection<RecipeCommentDto> Comments { get; set; } = [];
+
+    public IList<string> Categories { get; set; } = [];
 }

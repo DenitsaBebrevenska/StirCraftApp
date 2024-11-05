@@ -15,4 +15,6 @@ public class SummaryRecipeDto
 
     public int Likes { get; set; }
 
+    public IList<string> Categories { get; set; } = [];
+
 }

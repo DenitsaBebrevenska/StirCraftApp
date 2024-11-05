@@ -10,7 +10,7 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
 {
     // get recipes with specs and not, get recipe by id, create recipe, edit recipe, delete recipe
     [HttpGet]
-    public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams? specParams)
+    public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams specParams)
     {
         var spec = new RecipeFilterSortIncludeSpecification(specParams);
         var recipes = await recipeService.GetRecipesAsync(spec);
