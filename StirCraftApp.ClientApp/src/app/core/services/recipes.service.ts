@@ -11,12 +11,21 @@ import { RecipeDetailed } from '../../shared/models/recipeDetailed';
 export class RecipesService {
   baseUrl = 'https://localhost:7222/api/';
   private http = inject(HttpClient);
-  
+  difficultyLevels: string[] = [];
+
   getRecipes() {
     return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes');
   }
 
   getRecipe(id: number) {
     return this.http.get<RecipeDetailed>(this.baseUrl + 'recipes/' + id);
+  }
+
+  getDifficultyLevels() {
+    if (this.difficultyLevels.length > 0) return;
+    return this.http.get<string[]>(this.baseUrl + 'recipes/difficultyLevels')
+    .subscribe({
+      next: response => this.difficultyLevels = response
+    });
   }
 }

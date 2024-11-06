@@ -2,6 +2,7 @@ import { Component, inject, OnInit} from '@angular/core';
 import { RecipesService } from '../../core/services/recipes.service';
 import { RecipeShort } from '../../shared/models/recipeShort';
 import { RecipeItemComponent } from "./recipe-item/recipe-item.component";
+import { CategoriesService } from '../../core/services/categories.service';
 
 @Component({
   selector: 'app-recipes',
@@ -13,11 +14,19 @@ import { RecipeItemComponent } from "./recipe-item/recipe-item.component";
   styleUrl: './recipes.component.scss'
 })
 export class RecipesComponent implements OnInit{
-  private recipeService = inject(RecipesService);
+  private recipesService = inject(RecipesService);
   recipes: RecipeShort[] = [];
-  
+  private categoriesService = inject(CategoriesService);
+  categories: string[] = [];
+
   ngOnInit(): void {
-    this.recipeService.getRecipes()
+    this.initializeRecipes();
+  }
+
+  initializeRecipes() { 
+    this.recipesService.getDifficultyLevels();
+    this.categoriesService.getCategories();
+    this.recipesService.getRecipes()
       .subscribe({
         next: response => this.recipes = response.data,
         error: error => console.error(error)
