@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.Recipe;
+using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications;
 
 namespace StirCraftApp.Api.Controllers;
@@ -53,5 +54,13 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
     {
         await recipeService.DeleteRecipeAsync(id);
         return Ok();
+    }
+
+    //implementing that through any service is not necessary, complicates it for no good reason
+    [HttpGet("difficultyLevels")]
+    public IActionResult GetDifficultyLevels()
+    {
+        var difficultyLevels = Enum.GetNames(typeof(DifficultyLevel));
+        return Ok(difficultyLevels);
     }
 }
