@@ -1,5 +1,14 @@
-<div class="flex flex-wrap gap-6 justify-center mx-14">
-  @for (recipe of recipes; track recipe.id) {
-  <app-recipe-item [recipe]="recipe"></app-recipe-item>
-  }
+<div class="flex flex-col gap-5">
+  <div class="flex px-10">
+    <button mat-stroked-button (click)="openFiltersDialog()">
+      <mat-icon>filter_list</mat-icon>
+      Filters
+    </button>
+  </div>
+
+  <div class="flex flex-wrap gap-6 justify-center mx-14">
+    @for (recipe of recipes; track recipe.id) {
+    <app-recipe-item [recipe]="recipe"></app-recipe-item>
+    }
+  </div>
 </div>
