@@ -7,17 +7,18 @@ import { CategoriesService } from '../../../core/services/categories.service';
 import { MatButton } from '@angular/material/button';
 import { MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatButtonToggle } from '@angular/material/button-toggle';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filters-dialog',
   standalone: true,
   imports: [
     MatDivider,
-    MatSelectionList,
-    MatListOption,
     MatButton,
     MatButtonToggleGroup,
-    MatButtonToggle
+    MatButtonToggle,
+    FormsModule
   ],
   templateUrl: './filters-dialog.component.html',
   styleUrl: './filters-dialog.component.scss'
@@ -25,4 +26,17 @@ import { MatButtonToggle } from '@angular/material/button-toggle';
 export class FiltersDialogComponent {
   recipesService = inject(RecipesService);
   categoriesService = inject(CategoriesService);
+  private dialogReference = inject(MatDialogRef<FiltersDialogComponent>);
+  data = inject(MAT_DIALOG_DATA);
+
+  selectedCategories: string[] = this.data.selectedCategories;
+  selectedDifficultyLevels: string[] = this.data.selectedDifficultyLevels;
+
+  applyFilters() {
+    this.dialogReference.close({
+      selectedCategories: this.selectedCategories,
+      selectedDifficultyLevels: this.selectedDifficultyLevels
+    });
+  }
+
 }

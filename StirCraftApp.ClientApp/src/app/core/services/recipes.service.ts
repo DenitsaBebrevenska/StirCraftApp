@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Pagination } from '../../shared/models/pagination';
 import { RecipeShort } from '../../shared/models/recipeShort';
@@ -13,8 +13,22 @@ export class RecipesService {
   private http = inject(HttpClient);
   difficultyLevels: string[] = [];
 
-  getRecipes() {
-    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes');
+  getRecipes(categories?: string[], difficultyLevels?: string[], sort?: string) {
+    let params = new HttpParams();
+
+    if(categories && categories.length > 0) {
+      params = params.append('categories', categories.join(','));
+    }
+
+    if(difficultyLevels && difficultyLevels.length > 0) {
+      params = params.append('difficultyLevels', difficultyLevels.join(','));
+    }
+
+    if(sort) {
+      params = params.append('sort', sort);
+    }
+
+    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes', { params });
   }
 
   getRecipe(id: number) {

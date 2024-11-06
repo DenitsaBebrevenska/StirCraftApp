@@ -4,9 +4,13 @@
   <div class="flex-wrap p-4">
     <div class="pb-5">
       <h4 class="font-semibold text-xl text-primary">Categories</h4>
-      <mat-button-toggle-group class="filter-group" multiple>
+      <mat-button-toggle-group
+        [(ngModel)]="selectedCategories"
+        class="filter-group"
+        multiple
+      >
         @for (category of categoriesService.categories; track $index) {
-        <mat-button-toggle class="filter-button" value="{{ category }}">
+        <mat-button-toggle class="filter-button" [value]="category">
           {{ category }}
         </mat-button-toggle>
         }
@@ -14,10 +18,14 @@
     </div>
     <div>
       <h4 class="font-semibold text-xl text-primary">Difficulty Levels</h4>
-      <mat-button-toggle-group class="filter-group" multiple>
+      <mat-button-toggle-group
+        [(ngModel)]="selectedDifficultyLevels"
+        class="filter-group"
+        multiple
+      >
         @for (difficultyLevel of recipesService.difficultyLevels; track $index)
         {
-        <mat-button-toggle class="filter-button" value="{{ difficultyLevel }}">
+        <mat-button-toggle class="filter-button" [value]="difficultyLevel">
           {{ difficultyLevel }}
         </mat-button-toggle>
         }
@@ -25,6 +33,6 @@
     </div>
   </div>
   <div class="flex justify-end p-4">
-    <button mat-raised-button>Apply Filters</button>
+    <button mat-raised-button (click)="applyFilters()">Apply Filters</button>
   </div>
 </div>
