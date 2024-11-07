@@ -10,6 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatListOption, MatSelectionListChange} from '@angular/material/list';
 import { MatSelectionList } from '@angular/material/list';
+import { RecipeParams } from '../../shared/models/recipeParams';
 
 
 @Component({
@@ -34,16 +35,14 @@ export class RecipesComponent implements OnInit{
   private categoriesService = inject(CategoriesService);
   categories: string[] = [];
   private dialogService = inject(MatDialog);
-  searchName: string = "";
-  selectedCategories: string[] = [];
-  selectedDifficultyLevels: string[] = [];
-  selectedSort: string = "Rating-Descending";
   sortOptions = [
-    {name: "Difficulty Level-Ascending", value: "difficultyLevelAsc"},
-    {name: "Difficulty Level-Descending", value: "difficultyLevelDesc"},
+    {name: "Rating-Descending", value: "default"},
     {name: "Rating-Ascending", value: "ratingAsc"},
-    {name: "Rating-Descending", value: "default"}
+    {name: "Difficulty-Ascending", value: "difficultyLevelAsc"},
+    {name: "Difficulty-Descending", value: "difficultyLevelDesc"}
   ];
+
+  recipesParams = new RecipeParams();
 
   ngOnInit(): void {
     this.initializeRecipes();
@@ -56,7 +55,7 @@ export class RecipesComponent implements OnInit{
   }
 
   getRecipes(){
-    this.recipesService.getRecipes(this.selectedCategories, this.selectedDifficultyLevels, this.selectedSort, this.searchName)
+    this.recipesService.getRecipes(this.recipesParams)
     .subscribe({
       next: response => this.recipes = response.data,
       error: error => console.error(error)
@@ -66,7 +65,7 @@ export class RecipesComponent implements OnInit{
   onSortChange(event: MatSelectionListChange) {
     const selectedOption = event.options[0];
     if(selectedOption) {
-      this.selectedSort = selectedOption.value;
+      this.recipesParams.sort = selectedOption.value;
       this.getRecipes();
     }
   }
@@ -75,18 +74,18 @@ export class RecipesComponent implements OnInit{
     const dialogReference = this.dialogService.open(FiltersDialogComponent, {
       minWidth: '400px',
       data: {
-        selectedCategories: this.selectedCategories,
-        selectedDifficultyLevels: this.selectedDifficultyLevels,
-        searchName: this.searchName
+        selectedCategories: this.recipesParams.categories,
+        selectedDifficultyLevels: this.recipesParams.difficultyLevels,
+        searchName: this.recipesParams.searchName
       }
     });
 
     dialogReference.afterClosed()
     .subscribe({
       next: result =>{
-        this.selectedCategories = result.selectedCategories;
-        this.selectedDifficultyLevels = result.selectedDifficultyLevels;
-        this.searchName = result.searchName;
+        this.recipesParams.categories = result.selectedCategories;
+        this.recipesParams.difficultyLevels = result.selectedDifficultyLevels;
+        this.recipesParams.searchName = result.searchName;
         this.getRecipes();
       }
     });

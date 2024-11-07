@@ -43,4 +43,10 @@ export class FiltersDialogComponent {
     });
   }
 
+  resetFilters() {
+    this.selectedCategories = [];
+    this.selectedDifficultyLevels = [];
+    this.searchName = '';
+  }
+
 }

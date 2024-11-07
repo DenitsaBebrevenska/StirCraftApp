@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Pagination } from '../../shared/models/pagination';
 import { RecipeShort } from '../../shared/models/recipeShort';
 import { RecipeDetailed } from '../../shared/models/recipeDetailed';
+import { RecipeParams } from '../../shared/models/recipeParams';
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +15,23 @@ export class RecipesService {
   difficultyLevels: string[] = [];
   searchName: string = '';
 
-  getRecipes(categories?: string[], difficultyLevels?: string[], sort?: string, searchName?: string) {
+  getRecipes(recipeParams: RecipeParams) {
     let params = new HttpParams();
 
-    if(categories && categories.length > 0) {
-      params = params.append('categories', categories.join(','));
+    if(recipeParams.categories.length > 0) {
+      params = params.append('categories', recipeParams.categories.join(','));
     }
 
-    if(difficultyLevels && difficultyLevels.length > 0) {
-      params = params.append('difficultyLevels', difficultyLevels.join(','));
+    if(recipeParams.difficultyLevels.length > 0) {
+      params = params.append('difficultyLevels', recipeParams.difficultyLevels.join(','));
     }
 
-    if(sort) {
-      params = params.append('sort', sort);
+    if(recipeParams.sort) {
+      params = params.append('sort', recipeParams.sort);
     }
 
-    if(searchName) {
-      params = params.append('recipeName', searchName);
+    if(recipeParams.searchName) {
+      params = params.append('recipeName', recipeParams.searchName);
     }
 
     return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes', { params });
