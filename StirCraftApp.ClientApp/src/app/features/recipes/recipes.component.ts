@@ -34,6 +34,7 @@ export class RecipesComponent implements OnInit{
   private categoriesService = inject(CategoriesService);
   categories: string[] = [];
   private dialogService = inject(MatDialog);
+  searchName: string = "";
   selectedCategories: string[] = [];
   selectedDifficultyLevels: string[] = [];
   selectedSort: string = "Rating-Descending";
@@ -55,7 +56,7 @@ export class RecipesComponent implements OnInit{
   }
 
   getRecipes(){
-    this.recipesService.getRecipes(this.selectedCategories, this.selectedDifficultyLevels, this.selectedSort)
+    this.recipesService.getRecipes(this.selectedCategories, this.selectedDifficultyLevels, this.selectedSort, this.searchName)
     .subscribe({
       next: response => this.recipes = response.data,
       error: error => console.error(error)
@@ -76,6 +77,7 @@ export class RecipesComponent implements OnInit{
       data: {
         selectedCategories: this.selectedCategories,
         selectedDifficultyLevels: this.selectedDifficultyLevels,
+        searchName: this.searchName
       }
     });
 
@@ -84,6 +86,7 @@ export class RecipesComponent implements OnInit{
       next: result =>{
         this.selectedCategories = result.selectedCategories;
         this.selectedDifficultyLevels = result.selectedDifficultyLevels;
+        this.searchName = result.searchName;
         this.getRecipes();
       }
     });

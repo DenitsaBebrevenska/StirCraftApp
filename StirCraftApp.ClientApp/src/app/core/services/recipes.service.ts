@@ -12,8 +12,9 @@ export class RecipesService {
   baseUrl = 'https://localhost:7222/api/';
   private http = inject(HttpClient);
   difficultyLevels: string[] = [];
+  searchName: string = '';
 
-  getRecipes(categories?: string[], difficultyLevels?: string[], sort?: string) {
+  getRecipes(categories?: string[], difficultyLevels?: string[], sort?: string, searchName?: string) {
     let params = new HttpParams();
 
     if(categories && categories.length > 0) {
@@ -26,6 +27,10 @@ export class RecipesService {
 
     if(sort) {
       params = params.append('sort', sort);
+    }
+
+    if(searchName) {
+      params = params.append('recipeName', searchName);
     }
 
     return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes', { params });
@@ -42,4 +47,5 @@ export class RecipesService {
       next: response => this.difficultyLevels = response
     });
   }
+
 }

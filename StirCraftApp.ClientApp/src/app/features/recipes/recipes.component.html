@@ -20,11 +20,13 @@
 
 <mat-menu #sortMenu="matMenu">
   <mat-selection-list
+    class="flex"
     [multiple]="false"
     (selectionChange)="onSortChange($event)"
   >
     @for (sort of sortOptions; track $index) {
     <mat-list-option
+      class="flex-1"
       [value]="sort.value"
       [selected]="selectedSort === sort.value"
     >
