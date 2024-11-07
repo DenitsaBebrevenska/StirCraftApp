@@ -7,8 +7,6 @@ import { MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatButtonToggle } from '@angular/material/button-toggle';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-filters-dialog',
@@ -18,9 +16,7 @@ import { MatInput } from '@angular/material/input';
     MatButton,
     MatButtonToggleGroup,
     MatButtonToggle,
-    FormsModule,
-    MatFormField,
-    MatInput 
+    FormsModule
   ],
   templateUrl: './filters-dialog.component.html',
   styleUrl: './filters-dialog.component.scss'
@@ -33,20 +29,17 @@ export class FiltersDialogComponent {
 
   selectedCategories: string[] = this.data.selectedCategories;
   selectedDifficultyLevels: string[] = this.data.selectedDifficultyLevels;
-  searchName: string = this.data.searchName;
 
   applyFilters() {
     this.dialogReference.close({
       selectedCategories: this.selectedCategories,
       selectedDifficultyLevels: this.selectedDifficultyLevels,
-      searchName: this.searchName
     });
   }
 
   resetFilters() {
     this.selectedCategories = [];
     this.selectedDifficultyLevels = [];
-    this.searchName = '';
   }
 
 }

@@ -11,6 +11,9 @@ import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatListOption, MatSelectionListChange} from '@angular/material/list';
 import { MatSelectionList } from '@angular/material/list';
 import { RecipeParams } from '../../shared/models/recipeParams';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Pagination } from '../../shared/models/pagination';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -23,7 +26,9 @@ import { RecipeParams } from '../../shared/models/recipeParams';
     MatMenu,
     MatListOption,
     MatSelectionList, 
-    MatMenuTrigger
+    MatMenuTrigger, 
+    MatPaginator,
+    FormsModule
 ],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.scss'
@@ -31,7 +36,7 @@ import { RecipeParams } from '../../shared/models/recipeParams';
 
 export class RecipesComponent implements OnInit{
   private recipesService = inject(RecipesService);
-  recipes: RecipeShort[] = [];
+  recipes?: Pagination<RecipeShort>;
   private categoriesService = inject(CategoriesService);
   categories: string[] = [];
   private dialogService = inject(MatDialog);
@@ -43,6 +48,7 @@ export class RecipesComponent implements OnInit{
   ];
 
   recipesParams = new RecipeParams();
+  pageSizeOptions = [5, 10, 15, 20];
 
   ngOnInit(): void {
     this.initializeRecipes();
@@ -57,15 +63,28 @@ export class RecipesComponent implements OnInit{
   getRecipes(){
     this.recipesService.getRecipes(this.recipesParams)
     .subscribe({
-      next: response => this.recipes = response.data,
+      next: response => this.recipes = response,
       error: error => console.error(error)
     });
+  }
+
+  onSearchChange(){
+    this.recipesParams.pageIndex = 1;
+    this.getRecipes();
+  }
+
+  handlePage(event: PageEvent) {
+    this.recipesParams.pageIndex = event.pageIndex + 1;
+    this.recipesParams.pageSize = event.pageSize;
+    this.getRecipes();
+
   }
 
   onSortChange(event: MatSelectionListChange) {
     const selectedOption = event.options[0];
     if(selectedOption) {
       this.recipesParams.sort = selectedOption.value;
+      this.recipesParams.pageIndex = 1;
       this.getRecipes();
     }
   }
@@ -86,6 +105,7 @@ export class RecipesComponent implements OnInit{
         this.recipesParams.categories = result.selectedCategories;
         this.recipesParams.difficultyLevels = result.selectedDifficultyLevels;
         this.recipesParams.searchName = result.searchName;
+        this.recipesParams.pageIndex = 1;
         this.getRecipes();
       }
     });

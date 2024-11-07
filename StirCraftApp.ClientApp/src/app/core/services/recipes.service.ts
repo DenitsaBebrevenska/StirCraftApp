@@ -34,6 +34,9 @@ export class RecipesService {
       params = params.append('recipeName', recipeParams.searchName);
     }
 
+    params = params.append('pageIndex', recipeParams.pageIndex);
+    params = params.append('pageSize', recipeParams.pageSize);
+
     return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes', { params });
   }
 

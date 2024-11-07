@@ -1,21 +1,64 @@
 <div class="flex flex-col gap-5">
-  <div class="flex px-10 gap-4">
-    <button mat-stroked-button (click)="openFiltersDialog()">
-      <mat-icon>filter_list</mat-icon>
-      Filters
-    </button>
+  <div class="flex px-10">
+    <div class="flex gap-2">
+      <button
+        class="filter-btn"
+        mat-stroked-button
+        (click)="openFiltersDialog()"
+      >
+        <mat-icon>filter_list</mat-icon>
+        Filters
+      </button>
 
-    <button mat-stroked-button [matMenuTriggerFor]="sortMenu">
-      <mat-icon>swap_vert</mat-icon>
-      Sort
-    </button>
+      <button
+        class="sort-btn"
+        mat-stroked-button
+        [matMenuTriggerFor]="sortMenu"
+      >
+        <mat-icon>swap_vert</mat-icon>
+        Sort
+      </button>
+    </div>
+
+    <form
+      class="relative flex items-center w-full max-w-md mx-4"
+      #searchForm="ngForm"
+      (ngSubmit)="onSearchChange()"
+    >
+      <input
+        type="search"
+        class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg"
+        placeholder="Search by name"
+        name="searchName"
+        [(ngModel)]="recipesParams.searchName"
+      />
+      <button
+        mat-icon-button
+        type="submit"
+        class="absolute inset-y-0 right-3 top-0.5 flex items-center pl-3"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </form>
   </div>
 
   <div class="flex flex-wrap gap-6 justify-center mx-14">
-    @for (recipe of recipes; track recipe.id) {
+    @for (recipe of recipes?.data; track recipe.id) {
     <app-recipe-item [recipe]="recipe"></app-recipe-item>
     }
   </div>
+
+  <mat-paginator
+    class="page-paginator"
+    (page)="handlePage($event)"
+    [length]="recipes?.count"
+    [pageSize]="recipesParams.pageSize"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="recipesParams.pageIndex - 1"
+    aria-label="Select page"
+  >
+  </mat-paginator>
 </div>
 
 <mat-menu #sortMenu="matMenu">
