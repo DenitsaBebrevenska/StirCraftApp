@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../../shared/models/user';
 
 @Injectable({
@@ -12,14 +12,24 @@ export class AccountService {
   private http = inject(HttpClient);
   currentUser = signal<User | null>(null);
 
-  /* login(values: any) {
-    return this.http.post(this.baseUrl + 'account/login', values).pipe(
-      map((user: User) => {
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUser.next(user);
-        }
-      })
-    );
-  } */
+ logIn(values: any){
+  let params = new HttpParams();
+  params = params.append('useCookies', true);
+  return this.http.post<User>(this.baseUrl + 'login', values, {params, withCredentials: true});
+ }
+
+ register(values: any){
+  return this.http.post<User>(this.baseUrl + 'account/register', values);
+ }
+
+ getCurrentUser(){
+  return this.http.get<User>(this.baseUrl + 'account/user-info', {withCredentials: true})
+  .subscribe({
+    next: user => this.currentUser.set(user)
+  })
+ }
+
+ logout(){
+  return this.http.post(this.baseUrl + 'account/logout', {}, {withCredentials: true});
+ }
 }

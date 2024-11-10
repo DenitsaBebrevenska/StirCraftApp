@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.DTOs.User;
 using StirCraftApp.Infrastructure.Identity;
+using System.Security.Claims;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -38,6 +39,26 @@ public class AccountController(SignInManager<AppUser> signInManager) : Controlle
     public async Task<IActionResult> Logout()
     {
         await signInManager.SignOutAsync();
-        return Ok(); //or no content?
+        return NoContent();
+    }
+
+    [HttpGet("user-info")]
+    public async Task<IActionResult> GetUserInfo()
+    {
+        if (User.Identity?.IsAuthenticated == false)
+        {
+            return NoContent();
+        }
+
+        var user = await signInManager.UserManager.GetUserAsync(User);
+
+        return Ok(
+            new
+            {
+                user?.DisplayName,
+                user?.Email,
+                Roles = User.FindFirstValue(ClaimTypes.Role)
+            }
+            );
     }
 }
