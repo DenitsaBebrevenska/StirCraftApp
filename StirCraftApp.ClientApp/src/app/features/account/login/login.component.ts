@@ -35,7 +35,8 @@ export class LoginComponent {
   onSubmit() {
     this.accountService.logIn(this.loginForm.value).subscribe({
       next: () => {
-        this.accountService.getCurrentUser();
+        this.accountService.getCurrentUserInfo()
+        .subscribe();
         this.router.navigateByUrl('/'); 
     }});
   }
