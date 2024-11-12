@@ -16,7 +16,7 @@ export class AccountService {
  logIn(values: any){
   let params = new HttpParams();
   params = params.append('useCookies', true);
-  return this.http.post<User>(this.baseUrl + 'login', values, {params, withCredentials: true});
+  return this.http.post<User>(this.baseUrl + 'login', values);
  }
 
  register(values: any){
@@ -24,7 +24,7 @@ export class AccountService {
  }
 
  getCurrentUserInfo(){
-  return this.http.get<User>(this.baseUrl + 'account/user-info', {withCredentials: true})
+  return this.http.get<User>(this.baseUrl + 'account/user-info')
   .pipe(
     map(user => {
       this.currentUser.set(user);
@@ -34,6 +34,6 @@ export class AccountService {
  }
 
  logout(){
-  return this.http.post(this.baseUrl + 'account/logout', {}, {withCredentials: true});
+  return this.http.post(this.baseUrl + 'account/logout', {});
  }
 }
