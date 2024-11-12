@@ -1,1 +1,36 @@
-<p>register works!</p>
+<mat-card class="max-w-lg mx-auto mt- p-8 bg-white">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-semibold">Register</h1>
+    </div>
+    <app-text-input label="Email" formControlName="email" />
+    <app-text-input label="Display Name" formControlName="displayName" />
+    <app-text-input
+      label="Password"
+      formControlName="password"
+      type="password"
+    />
+    <app-text-input
+      label="Confirm Password"
+      formControlName="confirmPassword"
+      type="password"
+    />
+    @if (validationErrors) {
+    <div class="mb-3 p-4 bg-red-100 text-red-600">
+      <ul class="list-disc px-3">
+        @for (error of validationErrors; track $index) {
+        <li>{{ error }}</li>
+        }
+      </ul>
+    </div>
+    }
+    <button
+      mat-flat-button
+      [disabled]="registerForm.invalid"
+      type="submit"
+      class="w-full py-2"
+    >
+      Register
+    </button>
+  </form>
+</mat-card>
