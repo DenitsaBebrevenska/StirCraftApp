@@ -23,6 +23,8 @@ public class DetailedRecipeDto
 
     public double Rating { get; set; }
 
+    public int Likes { get; set; }
+
     public ICollection<RecipeIngredientDto> Ingredients { get; set; } = [];
 
     public ICollection<RecipeImageDto> Images { get; set; } = [];

@@ -10,6 +10,7 @@ public class RecipeIncludeAllSpecification : BaseSpecification<Recipe>
         AddInclude(r => r.RecipeImages);
         AddInclude(r => r.RecipeIngredients);
         AddInclude(r => r.CategoryRecipes);
+        AddInclude(r => r.RecipeRatings);
         AddIncludeStrings("CategoryRecipes.Category");
         AddIncludeStrings("Comments.Replies");
         AddIncludeStrings("RecipeIngredients.Ingredient");

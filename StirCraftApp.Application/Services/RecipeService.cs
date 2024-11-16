@@ -40,6 +40,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             CreatedOn = recipe.CreatedOn.ToString("dd/MM/yyyy"),
             UpdatedOn = recipe.UpdatedOn.ToString("dd/MM/yyyy"),
             Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
+            Likes = userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
             Ingredients = recipe.RecipeIngredients.Select(ri => new RecipeIngredientDto
             {
                 Id = ri.Ingredient.Id,
