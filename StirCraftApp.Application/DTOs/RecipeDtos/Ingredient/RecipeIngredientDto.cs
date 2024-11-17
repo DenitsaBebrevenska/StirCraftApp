@@ -1,5 +1,7 @@
-﻿namespace StirCraftApp.Application.DTOs.Recipe.Ingredient;
-public class RecipeIngredientDto
+﻿using StirCraftApp.Application.Contracts;
+
+namespace StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
+public class RecipeIngredientDto : IDto
 {
     public int Id { get; set; }
 

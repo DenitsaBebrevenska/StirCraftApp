@@ -1,4 +1,4 @@
-﻿namespace StirCraftApp.Domain.Specifications;
+﻿namespace StirCraftApp.Domain.Specifications.SpecParams;
 public class PagingParams
 {
     private const int MaxPageSize = 20;
@@ -10,6 +10,6 @@ public class PagingParams
     public int PageSize
     {
         get => _pageSize;
-        set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
+        set => _pageSize = value > MaxPageSize ? MaxPageSize : value;
     }
 }

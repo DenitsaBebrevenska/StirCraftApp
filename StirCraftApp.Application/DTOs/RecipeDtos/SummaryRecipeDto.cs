@@ -1,6 +1,8 @@
-﻿namespace StirCraftApp.Application.DTOs.Recipe;
+﻿using StirCraftApp.Application.Contracts;
 
-public class SummaryRecipeDto
+namespace StirCraftApp.Application.DTOs.RecipeDtos;
+
+public class SummaryRecipeDto : IDto
 {
     public int Id { get; set; }
     public required string Name { get; set; }

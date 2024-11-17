@@ -1,9 +1,10 @@
-﻿using StirCraftApp.Application.DTOs.Recipe.Comment;
-using StirCraftApp.Application.DTOs.Recipe.Image;
-using StirCraftApp.Application.DTOs.Recipe.Ingredient;
+﻿using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs.RecipeDtos.Comment;
+using StirCraftApp.Application.DTOs.RecipeDtos.Image;
+using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
 
-namespace StirCraftApp.Application.DTOs.Recipe;
-public class DetailedRecipeDto
+namespace StirCraftApp.Application.DTOs.RecipeDtos;
+public class DetailedRecipeDto : IDto
 {
     public int Id { get; set; }
 

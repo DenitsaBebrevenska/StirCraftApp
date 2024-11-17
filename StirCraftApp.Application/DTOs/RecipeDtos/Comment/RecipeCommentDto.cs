@@ -1,7 +1,8 @@
-﻿using StirCraftApp.Application.DTOs.Recipe.Reply;
+﻿using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs.RecipeDtos.Reply;
 
-namespace StirCraftApp.Application.DTOs.Recipe.Comment;
-public class RecipeCommentDto
+namespace StirCraftApp.Application.DTOs.RecipeDtos.Comment;
+public class RecipeCommentDto : IDto
 {
     public int Id { get; set; }
 

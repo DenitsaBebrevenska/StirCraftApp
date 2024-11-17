@@ -1,7 +1,7 @@
 ﻿using StirCraftApp.Domain.Contracts;
 using System.Linq.Expressions;
 
-namespace StirCraftApp.Domain.Specifications;
+namespace StirCraftApp.Domain.Specifications.SpecParams;
 public abstract class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecification<T>
 {
     protected BaseSpecification() : this(null) { }
