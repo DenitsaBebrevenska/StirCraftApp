@@ -7,6 +7,7 @@ public class SummaryCookDto : IDto
 
     public required string DisplayName { get; set; }
 
+    public string? AvatarUrl { get; set; }
     public uint RankingPoints { get; set; }
 
     public required string CookingRank { get; set; }

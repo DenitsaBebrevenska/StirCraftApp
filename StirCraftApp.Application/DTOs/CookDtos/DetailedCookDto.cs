@@ -6,6 +6,7 @@ public class DetailedCookDto : IDto
     public int Id { get; set; }
     public required string DisplayName { get; set; }
 
+    public string? AvatarUrl { get; set; }
     public required string About { get; set; }
 
     public uint RankingPoints { get; set; }
