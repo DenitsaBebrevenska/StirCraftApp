@@ -8,5 +8,6 @@ public class CookIncludeAllSpecification : BaseSpecification<Cook>
     {
         AddInclude(c => c.CookingRank);
         AddInclude(c => c.Recipes);
+        AddIncludeStrings("Recipes.UserFavoriteRecipes");
     }
 }
