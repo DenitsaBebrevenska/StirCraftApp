@@ -47,7 +47,7 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         context.Entry(entity).State = EntityState.Modified;
     }
 
-    public async Task<bool> Exists(int id)
+    public async Task<bool> ExistsAsync(int id)
     {
         var entity = await GetDbSet()
             .FindAsync(id);
