@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos.Comment;
 using StirCraftApp.Application.DTOs.RecipeDtos.Image;
@@ -8,25 +7,10 @@ using StirCraftApp.Application.DTOs.RecipeDtos.Reply;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Identity;
 
-namespace StirCraftApp.Application.DTOs;
-public class RecipeDtoFactory(UserManager<AppUser> userManager) : IDtoFactory<Recipe>
+namespace StirCraftApp.Application.Mappings;
+public static class RecipeMappingExtensions
 {
-    public IDto GetDto(Recipe recipe, string dtoName)
-    {
-        switch (dtoName)
-        {
-            case nameof(SummaryRecipeDto):
-                return CreateSummaryRecipeDto(recipe);
-            case nameof(DetailedRecipeDto):
-                return CreateDetailedRecipeDto(recipe);
-            case nameof(CookRecipeSummaryDto):
-                return CreateCookRecipeSummaryDto(recipe);
-        }
-
-        return null;
-    }
-
-    private CookRecipeSummaryDto CreateCookRecipeSummaryDto(Recipe recipe)
+    public static CookRecipeSummaryDto ToCookRecipeSummaryDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
         return new CookRecipeSummaryDto()
         {
@@ -40,7 +24,7 @@ public class RecipeDtoFactory(UserManager<AppUser> userManager) : IDtoFactory<Re
         };
     }
 
-    private SummaryRecipeDto CreateSummaryRecipeDto(Recipe recipe)
+    public static SummaryRecipeDto ToSummaryRecipeDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
         return new SummaryRecipeDto
         {
@@ -59,7 +43,7 @@ public class RecipeDtoFactory(UserManager<AppUser> userManager) : IDtoFactory<Re
 
     }
 
-    private DetailedRecipeDto CreateDetailedRecipeDto(Recipe recipe)
+    public static DetailedRecipeDto ToDetailedRecipeDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
         return new DetailedRecipeDto()
         {

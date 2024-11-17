@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.RecipeDtos;
+using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
@@ -9,7 +10,7 @@ using StirCraftApp.Infrastructure.Identity;
 
 namespace StirCraftApp.Application.Services;
 
-public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager, IDtoFactory<Recipe> dtoFactory) : IRecipeService
+public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) : IRecipeService
 {
     //todo handle exceptions better
     public async Task<object> GetRecipeByIdAsync(int id, string dtoName)
@@ -26,7 +27,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager, I
         var recipe = await unit.Repository<Recipe>()
             .GetEntityWithSpecAsync(spec, id);
 
-        var model = dtoFactory.GetDto(recipe!, dtoName);
+        var model = ConvertToDto(recipe!, dtoName);
 
         return model;
     }
@@ -36,7 +37,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager, I
         var recipes = await unit.Repository<Recipe>()
             .GetAllWithSpecAsync(spec);
 
-        var recipeDtos = recipes.Select(r => (object)dtoFactory.GetDto(r, dtoName)).ToList();
+        var recipeDtos = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
 
         var paginatedResult = new PaginatedResult(spec.Skip,
             spec.Take,
@@ -54,7 +55,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager, I
         var recipes = await unit.Repository<Recipe>()
             .GetAllWithSpecAsync(spec);
 
-        var topThree = recipes.Select(r => (object)dtoFactory.GetDto(r, dtoName)).ToList();
+        var topThree = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
 
         return topThree;
     }
@@ -73,5 +74,17 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager, I
     {
         throw new NotImplementedException();
     }
+
+    private object ConvertToDto(Recipe recipe, string dtoName)
+    {
+        return dtoName switch
+        {
+            nameof(SummaryRecipeDto) => recipe.ToSummaryRecipeDto(userManager),
+            nameof(DetailedRecipeDto) => recipe.ToDetailedRecipeDto(userManager),
+            nameof(CookRecipeSummaryDto) => recipe.ToCookRecipeSummaryDto(userManager),
+            _ => throw new ArgumentException("Invalid DTO type")
+        };
+    }
+
 }
 
