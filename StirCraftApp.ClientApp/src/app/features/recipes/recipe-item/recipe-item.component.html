@@ -13,7 +13,7 @@
     <p class="italic">By: {{ recipe.cookName }}</p>
   </mat-card-header>
   <div class="image-wrapper">
-    <img class="object-cover" mat-card-image src="default-image.jpg" />
+    <img [src]="recipe.imageUrl || 'default-image.jpg'" alt="Recipe Image" />
   </div>
   <mat-card-content>
     <p class="font-light">Difficulty level: {{ recipe.difficultyLevel }}</p>

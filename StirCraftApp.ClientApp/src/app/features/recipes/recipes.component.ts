@@ -77,7 +77,6 @@ export class RecipesComponent implements OnInit{
     this.recipesParams.pageIndex = event.pageIndex + 1;
     this.recipesParams.pageSize = event.pageSize;
     this.getRecipes();
-
   }
 
   onSortChange(event: MatSelectionListChange) {

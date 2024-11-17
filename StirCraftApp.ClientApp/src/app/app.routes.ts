@@ -7,9 +7,13 @@ import { RegisterComponent } from './features/account/register/register.componen
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { ServerErrorComponent } from './shared/components/server-error/server-error.component';
 import { authGuard } from './core/guards/auth.guard';
+import { CooksComponent } from './features/cooks/cooks.component';
+import { CookDetailsComponent } from './features/cooks/cook-details/cook-details.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
+    {path:'cooks', component: CooksComponent},
+    {path:'cooks/:id', component: CookDetailsComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/:id', component: RecipeDetailsComponent},
     {path: 'account/login', component: LoginComponent},

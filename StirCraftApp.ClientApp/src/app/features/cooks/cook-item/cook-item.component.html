@@ -1,0 +1,23 @@
+@if(cook){
+<mat-card
+  appearance="raised"
+  routerLink="/cooks/{{ cook.id }}"
+  class="cook-card flex-col gap-2"
+>
+  <mat-card-header class="flex-col gap-1">
+    <h2 class="font-bold text-2xl">{{ cook.displayName }}</h2>
+    <p class="italic">Rank: {{ cook.cookingRank }}</p>
+  </mat-card-header>
+  <div class="flex items-center space-x-4">
+    <img
+      [src]="cook.avatarUrl || 'default-avatar.jpg'"
+      alt="Cook Avatar"
+      class="h-16 w-16 rounded-full"
+    />
+  </div>
+  <mat-card-content>
+    <p>Ranking points: {{ cook.rankingPoints }}</p>
+    <p>This cook contributed : {{ cook.recipesCount }} recipes</p>
+  </mat-card-content>
+</mat-card>
+}

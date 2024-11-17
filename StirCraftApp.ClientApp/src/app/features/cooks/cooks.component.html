@@ -1,0 +1,50 @@
+<div class="flex flex-col gap-5">
+  <div class="flex px-10">
+    <div class="flex gap-2">
+      <button
+        class="sort-btn"
+        mat-stroked-button
+        [matMenuTriggerFor]="sortMenu"
+      >
+        <mat-icon>swap_vert</mat-icon>
+        Sort
+      </button>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-6 justify-center mx-14">
+    @for (cook of cooks?.data; track cook.id) {
+    <app-cook-item [cook]="cook"></app-cook-item>
+    }
+  </div>
+
+  <mat-paginator
+    class="page-paginator"
+    (page)="handlePage($event)"
+    [length]="cooks?.count"
+    [pageSize]="cookParams.pageSize"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="cookParams.pageIndex - 1"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>
+
+<mat-menu #sortMenu="matMenu">
+  <mat-selection-list
+    class="flex"
+    [multiple]="false"
+    (selectionChange)="onSortChange($event)"
+  >
+    @for (sort of sortOptions; track $index) {
+    <mat-list-option
+      class="flex-1"
+      [value]="sort.value"
+      [selected]="cookParams.sort === sort.value"
+    >
+      {{ sort.name }}
+    </mat-list-option>
+    }
+  </mat-selection-list>
+</mat-menu>

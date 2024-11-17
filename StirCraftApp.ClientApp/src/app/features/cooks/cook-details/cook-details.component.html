@@ -1,0 +1,39 @@
+@if(cook){
+<div class="p-6 max-w-3xl mx-auto bg-white rounded-xl shadow-md space-y-4">
+  <div class="flex items-center space-x-4">
+    <img
+      [src]="cook.avatarUrl || 'default-avatar.jpg'"
+      alt="Cook Avatar"
+      class="h-16 w-16 rounded-full"
+    />
+    <div>
+      <h1 class="text-xl font-bold">{{ cook.displayName }}</h1>
+      <p class="text-gray-500">Rank: {{ cook.cookingRank }}</p>
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <p class="text-gray-700">{{ cook.about }}</p>
+    <div class="flex items-center space-x-4">
+      <div class="text-gray-500">
+        <span class="font-bold text-black">{{ cook.rankingPoints }}</span>
+        Points
+      </div>
+      <div class="text-gray-500">
+        <span class="font-bold text-black">{{ cook.recipeCount }}</span> Recipes
+      </div>
+      <div class="text-gray-500">
+        <span class="font-bold text-black">{{ cook.recipeLikes }}</span> Likes
+      </div>
+    </div>
+  </div>
+
+  <button
+    (click)="loadCookRecipes()"
+    class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+  >
+    Load Recipes
+  </button>
+</div>
+
+}

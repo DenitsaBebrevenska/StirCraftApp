@@ -4,13 +4,14 @@ import { Pagination } from '../../shared/models/pagination';
 import { RecipeShort } from '../../shared/models/recipeShort';
 import { RecipeDetailed } from '../../shared/models/recipeDetailed';
 import { RecipeParams } from '../../shared/models/recipeParams';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RecipesService {
-  baseUrl = 'https://localhost:7222/api/';
+  baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
   difficultyLevels: string[] = [];
   searchName: string = '';
@@ -42,6 +43,10 @@ export class RecipesService {
 
   getRecipe(id: number) {
     return this.http.get<RecipeDetailed>(this.baseUrl + 'recipes/' + id);
+  }
+
+  getCookRecipes(id: number){
+    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes/cook/' + id);
   }
 
   getDifficultyLevels() {
