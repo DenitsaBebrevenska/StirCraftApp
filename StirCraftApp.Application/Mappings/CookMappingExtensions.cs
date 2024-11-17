@@ -14,7 +14,7 @@ public static class CookMappingExtensions
             DisplayName = userManager.Users.First(u => u.Id == cook.UserId).DisplayName ?? "",
             AvatarUrl = userManager.Users.First(u => u.Id == cook.UserId).AvatarUrl,
             RecipesCount = cook.Recipes.Any() ? (uint)cook.Recipes.Count : 0,
-            CookingRank = cook.CookingRank.ToString()!,
+            CookingRank = cook.CookingRank.Title,
             RankingPoints = cook.RankingPoints,
         };
     }
@@ -28,7 +28,7 @@ public static class CookMappingExtensions
             AvatarUrl = userManager.Users.First(u => u.Id == cook.UserId).AvatarUrl,
             About = cook.About,
             RecipesCount = cook.Recipes.Any() ? (uint)cook.Recipes.Count : 0,
-            CookingRank = cook.CookingRank.ToString()!,
+            CookingRank = cook.CookingRank.Title,
             RecipeLikes = cook.Recipes.Any() ? (uint)cook.Recipes.Sum(r => r.UserFavoriteRecipes.Count) : 0,
             RankingPoints = cook.RankingPoints,
         };
