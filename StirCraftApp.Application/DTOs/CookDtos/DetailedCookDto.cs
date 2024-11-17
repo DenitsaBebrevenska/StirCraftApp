@@ -10,5 +10,9 @@ public class DetailedCookDto : IDto
 
     public uint RankingPoints { get; set; }
 
+    public uint RecipesCount { get; set; }
+
+    public uint RecipeLikes { get; set; }
+
     public required string CookingRank { get; set; }
 }

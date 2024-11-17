@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CookDtos;
+using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.CookSpec;
@@ -9,7 +10,7 @@ using StirCraftApp.Infrastructure.Identity;
 namespace StirCraftApp.Application.Services;
 public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : ICookService
 {
-    public async Task<DetailedCookDto> GetCookByIdAsync(int id)
+    public async Task<object> GetCookByIdAsync(int id, string dtoName)
     {
         var cookExists = await unit.Repository<Cook>()
             .ExistsAsync(id);
@@ -23,39 +24,34 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         var cook = await unit.Repository<Cook>()
             .GetEntityWithSpecAsync(spec, id);
 
-        var cookDto = new DetailedCookDto
-        {
-            Id = cook!.Id,
-            DisplayName = userManager.Users.FirstOrDefault(u => u.Id == cook.UserId)?.DisplayName ?? "",
-            About = cook.About,
-            RankingPoints = cook.RankingPoints,
-            CookingRank = cook.CookingRank.Title
-        };
+        var cookDto = ConvertToDto(cook!, dtoName);
 
         return cookDto;
     }
 
-    public async Task<PaginatedResult> GetCooksAsync(CookSortIncludeSpecification spec)
+    public async Task<PaginatedResult> GetCooksAsync(CookSortIncludeSpecification spec, string dtoName)
     {
-        //var cooks = await unit.Repository<Cook>()
-        //    .GetAllWithSpecAsync(spec);
+        var cooks = await unit.Repository<Cook>()
+            .GetAllWithSpecAsync(spec);
 
-        //var cookDtos = cooks.Select(c => new SummaryCookDto
-        //{
-        //    Id = c.Id,
-        //    DisplayName = userManager.Users.FirstOrDefault(u => u.Id == c.UserId)?.DisplayName ?? "",
-        //    RankingPoints = c.RankingPoints,
-        //    CookingRank = c.CookingRank.Title,
-        //    RecipesCount = (uint)c.Recipes.Count
-        //}).ToList();
+        var cookDtos = cooks.Select(c => ConvertToDto(c, dtoName)).ToList();
 
-        //var paginatedResult = new PaginatedResult(spec.Skip,
-        //    spec.Take,
-        //    cookDtos.Count,
-        //    cookDtos);
+        var paginatedResult = new PaginatedResult(spec.Skip,
+            spec.Take,
+            cookDtos.Count,
+            cookDtos);
 
-        //return paginatedResult;
+        return paginatedResult;
 
-        return null;
+    }
+
+    private object ConvertToDto(Cook cook, string dtoName)
+    {
+        return dtoName switch
+        {
+            nameof(SummaryCookDto) => cook.ToSummaryCookDto(userManager),
+            nameof(DetailedCookDto) => cook.ToDetailedCookDto(userManager),
+            _ => throw new ArgumentException("Invalid DTO type")
+        };
     }
 }

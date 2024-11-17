@@ -12,7 +12,7 @@ public static class RecipeMappingExtensions
 {
     public static CookRecipeSummaryDto ToCookRecipeSummaryDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
-        return new CookRecipeSummaryDto()
+        return new CookRecipeSummaryDto
         {
             Id = recipe.Id,
             Name = recipe.Name,
@@ -45,7 +45,7 @@ public static class RecipeMappingExtensions
 
     public static DetailedRecipeDto ToDetailedRecipeDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
-        return new DetailedRecipeDto()
+        return new DetailedRecipeDto
         {
             Id = recipe!.Id,
             Name = recipe.Name,
