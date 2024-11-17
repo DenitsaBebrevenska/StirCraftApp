@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
-using StirCraftApp.Application.DTOs.Recipe;
+using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Enums;
-using StirCraftApp.Domain.Specifications;
+using StirCraftApp.Domain.Specifications.RecipeSpec;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -14,22 +14,30 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
     public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams specParams)
     {
         var spec = new RecipeFilterSortIncludeSpecification(specParams);
-        var recipes = await recipeService.GetRecipesAsync(spec);
+        var recipes = await recipeService.GetRecipesAsync(spec, nameof(SummaryRecipeDto));
         return Ok(recipes);
     }
 
     [HttpGet("top3")]
     public async Task<IActionResult> GetRecipes()
     {
-        var recipes = await recipeService.GetTopThreeRecipes();
+        var recipes = await recipeService.GetTopThreeRecipes(nameof(SummaryRecipeDto));
         return Ok(recipes);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRecipe(int id)
     {
-        var recipe = await recipeService.GetRecipeByIdAsync(id);
+        var recipe = await recipeService.GetRecipeByIdAsync(id, nameof(DetailedRecipeDto));
         return Ok(recipe);
+    }
+
+    [HttpGet("cook/{id}")]
+    public async Task<IActionResult> GetRecipesByCookId(int id)
+    {
+        var spec = new RecipeByCookIdSpecification(id);
+        var cookRecipes = await recipeService.GetRecipesAsync(spec, nameof(CookRecipeSummaryDto));
+        return Ok(cookRecipes);
     }
 
     [HttpPost]

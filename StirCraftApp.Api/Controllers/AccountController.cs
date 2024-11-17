@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using StirCraftApp.Application.DTOs.User;
+using Microsoft.EntityFrameworkCore;
+using StirCraftApp.Api.Extensions;
+using StirCraftApp.Application.DTOs.UserDtos;
 using StirCraftApp.Infrastructure.Identity;
 using System.Security.Claims;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController(SignInManager<AppUser> signInManager) : ControllerBase
+public class AccountController(SignInManager<AppUser> signInManager) : BaseApiController
 {
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
     {
@@ -35,6 +39,16 @@ public class AccountController(SignInManager<AppUser> signInManager) : Controlle
         return Ok();
     }
 
+    [HttpPost("avatar")]
+    public async Task<IActionResult> AddOrUpdateAvatar(IFormFile file)
+    {
+        var user = await signInManager.UserManager.GetUserByEmail(User);
+
+        //todo add image upload logic
+
+        return Ok();
+    }
+
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
@@ -42,6 +56,7 @@ public class AccountController(SignInManager<AppUser> signInManager) : Controlle
         return NoContent();
     }
 
+    [AllowAnonymous]
     [HttpGet("user-info")]
     public async Task<IActionResult> GetUserInfo()
     {
@@ -50,15 +65,32 @@ public class AccountController(SignInManager<AppUser> signInManager) : Controlle
             return NoContent();
         }
 
-        var user = await signInManager.UserManager.GetUserAsync(User);
+        var user = await signInManager.UserManager.GetUserByEmail(User);
 
         return Ok(
             new
             {
-                user?.DisplayName,
-                user?.Email,
+                user.DisplayName,
+                user.Email,
                 Roles = User.FindFirstValue(ClaimTypes.Role)
-            }
-            );
+            });
     }
+
+    [AllowAnonymous]
+    [HttpGet]
+    public IActionResult GetAuthState()
+    {
+        return Ok(new { IsAuthenticated = User.Identity?.IsAuthenticated ?? false });
+    }
+
+    private async Task<bool> IsUniqueDisplayName(string desiredName)
+    {
+        var isUniqueDisplayName = await signInManager
+            .UserManager
+            .Users
+            .AnyAsync(u => u.DisplayName == desiredName);
+
+        return isUniqueDisplayName;
+    }
+
 }

@@ -11,5 +11,6 @@ public class RecipeByCookIdSpecification : BaseSpecification<Recipe>
         AddInclude(r => r.CategoryRecipes);
         AddInclude(r => r.RecipeRatings);
         AddIncludeStrings("CategoryRecipes.Category");
+        AddOrderBy(r => r.CreatedOn);
     }
 }

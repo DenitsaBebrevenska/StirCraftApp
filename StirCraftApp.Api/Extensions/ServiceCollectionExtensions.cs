@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs;
 using StirCraftApp.Application.Services;
 using StirCraftApp.Domain.Contracts;
+using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Data;
 using StirCraftApp.Infrastructure.Data.Interceptors;
 
@@ -13,7 +15,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IRecipeService, RecipeService>();
         services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped(typeof(IService<>), typeof(GenericService<>));
+        services.AddScoped<ICookService, CookService>();
+        services.AddScoped<IDtoFactory<Recipe>, RecipeDtoFactory>();
 
         return services;
     }

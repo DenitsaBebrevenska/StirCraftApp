@@ -23,8 +23,13 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<AppUser>()
+builder.Services.AddIdentityApiEndpoints<AppUser>(opt =>
+{
+    opt.User.RequireUniqueEmail = true;
+
+})
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<StirCraftDbContext>();
 
