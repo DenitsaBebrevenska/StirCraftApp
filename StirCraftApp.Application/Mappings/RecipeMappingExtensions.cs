@@ -10,6 +10,17 @@ using StirCraftApp.Infrastructure.Identity;
 namespace StirCraftApp.Application.Mappings;
 public static class RecipeMappingExtensions
 {
+    public static BriefRecipeDto ToBriefRecipeDto(this Recipe recipe, UserManager<AppUser> userManager)
+    {
+        return new BriefRecipeDto
+        {
+            Id = recipe.Id,
+            Name = recipe.Name,
+            MainImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
+            CookName = userManager.Users.FirstOrDefault(u => u.Id == recipe.Cook.UserId)?.DisplayName ?? "",
+        };
+    }
+
     public static CookRecipeSummaryDto ToCookRecipeSummaryDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
         return new CookRecipeSummaryDto
@@ -17,7 +28,7 @@ public static class RecipeMappingExtensions
             Id = recipe.Id,
             Name = recipe.Name,
             DifficultyLevel = recipe.DifficultyLevel.ToString(),
-            ImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
+            MainImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
             Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
             Likes = (uint)userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
             Categories = recipe.CategoryRecipes.Select(cr => cr.Category.Name).ToList()

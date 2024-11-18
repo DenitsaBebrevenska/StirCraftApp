@@ -1,8 +1,4 @@
-<!-- todo check if default image is rendered when server returns null for image
- [src]="recipe.imageUrl ?? 'default-image.jpg'"
-    mat-card-image
-    alt="{{ recipe.name }} main image" -->
-@if(recipe){
+@if(recipesCook) { @for (recipe of recipesCook.data; track $index) {
 <mat-card
   appearance="raised"
   routerLink="/recipes/{{ recipe.id }}"
@@ -10,7 +6,7 @@
 >
   <mat-card-header class="flex-col gap-1">
     <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
-    <p class="italic">By: {{ recipe.cookName }}</p>
+    <p class="italic">{{ recipe.difficultyLevel }}</p>
   </mat-card-header>
   <div class="image-wrapper">
     <img
@@ -28,4 +24,6 @@
     </ul>
   </mat-card-content>
 </mat-card>
+} } @else {
+<h2>This author has not cooked any content yet!</h2>
 }

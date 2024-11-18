@@ -9,6 +9,7 @@ import { ServerErrorComponent } from './shared/components/server-error/server-er
 import { authGuard } from './core/guards/auth.guard';
 import { CooksComponent } from './features/cooks/cooks.component';
 import { CookDetailsComponent } from './features/cooks/cook-details/cook-details.component';
+import { RecipeCookComponent } from './features/recipes/recipe-cook/recipe-cook.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path:'cooks/:id', component: CookDetailsComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/:id', component: RecipeDetailsComponent},
+    {path: 'recipes/cook/:id', component: RecipeCookComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
     {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready

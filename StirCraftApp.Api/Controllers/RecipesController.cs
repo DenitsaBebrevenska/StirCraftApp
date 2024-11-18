@@ -19,9 +19,9 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
     }
 
     [HttpGet("top3")]
-    public async Task<IActionResult> GetRecipes()
+    public async Task<IActionResult> GetTopThree()
     {
-        var recipes = await recipeService.GetTopThreeRecipes(nameof(SummaryRecipeDto));
+        var recipes = await recipeService.GetTopThreeRecipes(nameof(BriefRecipeDto));
         return Ok(recipes);
     }
 

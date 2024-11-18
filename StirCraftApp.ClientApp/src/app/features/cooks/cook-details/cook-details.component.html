@@ -28,12 +28,13 @@
     </div>
   </div>
 
-  <button
-    (click)="loadCookRecipes()"
+  <a
+    routerLink="/recipes/cook/{{ cook.id }}"
+    routerLinkActive="router-link-active"
     class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
   >
     Load Recipes
-  </button>
+  </a>
 </div>
 
 }

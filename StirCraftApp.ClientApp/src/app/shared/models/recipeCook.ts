@@ -1,9 +1,8 @@
-export type RecipeShort = {
+export type RecipeCook = {
     id: number;
     name: string;
+    mainImageUrl: string;
     difficultyLevel: string;
-    mainImageUrl?: string | null;
-    cookName: string;
     rating: number;
     likes: number;
     categories: string[];

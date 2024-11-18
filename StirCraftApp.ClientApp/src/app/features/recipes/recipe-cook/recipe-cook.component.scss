@@ -1,0 +1,17 @@
+.recipe-card{
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 30vw;
+}
+
+.recipe-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.image-wrapper{
+    width: 30vw;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.3);
+}

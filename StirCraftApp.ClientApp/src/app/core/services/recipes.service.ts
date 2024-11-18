@@ -5,6 +5,8 @@ import { RecipeShort } from '../../shared/models/recipeShort';
 import { RecipeDetailed } from '../../shared/models/recipeDetailed';
 import { RecipeParams } from '../../shared/models/recipeParams';
 import { environment } from '../../../environments/environment.development';
+import { RecipeCook } from '../../shared/models/recipeCook';
+import { CarouselRecipe } from '../../shared/models/carouselRecipe';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +48,11 @@ export class RecipesService {
   }
 
   getCookRecipes(id: number){
-    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes/cook/' + id);
+    return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id);
+  }
+
+  getTopThreeRecipes(){
+    return this.http.get<CarouselRecipe[]>(this.baseUrl + 'recipes/top3');
   }
 
   getDifficultyLevels() {
