@@ -6,6 +6,17 @@ using StirCraftApp.Infrastructure.Identity;
 namespace StirCraftApp.Application.Mappings;
 public static class CookMappingExtensions
 {
+    public static CookWithRankDto ToCookWithRankDto(this Cook cook, UserManager<AppUser> userManager)
+    {
+        return new CookWithRankDto
+        {
+            CookId = cook.Id,
+            CookName = userManager.Users.First(u => u.Id == cook.UserId).DisplayName ?? "",
+            RankTitle = cook.CookingRank.Title,
+            RankPoints = cook.RankingPoints
+        };
+    }
+
     public static SummaryCookDto ToSummaryCookDto(this Cook cook, UserManager<AppUser> userManager)
     {
         return new SummaryCookDto

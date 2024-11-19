@@ -23,4 +23,12 @@ public class CooksController(ICookService cookService) : ControllerBase
         var cook = await cookService.GetCookByIdAsync(id, nameof(DetailedCookDto));
         return Ok(cook);
     }
+
+    [HttpGet("top/{count}")]
+    public async Task<IActionResult> GetTopTenCooksWithRanks(int count)
+    {
+        var spec = new CookTopRankSpecification(count);
+        var cooks = await cookService.GetCooksAsync(spec, nameof(CookWithRankDto));
+        return Ok(cooks);
+    }
 }
