@@ -10,7 +10,7 @@ public static class CookMappingExtensions
     {
         return new CookWithRankDto
         {
-            CookId = cook.Id,
+            Id = cook.Id,
             CookName = userManager.Users.First(u => u.Id == cook.UserId).DisplayName ?? "",
             RankTitle = cook.CookingRank.Title,
             RankPoints = cook.RankingPoints

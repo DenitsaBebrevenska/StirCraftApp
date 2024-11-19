@@ -10,9 +10,11 @@ import { authGuard } from './core/guards/auth.guard';
 import { CooksComponent } from './features/cooks/cooks.component';
 import { CookDetailsComponent } from './features/cooks/cook-details/cook-details.component';
 import { RecipeCookComponent } from './features/recipes/recipe-cook/recipe-cook.component';
+import { LeaderboardComponent } from './features/leaderboard/leaderboard.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
+    {path: 'cooks/top/10', component: LeaderboardComponent},
     {path:'cooks', component: CooksComponent},
     {path:'cooks/:id', component: CookDetailsComponent},
     {path: 'recipes', component: RecipesComponent},

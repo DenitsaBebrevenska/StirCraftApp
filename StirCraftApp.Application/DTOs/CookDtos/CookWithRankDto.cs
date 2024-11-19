@@ -3,7 +3,7 @@
 namespace StirCraftApp.Application.DTOs.CookDtos;
 public class CookWithRankDto : IDto
 {
-    public int CookId { get; set; }
+    public int Id { get; set; }
 
     public required string CookName { get; set; }
 

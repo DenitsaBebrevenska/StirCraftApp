@@ -1,0 +1,49 @@
+<div class="max-w-4xl mx-auto mt-8 p-4 bg-white shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Leaderboard</h2>
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-100">
+        <th
+          class="border border-gray-200 px-4 py-2 text-left text-gray-600 font-medium"
+        >
+          #
+        </th>
+        <th
+          class="border border-gray-200 px-4 py-2 text-left text-gray-600 font-medium"
+        >
+          Cook Name
+        </th>
+        <th
+          class="border border-gray-200 px-4 py-2 text-left text-gray-600 font-medium"
+        >
+          Rank Title
+        </th>
+        <th
+          class="border border-gray-200 px-4 py-2 text-left text-gray-600 font-medium"
+        >
+          Points
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-gray-50 transition duration-200">
+        @for (cook of topTenCooks; track cook.id) {
+        <td class="border border-gray-200 px-4 py-2 text-gray-800">
+          {{ cook.id }}
+        </td>
+        <td
+          class="border border-gray-200 px-4 py-2 text-gray-800 font-semibold"
+        >
+          {{ cook.cookName }}
+        </td>
+        <td class="border border-gray-200 px-4 py-2 text-gray-800">
+          {{ cook.rankTitle }}
+        </td>
+        <td class="border border-gray-200 px-4 py-2 text-gray-800">
+          {{ cook.rankPoints }}
+        </td>
+        }
+      </tr>
+    </tbody>
+  </table>
+</div>

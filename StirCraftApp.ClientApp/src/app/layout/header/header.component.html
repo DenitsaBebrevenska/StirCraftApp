@@ -14,7 +14,9 @@
       >
       <a routerLink="/recipes" routerLinkActive="active">Recipes</a>
       <a routerLink="/cooks" routerLinkActive="active">Cooks</a>
-      <a>StirCraft Leaderboard</a>
+      <a routerLink="/cooks/top/10" routerLinkActive="active"
+        >StirCraft Leaderboard</a
+      >
     </nav>
     <div class="flex gap-6 align-middle">
       @if(accountService.currentUser()) {
