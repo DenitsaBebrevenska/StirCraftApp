@@ -7,7 +7,6 @@ export type RecipeDetailed = {
     name: string;
     preparationSteps: string;
     difficultyLevel: string;
-    imageUrl?: string | null;
     cookName: string;
     createdOn: string;
     updatedOn: string;

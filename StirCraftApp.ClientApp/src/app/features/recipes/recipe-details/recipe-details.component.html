@@ -15,11 +15,13 @@
 
     <!-- Recipe Details -->
     <div class="flex flex-col items-center mb-6">
+      @for(image of recipe.images; track image.id) {
       <img
         class="w-1/2 h-auto rounded-md shadow-lg"
-        src="{{ recipe.imageUrl || 'default-image.jpg' }}"
-        alt="Image of {{ recipe.name }}"
+        [src]="image.url || 'default-image.jpg'"
+        alt="Recipe Image"
       />
+      }
       <p class="text-lg mt-4">
         <strong>Difficulty:</strong> {{ recipe.difficultyLevel }}
       </p>
