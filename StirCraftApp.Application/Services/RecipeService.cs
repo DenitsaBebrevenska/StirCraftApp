@@ -4,6 +4,7 @@ using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Identity;
@@ -73,6 +74,26 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
     public async Task DeleteRecipeAsync(int id)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task AddRecipeToUsersFavorites(string userId, int recipeId)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            throw new ArgumentException("The user does not exist.");
+        }
+
+        var recipe = await unit.Repository<Recipe>().GetByIdAsync(recipeId);
+
+        if (recipe == null)
+        {
+            throw new ArgumentException($"Recipe with id {recipeId} does not exist.");
+        }
+
+        user.FavoriteRecipes.Add(new UserFavoriteRecipe { Recipe = recipe, UserId = userId });
+
     }
 
     private object ConvertToDto(Recipe recipe, string dtoName)

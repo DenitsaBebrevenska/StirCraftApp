@@ -51,7 +51,7 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateRecipe(int id, FormRecipeDto updateRecipeDto)
     {
-        updateRecipeDto.Id = id;
+
         await recipeService.UpdateRecipeAsync(updateRecipeDto);
         //todo return updated recipe ???
         return Ok();
@@ -71,4 +71,11 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
         var difficultyLevels = Enum.GetNames(typeof(DifficultyLevel));
         return Ok(difficultyLevels);
     }
+
+    [HttpPost("recipe-like/{id}")]
+    public Task<IActionResult> LikeRecipe(int id)
+    {
+
+    }
+
 }
