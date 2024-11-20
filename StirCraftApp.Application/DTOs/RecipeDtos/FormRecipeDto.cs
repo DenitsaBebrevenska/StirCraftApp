@@ -1,6 +1,5 @@
 ﻿using StirCraftApp.Application.Contracts;
 using StirCraftApp.Domain.Entities;
-using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.JoinedTables;
 
 namespace StirCraftApp.Application.DTOs.RecipeDtos;
@@ -10,7 +9,7 @@ public class FormRecipeDto : IDto
 
     public required string PreparationSteps { get; set; }
 
-    public DifficultyLevel DifficultyLevel { get; set; }
+    public int DifficultyLevel { get; set; }
 
     public int CookId { get; set; }
 
@@ -27,5 +26,6 @@ public class FormRecipeDto : IDto
     public virtual ICollection<RecipeImage> RecipeImages { get; set; } = new List<RecipeImage>();
 
     public virtual ICollection<CategoryRecipe> CategoryRecipes { get; set; } = new List<CategoryRecipe>();
+
 
 }
