@@ -137,6 +137,21 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
         builder.Entity<ShoppingListRecipeIngredient>()
             .HasQueryFilter(slri => !slri.ShoppingList.IsDeleted && !slri.RecipeIngredient.IsDeleted);
 
+
+        //add filter to ingredients
+        builder.Entity<Ingredient>()
+            .HasQueryFilter(i => i.IsAdminApproved == true);
+        builder.Entity<Ingredient>()
+            .HasIndex(i => i.IsAdminApproved == true);
+
+        //add filter to recipes
+        builder.Entity<Recipe>()
+            .HasQueryFilter(r => r.IsAdminApproved == true);
+        builder.Entity<Recipe>()
+            .HasQueryFilter(r => r.IsAdminApproved == true);
+
+
+        //adding soft delete flag
         var softDeletables = allEntityTypes
             .Where(et => typeof(ISoftDeletable).IsAssignableFrom(et.ClrType));
 

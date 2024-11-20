@@ -36,6 +36,11 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         return paginatedResult;
     }
 
+    public Task SuggestIngredient(SuggestIngredientDto ingredient)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task CreateIngredientAsync(FormIngredientDto ingredient)
     {
         await unit.Repository<Ingredient>()

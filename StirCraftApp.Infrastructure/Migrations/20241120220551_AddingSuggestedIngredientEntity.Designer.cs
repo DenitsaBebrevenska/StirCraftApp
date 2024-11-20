@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StirCraftApp.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StirCraftApp.Infrastructure.Data;
 namespace StirCraftApp.Infrastructure.Migrations
 {
     [DbContext(typeof(StirCraftDbContext))]
-    partial class StirCraftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120220551_AddingSuggestedIngredientEntity")]
+    partial class AddingSuggestedIngredientEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -581,9 +584,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletedOnUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsAdminApproved")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsAllergen")
                         .HasColumnType("bit");
 
@@ -613,7 +613,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -622,7 +621,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -632,7 +630,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -641,7 +638,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = false,
@@ -650,7 +646,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -659,7 +654,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -668,7 +662,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = false,
@@ -677,7 +670,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -687,7 +679,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 9,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -696,7 +687,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 10,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -706,7 +696,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 11,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -716,7 +705,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 12,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -725,7 +713,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -735,7 +722,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -745,7 +731,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 15,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -755,7 +740,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 16,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -765,7 +749,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = false,
@@ -774,7 +757,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -784,7 +766,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 19,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -794,7 +775,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 20,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -803,7 +783,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 21,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -812,7 +791,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 22,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -822,7 +800,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 23,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -831,7 +808,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 24,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = false,
@@ -840,7 +816,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 25,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -850,7 +825,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 26,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -860,7 +834,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 27,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -869,7 +842,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 28,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -878,7 +850,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 29,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -888,7 +859,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 30,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -897,7 +867,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 31,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -906,7 +875,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 32,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -915,7 +883,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 33,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -924,7 +891,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 34,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -933,7 +899,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 35,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -943,7 +908,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 36,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -953,7 +917,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 37,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -962,7 +925,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 38,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -971,7 +933,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 39,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -980,7 +941,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 40,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = false,
@@ -989,7 +949,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 41,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = false,
@@ -998,7 +957,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 42,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1007,7 +965,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 43,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1016,7 +973,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 44,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1025,7 +981,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 45,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1034,7 +989,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 46,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1043,7 +997,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 47,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = false,
@@ -1052,7 +1005,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 48,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1061,7 +1013,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 49,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1070,7 +1021,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 50,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1079,7 +1029,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 51,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1088,7 +1037,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 52,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1097,7 +1045,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 53,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1106,7 +1053,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 54,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1115,7 +1061,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 55,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1125,7 +1070,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 56,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1135,7 +1079,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 57,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1145,7 +1088,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 58,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1155,7 +1097,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 59,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1164,7 +1105,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 60,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1173,7 +1113,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 61,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1182,7 +1121,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 62,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1191,7 +1129,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 63,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1201,7 +1138,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 64,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1211,7 +1147,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 65,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1220,7 +1155,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 66,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1229,7 +1163,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 67,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = false,
@@ -1238,7 +1171,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 68,
-                            IsAdminApproved = false,
                             IsAllergen = true,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1247,7 +1179,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 69,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -1257,7 +1188,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 70,
-                            IsAdminApproved = false,
                             IsAllergen = false,
                             IsDeleted = false,
                             IsSolid = true,
@@ -2199,6 +2129,36 @@ namespace StirCraftApp.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("StirCraftApp.Domain.Entities.SuggestedIngredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DeletedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAdminReviewed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted")
+                        .HasFilter("[IsDeleted] = 0");
+
+                    b.ToTable("SuggestedIngredients");
+                });
+
             modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.CategoryRecipe", b =>
                 {
                     b.Property<int>("RecipeId")
@@ -2516,7 +2476,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "9b6d00cb-b731-47d5-9c57-870ed8fbc0ce",
+                            ConcurrencyStamp = "9202e479-0f27-42ad-8431-e7046392183f",
                             DisplayName = "ChefBob",
                             Email = "bob@example.com",
                             EmailConfirmed = false,
@@ -2524,9 +2484,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB@EXAMPLE.COM",
                             NormalizedUserName = "BOB@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDljjA43OILJV1euwFyojKHWUSNIvXK+Rhg3243tpCQ+AtZKnvfS8LTh0ZgpUMfwA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA3T95M2eoeao+TaDZltHVcryei3SLiNMiElU2wkODpHk2FWy0vnHybSuojDyWdGew==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d1ed1a42-2a60-4dfc-b653-8dbc210bd337",
+                            SecurityStamp = "45e284b9-76fc-42ba-ac4f-0938064d8de2",
                             TwoFactorEnabled = false,
                             UserName = "bob@example.com"
                         },
@@ -2535,7 +2495,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "7b6da351-4c35-4cdc-b1e1-5ce6bf7c0ca6",
+                            ConcurrencyStamp = "2447a9ad-b8e8-4082-b225-558865abe22e",
                             DisplayName = "KateMiddleton",
                             Email = "kate@example.com",
                             EmailConfirmed = false,
@@ -2543,9 +2503,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KATE@EXAMPLE.COM",
                             NormalizedUserName = "KATE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBbg1mE+SVoksD7Pczm7ah781pjPckKFR6y2f+axhFqqgs9jJkBkapyZ2iYQyi+ICg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBmtYsmTGoLnAomVqEdQz4VyjQDY0OtZoDx1NrxKJbymR8sbG8tWkxv7nyxDlUIY4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "947580b0-f2ed-4f70-9892-2c109facb7f3",
+                            SecurityStamp = "b7492d37-4489-43c0-88fb-378fc84be712",
                             TwoFactorEnabled = false,
                             UserName = "kate@example.com"
                         },
@@ -2554,7 +2514,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "5387e17b-1d73-4397-8bc8-63f09066b4a0",
+                            ConcurrencyStamp = "16950772-216f-4a2c-98a1-660d91b3e06f",
                             DisplayName = "AdrianTheAdventurer",
                             Email = "adrian@example.com",
                             EmailConfirmed = false,
@@ -2562,9 +2522,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADRIAN@EXAMPLE.COM",
                             NormalizedUserName = "ADRIAN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOENAv4c/Z5XED4SytlGBtzcY6wjf+hNwxZQqA459EkhjpedwoYIM6SlvAY2HxE3Dg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENzWgDeqxnfydXS323ziU85n3r1mG1ReAfOakrynXQPIlXZqmFyvg/bQwQ2fPF/AMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ba2663fd-f867-433b-b273-06a018fde2cc",
+                            SecurityStamp = "9d60c8d2-5fb9-4e94-a03c-1351bb1cb66b",
                             TwoFactorEnabled = false,
                             UserName = "adrian@example.com"
                         },
@@ -2573,7 +2533,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "eaa5d6a3-27d4-4c5f-9d81-62645d9b183a",
+                            ConcurrencyStamp = "d306c4d3-c7be-4c03-bd72-09463a6ba561",
                             DisplayName = "LoveLink",
                             Email = "zelda@example.com",
                             EmailConfirmed = false,
@@ -2581,9 +2541,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZELDA@EXAMPLE.COM",
                             NormalizedUserName = "ZELDA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE9JZRsheOPobztcqGMOloPl/MPd2s+vCM8Y6oqifvuyJW2Dvf64THc8sjMB5zGCVg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEmv8HWaUkIkHzYyqK20krk55bQ3kZrwrINwPbSjV6U2iZ8xf2pdgqDppPdPAGObtw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e5d057c-2b59-474e-9e5a-7ef7e644cbe2",
+                            SecurityStamp = "27e70f9a-a481-40e6-a661-c01f576ad1b6",
                             TwoFactorEnabled = false,
                             UserName = "zelda@example.com"
                         },
@@ -2592,7 +2552,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "374ec5bc-076e-4e32-ba33-34d018bcb538",
+                            ConcurrencyStamp = "108a2715-87e5-44c1-b095-eda439dc5ae6",
                             DisplayName = "ThePowerOfMorgoth",
                             Email = "galadriel@example.com",
                             EmailConfirmed = false,
@@ -2600,9 +2560,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
                             NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELaTber0dcPqmwUrdPHVPaQkEVoqmRCK1Ca8YzKOyfo22vgGlXTFfCLt0kj6fbU3AQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMEi8ZrsKC7KBn5rTj1mLL1afF9jwK1ums0bjmV4wBrl4YGup4IbXzIzqPL3uRlFUg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9d9aafda-138d-4cc6-af2b-82713fab5dbf",
+                            SecurityStamp = "7da070e8-cd9e-439a-b1e3-e7163b2db08a",
                             TwoFactorEnabled = false,
                             UserName = "galadriel@example.com"
                         },
@@ -2610,7 +2570,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3acf0899-adf0-4327-9260-54ea285cd56e",
+                            ConcurrencyStamp = "67d71b2a-1c3f-405b-8319-4f4fd912211e",
                             DisplayName = "StirCraftAdmin",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
@@ -2618,9 +2578,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMz7rgxgYOdL3aXFtnVEHoqP2JMIU20aY9aigYBaXnUS0bf2l/cuF0sSyCtVooEayw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHsZmI7mY1ACSg0lSyx5+KxGv2UggBTM+6Ouu6/eLag6Zo0Ytc859jHtOG56xrgoAw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3d1d8a34-b38a-4f4c-b1a9-079c7193f2f4",
+                            SecurityStamp = "08608364-c55b-4627-bcf8-3fd883efb3bb",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });

@@ -14,5 +14,7 @@ public class Ingredient : BaseEntity
 
     public bool IsSolid { get; set; }
 
+    public bool IsAdminApproved { get; set; }
+
     public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }
