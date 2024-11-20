@@ -1,6 +1,6 @@
 ﻿using StirCraftApp.Domain.JoinedTables;
 using System.ComponentModel.DataAnnotations;
-using static StirCraftApp.Domain.Constraints.EntityConstraints;
+using static StirCraftApp.Domain.Constants.EntityConstraints;
 
 namespace StirCraftApp.Domain.Entities;
 public class Category : BaseEntity
