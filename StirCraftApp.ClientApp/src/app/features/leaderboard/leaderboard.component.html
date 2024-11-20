@@ -6,11 +6,6 @@
         <th
           class="border border-gray-200 px-4 py-2 text-left text-gray-600 font-medium"
         >
-          #
-        </th>
-        <th
-          class="border border-gray-200 px-4 py-2 text-left text-gray-600 font-medium"
-        >
           Cook Name
         </th>
         <th
@@ -26,11 +21,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="hover:bg-gray-50 transition duration-200">
-        @for (cook of topTenCooks; track cook.id) {
-        <td class="border border-gray-200 px-4 py-2 text-gray-800">
-          {{ cook.id }}
-        </td>
+      @for (cook of topTenCooks; track cook.id) {
+      <tr
+        class="hover:bg-gray-50 transition duration-200"
+        routerLink="/cooks/{{ cook.id }}"
+      >
         <td
           class="border border-gray-200 px-4 py-2 text-gray-800 font-semibold"
         >
@@ -42,8 +37,8 @@
         <td class="border border-gray-200 px-4 py-2 text-gray-800">
           {{ cook.rankPoints }}
         </td>
-        }
       </tr>
+      }
     </tbody>
   </table>
 </div>

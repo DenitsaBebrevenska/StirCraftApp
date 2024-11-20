@@ -32,6 +32,6 @@ export class CooksService {
   }
 
   getTopTenCooks(){
-    return this.http.get<CookRankLeaderBoard[]>(this.baseUrl + 'cooks/top/10');
+    return this.http.get<Pagination<CookRankLeaderBoard>>(this.baseUrl + 'cooks/top/10');
   }
 }
