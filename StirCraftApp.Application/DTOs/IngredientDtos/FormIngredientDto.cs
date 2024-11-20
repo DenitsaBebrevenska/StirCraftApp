@@ -10,4 +10,6 @@ public class FormIngredientDto : IDto
     public string? NameInPlural { get; set; }
 
     public bool IsSolid { get; set; }
+
+    public bool IsAdminApproved { get; set; }
 }

@@ -142,13 +142,15 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
         builder.Entity<Ingredient>()
             .HasQueryFilter(i => i.IsAdminApproved == true);
         builder.Entity<Ingredient>()
-            .HasIndex(i => i.IsAdminApproved == true);
+            .HasIndex(nameof(Ingredient.IsAdminApproved))
+            .HasFilter($"[{nameof(Ingredient.IsAdminApproved)}] = 1");
 
         //add filter to recipes
         builder.Entity<Recipe>()
             .HasQueryFilter(r => r.IsAdminApproved == true);
         builder.Entity<Recipe>()
-            .HasQueryFilter(r => r.IsAdminApproved == true);
+            .HasIndex(nameof(Recipe.IsAdminApproved))
+            .HasFilter($"[{nameof(Recipe.IsAdminApproved)}] = 1");
 
 
         //adding soft delete flag

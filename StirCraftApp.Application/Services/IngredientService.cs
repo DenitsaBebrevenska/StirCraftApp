@@ -36,9 +36,15 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         return paginatedResult;
     }
 
-    public Task SuggestIngredient(SuggestIngredientDto ingredient)
+    public async Task SuggestIngredient(SuggestIngredientDto ingredient)
     {
-        throw new NotImplementedException();
+        await unit.Repository<Ingredient>()
+            .AddAsync(new Ingredient
+            {
+                Name = ingredient.Name
+            });
+
+        await unit.CompleteAsync();
     }
 
     public async Task CreateIngredientAsync(FormIngredientDto ingredient)
@@ -49,7 +55,8 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
                 Name = ingredient.Name,
                 IsAllergen = ingredient.IsAllergen,
                 NameInPlural = ingredient.NameInPlural,
-                IsSolid = ingredient.IsSolid
+                IsSolid = ingredient.IsSolid,
+                IsAdminApproved = ingredient.IsAdminApproved
             });
     }
 
