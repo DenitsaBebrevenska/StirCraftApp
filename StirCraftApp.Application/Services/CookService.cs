@@ -23,7 +23,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
 
         var spec = new CookIncludeAllSpecification();
         var cook = await unit.Repository<Cook>()
-            .GetEntityWithSpecAsync(spec, id);
+            .GetByIdAsync(spec, id);
 
         var cookDto = ConvertToDto(cook!, dtoName);
 
@@ -33,7 +33,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
     public async Task<PaginatedResult> GetCooksAsync(BaseSpecification<Cook> spec, string dtoName)
     {
         var cooks = await unit.Repository<Cook>()
-            .GetAllWithSpecAsync(spec);
+            .GetAllAsync(spec);
 
         var cookDtos = cooks.Select(c => ConvertToDto(c, dtoName)).ToList();
 

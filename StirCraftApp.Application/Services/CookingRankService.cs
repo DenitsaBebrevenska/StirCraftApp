@@ -10,7 +10,7 @@ public class CookingRankService(IUnitOfWork unit) : ICookingRankService
     public async Task CalculatePoints(int cookId, string action)
     {
         var cook = await unit.Repository<Cook>()
-            .GetByIdAsync(cookId);
+            .GetByIdAsync(null, cookId);
 
         if (cook == null)
         {
@@ -42,7 +42,7 @@ public class CookingRankService(IUnitOfWork unit) : ICookingRankService
     private async Task RecalculateRank(Cook cook)
     {
         var ranks = await unit.Repository<CookingRank>()
-            .GetAllAsync();
+            .GetAllAsync(null);
         var currentRankPosition = ranks.IndexOf(ranks.First(r => r.Id == cook.CookingRankId));
         var previousRankPosition = currentRankPosition == 0 ? 0 : currentRankPosition - 1;
         var nextRankPosition = currentRankPosition == ranks.Count - 1 ? ranks.Count - 1 : currentRankPosition + 1;

@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StirCraftApp.Api.Extensions;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
+using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class RecipesController(IRecipeService recipeService) : ControllerBase
+public class RecipesController(IRecipeService recipeService, ICookingRankService cookingRankService) : ControllerBase
 {
     // get recipes with specs and not, get recipe by id, create recipe, edit recipe, delete recipe
     [HttpGet]
@@ -73,9 +75,19 @@ public class RecipesController(IRecipeService recipeService) : ControllerBase
     }
 
     [HttpPost("recipe-like/{id}")]
-    public Task<IActionResult> LikeRecipe(int id)
+    public async Task<IActionResult> LikeRecipe(int id)
     {
+        var userId = User.GetId();
+        await recipeService.AddRecipeToUsersFavoritesAsync(userId, id);
+        return Ok();
+    }
 
+    [HttpPost("recipe-unlike/{id}")]
+    public async Task<IActionResult> UnlikeRecipe(int id)
+    {
+        var userId = User.GetId();
+        await recipeService.RemoveRecipeToUsersFavoritesAsync(userId, id);
+        return Ok();
     }
 
 }

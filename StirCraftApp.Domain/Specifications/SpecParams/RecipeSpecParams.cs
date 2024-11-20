@@ -1,7 +1,6 @@
 ﻿using StirCraftApp.Domain.Enums;
-using StirCraftApp.Domain.Specifications.SpecParams;
 
-namespace StirCraftApp.Domain.Specifications.RecipeSpec;
+namespace StirCraftApp.Domain.Specifications.SpecParams;
 public class RecipeSpecParams : PagingParams
 {
     private string? _recipeName;

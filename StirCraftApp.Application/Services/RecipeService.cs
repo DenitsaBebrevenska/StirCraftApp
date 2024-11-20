@@ -26,7 +26,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
         var spec = new RecipeIncludeAllSpecification();
         var recipe = await unit.Repository<Recipe>()
-            .GetEntityWithSpecAsync(spec, id);
+            .GetByIdAsync(spec, id);
 
         var model = ConvertToDto(recipe!, dtoName);
 
@@ -36,7 +36,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
     public async Task<PaginatedResult> GetRecipesAsync(BaseSpecification<Recipe> spec, string dtoName)
     {
         var recipes = await unit.Repository<Recipe>()
-            .GetAllWithSpecAsync(spec);
+            .GetAllAsync(spec);
 
         var recipeDtos = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
 
@@ -54,7 +54,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         //todo probably different dto to use something for the home carousel
         var spec = new RecipeTopThreeSpecification();
         var recipes = await unit.Repository<Recipe>()
-            .GetAllWithSpecAsync(spec);
+            .GetAllAsync(spec);
 
         var topThree = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
 
@@ -76,7 +76,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         throw new NotImplementedException();
     }
 
-    public async Task AddRecipeToUsersFavorites(string userId, int recipeId)
+    public async Task AddRecipeToUsersFavoritesAsync(string userId, int recipeId)
     {
         var user = await userManager.FindByIdAsync(userId);
 
@@ -85,14 +85,48 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             throw new ArgumentException("The user does not exist.");
         }
 
-        var recipe = await unit.Repository<Recipe>().GetByIdAsync(recipeId);
+        var recipe = await unit.Repository<Recipe>().GetByIdAsync(null, recipeId);
 
         if (recipe == null)
         {
             throw new ArgumentException($"Recipe with id {recipeId} does not exist.");
         }
 
+        if (user.FavoriteRecipes.Any(r => r.RecipeId == recipeId))
+        {
+            throw new ArgumentException($"The user already has that recipe in their favorites.");
+        }
+
         user.FavoriteRecipes.Add(new UserFavoriteRecipe { Recipe = recipe, UserId = userId });
+
+
+    }
+
+    public async Task RemoveRecipeToUsersFavoritesAsync(string userId, int recipeId)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            throw new ArgumentException("The user does not exist.");
+        }
+
+        var recipe = await unit.Repository<Recipe>().GetByIdAsync(null, recipeId);
+
+        if (recipe == null)
+        {
+            throw new ArgumentException($"Recipe with id {recipeId} does not exist.");
+        }
+
+        var userFavoriteRecipe = user.FavoriteRecipes.FirstOrDefault(r => r.RecipeId == recipeId);
+
+        if (userFavoriteRecipe == null)
+        {
+            throw new ArgumentException($"Cannot remove recipe because it is not part of the user`s favorites.");
+        }
+
+
+        user.FavoriteRecipes.Remove(userFavoriteRecipe);
 
     }
 
