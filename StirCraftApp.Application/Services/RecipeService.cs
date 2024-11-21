@@ -48,10 +48,10 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         return paginatedResult;
     }
 
-    public async Task<IEnumerable<object>> GetTopThreeRecipes(string dtoName)
+    public async Task<IEnumerable<object>> GetTopNRecipes(int count, string dtoName)
     {
         //todo probably different dto to use something for the home carousel
-        var spec = new RecipeTopThreeSpecification();
+        var spec = new RecipeTopNSpecification(count);
         var recipes = await unit.Repository<Recipe>()
             .GetAllAsync(spec);
 

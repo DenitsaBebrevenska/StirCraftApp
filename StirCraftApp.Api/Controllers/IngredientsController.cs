@@ -37,7 +37,7 @@ public class IngredientsController(IIngredientService ingredientService) : Contr
     public async Task<IActionResult> AddIngredient(FormIngredientDto ingredientDto)
     {
         await ingredientService.CreateIngredientAsync(ingredientDto);
-        return Ok();
+        return Ok(); //todo return created ingredient
     }
 
     [HttpPut("{id}")]

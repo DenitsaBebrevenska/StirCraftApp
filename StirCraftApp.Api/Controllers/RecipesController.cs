@@ -20,10 +20,10 @@ public class RecipesController(IRecipeService recipeService, ICookingRankService
         return Ok(recipes);
     }
 
-    [HttpGet("top3")]
-    public async Task<IActionResult> GetTopThree()
+    [HttpGet("top/{count}")]
+    public async Task<IActionResult> GetTopNRecipes(int count)
     {
-        var recipes = await recipeService.GetTopThreeRecipes(nameof(BriefRecipeDto));
+        var recipes = await recipeService.GetTopNRecipes(count, nameof(BriefRecipeDto));
         return Ok(recipes);
     }
 

@@ -16,7 +16,14 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
     {
-        //todo check if user already exists or email
+        var isUniqueDisplayName = await IsUniqueDisplayName(userRegisterDto.DisplayName);
+
+        if (!isUniqueDisplayName)
+        {
+            ModelState.AddModelError("DisplayName", "The display name is already taken. Please choose a different one.");
+            return ValidationProblem();
+        }
+
         var user = new AppUser
         {
             DisplayName = userRegisterDto.DisplayName,
