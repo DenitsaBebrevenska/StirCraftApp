@@ -1,5 +1,4 @@
 ﻿using StirCraftApp.Domain.Entities;
-using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Domain.Specifications.CookSpec;
 public class CookTopRankSpecification : BaseSpecification<Cook>

@@ -20,6 +20,8 @@ public interface ISpecification<T>
     bool IsPaginationEnabled { get; }
 
     bool SplitQueryEnabled { get; }
+
+    IQueryable<T> ApplyCriteria(IQueryable<T> query);
 }
 
 public interface ISpecification<T, TResult> : ISpecification<T>

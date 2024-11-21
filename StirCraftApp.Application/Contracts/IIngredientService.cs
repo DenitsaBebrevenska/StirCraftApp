@@ -1,12 +1,12 @@
 ﻿using StirCraftApp.Application.DTOs.IngredientDtos;
+using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
-using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Application.Contracts;
 public interface IIngredientService
 {
     Task<DetailedIngredientDto> GetIngredientByIdAsync(int id);
-    Task<PaginatedResult> GetIngredientsAsync(BaseSpecification<Ingredient> spec);
+    Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec);
 
     Task SuggestIngredient(SuggestIngredientDto ingredient);
 

@@ -13,4 +13,5 @@ public interface IRepository<T> where T : BaseEntity
     void Delete(T entity);
     void Update(T entity);
     Task<bool> ExistsAsync(int id);
+    Task<int> CountAsync(ISpecification<T>? spec);
 }

@@ -5,7 +5,6 @@ using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.CookSpec;
-using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Identity;
 
 namespace StirCraftApp.Application.Services;
@@ -30,7 +29,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         return cookDto;
     }
 
-    public async Task<PaginatedResult> GetCooksAsync(BaseSpecification<Cook> spec, string dtoName)
+    public async Task<PaginatedResult> GetCooksAsync(ISpecification<Cook> spec, string dtoName)
     {
         var cooks = await unit.Repository<Cook>()
             .GetAllAsync(spec);

@@ -1,7 +1,7 @@
 ﻿using StirCraftApp.Domain.Contracts;
 using System.Linq.Expressions;
 
-namespace StirCraftApp.Domain.Specifications.SpecParams;
+namespace StirCraftApp.Domain.Specifications;
 public abstract class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecification<T>
 {
     protected BaseSpecification() : this(null) { }
@@ -14,7 +14,15 @@ public abstract class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) 
     public int Skip { get; private set; }
     public bool IsPaginationEnabled { get; private set; }
     public bool SplitQueryEnabled { get; private set; }
+    public IQueryable<T> ApplyCriteria(IQueryable<T> query)
+    {
+        if (Criteria != null)
+        {
+            query = query.Where(Criteria);
+        }
 
+        return query;
+    }
 
     protected void AddInclude(Expression<Func<T, object>> includeExpression)
     {

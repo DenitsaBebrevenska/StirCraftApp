@@ -6,7 +6,7 @@ public class IngredientFilterSpecification : BaseSpecification<Ingredient>
 {
     public IngredientFilterSpecification(IngredientSpecParams specParams)
         : base(c =>
-            (string.IsNullOrEmpty(specParams.Name) || c.Name.ToLower().Contains(specParams.Name))
+            (string.IsNullOrEmpty(specParams.IngredientName) || c.Name.ToLower().Contains(specParams.IngredientName))
         )
     {
         AddOrderBy(c => c.Name);

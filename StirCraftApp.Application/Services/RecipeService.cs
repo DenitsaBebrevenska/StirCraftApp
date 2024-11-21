@@ -6,7 +6,6 @@ using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
-using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Identity;
 
 namespace StirCraftApp.Application.Services;
@@ -33,7 +32,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         return model;
     }
 
-    public async Task<PaginatedResult> GetRecipesAsync(BaseSpecification<Recipe> spec, string dtoName)
+    public async Task<PaginatedResult> GetRecipesAsync(ISpecification<Recipe> spec, string dtoName)
     {
         var recipes = await unit.Repository<Recipe>()
             .GetAllAsync(spec);

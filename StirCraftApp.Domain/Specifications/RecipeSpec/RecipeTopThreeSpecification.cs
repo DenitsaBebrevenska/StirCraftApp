@@ -1,5 +1,4 @@
 ﻿using StirCraftApp.Domain.Entities;
-using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Domain.Specifications.RecipeSpec;
 public class RecipeTopThreeSpecification : BaseSpecification<Recipe>

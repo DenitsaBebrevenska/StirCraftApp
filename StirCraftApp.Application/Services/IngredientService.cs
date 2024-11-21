@@ -3,7 +3,6 @@ using StirCraftApp.Application.DTOs.IngredientDtos;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
-using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Application.Services;
 public class IngredientService(IUnitOfWork unit) : IIngredientService
@@ -21,16 +20,19 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         return ingredient.ToDetailedIngredientDto();
     }
 
-    public async Task<PaginatedResult> GetIngredientsAsync(BaseSpecification<Ingredient> spec)
+    public async Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec)
     {
         var ingredients = await unit.Repository<Ingredient>()
             .GetAllAsync(spec);
+
+        var count = await unit.Repository<Ingredient>()
+            .CountAsync(spec);
 
         var ingredientDtos = ingredients.Select(i => (object)i.ToDetailedIngredientDto()).ToList();
 
         var paginatedResult = new PaginatedResult(spec.Skip,
             spec.Take,
-            ingredientDtos.Count,
+            count,
             ingredientDtos);
 
         return paginatedResult;

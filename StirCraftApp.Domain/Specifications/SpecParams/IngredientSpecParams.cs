@@ -1,11 +1,11 @@
 ﻿namespace StirCraftApp.Domain.Specifications.SpecParams;
 public class IngredientSpecParams : PagingParams
 {
-    private string? _name;
+    private string? _ingredientName;
 
-    public string Name
+    public string IngredientName
     {
-        get => _name ?? string.Empty;
-        set => _name = value.ToLower();
+        get => _ingredientName ?? string.Empty;
+        set => _ingredientName = value.ToLower();
     }
 }

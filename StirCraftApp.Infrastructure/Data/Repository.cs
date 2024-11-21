@@ -71,6 +71,20 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         return entity is not null;
     }
 
+    public async Task<int> CountAsync(ISpecification<T>? spec)
+    {
+        var query = GetDbSet()
+            .AsQueryable();
+
+        if (spec != null)
+        {
+            query = spec.ApplyCriteria(query);
+        }
+
+        return await query
+            .CountAsync();
+    }
+
 
     private IQueryable<T> ApplySpecification(ISpecification<T> spec)
     {
