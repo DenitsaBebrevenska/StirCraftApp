@@ -5,7 +5,7 @@ public class PagingParams
 
     public int PageIndex { get; set; } = 1;
 
-    private int _pageSize = 10;
+    private int _pageSize = 5;
 
     public int PageSize
     {

@@ -137,14 +137,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
         builder.Entity<ShoppingListRecipeIngredient>()
             .HasQueryFilter(slri => !slri.ShoppingList.IsDeleted && !slri.RecipeIngredient.IsDeleted);
 
-
-        //add filter to ingredients
-        builder.Entity<Ingredient>()
-            .HasQueryFilter(i => i.IsAdminApproved == true);
-        builder.Entity<Ingredient>()
-            .HasIndex(nameof(Ingredient.IsAdminApproved))
-            .HasFilter($"[{nameof(Ingredient.IsAdminApproved)}] = 1");
-
         //add filter to recipes
         builder.Entity<Recipe>()
             .HasQueryFilter(r => r.IsAdminApproved == true);

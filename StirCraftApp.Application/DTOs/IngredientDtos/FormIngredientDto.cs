@@ -12,4 +12,6 @@ public class FormIngredientDto : IDto
     public bool IsSolid { get; set; }
 
     public bool IsAdminApproved { get; set; }
+
+    //collection of recipes
 }
