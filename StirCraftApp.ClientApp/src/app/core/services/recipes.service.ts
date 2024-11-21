@@ -51,8 +51,8 @@ export class RecipesService {
     return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id);
   }
 
-  getTopThreeRecipes(){
-    return this.http.get<CarouselRecipe[]>(this.baseUrl + 'recipes/top3');
+  getTopNRecipes(count: number) {
+    return this.http.get<CarouselRecipe[]>(this.baseUrl + 'recipes/top/' + count);
   }
 
   getDifficultyLevels() {

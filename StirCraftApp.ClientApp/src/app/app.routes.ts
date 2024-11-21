@@ -10,7 +10,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { CooksComponent } from './features/cooks/cooks.component';
 import { CookDetailsComponent } from './features/cooks/cook-details/cook-details.component';
 import { RecipeCookComponent } from './features/recipes/recipe-cook/recipe-cook.component';
-import { LeaderboardComponent } from './features/leaderboard/leaderboard.component';
+import { LeaderboardComponent } from './features/cooks/leaderboard/leaderboard.component';
 import { IngredientsComponent } from './features/ingredients/ingredients.component';
 import { IngredientDetailedComponent } from './features/ingredients/ingredient-detailed/ingredient-detailed.component';
 
