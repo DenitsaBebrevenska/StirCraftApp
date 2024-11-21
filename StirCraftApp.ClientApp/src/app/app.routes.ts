@@ -11,12 +11,16 @@ import { CooksComponent } from './features/cooks/cooks.component';
 import { CookDetailsComponent } from './features/cooks/cook-details/cook-details.component';
 import { RecipeCookComponent } from './features/recipes/recipe-cook/recipe-cook.component';
 import { LeaderboardComponent } from './features/leaderboard/leaderboard.component';
+import { IngredientsComponent } from './features/ingredients/ingredients.component';
+import { IngredientDetailedComponent } from './features/ingredients/ingredient-detailed/ingredient-detailed.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'cooks/top/10', component: LeaderboardComponent},
     {path:'cooks', component: CooksComponent},
     {path:'cooks/:id', component: CookDetailsComponent},
+    {path: 'ingredients', component: IngredientsComponent},
+    {path: 'ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/:id', component: RecipeDetailsComponent},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
