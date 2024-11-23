@@ -19,12 +19,12 @@ import { SuggestIngredientComponent } from './features/ingredients/suggest-ingre
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'cooks/top/10', component: LeaderboardComponent},
-    {path:'cooks', component: CooksComponent},
-    {path:'cooks/:id', component: CookDetailsComponent},
+    {path: 'cooks', component: CooksComponent},
+    {path: 'cooks/:id', component: CookDetailsComponent},
     {path: 'ingredients', component: IngredientsComponent},
-    {path: 'ingredients/create', component: CreateIngredientComponent}, //, canActivate: [authGuard]
+    {path: 'admin/ingredients/create', component: CreateIngredientComponent}, //, canActivate: [authGuard]
     {path: 'ingredients/suggest', component: SuggestIngredientComponent},
-    {path: 'ingredients/:id', component: IngredientDetailedComponent},
+    {path: 'admin/ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready
     {path: 'recipes/:id', component: RecipeDetailsComponent},

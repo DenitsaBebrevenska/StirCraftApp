@@ -2,12 +2,12 @@
 using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Domain.Specifications.RecipeSpec;
-public class RecipeFilterSortIncludeApprovedSpecification : BaseSpecification<Recipe>
+public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
 {
     //a recipe could be filtered by name, difficulty level, categories
     //sort by difficulty lvl, by average rating
-    public RecipeFilterSortIncludeApprovedSpecification(RecipeSpecParams specParams)
-    : base(r => r.IsAdminApproved == true &&
+    public RecipeFilterSortIncludeSpecification(RecipeSpecParams specParams)
+    : base(r =>
         (!specParams.Categories.Any() || r.CategoryRecipes.Any(cr => specParams.Categories.Contains(cr.Category.Name.ToLower()))) &&
        (!specParams.DifficultyLevels.Any() || specParams.DifficultyLevels.Contains(r.DifficultyLevel))
         )

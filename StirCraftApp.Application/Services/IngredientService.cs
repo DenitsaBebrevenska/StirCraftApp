@@ -7,20 +7,21 @@ using StirCraftApp.Domain.Entities;
 namespace StirCraftApp.Application.Services;
 public class IngredientService(IUnitOfWork unit) : IIngredientService
 {
-    public async Task<DetailedIngredientDto> GetIngredientByIdAsync(int id)
+    public async Task<EditFormIngredientDto> GetIngredientByIdAsync(int id, ISpecification<Ingredient>? spec)
     {
         var ingredient = await unit.Repository<Ingredient>()
-            .GetByIdAsync(null, id);
+            .GetByIdAsync(spec, id);
 
         if (ingredient == null)
         {
-            throw new Exception($"Ingredient with id {id} not found");
+            throw new Exception($"Ingredient not found");
         }
 
-        return ingredient.ToDetailedIngredientDto();
+        return ingredient.ToEditFormIngredientDto();
     }
 
-    public async Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec)
+
+    public async Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec, string dtoName)
     {
         var ingredients = await unit.Repository<Ingredient>()
             .GetAllAsync(spec);
@@ -28,7 +29,7 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         var count = await unit.Repository<Ingredient>()
             .CountAsync(spec);
 
-        var ingredientDtos = ingredients.Select(i => (object)i.ToDetailedIngredientDto()).ToList();
+        var ingredientDtos = ingredients.Select(i => ConvertToDto(i, dtoName)).ToList();
 
         var paginatedResult = new PaginatedResult(spec.Skip,
             spec.Take,
@@ -58,13 +59,13 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
                 IsAllergen = ingredient.IsAllergen,
                 NameInPlural = ingredient.NameInPlural,
                 IsSolid = ingredient.IsSolid,
-                IsAdminApproved = ingredient.IsAdminApproved
+                IsAdminApproved = true
             });
 
         await unit.CompleteAsync();
     }
 
-    public async Task UpdateIngredientAsync(FormIngredientDto ingredient, int id)
+    public async Task UpdateIngredientAsync(EditFormIngredientDto ingredientDto, int id)
     {
         var ingredientToUpdate = await unit.Repository<Ingredient>()
             .GetByIdAsync(null, id);
@@ -73,6 +74,13 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         {
             throw new Exception($"Ingredient with id {id} not found");
         }
+
+        if (ingredientDto.Id != id)
+        {
+            throw new Exception("Id mismatch");
+        }
+
+        ingredientToUpdate.UpdateFromDto(ingredientDto);
 
         unit.Repository<Ingredient>()
             .Update(ingredientToUpdate);
@@ -94,5 +102,17 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         unit.Repository<Ingredient>().Delete(ingredientToDelete);
 
         await unit.CompleteAsync();
+    }
+
+    private static object ConvertToDto(Ingredient ingredient, string dtoName)
+    {
+        return dtoName switch
+        {
+            nameof(BriefIngredientDto) => ingredient.ToBriefIngredientDto(),
+            nameof(SuggestIngredientDto) => ingredient.ToSuggestIngredientDto(),
+            nameof(FormIngredientDto) => ingredient.ToFormIngredientDto(),
+            nameof(EditFormIngredientDto) => ingredient.ToEditFormIngredientDto(),
+            _ => throw new ArgumentException("Invalid DTO type")
+        };
     }
 }

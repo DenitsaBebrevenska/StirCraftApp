@@ -1,5 +1,5 @@
 ﻿namespace StirCraftApp.Domain.Specifications.SpecParams;
-public class IngredientSpecParams : PagingParams
+public class IngredientAdminPanelSpecParams : PagingParams
 {
     private string? _ingredientName;
     public string IngredientName
@@ -8,12 +8,13 @@ public class IngredientSpecParams : PagingParams
         set => _ingredientName = value.ToLower();
     }
 
-    private bool? _isAllergen;
+    private bool? _isAdminApproved;
 
-    public bool? IsAllergen
+    public bool? IsAdminApproved
     {
-        get => _isAllergen;
-        set => _isAllergen = value;
+        get => _isAdminApproved;
+        set => _isAdminApproved = value;
     }
+
 
 }

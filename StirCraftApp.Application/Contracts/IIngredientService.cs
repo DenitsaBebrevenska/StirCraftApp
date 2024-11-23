@@ -5,14 +5,14 @@ using StirCraftApp.Domain.Entities;
 namespace StirCraftApp.Application.Contracts;
 public interface IIngredientService
 {
-    Task<DetailedIngredientDto> GetIngredientByIdAsync(int id);
-    Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec);
+    Task<EditFormIngredientDto> GetIngredientByIdAsync(int id, ISpecification<Ingredient>? spec);
+    Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec, string dtoName);
 
     Task SuggestIngredient(SuggestIngredientDto ingredient);
 
     Task CreateIngredientAsync(FormIngredientDto ingredient);
 
-    Task UpdateIngredientAsync(FormIngredientDto ingredient, int id);
+    Task UpdateIngredientAsync(EditFormIngredientDto ingredientDto, int id);
 
     Task DeleteIngredientAsync(int id);
 

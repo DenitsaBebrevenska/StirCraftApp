@@ -13,17 +13,9 @@ public class IngredientsController(IIngredientService ingredientService) : Contr
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientSpecParams specParams)
     {
         var spec = new IngredientFilterAdminApprovedSpecification(specParams);
-        var ingredients = await ingredientService.GetIngredientsAsync(spec);
+        var ingredients = await ingredientService.GetIngredientsAsync(spec, nameof(BriefIngredientDto));
 
         return Ok(ingredients);
-    }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetIngredient(int id)
-    {
-        var ingredient = await ingredientService.GetIngredientByIdAsync(id);
-
-        return Ok(ingredient);
     }
 
     [HttpPost("suggest")]
@@ -31,5 +23,6 @@ public class IngredientsController(IIngredientService ingredientService) : Contr
     {
         await ingredientService.SuggestIngredient(dto);
         return Ok();
+        //todo name check
     }
 }

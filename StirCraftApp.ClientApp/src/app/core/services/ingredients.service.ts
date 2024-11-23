@@ -35,11 +35,11 @@ export class IngredientsService {
   }
 
   getIngredient(id: number) {
-    return this.http.get<IngredientDetailed>(this.baseUrl + 'ingredients/' + id);
+    return this.http.get<IngredientDetailed>(this.baseUrl + 'admin/ingredients/' + id);
   }
 
   createIngredient(ingredient: IngredientCreateForm) {
-    return this.http.post(this.baseUrl + 'ingredients', ingredient);
+    return this.http.post(this.baseUrl + 'admin/ingredients/create', ingredient);
   }
 
   suggestIngredient(ingredient: IngredientSuggest) {

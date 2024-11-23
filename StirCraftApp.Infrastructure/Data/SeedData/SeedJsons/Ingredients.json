@@ -263,13 +263,14 @@
     "IsSolid": true,
     "IsAdminApproved": true
   },
-  {
-    "Id": 34,
-    "Name": "green beans",
-    "IsAllergen": false,
-    "NameInPlural": null,
-    "IsSolid": true
-  },
+    {
+        "Id": 34,
+        "Name": "green beans",
+        "IsAllergen": false,
+        "NameInPlural": null,
+        "IsSolid": true,
+        "IsAdminApproved": true
+    },
   {
     "Id": 35,
     "Name": "zucchini",

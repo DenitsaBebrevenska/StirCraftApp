@@ -10,38 +10,37 @@ namespace StirCraftApp.Api.Controllers;
 public class AdminController(IIngredientService ingredientService) : ControllerBase
 {
 
-    [HttpGet]
-    public async Task<IActionResult> GetIngredients([FromQuery] IngredientSpecParams specParams)
+    [HttpGet("ingredients")]
+    public async Task<IActionResult> GetIngredients([FromQuery] IngredientAdminPanelSpecParams specParams)
     {
-        var spec = new IngredientFilterAdminApprovedSpecification(specParams);
-        var ingredients = await ingredientService.GetIngredientsAsync(spec);
+        var spec = new IngredientFilterAdminPanelSpecification(specParams);
+        var ingredients = await ingredientService.GetIngredientsAsync(spec, nameof(BriefIngredientDto));
 
         return Ok(ingredients);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("ingredients/{id}")]
     public async Task<IActionResult> GetIngredient(int id)
     {
-        var ingredient = await ingredientService.GetIngredientByIdAsync(id);
+        var ingredient = await ingredientService.GetIngredientByIdAsync(id, null);
 
         return Ok(ingredient);
     }
 
-    [HttpPost]
     public async Task<IActionResult> AddIngredient(FormIngredientDto ingredientDto)
     {
         await ingredientService.CreateIngredientAsync(ingredientDto);
         return Ok(); //todo return created ingredient
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateOrApproveIngredient(int id)
+    [HttpPut("ingredients/update/{id}")]
+    public async Task<IActionResult> UpdateOrApproveIngredient(EditFormIngredientDto ingredientDto, int id)
     {
-        //await ingredientService.UpdateIngredientAsync(id);
+        await ingredientService.UpdateIngredientAsync(ingredientDto, id);
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("ingredients/delete/{id}")]
     public async Task<IActionResult> DeleteIngredient(int id)
     {
         await ingredientService.DeleteIngredientAsync(id);

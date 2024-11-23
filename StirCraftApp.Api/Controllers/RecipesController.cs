@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StirCraftApp.Api.Extensions;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Enums;
@@ -15,7 +14,7 @@ public class RecipesController(IRecipeService recipeService, ICookingRankService
     [HttpGet]
     public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams specParams)
     {
-        var spec = new RecipeFilterSortIncludeApprovedSpecification(specParams);
+        var spec = new RecipeFilterSortIncludeSpecification(specParams);
         var recipes = await recipeService.GetRecipesAsync(spec, nameof(SummaryRecipeDto));
         return Ok(recipes);
     }
@@ -42,28 +41,14 @@ public class RecipesController(IRecipeService recipeService, ICookingRankService
         return Ok(cookRecipes);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateRecipe(FormRecipeDto createRecipeDto)
-    {
-        await recipeService.CreateRecipeAsync(createRecipeDto);
-        //todo return created recipe
-        return Ok();
-    }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateRecipe(int id, FormRecipeDto updateRecipeDto)
+    [HttpGet("ingredient/{id}")]
+    public async Task<IActionResult> GetRecipesByIngredient(int id)
     {
-
-        await recipeService.UpdateRecipeAsync(updateRecipeDto);
-        //todo return updated recipe ???
-        return Ok();
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteRecipe(int id)
-    {
-        await recipeService.DeleteRecipeAsync(id);
-        return Ok();
+        //todo implement
+        var spec = new RecipeByCookIdSpecification(id);
+        var cookRecipes = await recipeService.GetRecipesAsync(spec, nameof(CookRecipeSummaryDto));
+        return Ok(cookRecipes);
     }
 
     //implementing that through any service is not necessary, complicates it for no good reason
@@ -72,22 +57,6 @@ public class RecipesController(IRecipeService recipeService, ICookingRankService
     {
         var difficultyLevels = Enum.GetNames(typeof(DifficultyLevel));
         return Ok(difficultyLevels);
-    }
-
-    [HttpPost("recipe-like/{id}")]
-    public async Task<IActionResult> LikeRecipe(int id)
-    {
-        var userId = User.GetId();
-        await recipeService.AddRecipeToUsersFavoritesAsync(userId, id);
-        return Ok();
-    }
-
-    [HttpPost("recipe-unlike/{id}")]
-    public async Task<IActionResult> UnlikeRecipe(int id)
-    {
-        var userId = User.GetId();
-        await recipeService.RemoveRecipeToUsersFavoritesAsync(userId, id);
-        return Ok();
     }
 
 }
