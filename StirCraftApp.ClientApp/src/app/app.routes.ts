@@ -13,6 +13,8 @@ import { RecipeCookComponent } from './features/recipes/recipe-cook/recipe-cook.
 import { LeaderboardComponent } from './features/cooks/leaderboard/leaderboard.component';
 import { IngredientsComponent } from './features/ingredients/ingredients.component';
 import { IngredientDetailedComponent } from './features/ingredients/ingredient-detailed/ingredient-detailed.component';
+import { CreateIngredientComponent } from './features/ingredients/create-ingredient/create-ingredient.component';
+import { SuggestIngredientComponent } from './features/ingredients/suggest-ingredient/suggest-ingredient.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,13 +22,15 @@ export const routes: Routes = [
     {path:'cooks', component: CooksComponent},
     {path:'cooks/:id', component: CookDetailsComponent},
     {path: 'ingredients', component: IngredientsComponent},
+    {path: 'ingredients/create', component: CreateIngredientComponent}, //, canActivate: [authGuard]
+    {path: 'ingredients/suggest', component: SuggestIngredientComponent},
     {path: 'ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
+    {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready
     {path: 'recipes/:id', component: RecipeDetailsComponent},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
-    {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready
     {path: 'not-fount', component: NotFoundComponent},
     {path: 'server-error', component: ServerErrorComponent},
     {path: '**', redirectTo: 'not-found', pathMatch: 'full'}    

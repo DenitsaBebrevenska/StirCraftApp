@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline" class="w-full mb-4">
+  <mat-label>{{ label }}</mat-label>
+  <mat-select [formControl]="control" placeholder="{{ label }}">
+    @for (item of items; track $index) {
+    <mat-option [value]="item.value">
+      {{ item.label }}
+    </mat-option>
+    }
+  </mat-select>
+  @if (control.hasError('required')) {
+  <mat-error>{{ label }} is required</mat-error>
+  }
+</mat-form-field>

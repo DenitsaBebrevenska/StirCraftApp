@@ -60,6 +60,8 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
                 IsSolid = ingredient.IsSolid,
                 IsAdminApproved = ingredient.IsAdminApproved
             });
+
+        await unit.CompleteAsync();
     }
 
     public async Task UpdateIngredientAsync(FormIngredientDto ingredient, int id)

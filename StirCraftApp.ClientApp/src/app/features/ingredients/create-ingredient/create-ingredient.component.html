@@ -1,9 +1,21 @@
 <mat-card class="max-w-lg mx-auto mt- p-8 bg-white">
-  <form [formGroup]="suggestIngredientForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createIngredientForm" (ngSubmit)="onSubmit()">
     <div class="text-center mb-6">
-      <h1 class="text-2xl font-semibold">Suggest ingredient</h1>
+      <h1 class="text-2xl font-semibold">Add ingredient</h1>
     </div>
     <app-text-input label="Name" formControlName="name" />
+    <app-text-input label="Name in plural" formControlName="nameInPlural" />
+    <app-select-option
+      label="Is Allergen"
+      formControlName="isAllergen"
+      [items]="allergenOptions"
+    />
+    <app-select-option
+      label="Is Solid"
+      formControlName="isSolid"
+      [items]="solidOptions"
+    />
+
     @if (validationErrors) {
     <div class="mb-3 p-4 bg-red-100 text-red-600">
       <ul class="list-disc px-3">
@@ -15,11 +27,11 @@
     }
     <button
       mat-flat-button
-      [disabled]="suggestIngredientForm.invalid"
+      [disabled]="createIngredientForm.invalid"
       type="submit"
       class="w-full py-2"
     >
-      Suggest ingredient
+      Create ingredient
     </button>
   </form>
 </mat-card>

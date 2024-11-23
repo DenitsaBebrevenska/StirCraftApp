@@ -55,9 +55,9 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         var recipes = await unit.Repository<Recipe>()
             .GetAllAsync(spec);
 
-        var topThree = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
+        var topRecipes = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
 
-        return topThree;
+        return topRecipes;
     }
 
     public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto)

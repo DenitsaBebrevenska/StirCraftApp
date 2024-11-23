@@ -3,7 +3,11 @@ import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { IngredientParams } from '../../shared/models/ingredientParams';
 import { Pagination } from '../../shared/models/pagination';
-import { Ingredient } from '../../shared/models/ingredientDetailed';
+import { IngredientDetailed } from '../../shared/models/ingredientDetailed';
+import { IngredientCreateForm } from '../../shared/models/ingredientCreateForm';
+import { IngredientShort } from '../../shared/models/ingredientShort';
+import { IngredientSuggest } from '../../shared/models/ingredientSuggest';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +31,18 @@ export class IngredientsService {
     params = params.append('pageIndex', ingredientParams.pageIndex);
     params = params.append('pageSize', ingredientParams.pageSize);
 
-    return this.http.get<Pagination<Ingredient>>(this.baseUrl + 'ingredients', { params });
+    return this.http.get<Pagination<IngredientShort>>(this.baseUrl + 'ingredients', { params });
   }
 
   getIngredient(id: number) {
-    return this.http.get<Ingredient>(this.baseUrl + 'ingredients/' + id);
+    return this.http.get<IngredientDetailed>(this.baseUrl + 'ingredients/' + id);
+  }
+
+  createIngredient(ingredient: IngredientCreateForm) {
+    return this.http.post<void>(this.baseUrl + 'ingredients', ingredient);
+  }
+
+  suggestIngredient(ingredient: any) {
+    return this.http.post<void>(this.baseUrl + 'ingredients/suggest', ingredient);
   }
 }

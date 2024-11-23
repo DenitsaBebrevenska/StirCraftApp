@@ -26,7 +26,7 @@ public class IngredientsController(IIngredientService ingredientService) : Contr
         return Ok(ingredient);
     }
 
-    [HttpPost("/suggest")]
+    [HttpPost("suggest")]
     public async Task<IActionResult> SuggestIngredient([FromQuery] SuggestIngredientDto dto)
     {
         await ingredientService.SuggestIngredient(dto);

@@ -1,8 +1,6 @@
-export type IngredientDetailed = {
-    id: number;
+export type IngredientCreateForm = {
     name: string;
     isAllergen: boolean;
     nameInPlural: string;
     isSolid: boolean;
-    isAdminApproved: boolean;
 }
