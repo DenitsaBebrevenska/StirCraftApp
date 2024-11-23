@@ -7,8 +7,9 @@ using StirCraftApp.Domain.Specifications.SpecParams;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class IngredientsController(IIngredientService ingredientService) : ControllerBase
+public class AdminController(IIngredientService ingredientService) : ControllerBase
 {
+
     [HttpGet]
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientSpecParams specParams)
     {
@@ -26,10 +27,24 @@ public class IngredientsController(IIngredientService ingredientService) : Contr
         return Ok(ingredient);
     }
 
-    [HttpPost("suggest")]
-    public async Task<IActionResult> SuggestIngredient(SuggestIngredientDto dto)
+    [HttpPost]
+    public async Task<IActionResult> AddIngredient(FormIngredientDto ingredientDto)
     {
-        await ingredientService.SuggestIngredient(dto);
+        await ingredientService.CreateIngredientAsync(ingredientDto);
+        return Ok(); //todo return created ingredient
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateOrApproveIngredient(int id)
+    {
+        //await ingredientService.UpdateIngredientAsync(id);
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteIngredient(int id)
+    {
+        await ingredientService.DeleteIngredientAsync(id);
         return Ok();
     }
 }

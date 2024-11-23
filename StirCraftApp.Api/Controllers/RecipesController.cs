@@ -15,7 +15,7 @@ public class RecipesController(IRecipeService recipeService, ICookingRankService
     [HttpGet]
     public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams specParams)
     {
-        var spec = new RecipeFilterSortIncludeSpecification(specParams);
+        var spec = new RecipeFilterSortIncludeApprovedSpecification(specParams);
         var recipes = await recipeService.GetRecipesAsync(spec, nameof(SummaryRecipeDto));
         return Ok(recipes);
     }
