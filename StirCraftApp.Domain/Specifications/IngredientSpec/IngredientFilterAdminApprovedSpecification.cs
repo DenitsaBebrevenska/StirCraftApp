@@ -2,10 +2,10 @@
 using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Domain.Specifications.IngredientSpec;
-public class IngredientFilterSpecification : BaseSpecification<Ingredient>
+public class IngredientFilterAdminApprovedSpecification : BaseSpecification<Ingredient>
 {
-    public IngredientFilterSpecification(IngredientSpecParams specParams)
-        : base(i =>
+    public IngredientFilterAdminApprovedSpecification(IngredientSpecParams specParams)
+        : base(i => i.IsAdminApproved == true &&
             (string.IsNullOrEmpty(specParams.IngredientName) ||
              i.Name.ToLower().Contains(specParams.IngredientName)) &&
             (!specParams.IsAllergen.HasValue ||
