@@ -5,6 +5,7 @@ import { TextInputComponent } from '../../../shared/components/text-input/text-i
 import { IngredientsService } from '../../../core/services/ingredients.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
+import { IngredientSuggest } from '../../../shared/models/ingredientSuggest';
 
 @Component({
   selector: 'app-suggest-ingredient',
@@ -23,19 +24,26 @@ export class SuggestIngredientComponent {
   private snack = inject(SnackbarService);
   private router = inject(Router);
   validationErrors?: string[];
+  dto: IngredientSuggest = {
+    name: ''
+  }
 
   suggestIngredientForm = this.formBuilder.group({
     name: ['', Validators.required]
   });
 
   onSubmit(){
-    this.suggestIngredientForm.reset();
-    this.ingredientsService.suggestIngredient(this.suggestIngredientForm.value).subscribe({
+    this.dto = {
+      name: this.suggestIngredientForm.value.name ?? ''
+    };
+
+    this.ingredientsService.suggestIngredient(this.dto).subscribe({
       next: () => {
         this.snack.success('Successfully suggested an ingredient.');
         this.router.navigateByUrl('/ingredients');
       },
       error: errors => this.validationErrors = errors
   });
+  this.suggestIngredientForm.reset();
   }
 }

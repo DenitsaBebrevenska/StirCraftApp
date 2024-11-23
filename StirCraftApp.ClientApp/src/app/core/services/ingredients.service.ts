@@ -39,10 +39,10 @@ export class IngredientsService {
   }
 
   createIngredient(ingredient: IngredientCreateForm) {
-    return this.http.post<void>(this.baseUrl + 'ingredients', ingredient);
+    return this.http.post(this.baseUrl + 'ingredients', ingredient);
   }
 
-  suggestIngredient(ingredient: any) {
-    return this.http.post<void>(this.baseUrl + 'ingredients/suggest', ingredient);
+  suggestIngredient(ingredient: IngredientSuggest) {
+    return this.http.post(this.baseUrl + 'ingredients/suggest', ingredient);
   }
 }
