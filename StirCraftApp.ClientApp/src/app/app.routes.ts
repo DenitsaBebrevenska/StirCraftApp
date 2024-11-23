@@ -15,6 +15,7 @@ import { IngredientsComponent } from './features/ingredients/ingredients.compone
 import { IngredientDetailedComponent } from './features/ingredients/ingredient-detailed/ingredient-detailed.component';
 import { CreateIngredientComponent } from './features/ingredients/create-ingredient/create-ingredient.component';
 import { SuggestIngredientComponent } from './features/ingredients/suggest-ingredient/suggest-ingredient.component';
+import { UpdateIngredientComponent } from './features/ingredients/update-ingredient/update-ingredient.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -22,8 +23,11 @@ export const routes: Routes = [
     {path: 'cooks', component: CooksComponent},
     {path: 'cooks/:id', component: CookDetailsComponent},
     {path: 'ingredients', component: IngredientsComponent},
-    {path: 'admin/ingredients/create', component: CreateIngredientComponent}, //, canActivate: [authGuard]
     {path: 'ingredients/suggest', component: SuggestIngredientComponent},
+    {path: 'admin/ingredients', component: CreateIngredientComponent},
+    {path: 'admin/ingredients/create', component: CreateIngredientComponent},
+    {path: 'admin/ingredients/update', component: UpdateIngredientComponent},
+    {path: 'admin/ingredients/delete', component: CreateIngredientComponent},//, canActivate: [authGuard]
     {path: 'admin/ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready

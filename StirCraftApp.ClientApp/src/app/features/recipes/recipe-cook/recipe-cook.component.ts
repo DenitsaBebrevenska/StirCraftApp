@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RecipesService } from '../../../core/services/recipes.service';
 import { Pagination } from '../../../shared/models/pagination';
-import { RecipeCook } from '../../../shared/models/recipeCook';
+import { RecipeCook } from '../../../shared/models/recipe/recipeCook';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 

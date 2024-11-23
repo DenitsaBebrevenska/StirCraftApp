@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { IngredientsService } from '../../core/services/ingredients.service';
 import { Pagination } from '../../shared/models/pagination';
-import { IngredientParams } from '../../shared/models/ingredientParams';
+import { IngredientParams } from '../../shared/models/ingredient/ingredientParams';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IngredientShort } from '../../shared/models/ingredientShort';
+import { IngredientShort } from '../../shared/models/ingredient/ingredientShort';
 import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 
 @Component({

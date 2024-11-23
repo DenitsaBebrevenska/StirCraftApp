@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CooksService } from '../../../core/services/cooks.service';
-import { CookRankLeaderBoard } from '../../../shared/models/cookRankLeaderBoard';
+import { CookRankLeaderBoard } from '../../../shared/models/cook/cookRankLeaderBoard';
 
 
 @Component({

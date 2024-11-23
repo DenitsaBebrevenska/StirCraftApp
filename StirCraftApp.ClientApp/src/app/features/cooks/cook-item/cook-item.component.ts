@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CookShort } from '../../../shared/models/cookShort';
+import { CookShort } from '../../../shared/models/cook/cookShort';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit} from '@angular/core';
 import { RecipesService } from '../../core/services/recipes.service';
-import { RecipeShort } from '../../shared/models/recipeShort';
+import { RecipeShort } from '../../shared/models/recipe/recipeShort';
 import { RecipeItemComponent } from "./recipe-item/recipe-item.component";
 import { CategoriesService } from '../../core/services/categories.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatListOption, MatSelectionListChange} from '@angular/material/list';
 import { MatSelectionList } from '@angular/material/list';
-import { RecipeParams } from '../../shared/models/recipeParams';
+import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Pagination } from '../../shared/models/pagination';
 import { FormsModule } from '@angular/forms';

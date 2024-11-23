@@ -5,7 +5,7 @@ import { TextInputComponent } from '../../../shared/components/text-input/text-i
 import { IngredientsService } from '../../../core/services/ingredients.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
-import { IngredientSuggest } from '../../../shared/models/ingredientSuggest';
+import { IngredientSuggest } from '../../../shared/models/ingredient/ingredientSuggest';
 
 @Component({
   selector: 'app-suggest-ingredient',

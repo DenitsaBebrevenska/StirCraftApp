@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { CookParams } from '../../shared/models/cookParams';
-import { CookShort } from '../../shared/models/cookShort';
-import { CookDetailed } from '../../shared/models/cookDetailed';
+import { CookParams } from '../../shared/models/cook/cookParams';
+import { CookShort } from '../../shared/models/cook/cookShort';
+import { CookDetailed } from '../../shared/models/cook/cookDetailed';
 import { Pagination } from '../../shared/models/pagination';
-import { CookRankLeaderBoard } from '../../shared/models/cookRankLeaderBoard';
+import { CookRankLeaderBoard } from '../../shared/models/cook/cookRankLeaderBoard';
 
 @Injectable({
   providedIn: 'root'

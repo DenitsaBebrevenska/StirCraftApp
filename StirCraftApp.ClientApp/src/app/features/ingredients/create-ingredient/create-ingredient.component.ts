@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { MatCard } from '@angular/material/card';
 import { TextInputComponent } from '../../../shared/components/text-input/text-input.component';
 import { SelectOptionComponent } from "../../../shared/components/select-option/select-option.component";
-import { IngredientCreateForm } from '../../../shared/models/ingredientCreateForm';
+import { IngredientCreateForm } from '../../../shared/models/ingredient/ingredientCreateForm';
 
 @Component({
   selector: 'app-create-ingredient',

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RecipeShort } from '../../../shared/models/recipeShort';
+import { RecipeShort } from '../../../shared/models/recipe/recipeShort';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 

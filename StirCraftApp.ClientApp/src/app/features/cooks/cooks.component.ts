@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CooksService } from '../../core/services/cooks.service';
 import { Pagination } from '../../shared/models/pagination';
-import { CookShort } from '../../shared/models/cookShort';
-import { CookParams } from '../../shared/models/cookParams';
+import { CookShort } from '../../shared/models/cook/cookShort';
+import { CookParams } from '../../shared/models/cook/cookParams';
 import { CookItemComponent } from './cook-item/cook-item.component';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';

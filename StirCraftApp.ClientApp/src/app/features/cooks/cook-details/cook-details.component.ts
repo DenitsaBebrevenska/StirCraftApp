@@ -1,10 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RecipesService } from '../../../core/services/recipes.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CooksService } from '../../../core/services/cooks.service';
-import { CookDetailed } from '../../../shared/models/cookDetailed';
+import { CookDetailed } from '../../../shared/models/cook/cookDetailed';
 import { Pagination } from '../../../shared/models/pagination';
-import { RecipeShort } from '../../../shared/models/recipeShort';
+import { RecipeShort } from '../../../shared/models/recipe/recipeShort';
 
 @Component({
   selector: 'app-cook-details',

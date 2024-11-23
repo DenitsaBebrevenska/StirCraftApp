@@ -1,11 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Pagination } from '../../shared/models/pagination';
-import { RecipeShort } from '../../shared/models/recipeShort';
-import { RecipeDetailed } from '../../shared/models/recipeDetailed';
-import { RecipeParams } from '../../shared/models/recipeParams';
+import { RecipeShort } from '../../shared/models/recipe/recipeShort';
+import { RecipeDetailed } from '../../shared/models/recipe/recipeDetailed';
+import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 import { environment } from '../../../environments/environment.development';
-import { RecipeCook } from '../../shared/models/recipeCook';
+import { RecipeCook } from '../../shared/models/recipe/recipeCook';
 import { CarouselRecipe } from '../../shared/models/carouselRecipe';
 
 @Injectable({

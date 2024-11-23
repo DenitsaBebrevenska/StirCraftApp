@@ -27,6 +27,7 @@ public class AdminController(IIngredientService ingredientService) : ControllerB
         return Ok(ingredient);
     }
 
+    [HttpPost("ingredients/create")]
     public async Task<IActionResult> AddIngredient(FormIngredientDto ingredientDto)
     {
         await ingredientService.CreateIngredientAsync(ingredientDto);

@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { IngredientParams } from '../../shared/models/ingredientParams';
+import { IngredientParams } from '../../shared/models/ingredient/ingredientParams';
 import { Pagination } from '../../shared/models/pagination';
-import { IngredientDetailed } from '../../shared/models/ingredientDetailed';
-import { IngredientCreateForm } from '../../shared/models/ingredientCreateForm';
-import { IngredientShort } from '../../shared/models/ingredientShort';
-import { IngredientSuggest } from '../../shared/models/ingredientSuggest';
+import { IngredientDetailed } from '../../shared/models/ingredient/ingredientDetailed';
+import { IngredientCreateForm } from '../../shared/models/ingredient/ingredientCreateForm';
+import { IngredientShort } from '../../shared/models/ingredient/ingredientShort';
+import { IngredientSuggest } from '../../shared/models/ingredient/ingredientSuggest';
 
 
 @Injectable({
