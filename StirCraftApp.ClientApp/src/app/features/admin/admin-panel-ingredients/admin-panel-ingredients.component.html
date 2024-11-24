@@ -1,0 +1,72 @@
+<div class="flex flex-col gap-5">
+  <div class="flex px-10">
+    <form
+      class="relative flex items-center w-full max-w-md mx-4"
+      #searchForm="ngForm"
+      (ngSubmit)="onSearchChange()"
+    >
+      <input
+        type="search"
+        class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg"
+        placeholder="Search by name"
+        name="searchName"
+        [(ngModel)]="ingredientAdminParams.searchName"
+      />
+      <button
+        mat-icon-button
+        type="submit"
+        class="absolute inset-y-0 right-3 top-0.5 flex items-center pl-3"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </form>
+  </div>
+
+  <div class="flex space-x-4">
+    <mat-selection-list
+      class="flex"
+      [multiple]="false"
+      (selectionChange)="onSortChange($event)"
+    >
+      @for (option of filterOptions; track $index) {
+      <mat-list-option
+        class="flex-1"
+        [value]="option.value"
+        [selected]="ingredientAdminParams.isAdminApproved === option.value"
+      >
+        {{ option.name }}
+      </mat-list-option>
+      }
+    </mat-selection-list>
+  </div>
+
+  <ul>
+    @for (ingredient of ingredients?.data; track ingredient.id) {
+    <li>
+      <a routerLink="/admin/ingredients/{{ ingredient.id }}">
+        <div class="flex items-center gap-2">
+          <a
+            class="text-lg font-semibold"
+            routerLink="/admin/ingredients/{{ ingredient.id }}"
+            >{{ ingredient.name }}</a
+          >
+        </div>
+      </a>
+    </li>
+    }
+  </ul>
+</div>
+
+<div>
+  <mat-paginator
+    class="page-paginator"
+    (page)="handlePage($event)"
+    [length]="ingredients?.count"
+    [pageSize]="ingredientAdminParams.pageSize"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="ingredientAdminParams.pageIndex - 1"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

@@ -7,6 +7,8 @@ import { IngredientDetailed } from '../../shared/models/ingredient/ingredientDet
 import { IngredientCreateForm } from '../../shared/models/ingredient/ingredientCreateForm';
 import { IngredientShort } from '../../shared/models/ingredient/ingredientShort';
 import { IngredientSuggest } from '../../shared/models/ingredient/ingredientSuggest';
+import { IngredientAdminParams } from '../../shared/models/ingredient/igredientAdminParams';
+import { IngredientAdminShort } from '../../shared/models/ingredient/ingredientAdminShort';
 
 
 @Injectable({
@@ -34,6 +36,23 @@ export class IngredientsService {
     return this.http.get<Pagination<IngredientShort>>(this.baseUrl + 'ingredients', { params });
   }
 
+  getAdminIngredients(ingredientAdminParams: IngredientAdminParams) {
+    let params = new HttpParams();
+
+    if(ingredientAdminParams.searchName) {
+      params = params.append('ingredientName', ingredientAdminParams.searchName);
+    }
+
+    if(ingredientAdminParams.isAdminApproved){
+      params = params.append('isAdminApproved', ingredientAdminParams.isAdminApproved.toString());
+    }
+
+    params = params.append('pageIndex', ingredientAdminParams.pageIndex);
+    params = params.append('pageSize', ingredientAdminParams.pageSize);
+
+    return this.http.get<Pagination<IngredientAdminShort>>(this.baseUrl + 'admin/ingredients', { params });
+  }
+
   getIngredient(id: number) {
     return this.http.get<IngredientDetailed>(this.baseUrl + 'admin/ingredients/' + id);
   }
@@ -44,5 +63,13 @@ export class IngredientsService {
 
   suggestIngredient(ingredient: IngredientSuggest) {
     return this.http.post(this.baseUrl + 'ingredients/suggest', ingredient);
+  }
+
+  updateIngredient(id: number, ingredient: IngredientDetailed) {
+    return this.http.put(this.baseUrl + 'admin/ingredients/update/' + id, ingredient);
+  }
+
+  deleteIngredient(id: number) {
+  return this.http.delete(this.baseUrl + 'admin/ingredients/delete/' + id);
   }
 }

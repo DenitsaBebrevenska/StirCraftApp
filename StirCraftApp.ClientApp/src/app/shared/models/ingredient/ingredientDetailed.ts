@@ -1,5 +1,5 @@
 export type IngredientDetailed = {
-    id: number;
+    id?: number;
     name: string;
     isAllergen: boolean;
     nameInPlural: string;

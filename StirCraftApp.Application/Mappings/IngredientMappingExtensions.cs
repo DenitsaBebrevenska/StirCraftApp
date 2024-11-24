@@ -40,7 +40,8 @@ public static class IngredientMappingExtensions
             Name = ingredient.Name,
             IsAllergen = ingredient.IsAllergen,
             NameInPlural = ingredient.NameInPlural,
-            IsSolid = ingredient.IsSolid
+            IsSolid = ingredient.IsSolid,
+            IsAdminApproved = ingredient.IsAdminApproved
         };
     }
 

@@ -12,10 +12,12 @@ import { CookDetailsComponent } from './features/cooks/cook-details/cook-details
 import { RecipeCookComponent } from './features/recipes/recipe-cook/recipe-cook.component';
 import { LeaderboardComponent } from './features/cooks/leaderboard/leaderboard.component';
 import { IngredientsComponent } from './features/ingredients/ingredients.component';
-import { IngredientDetailedComponent } from './features/ingredients/ingredient-detailed/ingredient-detailed.component';
-import { CreateIngredientComponent } from './features/ingredients/create-ingredient/create-ingredient.component';
+import { IngredientDetailedComponent } from './features/admin/ingredient-detailed/ingredient-detailed.component';
+import { CreateIngredientComponent } from './features/admin/create-ingredient/create-ingredient.component';
 import { SuggestIngredientComponent } from './features/ingredients/suggest-ingredient/suggest-ingredient.component';
-import { UpdateIngredientComponent } from './features/ingredients/update-ingredient/update-ingredient.component';
+import { AdminPanelIngredientsComponent } from './features/admin/admin-panel-ingredients/admin-panel-ingredients.component';
+import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-ingredient.component';
+
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -24,15 +26,15 @@ export const routes: Routes = [
     {path: 'cooks/:id', component: CookDetailsComponent},
     {path: 'ingredients', component: IngredientsComponent},
     {path: 'ingredients/suggest', component: SuggestIngredientComponent},
-    {path: 'admin/ingredients', component: CreateIngredientComponent},
+    {path: 'admin/ingredients', component: AdminPanelIngredientsComponent},
     {path: 'admin/ingredients/create', component: CreateIngredientComponent},
-    {path: 'admin/ingredients/update', component: UpdateIngredientComponent},
-    {path: 'admin/ingredients/delete', component: CreateIngredientComponent},//, canActivate: [authGuard]
+    {path: 'admin/ingredients/edit/:id', component: EditIngredientComponent},//, canActivate: [authGuard]
     {path: 'admin/ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready
     {path: 'recipes/:id', component: RecipeDetailsComponent},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
+    {path: 'recipes/ingredient/:id', component: RecipeCookComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
     {path: 'not-fount', component: NotFoundComponent},
