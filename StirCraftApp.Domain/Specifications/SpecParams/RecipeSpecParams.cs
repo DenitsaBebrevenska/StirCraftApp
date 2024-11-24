@@ -5,6 +5,8 @@ public class RecipeSpecParams : PagingParams
 {
     private string? _recipeName;
 
+    private int? _ingredientId;
+
     private List<string> _categories = [];
 
     private List<DifficultyLevel> _difficultyLevels = [];
@@ -12,7 +14,7 @@ public class RecipeSpecParams : PagingParams
     public string RecipeName
     {
         get => _recipeName ?? string.Empty;
-        set => _recipeName = value.ToLower();
+        set => _recipeName = value;
     }
 
     public List<string> Categories
@@ -34,6 +36,11 @@ public class RecipeSpecParams : PagingParams
             .ToList();
     }
 
+    public int? IngredientId
+    {
+        get => _ingredientId;
+        set => _ingredientId = value;
+    }
 
     public string? Sort { get; set; }
 

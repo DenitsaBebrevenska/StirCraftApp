@@ -37,6 +37,10 @@ export class RecipesService {
       params = params.append('recipeName', recipeParams.searchName);
     }
 
+    if(recipeParams.ingredientId){
+      params = params.append('ingredientId', recipeParams.ingredientId);
+    }
+
     params = params.append('pageIndex', recipeParams.pageIndex);
     params = params.append('pageSize', recipeParams.pageSize);
 
@@ -49,6 +53,10 @@ export class RecipesService {
 
   getCookRecipes(id: number){
     return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id);
+  }
+
+  getIngredientRecipes(id: number){
+    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes/ingredient/' + id);
   }
 
   getTopNRecipes(count: number) {

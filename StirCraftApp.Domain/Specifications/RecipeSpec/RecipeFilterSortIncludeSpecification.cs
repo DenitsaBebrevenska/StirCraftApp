@@ -8,6 +8,9 @@ public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
     //sort by difficulty lvl, by average rating
     public RecipeFilterSortIncludeSpecification(RecipeSpecParams specParams)
     : base(r =>
+        r.IsAdminApproved == true &&
+        (!specParams.IngredientId.HasValue || r.RecipeIngredients.Any(ri => ri.IngredientId == specParams.IngredientId)) &&
+        (string.IsNullOrEmpty(specParams.RecipeName) || r.Name.ToLower().Contains(specParams.RecipeName.ToLower())) &&
         (!specParams.Categories.Any() || r.CategoryRecipes.Any(cr => specParams.Categories.Contains(cr.Category.Name.ToLower()))) &&
        (!specParams.DifficultyLevels.Any() || specParams.DifficultyLevels.Contains(r.DifficultyLevel))
         )
@@ -18,6 +21,7 @@ public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
         AddInclude(r => r.Cook);
         AddInclude(r => r.CategoryRecipes);
         AddIncludeStrings("CategoryRecipes.Category");
+        AddIncludeStrings("RecipeIngredients.Ingredient");
 
 
         //todo check if pagination is well implemented after more recipes are accumulated

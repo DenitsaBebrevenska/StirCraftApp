@@ -5,9 +5,11 @@ import { IngredientParams } from '../../shared/models/ingredient/ingredientParam
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IngredientShort } from '../../shared/models/ingredient/ingredientShort';
 import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
+import { RecipesService } from '../../core/services/recipes.service';
+import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 
 @Component({
   selector: 'app-ingredients',
@@ -16,7 +18,6 @@ import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angula
     MatPaginator,
     MatIcon,
     FormsModule,
-    RouterLink,
     MatSelectionList,
     MatListOption
   ],
@@ -26,6 +27,8 @@ import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angula
 
 export class IngredientsComponent implements OnInit {
   private ingredientsService = inject(IngredientsService);
+  private recipesService = inject(RecipesService);
+  private router = inject(Router);
   ingredients?: Pagination<IngredientShort>;
   filterOptions = [
     {name: "All", value: ""},
@@ -70,5 +73,19 @@ export class IngredientsComponent implements OnInit {
     this.ingredientParams.pageIndex = event.pageIndex + 1;
     this.ingredientParams.pageSize = event.pageSize;
     this.getIngredients();
+  }
+
+  onClickIngredientName(id: number){
+   const params: RecipeParams = new RecipeParams();
+   params.ingredientId = id;
+   
+    this.recipesService.getRecipes(params)
+    .subscribe({
+      next: (response) => {
+        console.log(response.data);
+        this.router.navigate(['/recipes'], { queryParams: params });
+      },
+      error: err => console.error(err)
+    });
   }
 }

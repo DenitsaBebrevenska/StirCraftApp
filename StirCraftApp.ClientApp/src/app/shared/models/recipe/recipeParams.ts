@@ -5,4 +5,5 @@ export class RecipeParams {
   categories: string[] = [];
   difficultyLevels: string[] = [];
   sort = 'default';
+  ingredientId?: number;
 }

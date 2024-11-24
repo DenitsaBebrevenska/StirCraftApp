@@ -17,6 +17,7 @@ import { CreateIngredientComponent } from './features/admin/create-ingredient/cr
 import { SuggestIngredientComponent } from './features/ingredients/suggest-ingredient/suggest-ingredient.component';
 import { AdminPanelIngredientsComponent } from './features/admin/admin-panel-ingredients/admin-panel-ingredients.component';
 import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-ingredient.component';
+import { RecipeIngredientComponent } from './features/recipes/recipe-ingredient/recipe-ingredient.component';
 
 
 export const routes: Routes = [
@@ -34,7 +35,7 @@ export const routes: Routes = [
     {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready
     {path: 'recipes/:id', component: RecipeDetailsComponent},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
-    {path: 'recipes/ingredient/:id', component: RecipeCookComponent},
+    {path: 'recipes/ingredient/:id', component: RecipeIngredientComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
     {path: 'not-fount', component: NotFoundComponent},

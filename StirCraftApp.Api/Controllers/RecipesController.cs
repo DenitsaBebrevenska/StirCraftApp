@@ -42,14 +42,12 @@ public class RecipesController(IRecipeService recipeService, ICookingRankService
     }
 
 
-    [HttpGet("ingredient/{id}")]
-    public async Task<IActionResult> GetRecipesByIngredient(int id)
-    {
-        //todo implement
-        var spec = new RecipeByCookIdSpecification(id);
-        var cookRecipes = await recipeService.GetRecipesAsync(spec, nameof(CookRecipeSummaryDto));
-        return Ok(cookRecipes);
-    }
+    //[HttpGet("ingredient/{id}")]
+    //public async Task<IActionResult> GetRecipesByIngredient(int id)
+    //{
+    //    var ingredientRecipes = await recipeService.GetRecipesAsync(spec, nameof(BriefRecipeDto));
+    //    return Ok(ingredientRecipes);
+    //}
 
     //implementing that through any service is not necessary, complicates it for no good reason
     [HttpGet("difficultyLevels")]

@@ -3,7 +3,7 @@
 namespace StirCraftApp.Domain.Specifications.RecipeSpec;
 public class RecipeIncludeAllSpecification : BaseSpecification<Recipe>
 {
-    public RecipeIncludeAllSpecification()
+    public RecipeIncludeAllSpecification() : base(r => r.IsAdminApproved == true)
     {
         AddInclude(r => r.Cook);
         AddInclude(r => r.Comments);

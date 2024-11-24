@@ -3,7 +3,7 @@
 namespace StirCraftApp.Domain.Specifications.RecipeSpec;
 public class RecipeByCookIdSpecification : BaseSpecification<Recipe>
 {
-    public RecipeByCookIdSpecification(int id) : base(r => r.CookId == id)
+    public RecipeByCookIdSpecification(int id) : base(r => r.CookId == id && r.IsAdminApproved == true)
 
     {
         AddInclude(r => r.RecipeImages);
