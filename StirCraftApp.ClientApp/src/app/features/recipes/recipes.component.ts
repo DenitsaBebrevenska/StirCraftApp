@@ -14,7 +14,8 @@ import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Pagination } from '../../shared/models/pagination';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd  } from '@angular/router';
+import { distinctUntilChanged } from 'rxjs';
 
 
 @Component({
@@ -38,6 +39,7 @@ import { ActivatedRoute } from '@angular/router';
 export class RecipesComponent implements OnInit{
   private recipesService = inject(RecipesService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   recipes?: Pagination<RecipeShort>;
   private categoriesService = inject(CategoriesService);
   categories: string[] = [];
@@ -53,15 +55,21 @@ export class RecipesComponent implements OnInit{
   pageSizeOptions = [5, 10, 15, 20];
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.pipe(
+      distinctUntilChanged()
+    ).subscribe(params => {
       const ingredientId = params['ingredientId'];
-  
-      if (ingredientId) {
+      if (!ingredientId) {
+        this.resetState();
+      } else {
         this.recipesParams.ingredientId = +ingredientId;
       }
-  
-      this.initializeRecipes();
+      this.getRecipes();
     });
+  }
+  
+  resetState() {
+    this.recipesParams = new RecipeParams(); 
   }
 
   initializeRecipes() { 

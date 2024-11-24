@@ -78,14 +78,8 @@ export class IngredientsComponent implements OnInit {
   onClickIngredientName(id: number){
    const params: RecipeParams = new RecipeParams();
    params.ingredientId = id;
-   
-    this.recipesService.getRecipes(params)
-    .subscribe({
-      next: (response) => {
-        console.log(response.data);
-        this.router.navigate(['/recipes'], { queryParams: params });
-      },
-      error: err => console.error(err)
-    });
+  
+   this.router.navigate(['/recipes'], { queryParams: params });
+
   }
 }
