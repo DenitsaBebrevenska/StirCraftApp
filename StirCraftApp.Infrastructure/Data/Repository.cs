@@ -54,9 +54,17 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
             .AddAsync(entity);
 
     public void Delete(T entity)
-        => GetDbSet()
-            .Remove(entity);
-
+    {
+        if (entity is ISoftDeletable)
+        {
+            entity.DeletedOnUtc = DateTime.UtcNow;
+            context.Entry(entity).State = EntityState.Deleted;
+        }
+        else
+        {
+            GetDbSet().Remove(entity);
+        }
+    }
     public void Update(T entity)
     {
         GetDbSet().Attach(entity);
