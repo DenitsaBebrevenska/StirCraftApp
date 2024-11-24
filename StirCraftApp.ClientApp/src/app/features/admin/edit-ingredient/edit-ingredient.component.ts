@@ -89,7 +89,7 @@ export class EditIngredientComponent {
 
     this.ingredientsService.updateIngredient(Number(this.id), updatedIngredient).subscribe({
       next: () => {
-        this.snack.success('Successfully added ingredient.');
+        this.snack.success('Successfully updated ingredient.');
         this.router.navigateByUrl('/admin/ingredients');
       },
       error: errors => this.validationErrors = errors

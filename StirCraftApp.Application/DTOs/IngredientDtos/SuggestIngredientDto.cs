@@ -7,6 +7,7 @@ using static Domain.Constants.ValidationErrorMessages;
 
 public class SuggestIngredientDto
 {
+    [Required(ErrorMessage = RequiredValidationErrorMessage)]
     [StringLength(IngredientNameMaxLength, MinimumLength = IngredientNameMinLength,
         ErrorMessage = StringLengthValidationErrorMessage)]
     public required string Name { get; set; }

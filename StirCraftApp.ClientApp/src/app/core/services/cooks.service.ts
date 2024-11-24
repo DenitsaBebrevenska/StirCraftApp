@@ -6,6 +6,7 @@ import { CookShort } from '../../shared/models/cook/cookShort';
 import { CookDetailed } from '../../shared/models/cook/cookDetailed';
 import { Pagination } from '../../shared/models/pagination';
 import { CookRankLeaderBoard } from '../../shared/models/cook/cookRankLeaderBoard';
+import { BecomeCook } from '../../shared/models/cook/becomeCook';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,9 @@ export class CooksService {
 
   getTopTenCooks(){
     return this.http.get<Pagination<CookRankLeaderBoard>>(this.baseUrl + 'cooks/top/10');
+  }
+
+  becomeCook(dto: BecomeCook) {
+    return this.http.post(this.baseUrl + 'cook/become', { about: dto.about });
   }
 }

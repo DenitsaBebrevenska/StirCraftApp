@@ -18,10 +18,12 @@ import { SuggestIngredientComponent } from './features/ingredients/suggest-ingre
 import { AdminPanelIngredientsComponent } from './features/admin/admin-panel-ingredients/admin-panel-ingredients.component';
 import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-ingredient.component';
 import { RecipeIngredientComponent } from './features/recipes/recipe-ingredient/recipe-ingredient.component';
+import { BecomeCookComponent } from './features/cooks/become-cook/become-cook.component';
 
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
+    {path: 'cook/become', component: BecomeCookComponent},
     {path: 'cooks/top/10', component: LeaderboardComponent},
     {path: 'cooks', component: CooksComponent},
     {path: 'cooks/:id', component: CookDetailsComponent},
