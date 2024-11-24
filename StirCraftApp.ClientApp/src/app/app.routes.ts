@@ -19,6 +19,7 @@ import { AdminPanelIngredientsComponent } from './features/admin/admin-panel-ing
 import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-ingredient.component';
 import { RecipeIngredientComponent } from './features/recipes/recipe-ingredient/recipe-ingredient.component';
 import { BecomeCookComponent } from './features/cooks/become-cook/become-cook.component';
+import { ProfilePageComponent } from './features/account/profile-page/profile-page.component';
 
 
 export const routes: Routes = [
@@ -40,6 +41,7 @@ export const routes: Routes = [
     {path: 'recipes/ingredient/:id', component: RecipeIngredientComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
+    {path: 'account/profile', component: ProfilePageComponent},
     {path: 'not-fount', component: NotFoundComponent},
     {path: 'server-error', component: ServerErrorComponent},
     {path: '**', redirectTo: 'not-found', pathMatch: 'full'}    

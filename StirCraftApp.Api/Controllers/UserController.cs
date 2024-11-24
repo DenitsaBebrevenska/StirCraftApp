@@ -5,7 +5,7 @@ using StirCraftApp.Application.Contracts;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class UserController(IRecipeService recipeService) : ControllerBase
+public class UserController(IRecipeService recipeService, IUserService userService) : ControllerBase
 {
 
     [HttpPost("recipe-like/{id}")]
@@ -22,6 +22,14 @@ public class UserController(IRecipeService recipeService) : ControllerBase
         var userId = User.GetId();
         await recipeService.RemoveRecipeToUsersFavoritesAsync(userId, id);
         return Ok();
+    }
+
+    [HttpGet("profile")]
+    public async Task<IActionResult> GetProfile()
+    {
+        var userId = User.GetId();
+        var dto = await userService.GetUserProfileAsync(userId);
+        return Ok(dto);
     }
 
 
