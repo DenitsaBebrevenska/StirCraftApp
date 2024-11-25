@@ -2,15 +2,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StirCraftApp.Api.Extensions;
+using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.UserDtos;
+using StirCraftApp.Infrastructure.Extensions;
 using StirCraftApp.Infrastructure.Identity;
 using System.Security.Claims;
+
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController(SignInManager<AppUser> signInManager) : BaseApiController
+public class AccountController(SignInManager<AppUser> signInManager, ICookService cookService) : BaseApiController
 {
     [AllowAnonymous]
     [HttpPost("register")]
@@ -56,6 +58,7 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
         return Ok();
     }
 
+
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
@@ -79,12 +82,13 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
             {
                 user.DisplayName,
                 user.Email,
+                CookId = await cookService.GetCookId(user.Id),
                 Roles = User.FindFirstValue(ClaimTypes.Role)
             });
     }
 
     [AllowAnonymous]
-    [HttpGet]
+    [HttpGet("auth")]
     public IActionResult GetAuthState()
     {
         return Ok(new { IsAuthenticated = User.Identity?.IsAuthenticated ?? false });

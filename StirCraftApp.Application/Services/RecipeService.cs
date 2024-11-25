@@ -60,6 +60,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         return topRecipes;
     }
 
+
     public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto)
     {
         throw new NotImplementedException();
@@ -137,6 +138,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             nameof(DetailedRecipeDto) => recipe.ToDetailedRecipeDto(userManager),
             nameof(CookRecipeSummaryDto) => recipe.ToCookRecipeSummaryDto(userManager),
             nameof(BriefRecipeDto) => recipe.ToBriefRecipeDto(userManager),
+            nameof(BriefCookRecipeDto) => recipe.ToBriefCookRecipeDto(userManager),
             _ => throw new ArgumentException("Invalid DTO type")
         };
     }

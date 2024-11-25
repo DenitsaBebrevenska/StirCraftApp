@@ -25,3 +25,17 @@
   </mat-card-content>
 </mat-card>
 } }
+
+<div>
+  <mat-paginator
+    class="page-paginator"
+    (page)="handlePage($event)"
+    [length]="recipesCook?.count"
+    [pageSize]="recipeParams.pageSize"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="recipeParams.pageIndex - 1"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

@@ -1,0 +1,51 @@
+<div class="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg">
+  <!-- Header Section -->
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Cook Panel</h1>
+    <button
+      class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+      (click)="createRecipe()"
+    >
+      Create Recipe
+    </button>
+  </div>
+
+  <h2>Your StirCraft Creations:</h2>
+  <!-- Recipes List -->
+  @if(recipes){ @for(recipe of recipes.data; track recipe.id){
+  <mat-card
+    appearance="raised"
+    routerLink="/recipes/{{ recipe.id }}"
+    class="recipe-card flex-col gap-2"
+  >
+    <mat-card-header class="flex-col gap-1">
+      <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
+    </mat-card-header>
+    <div class="image-wrapper">
+      <img
+        class="object-cover rounded-lg"
+        [src]="recipe.mainImageUrl || 'default-image.jpg'"
+        alt="Recipe Image"
+      />
+    </div>
+    <mat-card-content>
+      <p class="font-light">Likes: {{ recipe.likes }}</p>
+      <p class="font-light">Rating: {{ recipe.rating }}</p>
+    </mat-card-content>
+  </mat-card>
+  } }
+</div>
+
+<div>
+  <mat-paginator
+    class="page-paginator"
+    (page)="handlePage($event)"
+    [length]="recipes?.count"
+    [pageSize]="recipeParams.pageSize"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="recipeParams.pageIndex - 1"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

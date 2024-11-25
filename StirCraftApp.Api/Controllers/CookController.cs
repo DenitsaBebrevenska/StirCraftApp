@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StirCraftApp.Api.Extensions;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
+using StirCraftApp.Infrastructure.Extensions;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -43,4 +43,5 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     }
 
     //todo comment, reply, rate, view profile, edit avatar, view liked recipes
+
 }

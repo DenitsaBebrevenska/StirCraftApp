@@ -7,6 +7,7 @@ import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 import { environment } from '../../../environments/environment.development';
 import { RecipeCook } from '../../shared/models/recipe/recipeCook';
 import { CarouselRecipe } from '../../shared/models/carouselRecipe';
+import { RecipeOwn } from '../../shared/models/recipe/recipeOwn';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,10 @@ export class RecipesService {
 
   getCookRecipes(id: number){
     return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id);
+  }
+
+  getOwnRecipes(){
+    return this.http.get<Pagination<RecipeOwn>>(this.baseUrl + 'recipes/own/');
   }
 
   getIngredientRecipes(id: number){

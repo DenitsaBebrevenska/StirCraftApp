@@ -27,7 +27,6 @@ import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 
 export class IngredientsComponent implements OnInit {
   private ingredientsService = inject(IngredientsService);
-  private recipesService = inject(RecipesService);
   private router = inject(Router);
   ingredients?: Pagination<IngredientShort>;
   filterOptions = [

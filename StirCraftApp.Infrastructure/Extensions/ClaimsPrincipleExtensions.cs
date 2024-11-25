@@ -4,7 +4,7 @@ using StirCraftApp.Infrastructure.Identity;
 using System.Security.Authentication;
 using System.Security.Claims;
 
-namespace StirCraftApp.Api.Extensions;
+namespace StirCraftApp.Infrastructure.Extensions;
 
 public static class ClaimsPrincipleExtensions
 {
@@ -45,3 +45,4 @@ public static class ClaimsPrincipleExtensions
         return id;
     }
 }
+

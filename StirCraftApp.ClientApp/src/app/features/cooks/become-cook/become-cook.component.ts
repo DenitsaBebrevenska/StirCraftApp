@@ -35,7 +35,7 @@ export class BecomeCookComponent{
     this.cooksService.becomeCook(this.becomeCookDto).subscribe({
       next: () => {
         this.snack.success('Welcome to StirCraft kitchen!');
-        this.router.navigateByUrl('home'); //todo fix the route
+        this.router.navigateByUrl('/logout'); //force logout to refresh user roles
       },
       error: errors => this.validationErrors = errors
   });

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StirCraftApp.Api.Extensions;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Infrastructure.Extensions;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]

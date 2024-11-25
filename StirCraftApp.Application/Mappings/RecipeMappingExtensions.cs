@@ -21,6 +21,18 @@ public static class RecipeMappingExtensions
         };
     }
 
+    public static BriefCookRecipeDto ToBriefCookRecipeDto(this Recipe recipe, UserManager<AppUser> userManager)
+    {
+        return new BriefCookRecipeDto
+        {
+            Id = recipe.Id,
+            Name = recipe.Name,
+            MainImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
+            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
+            Likes = (uint)userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id))
+        };
+    }
+
     public static CookRecipeSummaryDto ToCookRecipeSummaryDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
         return new CookRecipeSummaryDto

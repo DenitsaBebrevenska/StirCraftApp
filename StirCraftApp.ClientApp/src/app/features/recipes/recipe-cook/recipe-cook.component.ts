@@ -4,6 +4,8 @@ import { Pagination } from '../../../shared/models/pagination';
 import { RecipeCook } from '../../../shared/models/recipe/recipeCook';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { RecipeParams } from '../../../shared/models/recipe/recipeParams';
 
 @Component({
   selector: 'app-recipe-cook',
@@ -12,13 +14,16 @@ import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
     MatCard,
     MatCardHeader,
     MatCardContent,
-    RouterLink
+    RouterLink,
+    MatPaginator
   ],
   templateUrl: './recipe-cook.component.html',
   styleUrl: './recipe-cook.component.scss'
 })
 export class RecipeCookComponent implements OnInit {
-
+  recipeParams = new RecipeParams();
+  pageSizeOptions = [5, 10, 20];
+  
   ngOnInit(): void {
     this.getRecipesCook();
   }
@@ -37,5 +42,11 @@ export class RecipeCookComponent implements OnInit {
         error: err => console.error(err)
       }
     );
+  }
+
+  handlePage(event: PageEvent) {
+    this.recipeParams.pageIndex = event.pageIndex + 1;
+    this.recipeParams.pageSize = event.pageSize;
+    this.getRecipesCook();
   }
 }
