@@ -27,12 +27,37 @@
     >
       Favorite Recipes
     </a>
-    @if (user.isCook) {
     <a
-      routerLink="/cook/panel"
-      class="block text-center bg-green-100 text-green-600 py-2 px-4 rounded hover:bg-green-200"
+      routerLink="/shoppinglists"
+      class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
     >
-      To Cook Panel
+      Shopping Lists
+    </a>
+    @if (user.cookId) {
+    <a
+      class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
+      routerLink="/cook-panel/about"
+    >
+      Change About Me Content
+    </a>
+    <a
+      class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
+      routerLink="/recipes/create"
+    >
+      Create Recipe
+    </a>
+    <a
+      class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
+      routerLink="/recipes/cook/{{ user.cookId }}"
+    >
+      Your StirCraft Creations
+    </a>
+    } @if (user.role === 'Admin') {
+    <a
+      class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
+      routerLink="/admin/"
+    >
+      To Admin Panel
     </a>
     }
   </div>

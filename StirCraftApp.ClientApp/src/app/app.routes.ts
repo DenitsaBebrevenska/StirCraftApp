@@ -20,13 +20,12 @@ import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-i
 import { RecipeIngredientComponent } from './features/recipes/recipe-ingredient/recipe-ingredient.component';
 import { BecomeCookComponent } from './features/cooks/become-cook/become-cook.component';
 import { ProfilePageComponent } from './features/user/profile-page/profile-page.component';
-import { CookPanelComponent } from './features/cook-panel/cook-panel.component';
+
 
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'cook/become', component: BecomeCookComponent},
-    {path: 'cook/panel', component: CookPanelComponent},
     {path: 'cooks/top/10', component: LeaderboardComponent},
     {path: 'cooks', component: CooksComponent},
     {path: 'cooks/:id', component: CookDetailsComponent},

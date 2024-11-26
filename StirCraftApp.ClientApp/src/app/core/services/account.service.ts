@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../../shared/models/user/user';
 import { map } from 'rxjs/operators';
+import { UserInfo } from '../../shared/models/user/userInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class AccountService {
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
-  currentUser = signal<User | null>(null);
+  currentUser = signal<UserInfo | null>(null);
 
  logIn(values: any){
   let params = new HttpParams();
@@ -24,7 +25,7 @@ export class AccountService {
  }
 
  getCurrentUserInfo(){
-  return this.http.get<User>(this.baseUrl + 'account/user-info')
+  return this.http.get<UserInfo>(this.baseUrl + 'account/user-info')
   .pipe(
     map(user => {
       this.currentUser.set(user);
@@ -34,7 +35,9 @@ export class AccountService {
  }
 
  logout(){
+  this.currentUser.set(null);
   return this.http.post(this.baseUrl + 'account/logout', {});
+
  }
 
  getAuthState(){

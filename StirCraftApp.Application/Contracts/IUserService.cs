@@ -3,5 +3,5 @@
 namespace StirCraftApp.Application.Contracts;
 public interface IUserService
 {
-    Task<UserProfileDto> GetUserProfileAsync(string userId);
+    Task<UserInfoDto> GetUserProfileAsync(string userId);
 }

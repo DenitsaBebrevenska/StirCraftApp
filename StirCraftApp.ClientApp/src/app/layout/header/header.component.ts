@@ -17,7 +17,7 @@ import { AccountService } from '../../core/services/account.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent{
   busyService = inject(BusyService);
   accountService = inject(AccountService);
   private router = inject(Router);
@@ -28,6 +28,5 @@ export class HeaderComponent {
         this.accountService.currentUser.set(null);
         this.router.navigateByUrl('/');
     }});
-
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserProfile } from '../../../shared/models/user/userProfile';
-import { UserService } from '../../../core/services/user.service';
 import { RouterLink } from '@angular/router';
+import { AccountService } from '../../../core/services/account.service';
+import { UserInfo } from '../../../shared/models/user/userInfo';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,15 +13,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './profile-page.component.scss'
 })
 export class ProfilePageComponent implements OnInit {
-  private userService = inject(UserService);
-  user: UserProfile | undefined;
+  private accountService = inject(AccountService);
+  user: UserInfo | undefined;
 
   ngOnInit(): void {
     this.loadUser();
   }
 
   loadUser(){
-    this.userService.getUserProfile().subscribe({
+    this.accountService.getCurrentUserInfo().subscribe({
       next: response => this.user = response,
       error: err => console.log(err)
     });

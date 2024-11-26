@@ -4,7 +4,6 @@ using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
-using StirCraftApp.Infrastructure.Extensions;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -40,24 +39,6 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         var spec = new RecipeByCookIdSpecification(id);
         var cookRecipes = await recipeService.GetRecipesAsync(spec, nameof(CookRecipeSummaryDto));
         return Ok(cookRecipes);
-    }
-
-
-    [HttpGet("own")]
-    public async Task<IActionResult> GetCurrentCookRecipes()
-    {
-        var userId = User.GetId();
-        var cookId = await cookService.GetCookId(userId);
-
-        if (cookId == null)
-        {
-            return BadRequest("You are not a cook");
-        }
-
-        var recipes = await recipeService.GetRecipesAsync(new RecipesCurrentCookSpecification((int)cookId, new PagingParams())
-            , nameof(BriefCookRecipeDto));
-
-        return Ok(recipes);
     }
 
     //implementing that through any service is not necessary, complicates it for no good reason
