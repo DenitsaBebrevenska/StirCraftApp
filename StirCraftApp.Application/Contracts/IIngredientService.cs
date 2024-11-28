@@ -6,7 +6,9 @@ namespace StirCraftApp.Application.Contracts;
 public interface IIngredientService
 {
     Task<EditFormIngredientDto> GetIngredientByIdAsync(int id, ISpecification<Ingredient>? spec);
-    Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec, string dtoName);
+    Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient>? spec, string dtoName);
+
+    Task<IList<BriefIngredientDto>> GetIngredientsNotPaged();
 
     Task SuggestIngredient(SuggestIngredientDto ingredient);
 

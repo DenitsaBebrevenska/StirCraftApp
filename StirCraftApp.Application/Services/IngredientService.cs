@@ -21,7 +21,7 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
     }
 
 
-    public async Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient> spec, string dtoName)
+    public async Task<PaginatedResult> GetIngredientsAsync(ISpecification<Ingredient>? spec, string dtoName)
     {
         var ingredients = await unit.Repository<Ingredient>()
             .GetAllAsync(spec);
@@ -38,6 +38,22 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
 
         return paginatedResult;
     }
+
+    public async Task<IList<BriefIngredientDto>> GetIngredientsNotPaged()
+    {
+        var ingredients = await unit.Repository<Ingredient>()
+            .GetAllAsync(null);
+
+        //todo rethink this one
+        var dtos = ingredients
+            .Where(i => i.IsAdminApproved)
+            .OrderBy(i => i.Name)
+            .Select(i => i.ToBriefIngredientDto())
+            .ToList();
+
+        return dtos;
+    }
+
 
     public async Task SuggestIngredient(SuggestIngredientDto ingredient)
     {

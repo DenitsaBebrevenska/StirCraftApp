@@ -18,8 +18,8 @@ import { MatError, MatFormField, MatLabel, MatOption, MatSelect } from '@angular
 })
 export class SelectOptionComponent implements ControlValueAccessor{
   @Input() label = '';
-  @Input() type = 'text';
   @Input() items: { value: any; label: string }[] = [];
+  @Input() multiple = false;
 
   constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;

@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment.development';
 import { RecipeCook } from '../../shared/models/recipe/recipeCook';
 import { CarouselRecipe } from '../../shared/models/carouselRecipe';
 import { RecipeOwn } from '../../shared/models/recipe/recipeOwn';
+import { RecipeCreateForm } from '../../shared/models/recipe/recipeCreateForm';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +69,15 @@ export class RecipesService {
     return this.http.get<CarouselRecipe[]>(this.baseUrl + 'recipes/top/' + count);
   }
 
-  getDifficultyLevels() {
+  createRecipe(recipe: RecipeCreateForm) {
+    return this.http.post(this.baseUrl + 'recipes', recipe);
+  }
+
+  getDifficultyLevels(){
+    return this.http.get<string[]>(this.baseUrl + 'recipes/difficultyLevels');
+  }
+
+  getDifficultyLevelsNames() {
     if (this.difficultyLevels.length > 0) return;
     return this.http.get<string[]>(this.baseUrl + 'recipes/difficultyLevels')
     .subscribe({

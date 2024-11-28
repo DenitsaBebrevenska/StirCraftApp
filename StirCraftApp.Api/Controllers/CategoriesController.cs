@@ -6,10 +6,17 @@ namespace StirCraftApp.Api.Controllers;
 [ApiController]
 public class CategoriesController(ICategoryService categoryService) : ControllerBase
 {
+    [HttpGet("names")]
+    public async Task<ActionResult<List<string>>> GetCategoriesNames()
+    {
+        var categories = await categoryService.GetCategoriesNamesAsync();
+        return Ok(categories);
+    }
+
     [HttpGet]
     public async Task<ActionResult<List<string>>> GetCategories()
     {
-        var categories = await categoryService.GetCategoriesNamesAsync();
+        var categories = await categoryService.GetAll();
         return Ok(categories);
     }
 }

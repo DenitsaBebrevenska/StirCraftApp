@@ -4,6 +4,7 @@ using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
+using StirCraftApp.Infrastructure.Extensions;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -48,5 +49,38 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         var difficultyLevels = Enum.GetNames(typeof(DifficultyLevel));
         return Ok(difficultyLevels);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateRecipe(FormRecipeDto createRecipeDto)
+    {
+        var cookId = await cookService.GetCookId(User.GetId());
+
+        if (cookId == null)
+        {
+            return BadRequest("You need to become a cook to create a recipe");
+        }
+
+        await recipeService.CreateRecipeAsync(createRecipeDto, (int)cookId);
+
+        //todo return created recipe ???
+        return Ok();
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateRecipe(int id, FormRecipeDto updateRecipeDto)
+    {
+
+        await recipeService.UpdateRecipeAsync(updateRecipeDto);
+        //todo return updated recipe ???
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteRecipe(int id)
+    {
+        await recipeService.DeleteRecipeAsync(id);
+        return Ok();
+    }
+
 
 }

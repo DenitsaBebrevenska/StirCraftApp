@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICookingRankService, CookingRankService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<ICookService, CookService>();
+        services.AddScoped<IMeasurementUnitService, MeasurementUnitService>();
 
         return services;
     }

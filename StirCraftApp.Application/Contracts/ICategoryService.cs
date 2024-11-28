@@ -1,5 +1,9 @@
-﻿namespace StirCraftApp.Application.Contracts;
+﻿using StirCraftApp.Application.DTOs.CategoryDtos;
+
+namespace StirCraftApp.Application.Contracts;
 public interface ICategoryService
 {
-    Task<List<string>> GetCategoriesNamesAsync();
+    Task<IList<string>> GetCategoriesNamesAsync();
+
+    Task<IList<CategoryDto>> GetAll();
 }

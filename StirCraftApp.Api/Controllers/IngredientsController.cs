@@ -12,10 +12,15 @@ public class IngredientsController(IIngredientService ingredientService) : Contr
     [HttpGet]
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientSpecParams specParams)
     {
-        var spec = new IngredientFilterAdminApprovedSpecification(specParams);
-        var ingredients = await ingredientService.GetIngredientsAsync(spec, nameof(BriefIngredientDto));
 
-        return Ok(ingredients);
+        var spec = new IngredientFilterAdminApprovedSpecification(specParams);
+        return Ok(await ingredientService.GetIngredientsAsync(spec, nameof(BriefIngredientDto)));
+    }
+
+    [HttpGet("all")]
+    public async Task<IActionResult> GetIngredientsAllNonPaged()
+    {
+        return Ok(await ingredientService.GetIngredientsNotPaged());
     }
 
     [HttpPost("suggest")]

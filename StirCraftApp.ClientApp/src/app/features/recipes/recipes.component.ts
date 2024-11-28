@@ -64,7 +64,7 @@ export class RecipesComponent implements OnInit{
       } else {
         this.recipesParams.ingredientId = +ingredientId;
       }
-      this.getRecipes();
+      this.initializeRecipes();
     });
   }
   
@@ -73,8 +73,8 @@ export class RecipesComponent implements OnInit{
   }
 
   initializeRecipes() { 
-    this.recipesService.getDifficultyLevels();
-    this.categoriesService.getCategories();
+    this.recipesService.getDifficultyLevelsNames();
+    this.categoriesService.getCategoriesNames();
     this.getRecipes();
   }
 

@@ -20,6 +20,7 @@ import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-i
 import { RecipeIngredientComponent } from './features/recipes/recipe-ingredient/recipe-ingredient.component';
 import { BecomeCookComponent } from './features/cooks/become-cook/become-cook.component';
 import { ProfilePageComponent } from './features/user/profile-page/profile-page.component';
+import { CreateRecipeComponent } from './features/recipes/create-recipe/create-recipe.component';
 
 
 
@@ -36,7 +37,7 @@ export const routes: Routes = [
     {path: 'admin/ingredients/edit/:id', component: EditIngredientComponent},//, canActivate: [authGuard]
     {path: 'admin/ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
-    {path: 'recipes/create', component: NotFoundComponent, canActivate: [authGuard]}, //todo swap the component when it's ready
+    {path: 'recipes/create', component: CreateRecipeComponent, canActivate: [authGuard]},
     {path: 'recipes/:id', component: RecipeDetailsComponent},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
     {path: 'recipes/ingredient/:id', component: RecipeIngredientComponent},

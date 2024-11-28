@@ -9,7 +9,7 @@ public interface IRecipeService
     Task<object> GetRecipeByIdAsync(int id, string dtoName);
     Task<PaginatedResult> GetRecipesAsync(ISpecification<Recipe> spec, string dtoName);
     Task<IEnumerable<object>> GetTopNRecipes(int count, string dtoName);
-    Task CreateRecipeAsync(FormRecipeDto createRecipeDto);
+    Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId);
     Task UpdateRecipeAsync(FormRecipeDto updateRecipeDto);
     Task DeleteRecipeAsync(int id);
 

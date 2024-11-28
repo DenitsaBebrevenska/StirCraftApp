@@ -53,6 +53,10 @@ export class IngredientsService {
     return this.http.get<Pagination<IngredientAdminShort>>(this.baseUrl + 'admin/ingredients', { params });
   }
 
+  getAllNonPagedIngredients() {
+    return this.http.get<IngredientShort[]>(this.baseUrl + 'ingredients/all');
+  }
+
   getIngredient(id: number) {
     return this.http.get<IngredientDetailed>(this.baseUrl + 'admin/ingredients/' + id);
   }

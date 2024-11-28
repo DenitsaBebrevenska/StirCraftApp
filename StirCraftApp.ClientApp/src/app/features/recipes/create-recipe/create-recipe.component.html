@@ -1,0 +1,87 @@
+<mat-card class="max-w-screen-xl mx-auto mt-2 p-8 bg-white">
+  <form [formGroup]="createRecipeForm" (ngSubmit)="onSubmit()">
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-semibold">Create recipe</h1>
+    </div>
+    <app-text-input label="Name" formControlName="name" />
+    <h2 class="pb-5">Ingredients:</h2>
+    <div class="mb-3">
+      <div formArrayName="ingredients">
+        @for (ingredient of ingredients.controls; track $index) {
+        <div [formGroupName]="$index">
+          <div class="flex items-center">
+            <app-select-option
+              label="Name"
+              formControlName="id"
+              [items]="ingredientsOptions"
+              [multiple]="false"
+            />
+            <app-text-input
+              label="Quantity"
+              formControlName="quantity"
+              type="number"
+            />
+            <app-select-option
+              label="MeasurementUnit"
+              formControlName="measurementUnitId"
+              [items]="measurementUnitsOptions"
+              [multiple]="false"
+            />
+            <a
+              mat-mini-fab
+              color="warn"
+              (click)="removeIngredientLine($index)"
+              class="ml-2"
+            >
+              <mat-icon>remove</mat-icon>
+            </a>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    <a mat-mini-fab color="primary" (click)="addIngredientLine()">
+      <mat-icon>add</mat-icon>
+    </a>
+    <app-text-area
+      label="Preparation Steps"
+      rows="'50'"
+      [required]="true"
+      formControlName="preparationSteps"
+    ></app-text-area>
+    <app-text-input label="Image 1" formControlName="image1" />
+    <app-text-input label="Image 2" formControlName="image2" />
+    <app-text-input label="Image 3" formControlName="image3" />
+
+    <app-select-option
+      label="Difficulty Level"
+      formControlName="difficultyLevel"
+      [items]="difficultyOptions"
+      [multiple]="false"
+    />
+    <app-select-option
+      label="Categories"
+      formControlName="categories"
+      [items]="categoriesOptions"
+      [multiple]="true"
+    />
+
+    @if (validationErrors) {
+    <div class="mb-3 p-4 bg-red-100 text-red-600">
+      <ul class="list-disc px-3">
+        @for (error of validationErrors; track $index) {
+        <li>{{ error }}</li>
+        }
+      </ul>
+    </div>
+    }
+    <button
+      mat-flat-button
+      [disabled]="createRecipeForm.invalid"
+      type="submit"
+      class="w-full py-2"
+    >
+      Create Recipe
+    </button>
+  </form>
+</mat-card>

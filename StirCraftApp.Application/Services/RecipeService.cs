@@ -4,6 +4,7 @@ using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Infrastructure.Identity;
@@ -61,9 +62,39 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
     }
 
 
-    public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto)
+    public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId)
     {
-        throw new NotImplementedException();
+        var recipe = new Recipe
+        {
+            Name = createRecipeDto.Name,
+            PreparationSteps = createRecipeDto.PreparationSteps,
+            DifficultyLevel = Enum
+                .TryParse(createRecipeDto.DifficultyLevel, true, out DifficultyLevel level) == false ?
+                DifficultyLevel.Easy : level,
+            CookId = cookId,
+            CreatedOn = DateTime.UtcNow,
+            UpdatedOn = DateTime.UtcNow,
+            IsAdminApproved = false,
+            AdminNotes = null,
+            RecipeIngredients = createRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
+            {
+                Id = i.Id,
+                Quantity = i.Quantity,
+                MeasurementUnitId = i.MeasurementUnitId
+            }).ToList(),
+            RecipeImages = createRecipeDto.RecipeImages.Select(i => new RecipeImage
+            {
+                Url = i.Url
+            }).ToList(),
+            CategoryRecipes = createRecipeDto.CategoryRecipes.Select(c => new CategoryRecipe
+            {
+                CategoryId = c.Id
+            }).ToList()
+        };
+
+        await unit.Repository<Recipe>().AddAsync(recipe);
+
+        await unit.CompleteAsync();
     }
 
     public async Task UpdateRecipeAsync(FormRecipeDto updateRecipeDto)
