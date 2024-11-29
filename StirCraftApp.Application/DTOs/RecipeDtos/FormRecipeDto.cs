@@ -1,5 +1,4 @@
 ﻿using StirCraftApp.Application.Contracts;
-using StirCraftApp.Application.DTOs.CategoryDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos.Image;
 using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
 
@@ -16,7 +15,7 @@ public class FormRecipeDto : IDto
 
     public IList<RecipeImageDto> RecipeImages { get; set; } = [];
 
-    public IList<CategoryDto> CategoryRecipes { get; set; } = [];
+    public IList<int> CategoryRecipes { get; set; } = [];
 
 
 }

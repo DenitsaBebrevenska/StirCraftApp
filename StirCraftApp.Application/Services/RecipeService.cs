@@ -78,7 +78,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             AdminNotes = null,
             RecipeIngredients = createRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
             {
-                Id = i.Id,
+                IngredientId = i.IngredientId,
                 Quantity = i.Quantity,
                 MeasurementUnitId = i.MeasurementUnitId
             }).ToList(),
@@ -88,7 +88,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             }).ToList(),
             CategoryRecipes = createRecipeDto.CategoryRecipes.Select(c => new CategoryRecipe
             {
-                CategoryId = c.Id
+                CategoryId = c
             }).ToList()
         };
 

@@ -1,7 +1,7 @@
 import { MeasurementUnit } from "../measurementUnit/measurementUnit";
 
 export type RecipeCreateFormIngredient = {
-    id: number;
+    ingredientId: number;
     quantity?: number;
     measurementUnitId?: number 
 }

@@ -54,7 +54,7 @@ export class CreateRecipeComponent implements OnInit{
   categoriesOptions: { value: number, label: string }[] = [];
   difficultyOptions: { value: string, label: string }[] =[];
   ingredientsOptions: { value: number, label: string }[] = [];
-  measurementUnitsOptions: { value: string | undefined, label: string }[] =[];
+  measurementUnitsOptions: { value: string | null, label: string }[] =[];
 
   ngOnInit(): void {
 
@@ -88,14 +88,14 @@ export class CreateRecipeComponent implements OnInit{
         next: response => {
         this.measurementUnitsOptions = response
         .map(measurementUnit => ({ value: measurementUnit.id.toString(), label: measurementUnit.abbreviation })),
-        this.measurementUnitsOptions.unshift({ value: undefined, label: 'No unit' });},
+        this.measurementUnitsOptions.unshift({ value: null, label: 'No unit' });},
         error: error => console.error(error)
       });
   }
 
   createIngredient(){
     return this.formBuilder.group({
-      id: ['', Validators.required],
+      ingredientId: ['', Validators.required],
       quantity: [null, Validators.min(1)],
       measurementUnitId: [null]
     });
@@ -130,13 +130,12 @@ export class CreateRecipeComponent implements OnInit{
     }
 
     const formValue = this.createRecipeForm.value;
-
     this.recipeDto = {
       name: formValue.name!,
       preparationSteps: formValue.preparationSteps!,
       difficultyLevel: formValue.difficultyLevel!,
       recipeIngredients: formValue.ingredients!.map(ingredient => ({
-        id: +ingredient.id!,
+        ingredientId: +ingredient.ingredientId!,
         quantity: +ingredient.quantity! || undefined,
         measurementUnitId: +ingredient.measurementUnitId! || undefined,
       })),
@@ -145,10 +144,10 @@ export class CreateRecipeComponent implements OnInit{
         { url: formValue.image2! },
         { url: formValue.image3! }
       ].filter(image => image.url), // Exclude empty image URLs
-      categories: formValue.categories!.map((category: number) => ({ id: category }))
+      categoryRecipes: formValue.categories!
   };
 
-    
+
     this.recipesService.createRecipe(this.recipeDto).subscribe({
       next: () => {
         this.snack.success('Successfully added recipe.'); 
@@ -157,6 +156,5 @@ export class CreateRecipeComponent implements OnInit{
       error: errors => this.validationErrors = errors
   });
   }
-
-  
+ 
 }

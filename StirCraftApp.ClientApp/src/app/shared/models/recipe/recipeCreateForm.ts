@@ -1,6 +1,4 @@
 
-import { Category } from "./category";
-import { CategoryId } from "./categoryId";
 import { RecipeCreateFormImage } from "./recipeCreateFormImage";
 import { RecipeCreateFormIngredient } from "./recipeCreateFormIngredient";
 
@@ -10,5 +8,5 @@ export class RecipeCreateForm{
     difficultyLevel: string= '';
     recipeIngredients: RecipeCreateFormIngredient[] = [];
     recipeImages: RecipeCreateFormImage[] = [];
-    categories: CategoryId[] = [];
+    categoryRecipes: number[] = [];
 }
