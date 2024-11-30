@@ -67,7 +67,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id}/edit")]
     public async Task<IActionResult> UpdateRecipe(int id, EditFormRecipeDto updateRecipeDto)
     {
         if (updateRecipeDto.Id != id)
@@ -79,7 +79,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}/delete")]
     public async Task<IActionResult> DeleteRecipe(int id)
     {
         await recipeService.DeleteRecipeAsync(id);

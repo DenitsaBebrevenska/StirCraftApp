@@ -37,7 +37,7 @@ export class RecipeCookComponent implements OnInit {
   getRecipesCook(){
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (!id) return;
-    this.recipesService.getCookRecipes(this.pagingParams, +id).subscribe(
+    this.recipesService.getCookRecipes(+id, this.pagingParams).subscribe(
       {
         next: recipe => this.recipesCook = recipe,
         error: err => console.error(err)

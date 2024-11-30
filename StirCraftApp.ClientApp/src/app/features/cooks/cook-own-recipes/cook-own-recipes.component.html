@@ -1,9 +1,5 @@
 @if(recipes) { @for (recipe of recipes.data; track $index) {
-<mat-card
-  appearance="raised"
-  routerLink="/recipes/{{ recipe.id }}"
-  class="recipe-card flex-col gap-2"
->
+<mat-card appearance="raised" class="recipe-card flex-col gap-2">
   <mat-card-header class="flex-col gap-1">
     @if(recipe.isAdminApproved == false){
     <p class="font-bold italic text-red-500">
@@ -24,6 +20,31 @@
     <p class="font-light">Rating: {{ recipe.rating }}</p>
     <p class="font-light">Likes: {{ recipe.likes }}</p>
   </mat-card-content>
+  <div>
+    <mat-card-actions class="flex-row gap-2">
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/recipes/{{ recipe.id }}"
+      >
+        View Recipe
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        routerLink="/recipes/{{ recipe.id }}/edit"
+      >
+        Edit Recipe
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="openDialog(recipe.id, recipe.name)"
+      >
+        Delete Recipe
+      </button>
+    </mat-card-actions>
+  </div>
 </mat-card>
 } }
 

@@ -41,7 +41,7 @@ export const routes: Routes = [
     {path: 'admin/ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/create', component: CreateRecipeComponent, canActivate: [authGuard]},
-    {path: 'recipes/edit/:id', component: UpdateRecipeComponent, canActivate: [authGuard]},
+    {path: 'recipes/:id /edit', component: UpdateRecipeComponent, canActivate: [authGuard]},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
     {path: 'recipes/ingredient/:id', component: RecipeIngredientComponent},
     {path: 'recipes/:id', component: RecipeDetailsComponent},

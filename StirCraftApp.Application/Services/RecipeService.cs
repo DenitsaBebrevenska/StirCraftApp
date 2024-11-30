@@ -135,7 +135,17 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
     public async Task DeleteRecipeAsync(int id)
     {
-        throw new NotImplementedException();
+        var recipeToDelete = await unit.Repository<Recipe>()
+            .GetByIdAsync(null, id);
+
+        if (recipeToDelete == null)
+        {
+            throw new Exception($"Recipe with id {id} not found");
+        }
+
+        unit.Repository<Recipe>().Delete(recipeToDelete);
+
+        await unit.CompleteAsync();
     }
 
     public async Task AddRecipeToUsersFavoritesAsync(string userId, int recipeId)

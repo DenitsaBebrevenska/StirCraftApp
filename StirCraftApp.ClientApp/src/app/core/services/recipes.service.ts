@@ -74,7 +74,11 @@ export class RecipesService {
   }
 
   updateRecipe(id: number, recipe: RecipeCreateForm) {
-    return this.http.put(this.baseUrl + 'recipes/' + id, recipe);
+    return this.http.put(this.baseUrl + 'recipes/' + id + '/edit', recipe);
+  }
+
+  deleteRecipe(id: number) {
+    return this.http.delete(this.baseUrl + 'recipes/' + id +'/delete');
   }
 
   getDifficultyLevels(){

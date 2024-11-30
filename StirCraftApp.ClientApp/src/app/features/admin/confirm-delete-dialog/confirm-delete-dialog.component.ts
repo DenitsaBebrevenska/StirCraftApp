@@ -19,8 +19,7 @@ export class ConfirmDeleteDialogComponent {
   private router = inject(Router);
   data = inject(MAT_DIALOG_DATA);
 
-  approveDeletion(){
-    this.dialogReference.close(true);
+  approveDeletion(){    this.dialogReference.close(true);
     this.ingredientsService.deleteIngredient(this.data.id).subscribe({
       next: () => {
         this.snack.success('Ingredient deleted successfully');
