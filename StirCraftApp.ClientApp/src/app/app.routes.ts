@@ -19,14 +19,17 @@ import { AdminPanelIngredientsComponent } from './features/admin/admin-panel-ing
 import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-ingredient.component';
 import { RecipeIngredientComponent } from './features/recipes/recipe-ingredient/recipe-ingredient.component';
 import { BecomeCookComponent } from './features/cooks/become-cook/become-cook.component';
-import { ProfilePageComponent } from './features/user/profile-page/profile-page.component';
+import { ProfilePageComponent } from './features/account/profile-page/profile-page.component';
 import { CreateRecipeComponent } from './features/recipes/create-recipe/create-recipe.component';
+import { UpdateRecipeComponent } from './features/recipes/update-recipe/update-recipe.component';
+import { CookOwnRecipesComponent } from './features/cooks/cook-own-recipes/cook-own-recipes.component';
 
 
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'cook/become', component: BecomeCookComponent},
+    {path: 'cook/recipes', component: CookOwnRecipesComponent},
     {path: 'cooks/top/10', component: LeaderboardComponent},
     {path: 'cooks', component: CooksComponent},
     {path: 'cooks/:id', component: CookDetailsComponent},
@@ -38,9 +41,10 @@ export const routes: Routes = [
     {path: 'admin/ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
     {path: 'recipes/create', component: CreateRecipeComponent, canActivate: [authGuard]},
-    {path: 'recipes/:id', component: RecipeDetailsComponent},
+    {path: 'recipes/edit/:id', component: UpdateRecipeComponent, canActivate: [authGuard]},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
     {path: 'recipes/ingredient/:id', component: RecipeIngredientComponent},
+    {path: 'recipes/:id', component: RecipeDetailsComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
     {path: 'account/profile', component: ProfilePageComponent},

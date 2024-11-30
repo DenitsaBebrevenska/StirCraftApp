@@ -55,7 +55,7 @@ public static class RecipeMappingExtensions
             Name = recipe.Name,
             DifficultyLevel = recipe.DifficultyLevel.ToString(),
             MainImageUrl =
-                recipe.RecipeImages.FirstOrDefault()?.Url, //todo should set default image for recipe without image
+                recipe.RecipeImages.FirstOrDefault()?.Url,
             CookName = userManager.Users.FirstOrDefault(u => u.Id == recipe.Cook.UserId)?.DisplayName ?? "",
             Rating = recipe.RecipeRatings.Average(rr => rr.Value).ToString("F2"),
             Likes = userManager
@@ -115,4 +115,20 @@ public static class RecipeMappingExtensions
                 .ToList()
         };
     }
+
+    public static RecipeOwnDto ToRecipeOwnDto(this Recipe recipe, UserManager<AppUser> userManager)
+    {
+        return new RecipeOwnDto
+        {
+            Id = recipe.Id,
+            Name = recipe.Name,
+            MainImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
+            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value).ToString("F2") : "0",
+            Likes = (uint)userManager
+                .Users
+                .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
+            IsAdminApproved = recipe.IsAdminApproved
+        };
+    }
+
 }

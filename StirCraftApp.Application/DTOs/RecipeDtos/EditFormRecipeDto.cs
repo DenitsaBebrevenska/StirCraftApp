@@ -1,13 +1,14 @@
-﻿using StirCraftApp.Application.Contracts;
+﻿using StirCraftApp.Application.DTOs.CategoryDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos.Image;
-using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 
 namespace StirCraftApp.Application.DTOs.RecipeDtos;
-public class FormRecipeDto : IDto
+public class EditFormRecipeDto
 {
+    public int Id { get; set; }
+
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
     [StringLength(RecipeNameMaxLength, MinimumLength = RecipeNameMinLength, ErrorMessage = StringLengthValidationErrorMessage)]
     public required string Name { get; set; }
@@ -19,11 +20,11 @@ public class FormRecipeDto : IDto
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
     public required string DifficultyLevel { get; set; }
 
-    public IList<FormRecipeIngredientDto> RecipeIngredients { get; set; } = [];
+    public IList<EditRecipeFormIngredientDto> RecipeIngredients { get; set; } = [];
 
     public IList<RecipeImageDto> RecipeImages { get; set; } = [];
 
-    public IList<int> CategoryRecipes { get; set; } = [];
+    public IList<CategoryDto> CategoryRecipes { get; set; } = [];
 
 
 }

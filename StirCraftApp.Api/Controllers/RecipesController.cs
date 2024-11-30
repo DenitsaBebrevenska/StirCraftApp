@@ -30,14 +30,15 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRecipe(int id)
     {
-        var recipe = await recipeService.GetRecipeByIdAsync(id, nameof(DetailedRecipeDto));
+        var spec = new RecipeIncludeAllApprovedSpecification();
+        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeDto));
         return Ok(recipe);
     }
 
     [HttpGet("cook/{id}")]
-    public async Task<IActionResult> GetRecipesByCookId(int id)
+    public async Task<IActionResult> GetRecipesByCookId(int id, [FromQuery] PagingParams pagingParams)
     {
-        var spec = new RecipeByCookIdSpecification(id);
+        var spec = new RecipeByCookIdSpecification(pagingParams, id);
         var cookRecipes = await recipeService.GetRecipesAsync(spec, nameof(CookRecipeSummaryDto));
         return Ok(cookRecipes);
     }
@@ -67,11 +68,14 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateRecipe(int id, FormRecipeDto updateRecipeDto)
+    public async Task<IActionResult> UpdateRecipe(int id, EditFormRecipeDto updateRecipeDto)
     {
+        if (updateRecipeDto.Id != id)
+        {
+            return BadRequest("Id in the body does not match the id in the route");
+        }
 
         await recipeService.UpdateRecipeAsync(updateRecipeDto);
-        //todo return updated recipe ???
         return Ok();
     }
 

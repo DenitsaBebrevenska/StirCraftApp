@@ -4,4 +4,5 @@ export type RecipeOwn = {
     mainImageUrl?: string;
     likes: number;
     rating: number;
+    isAdminApproved: boolean;
 }

@@ -1,3 +1,4 @@
+import { Category } from "./category";
 import { RecipeComment } from "./recipeComments";
 import { RecipeImage } from "./recipeImage";
 import { RecipeIngredient } from "./recipeIngredient";
@@ -14,6 +15,6 @@ export type RecipeDetailed = {
     images: RecipeImage[];
     rating: number;
     likes: number;
-    categories: string[];
+    categories: Category[];
     comments: RecipeComment[]
 }

@@ -14,7 +14,7 @@ namespace StirCraftApp.Application.Services;
 public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) : IRecipeService
 {
     //todo handle exceptions better
-    public async Task<object> GetRecipeByIdAsync(int id, string dtoName)
+    public async Task<object> GetRecipeByIdAsync(ISpecification<Recipe>? spec, int id, string dtoName)
     {
         var recipeIsFound = await unit.Repository<Recipe>()
             .ExistsAsync(id);
@@ -24,7 +24,6 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             throw new Exception("Recipe not found");
         }
 
-        var spec = new RecipeIncludeAllSpecification();
         var recipe = await unit.Repository<Recipe>()
             .GetByIdAsync(spec, id);
 
@@ -64,6 +63,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
     public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId)
     {
+        //todo add mapping extension for this
         var recipe = new Recipe
         {
             Name = createRecipeDto.Name,
@@ -97,9 +97,40 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         await unit.CompleteAsync();
     }
 
-    public async Task UpdateRecipeAsync(FormRecipeDto updateRecipeDto)
+    public async Task UpdateRecipeAsync(EditFormRecipeDto updateRecipeDto)
     {
-        throw new NotImplementedException();
+        var recipe = await unit.Repository<Recipe>()
+            .GetByIdAsync(null, updateRecipeDto.Id);
+
+        if (recipe == null)
+        {
+            throw new ArgumentException("Recipe not found");
+        }
+
+        recipe.Name = updateRecipeDto.Name;
+        recipe.PreparationSteps = updateRecipeDto.PreparationSteps;
+        recipe.DifficultyLevel = Enum
+            .TryParse(updateRecipeDto.DifficultyLevel, true, out DifficultyLevel level) == false
+            ? DifficultyLevel.Easy
+            : level;
+        recipe.UpdatedOn = DateTime.UtcNow;
+        recipe.RecipeIngredients = updateRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
+        {
+            IngredientId = i.IngredientId,
+            Quantity = i.Quantity,
+            MeasurementUnitId = i.MeasurementUnitId
+        }).ToList();
+        recipe.RecipeImages = updateRecipeDto.RecipeImages.Select(i => new RecipeImage
+        {
+            Url = i.Url
+        }).ToList();
+        recipe.CategoryRecipes = updateRecipeDto.CategoryRecipes.Select(c => new CategoryRecipe
+        {
+            CategoryId = c.Id
+        }).ToList();
+
+        unit.Repository<Recipe>().Update(recipe);
+        await unit.CompleteAsync();
     }
 
     public async Task DeleteRecipeAsync(int id)
@@ -170,6 +201,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             nameof(CookRecipeSummaryDto) => recipe.ToCookRecipeSummaryDto(userManager),
             nameof(BriefRecipeDto) => recipe.ToBriefRecipeDto(userManager),
             nameof(BriefCookRecipeDto) => recipe.ToBriefCookRecipeDto(userManager),
+            nameof(RecipeOwnDto) => recipe.ToRecipeOwnDto(userManager),
             _ => throw new ArgumentException("Invalid DTO type")
         };
     }

@@ -2,10 +2,9 @@
 using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Domain.Specifications.RecipeSpec;
-public class RecipeByCookIdSpecification : BaseSpecification<Recipe>
+public class RecipesByCurrentCookSpecification : BaseSpecification<Recipe>
 {
-    public RecipeByCookIdSpecification(PagingParams pagingParams, int id) : base(r => r.CookId == id && r.IsAdminApproved == true)
-
+    public RecipesByCurrentCookSpecification(PagingParams pagingParams, int cookId) : base(r => r.CookId == cookId)
     {
         AddInclude(r => r.RecipeImages);
         AddInclude(r => r.CategoryRecipes);

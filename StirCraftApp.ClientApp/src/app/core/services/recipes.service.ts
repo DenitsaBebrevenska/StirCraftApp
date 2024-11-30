@@ -9,6 +9,7 @@ import { RecipeCook } from '../../shared/models/recipe/recipeCook';
 import { CarouselRecipe } from '../../shared/models/carouselRecipe';
 import { RecipeOwn } from '../../shared/models/recipe/recipeOwn';
 import { RecipeCreateForm } from '../../shared/models/recipe/recipeCreateForm';
+import { PagingParams } from '../../shared/models/pagingParams';
 
 @Injectable({
   providedIn: 'root'
@@ -53,12 +54,11 @@ export class RecipesService {
     return this.http.get<RecipeDetailed>(this.baseUrl + 'recipes/' + id);
   }
 
-  getCookRecipes(id: number){
-    return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id);
-  }
-
-  getOwnRecipes(){
-    return this.http.get<Pagination<RecipeOwn>>(this.baseUrl + 'recipes/own/');
+  getCookRecipes( id: number, pagingParams: PagingParams){
+    let params = new HttpParams();
+    params = params.append('pageIndex', pagingParams.pageIndex);
+    params = params.append('pageSize', pagingParams.pageSize);
+    return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id, {params}); 
   }
 
   getIngredientRecipes(id: number){
@@ -71,6 +71,10 @@ export class RecipesService {
 
   createRecipe(recipe: RecipeCreateForm) {
     return this.http.post(this.baseUrl + 'recipes', recipe);
+  }
+
+  updateRecipe(id: number, recipe: RecipeCreateForm) {
+    return this.http.put(this.baseUrl + 'recipes/' + id, recipe);
   }
 
   getDifficultyLevels(){

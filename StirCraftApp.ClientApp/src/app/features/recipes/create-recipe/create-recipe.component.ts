@@ -12,9 +12,6 @@ import { TextAreaComponent } from "../../../shared/components/text-area/text-are
 import { Category } from '../../../shared/models/recipe/category';
 import { IngredientsService } from '../../../core/services/ingredients.service';
 import { MatIcon } from '@angular/material/icon';
-import { RecipeIngredient } from '../../../shared/models/recipe/recipeIngredient';
-import { RecipeCreateFormIngredient } from '../../../shared/models/recipe/recipeCreateFormIngredient';
-import { MatDialog } from '@angular/material/dialog';
 import { MeasurementUnitsService } from '../../../core/services/measurement-units.service';
 import { MeasurementUnitParams } from '../../../shared/models/measurementUnit/measurementUnitParams';
 import { IngredientShort } from '../../../shared/models/ingredient/ingredientShort';

@@ -1,9 +1,9 @@
 ﻿using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Domain.Specifications.RecipeSpec;
-public class RecipeIncludeAllSpecification : BaseSpecification<Recipe>
+public class RecipeIncludeAllApprovedSpecification : BaseSpecification<Recipe>
 {
-    public RecipeIncludeAllSpecification() : base()
+    public RecipeIncludeAllApprovedSpecification() : base(r => r.IsAdminApproved == true)
     {
         AddInclude(r => r.Cook);
         AddInclude(r => r.Comments);

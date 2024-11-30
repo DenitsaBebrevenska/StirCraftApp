@@ -6,4 +6,5 @@ export type RecipeCook = {
     rating: number;
     likes: number;
     categories: string[];
+    isAdminApproved: boolean;
 }
