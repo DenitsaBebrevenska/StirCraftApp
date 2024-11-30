@@ -3,6 +3,7 @@ using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using StirCraftApp.Domain.Specifications.CookSpec;
 using StirCraftApp.Infrastructure.Identity;
 using static StirCraftApp.Domain.Constants.RoleConstants;
 
@@ -46,4 +47,17 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         }
     }
 
+    public async Task<bool> CookIsTheRecipeOwner(int cookId, int recipeId)
+    {
+        var spec = new CookIncludeAllSpecification();
+        var cookEntity = await unit.Repository<Cook>()
+            .GetByIdAsync(spec, cookId);
+
+        if (cookEntity == null)
+        {
+            throw new Exception($"Cook Id not found.");
+        }
+
+        return cookEntity.Recipes.Any(r => r.Id == recipeId);
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using StirCraftApp.Application.DTOs.CategoryDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos.Image;
+using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
@@ -20,7 +21,7 @@ public class EditFormRecipeDto
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
     public required string DifficultyLevel { get; set; }
 
-    public IList<EditRecipeFormIngredientDto> RecipeIngredients { get; set; } = [];
+    public IList<FormRecipeIngredientDto> RecipeIngredients { get; set; } = [];
 
     public IList<RecipeImageDto> RecipeImages { get; set; } = [];
 

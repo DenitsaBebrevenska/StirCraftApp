@@ -23,6 +23,7 @@ import { ProfilePageComponent } from './features/account/profile-page/profile-pa
 import { CreateRecipeComponent } from './features/recipes/create-recipe/create-recipe.component';
 import { UpdateRecipeComponent } from './features/recipes/update-recipe/update-recipe.component';
 import { CookOwnRecipesComponent } from './features/cooks/cook-own-recipes/cook-own-recipes.component';
+import { CookOwnRecipeComponent } from './features/recipes/cook-own-recipe/cook-own-recipe.component';
 
 
 
@@ -30,6 +31,7 @@ export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'cook/become', component: BecomeCookComponent},
     {path: 'cook/recipes', component: CookOwnRecipesComponent},
+    {path: 'cook/recipes/:id', component: CookOwnRecipeComponent},
     {path: 'cooks/top/10', component: LeaderboardComponent},
     {path: 'cooks', component: CooksComponent},
     {path: 'cooks/:id', component: CookDetailsComponent},

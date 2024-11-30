@@ -5,4 +5,6 @@ public interface ICookService
 {
     Task<int?> GetCookId(string userId);
     Task CreateCookAsync(BecomeCookDto dto, string userId);
+
+    Task<bool> CookIsTheRecipeOwner(int cookId, int recipeId);
 }

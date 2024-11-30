@@ -1,0 +1,78 @@
+@if (recipe) {
+<section class="p-10 bg-transparent rounded-lg shadow-md">
+  <article class="flex flex-col items-center">
+    <!-- Recipe Title and Cook Info -->
+    <div class="text-center">
+      <h1 class="text-4xl font-bold text-primary mb-2">{{ recipe.name }}</h1>
+      <h2 class="text-lg font-medium text-secondary">
+        By: {{ recipe.cookName }}
+      </h2>
+      <p class="text-sm text-gray-600">Created on: {{ recipe.createdOn }}</p>
+      <p class="text-sm text-gray-600 mb-4">
+        Last updated on: {{ recipe.updatedOn }}
+      </p>
+    </div>
+
+    <!-- Recipe Details -->
+    <div class="flex flex-col items-center mb-6">
+      @for(image of recipe.images; track image.id) {
+      <img
+        class="w-1/2 h-auto rounded-md shadow-lg"
+        [src]="image.url || 'default-image.jpg'"
+        alt="Recipe Image"
+      />
+      }
+      <p class="text-lg mt-4">
+        <strong>Difficulty:</strong> {{ recipe.difficultyLevel }}
+      </p>
+      <p class="text-lg"><strong>Rating:</strong> {{ recipe.rating }} ⭐</p>
+      <p class="text-lg"><strong>Likes:</strong> {{ recipe.likes }} ❤️</p>
+    </div>
+
+    <!-- Categories -->
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold text-primary mb-2">Categories:</h3>
+      <ul class="flex flex-wrap gap-2 list-disc">
+        @for (category of recipe.categories; track $index) {
+        <li class="bg-primary py-1 px-3 rounded-md text-lg">
+          {{ category }}
+        </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Ingredients and preparation -->
+    <div class="flex gap-5">
+      <div class="mb-6 w-auto">
+        <h3 class="text-xl font-semibold text-primary mb-2">Ingredients:</h3>
+        <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-md">
+          @for (ingredient of recipe.ingredients; track $index) {
+          <li class="mb-1">
+            {{ ingredient.name }}
+            @if(ingredient.quantity){
+            <span>: {{ ingredient.quantity }}</span>
+            {{ ingredient.measurementUnitName }}
+            }
+          </li>
+          }
+        </ul>
+      </div>
+
+      <div class="mb-6 w-1/2">
+        <h3 class="text-xl font-semibold text-primary mb-2">
+          Preparation Steps:
+        </h3>
+        <p class="bg-white p-4 rounded-lg shadow-md leading-relaxed">
+          {{ recipe.preparationSteps }}
+        </p>
+      </div>
+    </div>
+  </article>
+  <!-- Admin notes -->
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-primary mb-2">Admin Notes:</h1>
+    <p class="text-sm text-gray-600">{{ recipe.adminNotes }}</p>
+  </div>
+</section>
+
+}

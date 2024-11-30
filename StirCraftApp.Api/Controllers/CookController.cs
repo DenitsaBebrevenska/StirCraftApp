@@ -37,6 +37,26 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok(cookRecipes);
     }
 
+    [HttpGet("recipes/{id}")]
+    public async Task<IActionResult> GetCookOwnRecipeById(int id)
+    {
+        var cookId = await cookService.GetCookId(User.GetId());
+
+        if (cookId == null)
+        {
+            return NotFound();
+        }
+
+        if (await cookService.CookIsTheRecipeOwner((int)cookId, id) == false)
+        {
+            return Unauthorized();
+        }
+
+        var spec = new RecipeIncludeAllSpecification();
+
+        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeAdminNotesDto));
+        return Ok(recipe);
+    }
     //todo comment, reply, rate, view profile, edit avatar, view liked recipes
 
 }

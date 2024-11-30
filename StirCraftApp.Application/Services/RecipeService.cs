@@ -212,6 +212,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             nameof(BriefRecipeDto) => recipe.ToBriefRecipeDto(userManager),
             nameof(BriefCookRecipeDto) => recipe.ToBriefCookRecipeDto(userManager),
             nameof(RecipeOwnDto) => recipe.ToRecipeOwnDto(userManager),
+            nameof(DetailedRecipeAdminNotesDto) => recipe.ToDetailedRecipeAdminNotesDto(userManager),
             _ => throw new ArgumentException("Invalid DTO type")
         };
     }

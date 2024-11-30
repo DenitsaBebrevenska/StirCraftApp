@@ -6,6 +6,7 @@ import { RecipeShort } from '../../shared/models/recipe/recipeShort';
 import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 import { RecipeOwn } from '../../shared/models/recipe/recipeOwn';
 import { PagingParams } from '../../shared/models/pagingParams';
+import { RecipeOwnDetailed } from '../../shared/models/recipe/recipeOwnDetailed';
 
 
 @Injectable({
@@ -25,5 +26,9 @@ export class CookService implements OnInit{
     params = params.append('pageSize', pagingParams.pageSize);
 
     return this.http.get<Pagination<RecipeOwn>>(this.baseUrl + 'cook/recipes', {params});
+  }
+
+  getCookOwnRecipe(id: number){
+    return this.http.get<RecipeOwnDetailed>(this.baseUrl + 'cook/recipes/' + id);
   }
 }
