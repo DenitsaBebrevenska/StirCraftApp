@@ -1,15 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using StirCraftApp.Application.DTOs.CategoryDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos.Comment;
 using StirCraftApp.Application.DTOs.RecipeDtos.Image;
 using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
 using StirCraftApp.Application.DTOs.RecipeDtos.Reply;
 using StirCraftApp.Domain.Entities;
+using StirCraftApp.Domain.Enums;
+using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Infrastructure.Identity;
 
 namespace StirCraftApp.Application.Mappings;
 public static class RecipeMappingExtensions
 {
+
     public static BriefRecipeDto ToBriefRecipeDto(this Recipe recipe, UserManager<AppUser> userManager)
     {
         return new BriefRecipeDto
@@ -145,12 +149,14 @@ public static class RecipeMappingExtensions
             UpdatedOn = recipe.UpdatedOn.ToString("dd/MM/yyyy"),
             Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
             Likes = userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
-            Ingredients = recipe.RecipeIngredients.Select(ri => new RecipeIngredientDto
+            Ingredients = recipe.RecipeIngredients.Select(ri => new EditRecipeIngredientDto
             {
-                Id = ri.Ingredient.Id,
-                Name = ri.Ingredient.Name,
+                Id = ri.Id,
+                IngredientName = ri.Ingredient.Name,
+                IngredientId = ri.Ingredient.Id,
                 Quantity = ri.Quantity,
-                MeasurementUnitName = ri.MeasurementUnit?.Abbreviation
+                MeasurementUnitId = ri.MeasurementUnitId,
+                MeasurementAbbreviation = ri.MeasurementUnit?.Abbreviation
             }).ToList(),
             Images = recipe.RecipeImages.Select(ri => new RecipeImageDto
             {
@@ -158,11 +164,47 @@ public static class RecipeMappingExtensions
                 Url = ri.Url
             }).ToList(),
             Categories = recipe.CategoryRecipes
-                .Select(cr => cr.Category.Name)
+                .Select(cr => new CategoryDto()
+                {
+                    Id = cr.CategoryId,
+                    Name = cr.Category.Name
+                })
                 .ToList(),
             IsAdminApproved = recipe.IsAdminApproved,
             AdminNotes = recipe.AdminNotes
         };
     }
+
+    public static Recipe ToRecipe(this FormRecipeDto createRecipeDto, int cookId)
+    {
+        return new Recipe
+        {
+            Name = createRecipeDto.Name,
+            PreparationSteps = createRecipeDto.PreparationSteps,
+            DifficultyLevel = Enum
+                .TryParse(createRecipeDto.DifficultyLevel, true, out DifficultyLevel level) == false ?
+                DifficultyLevel.Easy : level,
+            CookId = cookId,
+            CreatedOn = DateTime.UtcNow,
+            UpdatedOn = DateTime.UtcNow,
+            IsAdminApproved = false,
+            AdminNotes = null,
+            RecipeIngredients = createRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
+            {
+                IngredientId = i.IngredientId,
+                Quantity = i.Quantity,
+                MeasurementUnitId = i.MeasurementUnitId
+            }).ToList(),
+            RecipeImages = createRecipeDto.RecipeImages.Select(i => new RecipeImage
+            {
+                Url = i.Url
+            }).ToList(),
+            CategoryRecipes = createRecipeDto.CategoryRecipes.Select(c => new CategoryRecipe
+            {
+                CategoryId = c
+            }).ToList()
+        };
+    }
+
 }
 

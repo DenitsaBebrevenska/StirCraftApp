@@ -63,34 +63,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
     public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId)
     {
-        //todo add mapping extension for this
-        var recipe = new Recipe
-        {
-            Name = createRecipeDto.Name,
-            PreparationSteps = createRecipeDto.PreparationSteps,
-            DifficultyLevel = Enum
-                .TryParse(createRecipeDto.DifficultyLevel, true, out DifficultyLevel level) == false ?
-                DifficultyLevel.Easy : level,
-            CookId = cookId,
-            CreatedOn = DateTime.UtcNow,
-            UpdatedOn = DateTime.UtcNow,
-            IsAdminApproved = false,
-            AdminNotes = null,
-            RecipeIngredients = createRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
-            {
-                IngredientId = i.IngredientId,
-                Quantity = i.Quantity,
-                MeasurementUnitId = i.MeasurementUnitId
-            }).ToList(),
-            RecipeImages = createRecipeDto.RecipeImages.Select(i => new RecipeImage
-            {
-                Url = i.Url
-            }).ToList(),
-            CategoryRecipes = createRecipeDto.CategoryRecipes.Select(c => new CategoryRecipe
-            {
-                CategoryId = c
-            }).ToList()
-        };
+        var recipe = createRecipeDto.ToRecipe(cookId);
 
         await unit.Repository<Recipe>().AddAsync(recipe);
 
@@ -114,20 +87,35 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             ? DifficultyLevel.Easy
             : level;
         recipe.UpdatedOn = DateTime.UtcNow;
-        recipe.RecipeIngredients = updateRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
+
+        var categoriesToRemove = recipe.CategoryRecipes
+            .Where(cr => updateRecipeDto.CategoryRecipes.All(c => c != cr.CategoryId))
+            .ToList();
+
+        foreach (var category in categoriesToRemove)
         {
-            IngredientId = i.IngredientId,
-            Quantity = i.Quantity,
-            MeasurementUnitId = i.MeasurementUnitId
-        }).ToList();
-        recipe.RecipeImages = updateRecipeDto.RecipeImages.Select(i => new RecipeImage
+            recipe.CategoryRecipes.Remove(category);
+        }
+
+        foreach (var categoryId in updateRecipeDto.CategoryRecipes)
         {
-            Url = i.Url
-        }).ToList();
-        recipe.CategoryRecipes = updateRecipeDto.CategoryRecipes.Select(c => new CategoryRecipe
-        {
-            CategoryId = c.Id
-        }).ToList();
+            recipe.CategoryRecipes.Add(new CategoryRecipe
+            {
+                CategoryId = categoryId,
+                RecipeId = recipe.Id
+            });
+        }
+
+        //recipe.RecipeIngredients = updateRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
+        //{
+        //    IngredientId = i.IngredientId,
+        //    Quantity = i.Quantity,
+        //    MeasurementUnitId = i.MeasurementUnitId
+        //}).ToList();
+        //recipe.RecipeImages = updateRecipeDto.RecipeImages.Select(i => new RecipeImage
+        //{
+        //    Url = i.Url
+        //}).ToList();
 
         unit.Repository<Recipe>().Update(recipe);
         await unit.CompleteAsync();

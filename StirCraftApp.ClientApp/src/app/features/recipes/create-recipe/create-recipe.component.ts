@@ -28,14 +28,14 @@ import { MeasurementUnit } from '../../../shared/models/measurementUnit/measurem
     TextAreaComponent,
     MatCard,
     MatIcon
-],
+  ],
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.scss'
 })
 
-export class CreateRecipeComponent implements OnInit{
+export class CreateRecipeComponent implements OnInit {
   private recipesService = inject(RecipesService);
-  private categoriesService = inject(CategoriesService); 
+  private categoriesService = inject(CategoriesService);
   private formBuilder = inject(FormBuilder);
   private snack = inject(SnackbarService);
   private router = inject(Router);
@@ -47,11 +47,11 @@ export class CreateRecipeComponent implements OnInit{
   difficultyLevels: string[] = [];
   ingredientsInDb: IngredientShort[] = [];
   measurementUnits: MeasurementUnit[] = [];
-  
+
   categoriesOptions: { value: number, label: string }[] = [];
-  difficultyOptions: { value: string, label: string }[] =[];
+  difficultyOptions: { value: string, label: string }[] = [];
   ingredientsOptions: { value: number, label: string }[] = [];
-  measurementUnitsOptions: { value: string | null, label: string }[] =[];
+  measurementUnitsOptions: { value: string | null, label: string }[] = [];
 
   ngOnInit(): void {
 
@@ -63,8 +63,8 @@ export class CreateRecipeComponent implements OnInit{
         },
         error: err => console.error(err)
       });
-     
-      this.recipesService.getDifficultyLevels()
+
+    this.recipesService.getDifficultyLevels()
       .subscribe({
         next: response => {
           this.difficultyOptions = response.map(difficulty => ({ value: difficulty, label: difficulty }));
@@ -72,25 +72,26 @@ export class CreateRecipeComponent implements OnInit{
         error: err => console.error(err)
       });
 
-      this.ingredientsService.getAllNonPagedIngredients()
+    this.ingredientsService.getAllNonPagedIngredients()
       .subscribe({
-        next: response => 
-        this.ingredientsOptions = response
-        .map(ingredient => ({ value: ingredient.id, label: ingredient.name })),
+        next: response =>
+          this.ingredientsOptions = response
+            .map(ingredient => ({ value: ingredient.id, label: ingredient.name })),
         error: error => console.error(error)
       });
 
-      this.measurementUnitsService.getUnits(new MeasurementUnitParams)
+    this.measurementUnitsService.getUnits(new MeasurementUnitParams)
       .subscribe({
         next: response => {
-        this.measurementUnitsOptions = response
-        .map(measurementUnit => ({ value: measurementUnit.id.toString(), label: measurementUnit.abbreviation })),
-        this.measurementUnitsOptions.unshift({ value: null, label: 'No unit' });},
+          this.measurementUnitsOptions = response
+            .map(measurementUnit => ({ value: measurementUnit.id.toString(), label: measurementUnit.abbreviation })),
+            this.measurementUnitsOptions.unshift({ value: null, label: 'No unit' });
+        },
         error: error => console.error(error)
       });
   }
 
-  createIngredient(){
+  createIngredient() {
     return this.formBuilder.group({
       ingredientId: ['', Validators.required],
       quantity: [null, Validators.min(1)],
@@ -98,7 +99,7 @@ export class CreateRecipeComponent implements OnInit{
     });
   }
 
-  addIngredientLine(){
+  addIngredientLine() {
     (this.createRecipeForm.get('ingredients') as FormArray).push(this.createIngredient());
   }
 
@@ -106,7 +107,7 @@ export class CreateRecipeComponent implements OnInit{
     (this.createRecipeForm.get('ingredients') as FormArray).removeAt(index);
   }
 
-  get ingredients(): FormArray{
+  get ingredients(): FormArray {
     return this.createRecipeForm.get('ingredients') as FormArray;
   }
 
@@ -117,12 +118,12 @@ export class CreateRecipeComponent implements OnInit{
     image2: [''],
     image3: [''],
     difficultyLevel: [null, Validators.required],
-    categories: [null, Validators.required],
+    categories: [<number[]>[], Validators.required],
     ingredients: this.formBuilder.array([this.createIngredient()]),
   });
 
-  onSubmit(){
-    if(this.createRecipeForm.invalid){
+  onSubmit() {
+    if (this.createRecipeForm.invalid) {
       return;
     }
 
@@ -142,16 +143,16 @@ export class CreateRecipeComponent implements OnInit{
         { url: formValue.image3! }
       ].filter(image => image.url), // Exclude empty image URLs
       categoryRecipes: formValue.categories!
-  };
+    };
 
 
     this.recipesService.createRecipe(this.recipeDto).subscribe({
       next: () => {
-        this.snack.success('Successfully added recipe.'); 
-        this.router.navigateByUrl('/recipes');
+        this.snack.success('Successfully added recipe.');
+        this.router.navigateByUrl('/cook/recipes');
       },
       error: errors => this.validationErrors = errors
-  });
+    });
   }
- 
+
 }

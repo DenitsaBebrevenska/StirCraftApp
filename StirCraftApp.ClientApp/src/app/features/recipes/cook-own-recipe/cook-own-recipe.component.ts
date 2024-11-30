@@ -26,7 +26,7 @@ export class CookOwnRecipeComponent {
     if (!id) return;
     this.cookService.getCookOwnRecipe(+id).subscribe(
       {
-        next: recipe => this.recipe = recipe,
+        next: response => this.recipe = response,
         error: err => console.error(err)
       }
     );

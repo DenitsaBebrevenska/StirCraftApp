@@ -1,4 +1,5 @@
-﻿using StirCraftApp.Application.DTOs.RecipeDtos.Image;
+﻿using StirCraftApp.Application.DTOs.CategoryDtos;
+using StirCraftApp.Application.DTOs.RecipeDtos.Image;
 using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
 
 namespace StirCraftApp.Application.DTOs.RecipeDtos;
@@ -24,11 +25,11 @@ public class DetailedRecipeAdminNotesDto
 
     public int Likes { get; set; }
 
-    public ICollection<RecipeIngredientDto> Ingredients { get; set; } = [];
+    public ICollection<EditRecipeIngredientDto> Ingredients { get; set; } = [];
 
     public ICollection<RecipeImageDto> Images { get; set; } = [];
 
-    public IList<string> Categories { get; set; } = [];
+    public IList<CategoryDto> Categories { get; set; } = [];
 
     public bool IsAdminApproved { get; set; }
     public string? AdminNotes { get; set; }

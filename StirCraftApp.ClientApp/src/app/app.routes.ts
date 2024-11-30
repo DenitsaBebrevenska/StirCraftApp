@@ -22,7 +22,7 @@ import { BecomeCookComponent } from './features/cooks/become-cook/become-cook.co
 import { ProfilePageComponent } from './features/account/profile-page/profile-page.component';
 import { CreateRecipeComponent } from './features/recipes/create-recipe/create-recipe.component';
 import { UpdateRecipeComponent } from './features/recipes/update-recipe/update-recipe.component';
-import { CookOwnRecipesComponent } from './features/cooks/cook-own-recipes/cook-own-recipes.component';
+import { CookOwnRecipesComponent } from './features/recipes/cook-own-recipes/cook-own-recipes.component';
 import { CookOwnRecipeComponent } from './features/recipes/cook-own-recipe/cook-own-recipe.component';
 
 
@@ -31,6 +31,8 @@ export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'cook/become', component: BecomeCookComponent},
     {path: 'cook/recipes', component: CookOwnRecipesComponent},
+    {path: 'cook/recipes/create', component: CreateRecipeComponent, canActivate: [authGuard]},
+    {path: 'cook/recipes/:id/edit', component: UpdateRecipeComponent, canActivate: [authGuard]},
     {path: 'cook/recipes/:id', component: CookOwnRecipeComponent},
     {path: 'cooks/top/10', component: LeaderboardComponent},
     {path: 'cooks', component: CooksComponent},
@@ -42,8 +44,6 @@ export const routes: Routes = [
     {path: 'admin/ingredients/edit/:id', component: EditIngredientComponent},//, canActivate: [authGuard]
     {path: 'admin/ingredients/:id', component: IngredientDetailedComponent},
     {path: 'recipes', component: RecipesComponent},
-    {path: 'recipes/create', component: CreateRecipeComponent, canActivate: [authGuard]},
-    {path: 'recipes/:id /edit', component: UpdateRecipeComponent, canActivate: [authGuard]},
     {path: 'recipes/cook/:id', component: RecipeCookComponent},
     {path: 'recipes/ingredient/:id', component: RecipeIngredientComponent},
     {path: 'recipes/:id', component: RecipeDetailsComponent},

@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { RecipeIngredientDetailedDto } from "./recipeIngredientDetailedDto";
 import { RecipeImage } from "./recipeImage";
 import { RecipeIngredient } from "./recipeIngredient";
 
@@ -10,11 +11,11 @@ export type RecipeOwnDetailed = {
     cookName: string;
     createdOn: string;
     updatedOn: string;
-    ingredients: RecipeIngredient[];
+    ingredients: RecipeIngredientDetailedDto[];
     images: RecipeImage[];
     rating: number;
     likes: number;
     categories: Category[];
     isAdminApproved: boolean;
-    adminNotes? : string;
+    adminNotes?: string;
 }

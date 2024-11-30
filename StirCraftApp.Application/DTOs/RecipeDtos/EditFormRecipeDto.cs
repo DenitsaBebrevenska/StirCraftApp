@@ -1,5 +1,4 @@
-﻿using StirCraftApp.Application.DTOs.CategoryDtos;
-using StirCraftApp.Application.DTOs.RecipeDtos.Image;
+﻿using StirCraftApp.Application.DTOs.RecipeDtos.Image;
 using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
@@ -25,7 +24,7 @@ public class EditFormRecipeDto
 
     public IList<RecipeImageDto> RecipeImages { get; set; } = [];
 
-    public IList<CategoryDto> CategoryRecipes { get; set; } = [];
+    public IList<int> CategoryRecipes { get; set; } = [];
 
 
 }

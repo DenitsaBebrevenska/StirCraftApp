@@ -22,15 +22,27 @@ public class UnitOfWork(StirCraftDbContext context) : IUnitOfWork
 
     public async Task<bool> CompleteAsync()
     {
-        foreach (var entry in context.ChangeTracker.Entries<ISoftDeletable>())
-        {
-            if (entry.State == EntityState.Deleted)
-            {
-                entry.State = EntityState.Modified;
-                entry.Entity.IsDeleted = true;
-            }
-        }
+        await using var transaction = await context.Database.BeginTransactionAsync();
 
-        return await context.SaveChangesAsync() > 0;
+        try
+        {
+            foreach (var entry in context.ChangeTracker.Entries<ISoftDeletable>())
+            {
+                if (entry.State == EntityState.Deleted)
+                {
+                    entry.State = EntityState.Modified;
+                    entry.Entity.IsDeleted = true;
+                }
+            }
+
+            var changesSaved = await context.SaveChangesAsync() > 0;
+            await transaction.CommitAsync();
+            return changesSaved;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw; //todo handle exception
+        }
     }
 }

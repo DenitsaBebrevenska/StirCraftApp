@@ -35,7 +35,7 @@
       <ul class="flex flex-wrap gap-2 list-disc">
         @for (category of recipe.categories; track $index) {
         <li class="bg-primary py-1 px-3 rounded-md text-lg">
-          {{ category }}
+          {{ category.name }}
         </li>
         }
       </ul>
@@ -48,11 +48,12 @@
         <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-md">
           @for (ingredient of recipe.ingredients; track $index) {
           <li class="mb-1">
-            {{ ingredient.name }}
+            {{ ingredient.ingredientName }}
             @if(ingredient.quantity){
-            <span>: {{ ingredient.quantity }}</span>
-            {{ ingredient.measurementUnitName }}
-            }
+            <span>: {{ ingredient.quantity }} </span>
+            @if(ingredient.measurementUnitId){
+            <span>{{ ingredient.measurementAbbreviation }}</span>
+            }}
           </li>
           }
         </ul>
