@@ -12,8 +12,6 @@ public interface IRecipeService
     Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId);
     Task UpdateRecipeAsync(EditFormRecipeDto updateRecipeDto);
     Task DeleteRecipeAsync(int id);
-
-    Task AddRecipeToUsersFavoritesAsync(string userId, int recipeId);
-    Task RemoveRecipeToUsersFavoritesAsync(string userId, int recipeId);
+    Task<bool> ToggleFavoriteAsync(string userId, int recipeId);
 }
 

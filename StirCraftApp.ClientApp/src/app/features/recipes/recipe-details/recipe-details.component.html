@@ -41,6 +41,38 @@
       </ul>
     </div>
 
+    <!-- Rating Section -->
+    <div class="d-flex align-items-center mb-6">
+      <span class="me-2 text-lg font-semibold text-primary"
+        >Rate this Recipe:</span
+      >
+      @for (option of ratingOptions; track $index) {
+      <button
+        mat-button
+        mat-icon-button
+        (click)="rateRecipe(option)"
+        [color]="option <= recipe.rating ? 'primary' : ''"
+      >
+        <mat-icon>star</mat-icon>
+      </button>
+      }
+    </div>
+
+    <div class="d-flex align-items-center mb-6">
+      <span class="me-2 text-lg font-semibold text-primary"
+        >Add to Favorites:</span
+      >
+      <button
+        mat-button
+        mat-icon-button
+        (click)="toggleFavorite()"
+        [color]="recipe.isFavorite ? 'primary' : ''"
+      >
+        <mat-icon>{{
+          recipe.isFavorite ? "favorite" : "favorite_border"
+        }}</mat-icon>
+      </button>
+    </div>
     <!-- Ingredients and preparation -->
     <div class="flex gap-5">
       <div class="mb-6 w-auto">
@@ -72,6 +104,33 @@
   <!-- Comments Section -->
   <div class="mt-10">
     <h4 class="text-2xl font-semibold text-primary mb-4">Comments:</h4>
+    <mat-card class="max-w-screen-xl mx-auto mt-2 p-8 bg-white">
+      <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-semibold">Add Comment</h2>
+        </div>
+        <app-text-input label="Title" formControlName="title" />
+        <app-text-area label="Comment" rows="'5'" formControlName="body" />
+        @if (validationErrors) {
+        <div class="mb-3 p-4 bg-red-100 text-red-600">
+          <ul class="list-disc px-3">
+            @for (error of validationErrors; track $index) {
+            <li>{{ error }}</li>
+            }
+          </ul>
+        </div>
+        }
+        <button
+          mat-flat-button
+          [disabled]="commentForm.invalid"
+          type="submit"
+          class="w-full py-2"
+        >
+          Post Comment
+        </button>
+      </form>
+    </mat-card>
+
     <ul class="space-y-4">
       @for (comment of recipe.comments; track $index) {
       <li class="bg-white p-4 rounded-lg shadow-md">
@@ -91,6 +150,29 @@
           }
         </ul>
       </li>
+      <form [formGroup]="replyForm" (ngSubmit)="onSubmit()">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-semibold">Reply to this comment:</h2>
+        </div>
+        <app-text-area label="Reply" rows="'5'" formControlName="body" />
+        @if (validationErrors) {
+        <div class="mb-3 p-4 bg-red-100 text-red-600">
+          <ul class="list-disc px-3">
+            @for (error of validationErrors; track $index) {
+            <li>{{ error }}</li>
+            }
+          </ul>
+        </div>
+        }
+        <button
+          mat-flat-button
+          [disabled]="replyForm.invalid"
+          type="submit"
+          class="w-full py-2"
+        >
+          Post Reply
+        </button>
+      </form>
       }
     </ul>
   </div>

@@ -8,21 +8,6 @@ namespace StirCraftApp.Api.Controllers;
 public class UserController(IRecipeService recipeService, IUserService userService) : ControllerBase
 {
 
-    [HttpPost("recipe-like/{id}")]
-    public async Task<IActionResult> LikeRecipe(int id)
-    {
-        var userId = User.GetId();
-        await recipeService.AddRecipeToUsersFavoritesAsync(userId, id);
-        return Ok();
-    }
-
-    [HttpPost("recipe-unlike/{id}")]
-    public async Task<IActionResult> UnlikeRecipe(int id)
-    {
-        var userId = User.GetId();
-        await recipeService.RemoveRecipeToUsersFavoritesAsync(userId, id);
-        return Ok();
-    }
 
     [HttpGet("profile")]
     public async Task<IActionResult> GetProfile()

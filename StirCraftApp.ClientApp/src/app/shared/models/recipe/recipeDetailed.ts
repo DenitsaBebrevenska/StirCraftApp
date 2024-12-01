@@ -17,4 +17,5 @@ export type RecipeDetailed = {
     likes: number;
     categories: Category[];
     comments: RecipeComment[]
+    isFavorite?: boolean;
 }

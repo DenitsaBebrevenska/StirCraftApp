@@ -24,23 +24,23 @@ export class RecipesService {
   getRecipes(recipeParams: RecipeParams) {
     let params = new HttpParams();
 
-    if(recipeParams.categories.length > 0) {
+    if (recipeParams.categories.length > 0) {
       params = params.append('categories', recipeParams.categories.join(','));
     }
 
-    if(recipeParams.difficultyLevels.length > 0) {
+    if (recipeParams.difficultyLevels.length > 0) {
       params = params.append('difficultyLevels', recipeParams.difficultyLevels.join(','));
     }
 
-    if(recipeParams.sort) {
+    if (recipeParams.sort) {
       params = params.append('sort', recipeParams.sort);
     }
 
-    if(recipeParams.searchName) {
+    if (recipeParams.searchName) {
       params = params.append('recipeName', recipeParams.searchName);
     }
 
-    if(recipeParams.ingredientId){
+    if (recipeParams.ingredientId) {
       params = params.append('ingredientId', recipeParams.ingredientId);
     }
 
@@ -54,14 +54,14 @@ export class RecipesService {
     return this.http.get<RecipeDetailed>(this.baseUrl + 'recipes/' + id);
   }
 
-  getCookRecipes( id: number, pagingParams: PagingParams){
+  getCookRecipes(id: number, pagingParams: PagingParams) {
     let params = new HttpParams();
     params = params.append('pageIndex', pagingParams.pageIndex);
     params = params.append('pageSize', pagingParams.pageSize);
-    return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id, {params}); 
+    return this.http.get<Pagination<RecipeCook>>(this.baseUrl + 'recipes/cook/' + id, { params });
   }
 
-  getIngredientRecipes(id: number){
+  getIngredientRecipes(id: number) {
     return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes/ingredient/' + id);
   }
 
@@ -78,19 +78,26 @@ export class RecipesService {
   }
 
   deleteRecipe(id: number) {
-    return this.http.delete(this.baseUrl + 'recipes/' + id +'/delete');
+    return this.http.delete(this.baseUrl + 'recipes/' + id + '/delete');
   }
 
-  getDifficultyLevels(){
+  getDifficultyLevels() {
     return this.http.get<string[]>(this.baseUrl + 'recipes/difficultyLevels');
   }
 
   getDifficultyLevelsNames() {
     if (this.difficultyLevels.length > 0) return;
     return this.http.get<string[]>(this.baseUrl + 'recipes/difficultyLevels')
-    .subscribe({
-      next: response => this.difficultyLevels = response
-    });
+      .subscribe({
+        next: response => this.difficultyLevels = response
+      });
   }
 
+  toggleFavorite(recipeId: number) {
+    return this.http.post<boolean>(this.baseUrl + 'recipes/' + recipeId + '/toggle-favorite', null);
+  }
+
+  rateRecipe(recipeId: number, rating: number) {
+    return this.http.post<number>(this.baseUrl + 'recipes/' + recipeId + '/rate', rating);
+  }
 }

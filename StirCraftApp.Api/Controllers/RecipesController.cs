@@ -86,5 +86,11 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
-
+    [HttpPost("{id}/toggle-favorite")]
+    public async Task<IActionResult> ToggleFavorite(int id)
+    {
+        var userId = User.GetId();
+        var isFavorite = await recipeService.ToggleFavoriteAsync(userId, id);
+        return Ok(isFavorite);
+    }
 }
