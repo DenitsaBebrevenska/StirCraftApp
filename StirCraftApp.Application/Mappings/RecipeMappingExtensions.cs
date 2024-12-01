@@ -60,7 +60,7 @@ public static class RecipeMappingExtensions
             MainImageUrl =
                 recipe.RecipeImages.FirstOrDefault()?.Url,
             CookName = userManager.Users.FirstOrDefault(u => u.Id == recipe.Cook.UserId)?.DisplayName ?? "",
-            Rating = recipe.RecipeRatings.Average(rr => rr.Value).ToString("F2"),
+            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value).ToString("F2") : "0",
             Likes = userManager
                 .Users
                 .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),

@@ -36,11 +36,14 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         var recipes = await unit.Repository<Recipe>()
             .GetAllAsync(spec);
 
+        var count = await unit.Repository<Recipe>()
+            .CountAsync(spec);
+
         var recipeDtos = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
 
         var paginatedResult = new PaginatedResult(spec.Skip,
             spec.Take,
-            recipeDtos.Count,
+            count,
             recipeDtos);
 
 
