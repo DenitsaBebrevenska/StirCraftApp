@@ -72,8 +72,10 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
     public async Task UpdateRecipeAsync(EditFormRecipeDto updateRecipeDto)
     {
+        //todo clear up this monstrous method
+        var spec = new RecipeIncludeAllSpecification();
         var recipe = await unit.Repository<Recipe>()
-            .GetByIdAsync(null, updateRecipeDto.Id);
+            .GetByIdAsync(spec, updateRecipeDto.Id);
 
         if (recipe == null)
         {
@@ -88,14 +90,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             : level;
         recipe.UpdatedOn = DateTime.UtcNow;
 
-        var categoriesToRemove = recipe.CategoryRecipes
-            .Where(cr => updateRecipeDto.CategoryRecipes.All(c => c != cr.CategoryId))
-            .ToList();
-
-        foreach (var category in categoriesToRemove)
-        {
-            recipe.CategoryRecipes.Remove(category);
-        }
+        recipe.CategoryRecipes.Clear();
 
         foreach (var categoryId in updateRecipeDto.CategoryRecipes)
         {
@@ -106,16 +101,39 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             });
         }
 
-        //recipe.RecipeIngredients = updateRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
-        //{
-        //    IngredientId = i.IngredientId,
-        //    Quantity = i.Quantity,
-        //    MeasurementUnitId = i.MeasurementUnitId
-        //}).ToList();
-        //recipe.RecipeImages = updateRecipeDto.RecipeImages.Select(i => new RecipeImage
-        //{
-        //    Url = i.Url
-        //}).ToList();
+        foreach (var ri in updateRecipeDto.RecipeIngredients)
+        {
+            if (recipe.RecipeIngredients.Any(i => i.Id == ri.Id))
+            {
+                var ingredient = recipe.RecipeIngredients.First(i => i.Id == ri.Id);
+                ingredient.IngredientId = ri.IngredientId;
+                ingredient.Quantity = ri.Quantity;
+                ingredient.MeasurementUnitId = ri.MeasurementUnitId;
+                continue;
+            }
+
+            recipe.RecipeIngredients.Add(new RecipeIngredient
+            {
+                IngredientId = ri.IngredientId,
+                Quantity = ri.Quantity,
+                MeasurementUnitId = ri.MeasurementUnitId
+            });
+        }
+
+        foreach (var image in updateRecipeDto.RecipeImages)
+        {
+            if (recipe.RecipeImages.Any(i => i.Id == image.Id))
+            {
+                var imageFound = recipe.RecipeImages.First(i => i.Id == image.Id);
+                imageFound.Url = image.Url;
+                continue;
+            }
+
+            recipe.RecipeImages.Add(new RecipeImage
+            {
+                Url = image.Url
+            });
+        }
 
         unit.Repository<Recipe>().Update(recipe);
         await unit.CompleteAsync();

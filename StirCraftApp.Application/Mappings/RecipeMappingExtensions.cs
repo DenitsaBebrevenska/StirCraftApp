@@ -191,12 +191,14 @@ public static class RecipeMappingExtensions
             AdminNotes = null,
             RecipeIngredients = createRecipeDto.RecipeIngredients.Select(i => new RecipeIngredient()
             {
+                Id = i.Id,
                 IngredientId = i.IngredientId,
                 Quantity = i.Quantity,
                 MeasurementUnitId = i.MeasurementUnitId
             }).ToList(),
             RecipeImages = createRecipeDto.RecipeImages.Select(i => new RecipeImage
             {
+                Id = i.Id,
                 Url = i.Url
             }).ToList(),
             CategoryRecipes = createRecipeDto.CategoryRecipes.Select(c => new CategoryRecipe

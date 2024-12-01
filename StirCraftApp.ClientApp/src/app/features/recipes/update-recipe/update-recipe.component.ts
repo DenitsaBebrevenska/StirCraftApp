@@ -177,14 +177,15 @@ export class UpdateRecipeComponent implements OnInit {
       preparationSteps: formValue.preparationSteps!,
       difficultyLevel: formValue.difficultyLevel!,
       recipeIngredients: formValue.ingredients!.map((ingredient: any) => ({
+        id: this.recipe!.ingredients.find(i => i.ingredientId === +ingredient.name)?.id,
         ingredientId: +ingredient.name!,
         quantity: +ingredient.quantity! || undefined,
-        measurementUnitId: +ingredient.measurementUnitId! || undefined,
+        measurementUnitId: +ingredient.measurementUnit || undefined
       })),
       recipeImages: [
-        { url: formValue.image1! },
-        { url: formValue.image2! },
-        { url: formValue.image3! }
+        { id: this.recipe!.images[0]?.id, url: formValue.image1! },
+        { id: this.recipe!.images[1]?.id, url: formValue.image2! },
+        { id: this.recipe!.images[2]?.id, url: formValue.image3! }
       ].filter(image => image.url), // Exclude empty image URLs
       categoryRecipes: formValue.categories!
     };
