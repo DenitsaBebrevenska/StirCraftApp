@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Domain.Contracts;
-using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.JoinedTables;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 
-namespace StirCraftApp.Infrastructure.Identity;
+namespace StirCraftApp.Domain.Entities;
 
 //todo I probably don`t need soft deletable on this one as identity user deletion is handled by the identity framework
 public class AppUser : IdentityUser, ISoftDeletable

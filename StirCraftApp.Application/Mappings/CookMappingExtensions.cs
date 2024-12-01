@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Domain.Entities;
-using StirCraftApp.Infrastructure.Identity;
 
 namespace StirCraftApp.Application.Mappings;
 public static class CookMappingExtensions

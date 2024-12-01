@@ -5,7 +5,6 @@ using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.CookSpec;
-using StirCraftApp.Infrastructure.Identity;
 
 
 namespace StirCraftApp.Application.Services;

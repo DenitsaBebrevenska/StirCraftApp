@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.UserDtos;
+using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Extensions;
-using StirCraftApp.Infrastructure.Identity;
 using System.Security.Claims;
 
 

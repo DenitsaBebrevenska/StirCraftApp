@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Data;
-using StirCraftApp.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

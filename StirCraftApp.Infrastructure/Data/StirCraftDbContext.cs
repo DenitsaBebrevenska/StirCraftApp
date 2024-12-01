@@ -4,12 +4,12 @@ using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Infrastructure.Data.EntityConfigurations;
-using StirCraftApp.Infrastructure.Identity;
 using System.Reflection;
 
 namespace StirCraftApp.Infrastructure.Data;
 public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : IdentityDbContext<AppUser>(options)
 {
+    public DbSet<AppUser> AppUsers { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
 
     public DbSet<Comment> Comments { get; set; } = null!;
@@ -42,34 +42,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //Defining all AppUser connections since the Domain is kept without references
-        builder.Entity<Cook>()
-            .HasOne<AppUser>()
-            .WithOne()
-            .HasForeignKey<Cook>(c => c.UserId);
-
-        builder.Entity<Comment>()
-            .HasOne<AppUser>()
-            .WithMany(u => u.Comments)
-            .HasForeignKey(c => c.UserId);
-
-        builder.Entity<Reply>()
-            .HasOne<AppUser>()
-            .WithMany(r => r.Replies)
-            .HasForeignKey(r => r.UserId);
-
-        builder.Entity<ShoppingList>()
-            .HasOne<AppUser>()
-            .WithMany(u => u.ShoppingLists)
-            .HasForeignKey(s => s.UserId);
-
-        builder.Entity<RecipeRating>()
-            .HasOne<AppUser>()
-            .WithMany(u => u.RecipesRatings)
-            .HasForeignKey(rr => rr.UserId);
-
-
-        //joined tables
+        //joined tables configurations
         builder.Entity<CategoryRecipe>()
             .HasKey(cr => new { cr.RecipeId, cr.CategoryId });
 
@@ -100,7 +73,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
             .HasKey(ufr => new { ufr.UserId, ufr.RecipeId });
 
         builder.Entity<UserFavoriteRecipe>()
-            .HasOne<AppUser>()
+            .HasOne(ufr => ufr.AppUser)
             .WithMany(u => u.FavoriteRecipes)
             .HasForeignKey(ufr => ufr.UserId);
 
@@ -109,7 +82,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
             .WithMany(r => r.UserFavoriteRecipes)
             .HasForeignKey(ufr => ufr.RecipeId);
 
-        //Adding unique display name
+        //Adding unique restraint on display name
         builder.Entity<AppUser>()
             .HasIndex(u => u.DisplayName)
             .IsUnique();
@@ -129,7 +102,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
         //Joined tables explicit filters so that I don`t get unexpected results
         builder.Entity<UserFavoriteRecipe>()
-            .HasQueryFilter(ufr => !ufr.Recipe.IsDeleted);
+            .HasQueryFilter(ufr => !ufr.Recipe.IsDeleted && !ufr.AppUser.IsDeleted);
 
         builder.Entity<CategoryRecipe>()
             .HasQueryFilter(cr => !cr.Category.IsDeleted && !cr.Recipe.IsDeleted);

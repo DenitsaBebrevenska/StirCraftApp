@@ -2,7 +2,7 @@
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.UserDtos;
 using StirCraftApp.Domain.Contracts;
-using StirCraftApp.Infrastructure.Identity;
+using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Services;
 public class UserService(UserManager<AppUser> userManager, IUnitOfWork unit) : IUserService

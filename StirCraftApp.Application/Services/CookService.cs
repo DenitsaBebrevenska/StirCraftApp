@@ -4,7 +4,6 @@ using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.CookSpec;
-using StirCraftApp.Infrastructure.Identity;
 using static StirCraftApp.Domain.Constants.RoleConstants;
 
 namespace StirCraftApp.Application.Services;

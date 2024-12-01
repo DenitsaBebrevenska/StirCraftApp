@@ -191,6 +191,207 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("StirCraftApp.Domain.Entities.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AvatarUrl")
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisplayName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DisplayName")
+                        .IsUnique()
+                        .HasFilter("[DisplayName] IS NOT NULL");
+
+                    b.HasIndex("IsDeleted")
+                        .HasFilter("[IsDeleted] = 0");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
+                            AccessFailedCount = 0,
+                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            ConcurrencyStamp = "3d92c5f0-0f68-4e2b-9542-a5144cd14319",
+                            DisplayName = "ChefBob",
+                            Email = "bob@example.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "BOB@EXAMPLE.COM",
+                            NormalizedUserName = "BOB@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA1tXIxdK6jxCka5t9eoMgbkUGAsQtyxhcQK3OvqL+wkvtdZdnM79Iw4PkUOHna3OQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f71ef3a0-7dba-4e25-8baa-a8f9b22cfdc4",
+                            TwoFactorEnabled = false,
+                            UserName = "bob@example.com"
+                        },
+                        new
+                        {
+                            Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
+                            AccessFailedCount = 0,
+                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            ConcurrencyStamp = "f8242cae-d157-45ad-80d3-115ffc875ab3",
+                            DisplayName = "KateMiddleton",
+                            Email = "kate@example.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "KATE@EXAMPLE.COM",
+                            NormalizedUserName = "KATE@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIEZzzxv4HIB1KF8ZXZpCoXTKuBlVgf5C+2UnUQUAm8Z+XAS3izPi7dFkhj+0sTmRQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a4b63d26-cc52-4c18-bb3d-74fa19eb621d",
+                            TwoFactorEnabled = false,
+                            UserName = "kate@example.com"
+                        },
+                        new
+                        {
+                            Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
+                            AccessFailedCount = 0,
+                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            ConcurrencyStamp = "3b6333cc-d9b6-4619-a950-d7c5bb89969d",
+                            DisplayName = "AdrianTheAdventurer",
+                            Email = "adrian@example.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADRIAN@EXAMPLE.COM",
+                            NormalizedUserName = "ADRIAN@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELqEvyKDMv/ZOVJuh+N67OharS1OPKk5C8ejjkI1QI59sy68JyWHif5Hn0OlHkE07Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e11a20f0-1718-4714-a0f0-15f80229c42c",
+                            TwoFactorEnabled = false,
+                            UserName = "adrian@example.com"
+                        },
+                        new
+                        {
+                            Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
+                            AccessFailedCount = 0,
+                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            ConcurrencyStamp = "55a8732b-5723-4d35-ba1d-66e2393459a5",
+                            DisplayName = "LoveLink",
+                            Email = "zelda@example.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ZELDA@EXAMPLE.COM",
+                            NormalizedUserName = "ZELDA@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBMEoIz9MU41/6TalEtU+7WbYVv0ZLj67osiY6P06IFfb06oybfsfkp2vosKSU443A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0c1e9f2a-5817-465d-9543-c12df0a3a67e",
+                            TwoFactorEnabled = false,
+                            UserName = "zelda@example.com"
+                        },
+                        new
+                        {
+                            Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
+                            AccessFailedCount = 0,
+                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            ConcurrencyStamp = "fe3c83a9-bafc-42ba-be3f-6651a463e1a3",
+                            DisplayName = "ThePowerOfMorgoth",
+                            Email = "galadriel@example.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
+                            NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGDYTZi+n8LMwfa5JVzhL2mS03v8KAdpK/oi37KS1z5QTBfM722tBKfXY733IEvokQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2cbfc130-01cd-44a1-b64d-c6eaf06bbb88",
+                            TwoFactorEnabled = false,
+                            UserName = "galadriel@example.com"
+                        },
+                        new
+                        {
+                            Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "8a1f5390-65c2-4a80-bb66-0028049f6cb1",
+                            DisplayName = "StirCraftAdmin",
+                            Email = "admin@example.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO6uj6UnICieDMdNfxZZK+hMjbszcqoFSQ0Jpf4RSwjjOP8rEwFRlcdYfQhZsfTiPQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "10e35705-db1e-4710-a096-f4f4fb06ed59",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@example.com"
+                        });
+                });
+
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -490,8 +691,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.HasIndex("IsDeleted")
                         .HasFilter("[IsDeleted] = 0");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cooks");
 
@@ -3167,207 +3367,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Identity.AppUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AvatarUrl")
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOnUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DisplayName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DisplayName")
-                        .IsUnique()
-                        .HasFilter("[DisplayName] IS NOT NULL");
-
-                    b.HasIndex("IsDeleted")
-                        .HasFilter("[IsDeleted] = 0");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
-                            AccessFailedCount = 0,
-                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "3dd1e7c7-1a2d-431a-8994-05f0b2f93b9e",
-                            DisplayName = "ChefBob",
-                            Email = "bob@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "BOB@EXAMPLE.COM",
-                            NormalizedUserName = "BOB@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKTs+zisymfJEDV+gZ9lPgQ+8ZRipcYTGt4EaEXnzXNhBbMr4G5K+EO5TBGQ03+Z+A==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "db99014c-0b63-482c-ad5c-f6e8e46be948",
-                            TwoFactorEnabled = false,
-                            UserName = "bob@example.com"
-                        },
-                        new
-                        {
-                            Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
-                            AccessFailedCount = 0,
-                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "762a933a-ee7d-4519-82cd-7266b85af964",
-                            DisplayName = "KateMiddleton",
-                            Email = "kate@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "KATE@EXAMPLE.COM",
-                            NormalizedUserName = "KATE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBngvTSTLC2F6PBXOOhicndbUYluu9Uybzi/vmWIVvEoH7eF/A40w/6no9qmG70mQA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "aec604e6-ecbf-47a0-b559-f6ffeaf2830f",
-                            TwoFactorEnabled = false,
-                            UserName = "kate@example.com"
-                        },
-                        new
-                        {
-                            Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
-                            AccessFailedCount = 0,
-                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "51a817be-2430-45a1-855e-a29134123c05",
-                            DisplayName = "AdrianTheAdventurer",
-                            Email = "adrian@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADRIAN@EXAMPLE.COM",
-                            NormalizedUserName = "ADRIAN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDg3iD3lLvsmtJNilP/jqUKFMLMhOAZmUKUOajUGxGJpTG89mz0NDs2p0Hsio2EgJw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d775cbad-b8d0-44a8-bf42-940c6ab748fd",
-                            TwoFactorEnabled = false,
-                            UserName = "adrian@example.com"
-                        },
-                        new
-                        {
-                            Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
-                            AccessFailedCount = 0,
-                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "1180834c-a57c-4169-87e8-3d715229d03f",
-                            DisplayName = "LoveLink",
-                            Email = "zelda@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ZELDA@EXAMPLE.COM",
-                            NormalizedUserName = "ZELDA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELnicvycTQzbGuJaBfRhaBCcTLHu0VjUcG8Eu6aLBSR4cnPDDjpduqCQptwKZSPdWw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "207ffa5b-6952-49d6-a8f0-7f976c312209",
-                            TwoFactorEnabled = false,
-                            UserName = "zelda@example.com"
-                        },
-                        new
-                        {
-                            Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
-                            AccessFailedCount = 0,
-                            AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "9ada98a9-f3c5-409f-8c90-16a3e7d25281",
-                            DisplayName = "ThePowerOfMorgoth",
-                            Email = "galadriel@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
-                            NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKtKK00zx9RLLEwqjJM3MueLbpl0vYBJJ65J047bxVHDz4sYfedJrxrFNedbo+vBfw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "904d366c-5d38-4c6b-84ee-5de3cc74d507",
-                            TwoFactorEnabled = false,
-                            UserName = "galadriel@example.com"
-                        },
-                        new
-                        {
-                            Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b7581ec-7cf3-4cce-8d8f-b4fc7491ddba",
-                            DisplayName = "StirCraftAdmin",
-                            Email = "admin@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOImk2RY+icQ1ga4hGQ2GLJIHgUPTKwu0b3zHtMCW1uc92HkKOdJ1QUHA0L7Zcu9cg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "48a187a4-4b7b-424e-824a-4cdedfca323b",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@example.com"
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -3379,7 +3378,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3388,7 +3387,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3403,7 +3402,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3412,7 +3411,7 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3427,11 +3426,13 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", "AppUser")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Recipe");
                 });
@@ -3444,11 +3445,13 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
-                        .WithOne()
-                        .HasForeignKey("StirCraftApp.Domain.Entities.Cook", "UserId")
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("CookingRank");
                 });
@@ -3509,11 +3512,13 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", "AppUser")
                         .WithMany("RecipesRatings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Recipe");
                 });
@@ -3526,22 +3531,26 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", "AppUser")
                         .WithMany("Replies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Comment");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
                 {
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", "AppUser")
                         .WithMany("ShoppingLists")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.CategoryRecipe", b =>
@@ -3590,13 +3599,28 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
+                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", "AppUser")
                         .WithMany("FavoriteRecipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("AppUser");
+
                     b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("StirCraftApp.Domain.Entities.AppUser", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("FavoriteRecipes");
+
+                    b.Navigation("RecipesRatings");
+
+                    b.Navigation("Replies");
+
+                    b.Navigation("ShoppingLists");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Category", b =>
@@ -3652,19 +3676,6 @@ namespace StirCraftApp.Infrastructure.Migrations
             modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
                 {
                     b.Navigation("ShoppingListRecipeIngredients");
-                });
-
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Identity.AppUser", b =>
-                {
-                    b.Navigation("Comments");
-
-                    b.Navigation("FavoriteRecipes");
-
-                    b.Navigation("RecipesRatings");
-
-                    b.Navigation("Replies");
-
-                    b.Navigation("ShoppingLists");
                 });
 #pragma warning restore 612, 618
         }

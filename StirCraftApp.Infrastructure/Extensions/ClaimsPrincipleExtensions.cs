@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using StirCraftApp.Infrastructure.Identity;
+using StirCraftApp.Domain.Entities;
 using System.Security.Authentication;
 using System.Security.Claims;
 

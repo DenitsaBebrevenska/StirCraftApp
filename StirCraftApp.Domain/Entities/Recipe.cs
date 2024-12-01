@@ -1,6 +1,7 @@
 ﻿using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.JoinedTables;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 
 namespace StirCraftApp.Domain.Entities;
@@ -14,6 +15,7 @@ public class Recipe : BaseEntity
 
     public DifficultyLevel DifficultyLevel { get; set; }
 
+    [ForeignKey(nameof(Cook))]
     public int CookId { get; set; }
 
     public virtual Cook Cook { get; set; } = null!;

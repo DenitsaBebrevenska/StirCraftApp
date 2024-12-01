@@ -8,7 +8,6 @@ using StirCraftApp.Application.DTOs.RecipeDtos.Reply;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.JoinedTables;
-using StirCraftApp.Infrastructure.Identity;
 
 namespace StirCraftApp.Application.Mappings;
 public static class RecipeMappingExtensions
