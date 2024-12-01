@@ -74,7 +74,6 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
                 Name = ingredient.Name,
                 IsAllergen = ingredient.IsAllergen,
                 NameInPlural = ingredient.NameInPlural,
-                IsSolid = ingredient.IsSolid,
                 IsAdminApproved = true
             });
 

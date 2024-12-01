@@ -1,62 +1,124 @@
 [
-  {
-    "Id": 1,
-    "Name": "Spaghetti Aglio e Olio",
-    "PreparationSteps": "Cook the spaghetti in salted boiling water until al dente. Reserve some pasta water before draining. Heat olive oil in a pan over medium heat, then add thinly sliced garlic and chili flakes. Sauté until fragrant but not browned.Add the cooked spaghetti to the pan and toss with the garlic oil. Add reserved pasta water to loosen the sauce if needed. Season with salt and pepper to taste, garnish with fresh parsley, and serve.",
-    "Likes": 4,
-    "DifficultyLevel": 1,
-    "CookId": 2,
-    "CreatedOn": "2024-10-06T12:00:00",
-    "UpdatedOn": "2024-10-06T12:00:00",
-    "IsAdminApproved": true,
-    "AdminNotes": null
-  },
-  {
-    "Id": 2,
-    "Name": "Quinoa Salad",
-    "PreparationSteps": "Cook quinoa in water (you can use vegetable broth if you like). Let it cool. In a large bowl, combine diced cucumber, cherry tomatoes, red onion, and avocado. Add the cooled quinoa and mix well. In a small bowl, whisk together lemon juice, olive oil, tahini, salt, and pepper. Pour the dressing over the salad and toss. Garnish with fresh herbs like parsley and cilantro and serve chilled.",
-    "Likes": 10,
-    "DifficultyLevel": 2,
-    "CookId": 2,
-    "CreatedOn": "2024-09-15T12:00:00",
-    "UpdatedOn": "2024-09-15T12:00:00",
-    "IsAdminApproved": true,
-    "AdminNotes": null
-  },
-  {
-    "Id": 3,
-    "Name": "Gluten-Free Almond Pancakes",
-    "PreparationSteps": "In a bowl, whisk together almond flour, eggs, baking powder, vanilla extract, and a pinch of salt until smooth. Heat a non-stick pan over medium heat and grease lightly with butter. Pour small amounts of batter onto the pan and cook until bubbles form on the surface, then flip and cook the other side until golden brown. Serve pancakes with fresh berries, maple syrup, and a sprinkle of almond slices for garnish.",
-    "Likes": 30,
-    "DifficultyLevel": 2,
-    "CookId": 3,
-    "CreatedOn": "2024-08-22T12:00:00",
-    "UpdatedOn": "2024-08-22T12:00:00",
-    "IsAdminApproved": true,
-    "AdminNotes": null
-  },
-  {
-    "Id": 4,
-    "Name": "Spicy Chicken Tacos",
-    "PreparationSteps": "Marinate chicken breast in a mixture of chili powder, cumin, paprika, garlic, lime juice, and olive oil for at least 30 minutes. Cook the marinated chicken in a pan over medium heat until fully cooked and slightly charred. Warm the taco shells in the oven or on a pan. Assemble the tacos by adding chicken, finely chopped ripe tomatoes, onion, cilantro, jalapeño, and lime, and avocado.",
-    "Likes": 3,
-    "DifficultyLevel": 2,
-    "CookId": 1,
-    "CreatedOn": "2024-07-10T12:00:00",
-    "UpdatedOn": "2024-07-10T12:00:00",
-    "IsAdminApproved": true,
-    "AdminNotes": null
-  },
-  {
-    "Id": 5,
-    "Name": "Classic Beef Stroganoff",
-    "PreparationSteps": "Cook egg noodles according to package instructions, drain, and set aside. In a large pan, brown strips of beef in butter over high heat. Remove from the pan and set aside. In the same pan, sauté onions and mushrooms until softened. Add garlic and cook for another minute. Stir in beef broth, mustard, and Worcestershire sauce, then return the beef to the pan. Reduce heat, stir in sour cream, and simmer until the sauce thickens. Serve the beef stroganoff over egg noodles, garnished with fresh parsley.",
-    "Likes": 10,
-    "DifficultyLevel": 3,
-    "CookId": 3,
-    "CreatedOn": "2024-06-05T12:00:00",
-    "UpdatedOn": "2024-06-05T12:00:00",
-    "IsAdminApproved": true,
-    "AdminNotes": null
-  }
+    {
+        "Id": 1,
+        "Name": "Spaghetti Aglio e Olio",
+        "PreparationSteps": "Cook the spaghetti in salted boiling water until al dente. Reserve some pasta water before draining. Heat olive oil in a pan over medium heat, then add thinly sliced garlic and chili flakes. Sauté until fragrant but not browned.Add the cooked spaghetti to the pan and toss with the garlic oil. Add reserved pasta water to loosen the sauce if needed. Season with salt and pepper to taste, garnish with fresh parsley, and serve.",
+        "DifficultyLevel": 1,
+        "CookId": 2,
+        "CreatedOn": "2024-10-06T12:00:00",
+        "UpdatedOn": "2024-10-06T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 2,
+        "Name": "Quinoa Salad",
+        "PreparationSteps": "Cook quinoa in water (you can use vegetable broth if you like). Let it cool. In a large bowl, combine diced cucumber, cherry tomatoes, red onion, and avocado. Add the cooled quinoa and mix well. In a small bowl, whisk together lemon juice, olive oil, tahini, salt, and pepper. Pour the dressing over the salad and toss. Garnish with fresh herbs like parsley and cilantro and serve chilled.",
+        "DifficultyLevel": 2,
+        "CookId": 2,
+        "CreatedOn": "2024-09-15T12:00:00",
+        "UpdatedOn": "2024-09-15T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 3,
+        "Name": "Gluten-Free Almond Pancakes",
+        "PreparationSteps": "In a bowl, whisk together almond flour, eggs, baking powder, vanilla extract, and a pinch of salt until smooth. Heat a non-stick pan over medium heat and grease lightly with butter. Pour small amounts of batter onto the pan and cook until bubbles form on the surface, then flip and cook the other side until golden brown. Serve pancakes with fresh berries, maple syrup, and a sprinkle of almond slices for garnish.",
+        "DifficultyLevel": 2,
+        "CookId": 3,
+        "CreatedOn": "2024-08-22T12:00:00",
+        "UpdatedOn": "2024-08-22T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 4,
+        "Name": "Spicy Chicken Tacos",
+        "PreparationSteps": "Marinate chicken breast in a mixture of chili powder, cumin, paprika, garlic, lime juice, and olive oil for at least 30 minutes. Cook the marinated chicken in a pan over medium heat until fully cooked and slightly charred. Warm the taco shells in the oven or on a pan. Assemble the tacos by adding chicken, finely chopped ripe tomatoes, onion, cilantro, jalapeño, and lime, and avocado.",
+        "DifficultyLevel": 2,
+        "CookId": 1,
+        "CreatedOn": "2024-07-10T12:00:00",
+        "UpdatedOn": "2024-07-10T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 5,
+        "Name": "Classic Beef Stroganoff",
+        "PreparationSteps": "Cook egg noodles according to package instructions, drain, and set aside. In a large pan, brown strips of beef in butter over high heat. Remove from the pan and set aside. In the same pan, sauté onions and mushrooms until softened. Add garlic and cook for another minute. Stir in beef broth, mustard, and Worcestershire sauce, then return the beef to the pan. Reduce heat, stir in sour cream, and simmer until the sauce thickens. Serve the beef stroganoff over egg noodles, garnished with fresh parsley.",
+        "DifficultyLevel": 3,
+        "CookId": 3,
+        "CreatedOn": "2024-06-05T12:00:00",
+        "UpdatedOn": "2024-06-05T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 6,
+        "Name": "Granny`s Homemade Mayo",
+        "PreparationSteps": "Place oil, egg, lemon juice, Dijon mustard, salt, and pepper in a large bowl.Use a hand-held immersion blender to blend mixture until fully emulsified, taking care not to over-blend. Store in a tightly closed container; refrigerate until using.",
+        "DifficultyLevel": 1,
+        "CookId": 1,
+        "CreatedOn": "2024-06-05T12:00:00",
+        "UpdatedOn": "2024-06-05T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 7,
+        "Name": "Banana Bread",
+        "PreparationSteps": "In a mixing bowl, mash the ripe bananas with a fork until completely smooth. Stir the melted butter into the mashed bananas.Mix in the baking soda and salt. Stir in the sugar, beaten egg, and vanilla extract. Mix in the flour.Pour the batter into your prepared loaf pan.Bake for 55 to 65 minutes at 175°C, or until a toothpick or wooden skewer inserted into the center comes out clean. Cool and serve.",
+        "DifficultyLevel": 1,
+        "CookId": 3,
+        "CreatedOn": "2024-06-05T12:00:00",
+        "UpdatedOn": "2024-06-05T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+
+    {
+        "Id": 8,
+        "Name": "Mochi",
+        "PreparationSteps": "Wrap red bean paste in aluminum foil and place in the freezer until solid, at least 1 hour.Mix glutinous rice flour and green tea powder thoroughly in a microwave-safe bowl.Stir in water, then sugar; mix until smooth.Cover the bowl with plastic wrap and microwave for 3 minutes 30 seconds.Meanwhile, remove red bean paste from the freezer and divide into 8 equal balls. Set aside.Remove rice flour mixture from the microwave. Stir and heat, covered, for another 15 to 30 seconds.Dust a work surface with cornstarch. Roll about 2 tablespoons of hot rice flour mixture into a ball. Flatten the ball and place one ball of frozen red bean paste in the center. Pinch and press the dough around the bean paste until completely covered.Sprinkle with additional cornstarch and place mochi, seam-side down, in a paper muffin liner to prevent sticking.Enjoy!",
+        "DifficultyLevel": 2,
+        "CookId": 2,
+        "CreatedOn": "2024-06-05T12:00:00",
+        "UpdatedOn": "2024-06-05T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 9,
+        "Name": "Choco Chip Cookies",
+        "PreparationSteps": "Preheat oven to 375 degrees F. Line three baking sheets with parchment paper and set aside. In a medium bowl mix flour, baking soda, baking powder and salt. Set aside. Cream together butter and sugars until combined. Beat in eggs and vanilla until light (about 1 minute). Mix in the dry ingredients until combined. Add chocolate chips and mix well. Roll 2-3 Tablespoons (depending on how large you like your cookies) of dough at a time into balls and place them evenly spaced on your prepared cookie sheets. Bake in preheated oven for approximately 8-10 minutes. Take them out when they are just barely starting to turn brown. Let them sit on the baking pan for 5 minutes before removing to cooling rack.",
+        "DifficultyLevel": 1,
+        "CookId": 1,
+        "CreatedOn": "2024-06-05T12:00:00",
+        "UpdatedOn": "2024-06-05T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 10,
+        "Name": "Pumpkin Soup",
+        "PreparationSteps": "Preheat oven to 425 degrees Fahrenheit and line a baking sheet with parchment paper for easy cleanup. Carefully halve the pumpkin and scoop out the seeds.Slice each pumpkin halve in half to make quarters. Brush or rub 1 tablespoon olive oil over the flesh of the pumpkin and place the quarters, cut sides down, onto the baking sheet. Roast for 35 minutes or longer, until the orange flesh is easily pierced through with a fork. Set it aside to cool for a few minutes.Heat the remaining 3 tablespoons olive oil in a large Dutch oven or heavy-bottomed pot over medium heat. Once the oil is shimmering, add onion, garlic and salt to the skillet. Stir to combine. Cook, stirring occasionally, until onion is translucent, about 8 to 10 minutes. Peel the pumpkin skin off the pumpkins and discard the skin.Add the pumpkin flesh, cinnamon, nutmeg and ground black pepper. Use your stirring spoon to break up the pumpkin a bit. Pour in the broth. Bring the mixture to a boil, then reduce heat and simmer for about 15 minutes, to give the flavors time to meld. Toast the pumpkin seeds in a medium skillet over medium-low heat, stirring frequently, until fragrant, golden and making little popping noises.Once the pumpkin mixture is done cooking, stir in the coconut milk and maple syrup. Remove the soup from heat and let it cool slightly. You can use an immersion blender to blend this soup in the pot. Securely fasten the blender’s lid and use a kitchen towel to protect your hand from steam escaping from the top of the blender as you purée the mixture until smooth. Transfer the puréed soup to a serving bowl and repeat with the remaining batches.Taste and adjust if necessary.",
+        "DifficultyLevel": 2,
+        "CookId": 2,
+        "CreatedOn": "2024-06-05T12:00:00",
+        "UpdatedOn": "2024-06-05T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    },
+    {
+        "Id": 11,
+        "Name": "Easy Weeknight Spaghetti",
+        "PreparationSteps": "To a large pan, add the pasta, cover with 3 cups cold water, optional salt to taste, and boil over high heat until water has absorbed, about 10 minutes, but watch your pasta and cook as needed until al dente. While pasta boils, brown the ground beef. To a large skillet, add the ground beef and cook over medium-high heat, breaking up the meat with a spatula as it cooks to ensure even cooking. After beef has cooked through, add the pasta sauce, stir to combine, and cook for 1 to 2 minutes, or until heated through. After pasta has cooked for about 10 minutes, or until all the water has been absorbed, add the sauce over the pasta and toss to combine in the skillet or alternatively plate the pasta and add sauce to each individual plate as desired.",
+        "DifficultyLevel": 1,
+        "CookId": 2,
+        "CreatedOn": "2024-06-05T12:00:00",
+        "UpdatedOn": "2024-06-05T12:00:00",
+        "IsAdminApproved": true,
+        "AdminNotes": null
+    }
 ]

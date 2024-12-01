@@ -10,9 +10,5 @@ public class MeasurementUnit : BaseEntity
     [MaxLength(UnitAbbreviationMaxLength)]
     public required string Abbreviation { get; set; }
 
-    public bool IsLiquidSpecific { get; set; }
-
-    public bool IsSolidSpecific { get; set; }
-
     public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }

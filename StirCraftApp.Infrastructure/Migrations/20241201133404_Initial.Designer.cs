@@ -12,8 +12,8 @@ using StirCraftApp.Infrastructure.Data;
 namespace StirCraftApp.Infrastructure.Migrations
 {
     [DbContext(typeof(StirCraftDbContext))]
-    [Migration("20241026061044_DataSeed")]
-    partial class DataSeed
+    [Migration("20241201133404_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -418,6 +418,42 @@ namespace StirCraftApp.Infrastructure.Migrations
                             RecipeId = 5,
                             Title = "Need help!",
                             UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Body = "Best banana bread ever!",
+                            IsDeleted = false,
+                            RecipeId = 7,
+                            Title = "Love",
+                            UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Body = "I love this. Cheers to the creator!",
+                            IsDeleted = false,
+                            RecipeId = 6,
+                            Title = "Great!",
+                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Body = "I love this!",
+                            IsDeleted = false,
+                            RecipeId = 9,
+                            Title = "NOM NOM!",
+                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Body = "Quick and easy, it is indeed a great recipe for fast dinner!",
+                            IsDeleted = false,
+                            RecipeId = 11,
+                            Title = "Love it",
+                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
                         });
                 });
 
@@ -584,13 +620,13 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletedOnUtc")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsAdminApproved")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsAllergen")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSolid")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -613,585 +649,828 @@ namespace StirCraftApp.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "flour"
                         },
                         new
                         {
                             Id = 2,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "egg",
                             NameInPlural = "eggs"
                         },
                         new
                         {
                             Id = 3,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "sugar"
                         },
                         new
                         {
                             Id = 4,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "milk"
                         },
                         new
                         {
                             Id = 5,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "salt"
                         },
                         new
                         {
                             Id = 6,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "butter"
                         },
                         new
                         {
                             Id = 7,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "olive oil"
                         },
                         new
                         {
                             Id = 8,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "tomato",
                             NameInPlural = "tomatoes"
                         },
                         new
                         {
                             Id = 9,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "garlic"
                         },
                         new
                         {
                             Id = 10,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "onion",
                             NameInPlural = "onions"
                         },
                         new
                         {
                             Id = 11,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "chicken breast",
                             NameInPlural = "chicken breasts"
                         },
                         new
                         {
                             Id = 12,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "ground beef"
                         },
                         new
                         {
                             Id = 13,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "carrot",
                             NameInPlural = "carrots"
                         },
                         new
                         {
                             Id = 14,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "celery",
                             NameInPlural = "celeries"
                         },
                         new
                         {
                             Id = 15,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "almond",
                             NameInPlural = "almonds"
                         },
                         new
                         {
                             Id = 16,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "peanut",
                             NameInPlural = "peanuts"
                         },
                         new
                         {
                             Id = 17,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "soy sauce"
                         },
                         new
                         {
                             Id = 18,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "lemon",
                             NameInPlural = "lemons"
                         },
                         new
                         {
                             Id = 19,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "lime",
                             NameInPlural = "limes"
                         },
                         new
                         {
                             Id = 20,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "basil"
                         },
                         new
                         {
                             Id = 21,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "parsley"
                         },
                         new
                         {
                             Id = 22,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "mushroom",
                             NameInPlural = "mushrooms"
                         },
                         new
                         {
                             Id = 23,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "spinach"
                         },
                         new
                         {
                             Id = 24,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "coconut milk"
                         },
                         new
                         {
                             Id = 25,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "shrimp",
                             NameInPlural = "shrimps"
                         },
                         new
                         {
                             Id = 26,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "salmon",
                             NameInPlural = "salmons"
                         },
                         new
                         {
                             Id = 27,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "tofu"
                         },
                         new
                         {
                             Id = 28,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "chickpeas"
                         },
                         new
                         {
                             Id = 29,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "potato",
                             NameInPlural = "potatoes"
                         },
                         new
                         {
                             Id = 30,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "rice"
                         },
                         new
                         {
                             Id = 31,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "pasta"
                         },
                         new
                         {
                             Id = 32,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "broccoli"
                         },
                         new
                         {
                             Id = 33,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cauliflower"
                         },
                         new
                         {
                             Id = 34,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "green beans"
                         },
                         new
                         {
                             Id = 35,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "zucchini",
                             NameInPlural = "zucchinis"
                         },
                         new
                         {
                             Id = 36,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "corn",
                             NameInPlural = "corns"
                         },
                         new
                         {
                             Id = 37,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cheese"
                         },
                         new
                         {
                             Id = 38,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cream"
                         },
                         new
                         {
                             Id = 39,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "yogurt"
                         },
                         new
                         {
                             Id = 40,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "honey"
                         },
                         new
                         {
                             Id = 41,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "maple syrup"
                         },
                         new
                         {
                             Id = 42,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "baking powder"
                         },
                         new
                         {
                             Id = 43,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "yeast"
                         },
                         new
                         {
                             Id = 44,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cinnamon"
                         },
                         new
                         {
                             Id = 45,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cumin"
                         },
                         new
                         {
                             Id = 46,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "ginger"
                         },
                         new
                         {
                             Id = 47,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "vanilla extract"
                         },
                         new
                         {
                             Id = 48,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "black pepper"
                         },
                         new
                         {
                             Id = 49,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "oregano"
                         },
                         new
                         {
                             Id = 50,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "paprika"
                         },
                         new
                         {
                             Id = 51,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "spaghetti"
                         },
                         new
                         {
                             Id = 52,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "chili flakes"
                         },
                         new
                         {
                             Id = 53,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "chili powder"
                         },
                         new
                         {
                             Id = 54,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "quinoa"
                         },
                         new
                         {
                             Id = 55,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cucumber",
                             NameInPlural = "cucumbers"
                         },
                         new
                         {
                             Id = 56,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cherry tomato",
                             NameInPlural = "cherry tomatoes"
                         },
                         new
                         {
                             Id = 57,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "red onion",
                             NameInPlural = "red onions"
                         },
                         new
                         {
                             Id = 58,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "avocado",
-                            NameInPlural = "avocadoes"
+                            NameInPlural = "avocados"
                         },
                         new
                         {
                             Id = 59,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "tahini"
                         },
                         new
                         {
                             Id = 60,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "cilantro"
                         },
                         new
                         {
                             Id = 61,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "almond flour"
                         },
                         new
                         {
                             Id = 62,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "berries mix"
                         },
                         new
                         {
                             Id = 63,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "taco shell",
                             NameInPlural = "taco shells"
                         },
                         new
                         {
                             Id = 64,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "tortilla",
                             NameInPlural = "tortillas"
                         },
                         new
                         {
                             Id = 65,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "egg noodles"
                         },
                         new
                         {
                             Id = 66,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "mustard"
                         },
                         new
                         {
                             Id = 67,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = false,
                             Name = "Worcestershire sauce"
                         },
                         new
                         {
                             Id = 68,
+                            IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "sour cream"
                         },
                         new
                         {
                             Id = 69,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "jalapeño",
                             NameInPlural = "jalapeños"
                         },
                         new
                         {
                             Id = 70,
+                            IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            IsSolid = true,
                             Name = "beef"
+                        },
+                        new
+                        {
+                            Id = 71,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "banana",
+                            NameInPlural = "bananas"
+                        },
+                        new
+                        {
+                            Id = 72,
+                            IsAdminApproved = true,
+                            IsAllergen = true,
+                            IsDeleted = false,
+                            Name = "corn flour"
+                        },
+                        new
+                        {
+                            Id = 73,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "coconut flour"
+                        },
+                        new
+                        {
+                            Id = 74,
+                            IsAdminApproved = true,
+                            IsAllergen = true,
+                            IsDeleted = false,
+                            Name = "oats"
+                        },
+                        new
+                        {
+                            Id = 75,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "brown sugar"
+                        },
+                        new
+                        {
+                            Id = 76,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "powdered sugar"
+                        },
+                        new
+                        {
+                            Id = 77,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "vegetable oil"
+                        },
+                        new
+                        {
+                            Id = 78,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "canned beans"
+                        },
+                        new
+                        {
+                            Id = 79,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "red bean paste"
+                        },
+                        new
+                        {
+                            Id = 80,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "lentils"
+                        },
+                        new
+                        {
+                            Id = 81,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "rice flour"
+                        },
+                        new
+                        {
+                            Id = 82,
+                            IsAdminApproved = true,
+                            IsAllergen = true,
+                            IsDeleted = false,
+                            Name = "parmesan"
+                        },
+                        new
+                        {
+                            Id = 83,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "rice milk"
+                        },
+                        new
+                        {
+                            Id = 84,
+                            IsAdminApproved = true,
+                            IsAllergen = true,
+                            IsDeleted = false,
+                            Name = "almond milk"
+                        },
+                        new
+                        {
+                            Id = 85,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "water"
+                        },
+                        new
+                        {
+                            Id = 86,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "matcha"
+                        },
+                        new
+                        {
+                            Id = 87,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "apple cider vinegar"
+                        },
+                        new
+                        {
+                            Id = 88,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "white wine vinegar"
+                        },
+                        new
+                        {
+                            Id = 89,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "balsamic vinegar"
+                        },
+                        new
+                        {
+                            Id = 90,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "red wine"
+                        },
+                        new
+                        {
+                            Id = 91,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "white wine"
+                        },
+                        new
+                        {
+                            Id = 92,
+                            IsAdminApproved = true,
+                            IsAllergen = true,
+                            IsDeleted = false,
+                            Name = "chocolate chips"
+                        },
+                        new
+                        {
+                            Id = 93,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "pumpkin",
+                            NameInPlural = "pumpkins"
+                        },
+                        new
+                        {
+                            Id = 94,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "nutmeg"
+                        },
+                        new
+                        {
+                            Id = 95,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "cornstarch"
+                        },
+                        new
+                        {
+                            Id = 96,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "vegetable broth"
+                        },
+                        new
+                        {
+                            Id = 97,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "bay leaf",
+                            NameInPlural = "bay leaves"
+                        },
+                        new
+                        {
+                            Id = 98,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "green pumpkin seeds"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "rosemary"
+                        },
+                        new
+                        {
+                            Id = 100,
+                            IsAdminApproved = true,
+                            IsAllergen = false,
+                            IsDeleted = false,
+                            Name = "dill"
                         });
                 });
 
@@ -1214,12 +1493,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsLiquidSpecific")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSolidSpecific")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -1238,8 +1511,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 1,
                             Abbreviation = "g",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = true,
                             Name = "Gram"
                         },
                         new
@@ -1247,8 +1518,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 2,
                             Abbreviation = "kg",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = true,
                             Name = "Kilogram"
                         },
                         new
@@ -1256,8 +1525,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 3,
                             Abbreviation = "mg",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = true,
                             Name = "Milligram"
                         },
                         new
@@ -1265,8 +1532,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 4,
                             Abbreviation = "oz",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = true,
                             Name = "Ounce"
                         },
                         new
@@ -1274,8 +1539,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 5,
                             Abbreviation = "lb",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = true,
                             Name = "Pound"
                         },
                         new
@@ -1283,8 +1546,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 6,
                             Abbreviation = "L",
                             IsDeleted = false,
-                            IsLiquidSpecific = true,
-                            IsSolidSpecific = false,
                             Name = "Liter"
                         },
                         new
@@ -1292,8 +1553,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 7,
                             Abbreviation = "mL",
                             IsDeleted = false,
-                            IsLiquidSpecific = true,
-                            IsSolidSpecific = false,
                             Name = "Milliliter"
                         },
                         new
@@ -1301,8 +1560,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 8,
                             Abbreviation = "tsp",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = false,
                             Name = "Teaspoon"
                         },
                         new
@@ -1310,8 +1567,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 9,
                             Abbreviation = "tbsp",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = false,
                             Name = "Tablespoon"
                         },
                         new
@@ -1319,8 +1574,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 10,
                             Abbreviation = "cup",
                             IsDeleted = false,
-                            IsLiquidSpecific = false,
-                            IsSolidSpecific = false,
                             Name = "Cup"
                         },
                         new
@@ -1328,8 +1581,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 11,
                             Abbreviation = "fl oz",
                             IsDeleted = false,
-                            IsLiquidSpecific = true,
-                            IsSolidSpecific = false,
                             Name = "Fluid Ounce"
                         });
                 });
@@ -1446,6 +1697,78 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Name = "Classic Beef Stroganoff",
                             PreparationSteps = "Cook egg noodles according to package instructions, drain, and set aside. In a large pan, brown strips of beef in butter over high heat. Remove from the pan and set aside. In the same pan, sauté onions and mushrooms until softened. Add garlic and cook for another minute. Stir in beef broth, mustard, and Worcestershire sauce, then return the beef to the pan. Reduce heat, stir in sour cream, and simmer until the sauce thickens. Serve the beef stroganoff over egg noodles, garnished with fresh parsley.",
                             UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CookId = 1,
+                            CreatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            DifficultyLevel = 1,
+                            IsAdminApproved = true,
+                            IsDeleted = false,
+                            Name = "Granny`s Homemade Mayo",
+                            PreparationSteps = "Place oil, egg, lemon juice, Dijon mustard, salt, and pepper in a large bowl.Use a hand-held immersion blender to blend mixture until fully emulsified, taking care not to over-blend. Store in a tightly closed container; refrigerate until using.",
+                            UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CookId = 3,
+                            CreatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            DifficultyLevel = 1,
+                            IsAdminApproved = true,
+                            IsDeleted = false,
+                            Name = "Banana Bread",
+                            PreparationSteps = "In a mixing bowl, mash the ripe bananas with a fork until completely smooth. Stir the melted butter into the mashed bananas.Mix in the baking soda and salt. Stir in the sugar, beaten egg, and vanilla extract. Mix in the flour.Pour the batter into your prepared loaf pan.Bake for 55 to 65 minutes at 175°C, or until a toothpick or wooden skewer inserted into the center comes out clean. Cool and serve.",
+                            UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CookId = 2,
+                            CreatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            DifficultyLevel = 2,
+                            IsAdminApproved = true,
+                            IsDeleted = false,
+                            Name = "Mochi",
+                            PreparationSteps = "Wrap red bean paste in aluminum foil and place in the freezer until solid, at least 1 hour.Mix glutinous rice flour and green tea powder thoroughly in a microwave-safe bowl.Stir in water, then sugar; mix until smooth.Cover the bowl with plastic wrap and microwave for 3 minutes 30 seconds.Meanwhile, remove red bean paste from the freezer and divide into 8 equal balls. Set aside.Remove rice flour mixture from the microwave. Stir and heat, covered, for another 15 to 30 seconds.Dust a work surface with cornstarch. Roll about 2 tablespoons of hot rice flour mixture into a ball. Flatten the ball and place one ball of frozen red bean paste in the center. Pinch and press the dough around the bean paste until completely covered.Sprinkle with additional cornstarch and place mochi, seam-side down, in a paper muffin liner to prevent sticking.Enjoy!",
+                            UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CookId = 1,
+                            CreatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            DifficultyLevel = 1,
+                            IsAdminApproved = true,
+                            IsDeleted = false,
+                            Name = "Choco Chip Cookies",
+                            PreparationSteps = "Preheat oven to 375 degrees F. Line three baking sheets with parchment paper and set aside. In a medium bowl mix flour, baking soda, baking powder and salt. Set aside. Cream together butter and sugars until combined. Beat in eggs and vanilla until light (about 1 minute). Mix in the dry ingredients until combined. Add chocolate chips and mix well. Roll 2-3 Tablespoons (depending on how large you like your cookies) of dough at a time into balls and place them evenly spaced on your prepared cookie sheets. Bake in preheated oven for approximately 8-10 minutes. Take them out when they are just barely starting to turn brown. Let them sit on the baking pan for 5 minutes before removing to cooling rack.",
+                            UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CookId = 2,
+                            CreatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            DifficultyLevel = 2,
+                            IsAdminApproved = true,
+                            IsDeleted = false,
+                            Name = "Pumpkin Soup",
+                            PreparationSteps = "Preheat oven to 425 degrees Fahrenheit and line a baking sheet with parchment paper for easy cleanup. Carefully halve the pumpkin and scoop out the seeds.Slice each pumpkin halve in half to make quarters. Brush or rub 1 tablespoon olive oil over the flesh of the pumpkin and place the quarters, cut sides down, onto the baking sheet. Roast for 35 minutes or longer, until the orange flesh is easily pierced through with a fork. Set it aside to cool for a few minutes.Heat the remaining 3 tablespoons olive oil in a large Dutch oven or heavy-bottomed pot over medium heat. Once the oil is shimmering, add onion, garlic and salt to the skillet. Stir to combine. Cook, stirring occasionally, until onion is translucent, about 8 to 10 minutes. Peel the pumpkin skin off the pumpkins and discard the skin.Add the pumpkin flesh, cinnamon, nutmeg and ground black pepper. Use your stirring spoon to break up the pumpkin a bit. Pour in the broth. Bring the mixture to a boil, then reduce heat and simmer for about 15 minutes, to give the flavors time to meld. Toast the pumpkin seeds in a medium skillet over medium-low heat, stirring frequently, until fragrant, golden and making little popping noises.Once the pumpkin mixture is done cooking, stir in the coconut milk and maple syrup. Remove the soup from heat and let it cool slightly. You can use an immersion blender to blend this soup in the pot. Securely fasten the blender’s lid and use a kitchen towel to protect your hand from steam escaping from the top of the blender as you purée the mixture until smooth. Transfer the puréed soup to a serving bowl and repeat with the remaining batches.Taste and adjust if necessary.",
+                            UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CookId = 2,
+                            CreatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            DifficultyLevel = 1,
+                            IsAdminApproved = true,
+                            IsDeleted = false,
+                            Name = "Easy Weeknight Spaghetti",
+                            PreparationSteps = "To a large pan, add the pasta, cover with 3 cups cold water, optional salt to taste, and boil over high heat until water has absorbed, about 10 minutes, but watch your pasta and cook as needed until al dente. While pasta boils, brown the ground beef. To a large skillet, add the ground beef and cook over medium-high heat, breaking up the meat with a spatula as it cooks to ensure even cooking. After beef has cooked through, add the pasta sauce, stir to combine, and cook for 1 to 2 minutes, or until heated through. After pasta has cooked for about 10 minutes, or until all the water has been absorbed, add the sauce over the pasta and toss to combine in the skillet or alternatively plate the pasta and add sauce to each individual plate as desired.",
+                            UpdatedOn = new DateTime(2024, 6, 5, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1515,6 +1838,41 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsDeleted = false,
                             RecipeId = 5,
                             Url = "https://media.istockphoto.com/id/817313114/photo/mushroom-beef-stroganoff-in-pan-with-copy-space.jpg?s=2048x2048&w=is&k=20&c=X6NMh7o18JfGseHdb1UwOzHWxpwC7kpwEDsJcvDrAms="
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            RecipeId = 6,
+                            Url = "https://plus.unsplash.com/premium_photo-1664391870099-a7d4976fd8e9?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            RecipeId = 8,
+                            Url = "https://plus.unsplash.com/premium_photo-1700590072619-46364c033a1b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fG1vY2hpfGVufDB8fDB8fHww"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            RecipeId = 8,
+                            Url = "https://images.unsplash.com/photo-1629984169599-184e84223c1e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1vY2hpfGVufDB8fDB8fHww"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            RecipeId = 9,
+                            Url = "https://images.unsplash.com/photo-1724424280324-7d8e35196bde?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hvY29jaGlwfGVufDB8fDB8fHww"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsDeleted = false,
+                            RecipeId = 10,
+                            Url = "https://plus.unsplash.com/premium_photo-1669559809094-1d6942e1531e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHVtcGtpbiUyMHNvdXB8ZW58MHx8MHx8fDA%3D"
                         });
                 });
 
@@ -1944,6 +2302,378 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IngredientId = 21,
                             IsDeleted = false,
                             RecipeId = 5
+                        },
+                        new
+                        {
+                            Id = 50,
+                            IngredientId = 7,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 1L,
+                            RecipeId = 6
+                        },
+                        new
+                        {
+                            Id = 51,
+                            IngredientId = 2,
+                            IsDeleted = false,
+                            Quantity = 1L,
+                            RecipeId = 6
+                        },
+                        new
+                        {
+                            Id = 52,
+                            IngredientId = 18,
+                            IsDeleted = false,
+                            RecipeId = 6
+                        },
+                        new
+                        {
+                            Id = 53,
+                            IngredientId = 66,
+                            IsDeleted = false,
+                            MeasurementUnitId = 9,
+                            Quantity = 1L,
+                            RecipeId = 6
+                        },
+                        new
+                        {
+                            Id = 54,
+                            IngredientId = 5,
+                            IsDeleted = false,
+                            RecipeId = 6
+                        },
+                        new
+                        {
+                            Id = 55,
+                            IngredientId = 48,
+                            IsDeleted = false,
+                            RecipeId = 6
+                        },
+                        new
+                        {
+                            Id = 56,
+                            IngredientId = 71,
+                            IsDeleted = false,
+                            Quantity = 2L,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 57,
+                            IngredientId = 6,
+                            IsDeleted = false,
+                            MeasurementUnitId = 1,
+                            Quantity = 80L,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 58,
+                            IngredientId = 5,
+                            IsDeleted = false,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 59,
+                            IngredientId = 42,
+                            IsDeleted = false,
+                            MeasurementUnitId = 9,
+                            Quantity = 1L,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 60,
+                            IngredientId = 75,
+                            IsDeleted = false,
+                            MeasurementUnitId = 1,
+                            Quantity = 150L,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 61,
+                            IngredientId = 2,
+                            IsDeleted = false,
+                            Quantity = 1L,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 62,
+                            IngredientId = 47,
+                            IsDeleted = false,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 63,
+                            IngredientId = 72,
+                            IsDeleted = false,
+                            MeasurementUnitId = 1,
+                            Quantity = 200L,
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            Id = 64,
+                            IngredientId = 79,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 1L,
+                            RecipeId = 8
+                        },
+                        new
+                        {
+                            Id = 65,
+                            IngredientId = 81,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 1L,
+                            RecipeId = 8
+                        },
+                        new
+                        {
+                            Id = 66,
+                            IngredientId = 85,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 1L,
+                            RecipeId = 8
+                        },
+                        new
+                        {
+                            Id = 67,
+                            IngredientId = 86,
+                            IsDeleted = false,
+                            MeasurementUnitId = 8,
+                            Quantity = 1L,
+                            RecipeId = 8
+                        },
+                        new
+                        {
+                            Id = 68,
+                            IngredientId = 76,
+                            IsDeleted = false,
+                            MeasurementUnitId = 1,
+                            Quantity = 100L,
+                            RecipeId = 8
+                        },
+                        new
+                        {
+                            Id = 69,
+                            IngredientId = 95,
+                            IsDeleted = false,
+                            MeasurementUnitId = 1,
+                            Quantity = 50L,
+                            RecipeId = 8
+                        },
+                        new
+                        {
+                            Id = 70,
+                            IngredientId = 6,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 1L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 71,
+                            IngredientId = 3,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 1L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 72,
+                            IngredientId = 75,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 1L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 73,
+                            IngredientId = 47,
+                            IsDeleted = false,
+                            MeasurementUnitId = 8,
+                            Quantity = 2L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 74,
+                            IngredientId = 1,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 3L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 75,
+                            IngredientId = 42,
+                            IsDeleted = false,
+                            MeasurementUnitId = 8,
+                            Quantity = 1L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 76,
+                            IngredientId = 5,
+                            IsDeleted = false,
+                            MeasurementUnitId = 8,
+                            Quantity = 1L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 77,
+                            IngredientId = 92,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 2L,
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            Id = 78,
+                            IngredientId = 7,
+                            IsDeleted = false,
+                            MeasurementUnitId = 9,
+                            Quantity = 6L,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 79,
+                            IngredientId = 93,
+                            IsDeleted = false,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 80,
+                            IngredientId = 10,
+                            IsDeleted = false,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 81,
+                            IngredientId = 9,
+                            IsDeleted = false,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 82,
+                            IngredientId = 5,
+                            IsDeleted = false,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 83,
+                            IngredientId = 44,
+                            IsDeleted = false,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 84,
+                            IngredientId = 94,
+                            IsDeleted = false,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 85,
+                            IngredientId = 48,
+                            IsDeleted = false,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 86,
+                            IngredientId = 96,
+                            IsDeleted = false,
+                            MeasurementUnitId = 10,
+                            Quantity = 4L,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 87,
+                            IngredientId = 24,
+                            IsDeleted = false,
+                            MeasurementUnitId = 7,
+                            Quantity = 100L,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 88,
+                            IngredientId = 41,
+                            IsDeleted = false,
+                            MeasurementUnitId = 9,
+                            Quantity = 2L,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 89,
+                            IngredientId = 98,
+                            IsDeleted = false,
+                            MeasurementUnitId = 1,
+                            Quantity = 100L,
+                            RecipeId = 10
+                        },
+                        new
+                        {
+                            Id = 90,
+                            IngredientId = 51,
+                            IsDeleted = false,
+                            MeasurementUnitId = 4,
+                            Quantity = 12L,
+                            RecipeId = 11
+                        },
+                        new
+                        {
+                            Id = 91,
+                            IngredientId = 5,
+                            IsDeleted = false,
+                            RecipeId = 11
+                        },
+                        new
+                        {
+                            Id = 92,
+                            IngredientId = 20,
+                            IsDeleted = false,
+                            RecipeId = 11
+                        },
+                        new
+                        {
+                            Id = 93,
+                            IngredientId = 82,
+                            IsDeleted = false,
+                            RecipeId = 11
+                        },
+                        new
+                        {
+                            Id = 94,
+                            IngredientId = 12,
+                            IsDeleted = false,
+                            MeasurementUnitId = 5,
+                            Quantity = 1L,
+                            RecipeId = 11
                         });
                 });
 
@@ -2129,191 +2859,246 @@ namespace StirCraftApp.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Data.JoinedTables.CategoryRecipe", b =>
+            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.CategoryRecipe", b =>
                 {
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoryId", "RecipeId");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("RecipeId");
+                    b.HasKey("RecipeId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("CategoriesRecipes");
 
                     b.HasData(
                         new
                         {
-                            CategoryId = 4,
-                            RecipeId = 1
+                            RecipeId = 1,
+                            CategoryId = 4
                         },
                         new
                         {
-                            CategoryId = 8,
-                            RecipeId = 1
+                            RecipeId = 1,
+                            CategoryId = 8
                         },
                         new
                         {
-                            CategoryId = 9,
-                            RecipeId = 2
+                            RecipeId = 2,
+                            CategoryId = 9
                         },
                         new
                         {
-                            CategoryId = 10,
-                            RecipeId = 2
+                            RecipeId = 2,
+                            CategoryId = 10
                         },
                         new
                         {
-                            CategoryId = 6,
-                            RecipeId = 2
+                            RecipeId = 2,
+                            CategoryId = 6
                         },
                         new
                         {
-                            CategoryId = 11,
-                            RecipeId = 3
+                            RecipeId = 3,
+                            CategoryId = 11
                         },
                         new
                         {
-                            CategoryId = 16,
-                            RecipeId = 3
+                            RecipeId = 3,
+                            CategoryId = 16
                         },
                         new
                         {
-                            CategoryId = 18,
-                            RecipeId = 4
+                            RecipeId = 4,
+                            CategoryId = 18
                         },
                         new
                         {
-                            CategoryId = 16,
-                            RecipeId = 4
+                            RecipeId = 4,
+                            CategoryId = 16
                         },
                         new
                         {
-                            CategoryId = 21,
-                            RecipeId = 5
+                            RecipeId = 5,
+                            CategoryId = 21
+                        },
+                        new
+                        {
+                            RecipeId = 6,
+                            CategoryId = 15
+                        },
+                        new
+                        {
+                            RecipeId = 7,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            RecipeId = 7,
+                            CategoryId = 16
+                        },
+                        new
+                        {
+                            RecipeId = 7,
+                            CategoryId = 20
+                        },
+                        new
+                        {
+                            RecipeId = 8,
+                            CategoryId = 1
+                        },
+                        new
+                        {
+                            RecipeId = 8,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            RecipeId = 9,
+                            CategoryId = 20
+                        },
+                        new
+                        {
+                            RecipeId = 9,
+                            CategoryId = 2
+                        },
+                        new
+                        {
+                            RecipeId = 10,
+                            CategoryId = 12
+                        },
+                        new
+                        {
+                            RecipeId = 11,
+                            CategoryId = 4
+                        },
+                        new
+                        {
+                            RecipeId = 11,
+                            CategoryId = 8
                         });
                 });
 
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Data.JoinedTables.ShoppingListRecipeIngredient", b =>
+            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.ShoppingListRecipeIngredient", b =>
                 {
-                    b.Property<int>("ShoppingListId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RecipeIngredientId")
                         .HasColumnType("int");
 
-                    b.HasKey("ShoppingListId", "RecipeIngredientId");
+                    b.Property<int>("ShoppingListId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("RecipeIngredientId");
+                    b.HasKey("RecipeIngredientId", "ShoppingListId");
+
+                    b.HasIndex("ShoppingListId");
 
                     b.ToTable("ShoppingListsRecipeIngredients");
 
                     b.HasData(
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 18
+                            RecipeIngredientId = 18,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 19
+                            RecipeIngredientId = 19,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 20
+                            RecipeIngredientId = 20,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 21
+                            RecipeIngredientId = 21,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 22
+                            RecipeIngredientId = 22,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 23
+                            RecipeIngredientId = 23,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 24
+                            RecipeIngredientId = 24,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 25
+                            RecipeIngredientId = 25,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 1,
-                            RecipeIngredientId = 26
+                            RecipeIngredientId = 26,
+                            ShoppingListId = 1
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 7
+                            RecipeIngredientId = 7,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 8
+                            RecipeIngredientId = 8,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 9
+                            RecipeIngredientId = 9,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 10
+                            RecipeIngredientId = 10,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 11
+                            RecipeIngredientId = 11,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 12
+                            RecipeIngredientId = 12,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 13
+                            RecipeIngredientId = 13,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 14
+                            RecipeIngredientId = 14,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 15
+                            RecipeIngredientId = 15,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 16
+                            RecipeIngredientId = 16,
+                            ShoppingListId = 2
                         },
                         new
                         {
-                            ShoppingListId = 2,
-                            RecipeIngredientId = 17
+                            RecipeIngredientId = 17,
+                            ShoppingListId = 2
                         });
                 });
 
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Data.JoinedTables.UserFavoriteRecipe", b =>
+            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.UserFavoriteRecipe", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -2352,6 +3137,36 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a",
                             RecipeId = 1
+                        },
+                        new
+                        {
+                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
+                            RecipeId = 6
+                        },
+                        new
+                        {
+                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a",
+                            RecipeId = 7
+                        },
+                        new
+                        {
+                            UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a",
+                            RecipeId = 8
+                        },
+                        new
+                        {
+                            UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a",
+                            RecipeId = 9
+                        },
+                        new
+                        {
+                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
+                            RecipeId = 11
                         });
                 });
 
@@ -2446,7 +3261,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "dcda0eec-37b5-4651-93cf-76a68e5d598e",
+                            ConcurrencyStamp = "3dd1e7c7-1a2d-431a-8994-05f0b2f93b9e",
                             DisplayName = "ChefBob",
                             Email = "bob@example.com",
                             EmailConfirmed = false,
@@ -2454,9 +3269,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB@EXAMPLE.COM",
                             NormalizedUserName = "BOB@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAOEkkIjvAcegtAE+k82S/HIxCWeJJrENzZgYV57DZGbpW8cPIJrWYFtgdQiRNQ+vA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKTs+zisymfJEDV+gZ9lPgQ+8ZRipcYTGt4EaEXnzXNhBbMr4G5K+EO5TBGQ03+Z+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f76eb20c-4e12-4ce6-9243-721a555cf832",
+                            SecurityStamp = "db99014c-0b63-482c-ad5c-f6e8e46be948",
                             TwoFactorEnabled = false,
                             UserName = "bob@example.com"
                         },
@@ -2465,7 +3280,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "7e7b8ca2-4e05-4a7e-9088-d48d8569f16c",
+                            ConcurrencyStamp = "762a933a-ee7d-4519-82cd-7266b85af964",
                             DisplayName = "KateMiddleton",
                             Email = "kate@example.com",
                             EmailConfirmed = false,
@@ -2473,9 +3288,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KATE@EXAMPLE.COM",
                             NormalizedUserName = "KATE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIl10MC1UYMs+SNijZi5aBY/1bFZo5vAvyHNBku/+wSCpXpuD+J47u3mUNFCqzAmtQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBngvTSTLC2F6PBXOOhicndbUYluu9Uybzi/vmWIVvEoH7eF/A40w/6no9qmG70mQA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9c248072-a271-492c-a514-a6c3cc26209e",
+                            SecurityStamp = "aec604e6-ecbf-47a0-b559-f6ffeaf2830f",
                             TwoFactorEnabled = false,
                             UserName = "kate@example.com"
                         },
@@ -2484,7 +3299,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "d1d0a9bb-ee12-4b8d-a8ea-cb910f73bb7e",
+                            ConcurrencyStamp = "51a817be-2430-45a1-855e-a29134123c05",
                             DisplayName = "AdrianTheAdventurer",
                             Email = "adrian@example.com",
                             EmailConfirmed = false,
@@ -2492,9 +3307,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADRIAN@EXAMPLE.COM",
                             NormalizedUserName = "ADRIAN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM781he74Lf9I5TnDp3i31tkfNakbAcz0X9P14W9gV/iUYkrrg0szU5jEhRhGntY9w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDg3iD3lLvsmtJNilP/jqUKFMLMhOAZmUKUOajUGxGJpTG89mz0NDs2p0Hsio2EgJw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c44ebe42-dac6-4b3e-b97f-0506e842b2f0",
+                            SecurityStamp = "d775cbad-b8d0-44a8-bf42-940c6ab748fd",
                             TwoFactorEnabled = false,
                             UserName = "adrian@example.com"
                         },
@@ -2503,7 +3318,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "3326b1e8-de80-45c6-be0f-c987c7d4a079",
+                            ConcurrencyStamp = "1180834c-a57c-4169-87e8-3d715229d03f",
                             DisplayName = "LoveLink",
                             Email = "zelda@example.com",
                             EmailConfirmed = false,
@@ -2511,9 +3326,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZELDA@EXAMPLE.COM",
                             NormalizedUserName = "ZELDA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELGYoWJ/UA+vaCqp4GGvQts/BfUxE6r51As5xRMldNXnWo1t//uOaYe+NNbyp2EK9Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELnicvycTQzbGuJaBfRhaBCcTLHu0VjUcG8Eu6aLBSR4cnPDDjpduqCQptwKZSPdWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "31dee186-c743-4324-bb9c-e001e6f641ec",
+                            SecurityStamp = "207ffa5b-6952-49d6-a8f0-7f976c312209",
                             TwoFactorEnabled = false,
                             UserName = "zelda@example.com"
                         },
@@ -2522,7 +3337,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "980b1ab4-0559-4bc5-90c2-cb4c1083550f",
+                            ConcurrencyStamp = "9ada98a9-f3c5-409f-8c90-16a3e7d25281",
                             DisplayName = "ThePowerOfMorgoth",
                             Email = "galadriel@example.com",
                             EmailConfirmed = false,
@@ -2530,9 +3345,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
                             NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEECYOQq4Xh1Gt7xjKEThMg0gaDiAzOWDEjFLsrHqIjCJZOjTMw2kWVjgyRtaa0PoAg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKtKK00zx9RLLEwqjJM3MueLbpl0vYBJJ65J047bxVHDz4sYfedJrxrFNedbo+vBfw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cff70599-3fe9-4a24-84e4-e0f61e39394f",
+                            SecurityStamp = "904d366c-5d38-4c6b-84ee-5de3cc74d507",
                             TwoFactorEnabled = false,
                             UserName = "galadriel@example.com"
                         },
@@ -2540,7 +3355,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "82c69f54-2890-45af-a9ee-196750772930",
+                            ConcurrencyStamp = "0b7581ec-7cf3-4cce-8d8f-b4fc7491ddba",
                             DisplayName = "StirCraftAdmin",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
@@ -2548,9 +3363,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOkIpAmsNU6tdExMpolySWe8+0Sjo7JB3kYnB8FrftgGZiX3D/0+ir27Zr/fUBk9Nw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOImk2RY+icQ1ga4hGQ2GLJIHgUPTKwu0b3zHtMCW1uc92HkKOdJ1QUHA0L7Zcu9cg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "57a327ea-bf02-441a-896e-4dda032373bb",
+                            SecurityStamp = "48a187a4-4b7b-424e-824a-4cdedfca323b",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });
@@ -2732,16 +3547,16 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Data.JoinedTables.CategoryRecipe", b =>
+            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.CategoryRecipe", b =>
                 {
                     b.HasOne("StirCraftApp.Domain.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("CategoryRecipes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("StirCraftApp.Domain.Entities.Recipe", "Recipe")
-                        .WithMany()
+                        .WithMany("CategoryRecipes")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -2751,16 +3566,16 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Data.JoinedTables.ShoppingListRecipeIngredient", b =>
+            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.ShoppingListRecipeIngredient", b =>
                 {
                     b.HasOne("StirCraftApp.Domain.Entities.RecipeIngredient", "RecipeIngredient")
-                        .WithMany()
+                        .WithMany("ShoppingListRecipeIngredients")
                         .HasForeignKey("RecipeIngredientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("StirCraftApp.Domain.Entities.ShoppingList", "ShoppingList")
-                        .WithMany()
+                        .WithMany("ShoppingListRecipeIngredients")
                         .HasForeignKey("ShoppingListId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -2770,23 +3585,26 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Navigation("ShoppingList");
                 });
 
-            modelBuilder.Entity("StirCraftApp.Infrastructure.Data.JoinedTables.UserFavoriteRecipe", b =>
+            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.UserFavoriteRecipe", b =>
                 {
                     b.HasOne("StirCraftApp.Domain.Entities.Recipe", "Recipe")
-                        .WithMany()
+                        .WithMany("UserFavoriteRecipes")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", "User")
+                    b.HasOne("StirCraftApp.Infrastructure.Identity.AppUser", null)
                         .WithMany("FavoriteRecipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Recipe");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("StirCraftApp.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("CategoryRecipes");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Comment", b =>
@@ -2816,6 +3634,8 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Recipe", b =>
                 {
+                    b.Navigation("CategoryRecipes");
+
                     b.Navigation("Comments");
 
                     b.Navigation("RecipeImages");
@@ -2823,6 +3643,18 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Navigation("RecipeIngredients");
 
                     b.Navigation("RecipeRatings");
+
+                    b.Navigation("UserFavoriteRecipes");
+                });
+
+            modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeIngredient", b =>
+                {
+                    b.Navigation("ShoppingListRecipeIngredients");
+                });
+
+            modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
+                {
+                    b.Navigation("ShoppingListRecipeIngredients");
                 });
 
             modelBuilder.Entity("StirCraftApp.Infrastructure.Identity.AppUser", b =>

@@ -27,8 +27,7 @@ public static class IngredientMappingExtensions
         {
             Name = ingredient.Name,
             IsAllergen = ingredient.IsAllergen,
-            NameInPlural = ingredient.NameInPlural,
-            IsSolid = ingredient.IsSolid
+            NameInPlural = ingredient.NameInPlural
         };
     }
 
@@ -40,7 +39,6 @@ public static class IngredientMappingExtensions
             Name = ingredient.Name,
             IsAllergen = ingredient.IsAllergen,
             NameInPlural = ingredient.NameInPlural,
-            IsSolid = ingredient.IsSolid,
             IsAdminApproved = ingredient.IsAdminApproved
         };
     }
@@ -50,7 +48,6 @@ public static class IngredientMappingExtensions
         ingredient.Name = formIngredientDto.Name;
         ingredient.IsAllergen = formIngredientDto.IsAllergen;
         ingredient.NameInPlural = formIngredientDto.NameInPlural;
-        ingredient.IsSolid = formIngredientDto.IsSolid;
         ingredient.IsAdminApproved = true;
     }
 

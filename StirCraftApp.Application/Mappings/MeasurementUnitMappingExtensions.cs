@@ -10,9 +10,7 @@ public static class MeasurementUnitMappingExtensions
         {
             Id = measurementUnit.Id,
             Name = measurementUnit.Name,
-            Abbreviation = measurementUnit.Abbreviation,
-            IsSolidSpecific = measurementUnit.IsSolidSpecific,
-            IsLiquidSpecific = measurementUnit.IsLiquidSpecific
+            Abbreviation = measurementUnit.Abbreviation
         };
     }
     public static MeasurementUnit ToMeasurementUnit(this MeasurementUnitDto measurementUnitDto)
@@ -21,9 +19,7 @@ public static class MeasurementUnitMappingExtensions
         {
             Id = measurementUnitDto.Id,
             Name = measurementUnitDto.Name,
-            Abbreviation = measurementUnitDto.Abbreviation,
-            IsSolidSpecific = measurementUnitDto.IsSolidSpecific,
-            IsLiquidSpecific = measurementUnitDto.IsLiquidSpecific
+            Abbreviation = measurementUnitDto.Abbreviation
         };
     }
 }
