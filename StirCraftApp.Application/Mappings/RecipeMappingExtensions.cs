@@ -69,7 +69,7 @@ public static class RecipeMappingExtensions
 
     }
 
-    public static DetailedRecipeDto ToDetailedRecipeDto(this Recipe recipe, UserManager<AppUser> userManager)
+    public static DetailedRecipeDto ToDetailedRecipeDto(this Recipe recipe, UserManager<AppUser> userManager, string? userId)
     {
         return new DetailedRecipeDto
         {
@@ -115,7 +115,9 @@ public static class RecipeMappingExtensions
                         })
                         .ToList()
             })
-                .ToList()
+                .ToList(),
+            IsLikedByCurrentUser = userId != null ? recipe.UserFavoriteRecipes.Any(ufr => ufr.UserId == userId) : null,
+            CurrentUserRating = userId != null ? recipe.RecipeRatings.FirstOrDefault(rr => rr.UserId == userId)?.Value ?? 0 : 0
         };
     }
 

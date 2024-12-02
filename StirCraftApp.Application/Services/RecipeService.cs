@@ -13,7 +13,7 @@ namespace StirCraftApp.Application.Services;
 public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) : IRecipeService
 {
     //todo handle exceptions better
-    public async Task<object> GetRecipeByIdAsync(ISpecification<Recipe>? spec, int id, string dtoName)
+    public async Task<object> GetRecipeByIdAsync(ISpecification<Recipe>? spec, int id, string dtoName, string? userId)
     {
         var recipeIsFound = await unit.Repository<Recipe>()
             .ExistsAsync(id);
@@ -26,7 +26,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         var recipe = await unit.Repository<Recipe>()
             .GetByIdAsync(spec, id);
 
-        var model = ConvertToDto(recipe!, dtoName);
+        var model = ConvertToDto(recipe!, dtoName, userId);
 
         return model;
     }
@@ -184,12 +184,37 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         return true;
     }
 
-    private object ConvertToDto(Recipe recipe, string dtoName)
+    public async Task RateRecipeAsync(string userId, int recipeId, int rating)
+    {
+        var recipeRatings = await unit.Repository<RecipeRating>()
+            .GetAllAsync(null);
+
+        var ratingFound = recipeRatings.FirstOrDefault(rr => rr.UserId == userId && rr.RecipeId == recipeId);
+
+        if (ratingFound != null)
+        {
+            ratingFound.Value = rating;
+            await unit.CompleteAsync();
+        }
+        else
+        {
+            await unit.Repository<RecipeRating>().AddAsync(new RecipeRating
+            {
+                UserId = userId,
+                RecipeId = recipeId,
+                Value = rating
+            });
+
+            await unit.CompleteAsync();
+        }
+    }
+
+    private object ConvertToDto(Recipe recipe, string dtoName, string? userId = null)
     {
         return dtoName switch
         {
             nameof(SummaryRecipeDto) => recipe.ToSummaryRecipeDto(userManager),
-            nameof(DetailedRecipeDto) => recipe.ToDetailedRecipeDto(userManager),
+            nameof(DetailedRecipeDto) => recipe.ToDetailedRecipeDto(userManager, userId),
             nameof(CookRecipeSummaryDto) => recipe.ToCookRecipeSummaryDto(userManager),
             nameof(BriefRecipeDto) => recipe.ToBriefRecipeDto(userManager),
             nameof(BriefCookRecipeDto) => recipe.ToBriefCookRecipeDto(userManager),

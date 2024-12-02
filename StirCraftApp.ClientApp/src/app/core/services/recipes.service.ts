@@ -98,6 +98,6 @@ export class RecipesService {
   }
 
   rateRecipe(recipeId: number, rating: number) {
-    return this.http.post<number>(this.baseUrl + 'recipes/' + recipeId + '/rate', rating);
+    return this.http.post(this.baseUrl + 'recipes/' + recipeId + '/rate/' + rating, null);
   }
 }

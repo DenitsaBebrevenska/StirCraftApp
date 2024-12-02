@@ -54,7 +54,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
 
         var spec = new RecipeIncludeAllSpecification();
 
-        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeAdminNotesDto));
+        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeAdminNotesDto), null);
         return Ok(recipe);
     }
     //todo comment, reply, rate, view profile, edit avatar, view liked recipes

@@ -14,11 +14,12 @@
     </div>
 
     <!-- Recipe Details -->
+    <!-- Fix images -->
     <div class="flex flex-col items-center mb-6">
       @for(image of recipe.images; track image.id) {
       <img
         class="w-1/2 h-auto rounded-md shadow-lg"
-        [src]="image.url || 'default-image.jpg'"
+        [src]="recipe.images || 'default-image.jpg'"
         alt="Recipe Image"
       />
       }
@@ -46,12 +47,12 @@
       <span class="me-2 text-lg font-semibold text-primary"
         >Rate this Recipe:</span
       >
-      @for (option of ratingOptions; track $index) {
+      @for (value of ratingOptions; track $index) {
       <button
         mat-button
         mat-icon-button
-        (click)="rateRecipe(option)"
-        [color]="option <= recipe.rating ? 'primary' : ''"
+        (click)="rateRecipe(+value)"
+        [color]="value <= recipe.currentUserRating ? 'primary' : ''"
       >
         <mat-icon>star</mat-icon>
       </button>
@@ -62,15 +63,10 @@
       <span class="me-2 text-lg font-semibold text-primary"
         >Add to Favorites:</span
       >
-      <button
-        mat-button
-        mat-icon-button
-        (click)="toggleFavorite()"
-        [color]="recipe.isFavorite ? 'primary' : ''"
-      >
-        <mat-icon>{{
-          recipe.isFavorite ? "favorite" : "favorite_border"
-        }}</mat-icon>
+      <button mat-button mat-icon-button (click)="toggleFavorite()">
+        <mat-icon [color]="recipe.isLikedByCurrentUser ? 'primary' : ''"
+          >favorite</mat-icon
+        >
       </button>
     </div>
     <!-- Ingredients and preparation -->
