@@ -8,7 +8,7 @@ import { CarouselComponent } from "../../shared/components/carousel/carousel.com
   standalone: true,
   imports: [
     CarouselComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

@@ -1,7 +1,7 @@
 <div class="carousel-container">
   @for (recipe of carouselRecipes; track recipe.id) {
   <div
-    routerLink="/recipes/{{ recipe.id }}"
+    routerLink="/recipes/{{ currentSlide }}"
     class="carousel-slide"
     [class.active]="recipe.id === currentSlide"
     [style.backgroundImage]="'url(' + recipe.mainImageUrl + ')'"
