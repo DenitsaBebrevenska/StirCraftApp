@@ -92,8 +92,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     public async Task<IActionResult> ToggleFavorite(int id)
     {
         var userId = User.GetId();
-        var isFavorite = await recipeService.ToggleFavoriteAsync(userId, id);
-        return Ok(isFavorite);
+        var dto = await recipeService.ToggleFavoriteAsync(userId, id);
+        return Ok(dto);
     }
 
 
@@ -101,8 +101,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     public async Task<IActionResult> RateRecipe(int id, int value)
     {
         var userId = User.GetId();
-        await recipeService.RateRecipeAsync(userId, id, value);
-        return Ok();
+        var averageRating = await recipeService.RateRecipeAsync(userId, id, value);
+        return Ok(averageRating);
     }
 
     [HttpPost("{id}/comments")]

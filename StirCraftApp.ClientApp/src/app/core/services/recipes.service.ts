@@ -12,6 +12,7 @@ import { RecipeCreateForm } from '../../shared/models/recipe/recipeCreateForm';
 import { PagingParams } from '../../shared/models/pagingParams';
 import { CommentForm } from '../../shared/models/recipe/commentForm';
 import { EditComment } from '../../shared/models/recipe/editComment';
+import { ToggleFavoriteRecipe } from '../../shared/models/recipe/toggleFavoriteRecipe';
 
 @Injectable({
   providedIn: 'root'
@@ -96,11 +97,11 @@ export class RecipesService {
   }
 
   toggleFavorite(recipeId: number) {
-    return this.http.post<boolean>(this.baseUrl + 'recipes/' + recipeId + '/toggle-favorite', null);
+    return this.http.post<ToggleFavoriteRecipe>(this.baseUrl + 'recipes/' + recipeId + '/toggle-favorite', null);
   }
 
   rateRecipe(recipeId: number, rating: number) {
-    return this.http.post(this.baseUrl + 'recipes/' + recipeId + '/rate/' + rating, null);
+    return this.http.post<number>(this.baseUrl + 'recipes/' + recipeId + '/rate/' + rating, null);
   }
 
   addComment(recipeId: number, commentFormDto: CommentForm) {

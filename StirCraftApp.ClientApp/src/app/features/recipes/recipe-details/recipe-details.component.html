@@ -51,15 +51,12 @@
       <button mat-icon-button (click)="rateRecipe(+value)">
         <mat-icon
           class="scale-125"
-          [color]="
-            this.currentRating <= recipe.currentUserRating ? 'primary' : ''
-          "
+          [color]="(recipe.currentUserRating || 0) >= +value ? 'primary' : ''"
           >star</mat-icon
         >
       </button>
       }
     </div>
-
     <!-- Like Section -->
     <div class="d-flex align-items-center mb-6">
       <span class="me-2 text-lg font-semibold text-primary"

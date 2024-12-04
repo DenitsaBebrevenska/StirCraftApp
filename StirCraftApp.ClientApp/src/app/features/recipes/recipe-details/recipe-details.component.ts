@@ -73,7 +73,9 @@ export class RecipeDetailsComponent implements OnInit {
     this.recipeService.getRecipe(+id).subscribe(
       {
         next: response => {
-          this.recipe = response
+          this.recipe = response,
+            this.isLiked = response.isLikedByCurrentUser,
+            this.currentRating = response.currentUserRating || 0
         },
         error: err => console.error(err)
       }
@@ -81,24 +83,49 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   toggleFavorite() {
-
     if (!this.recipe) return;
 
     this.recipeService.toggleFavorite(this.recipe.id).subscribe({
       next: response => {
-        this.isLiked = response;
+        // Directly update the local state
+        this.isLiked = response.isFavorite;
+
+        // Optimistically update likes count
+        if (this.recipe) {
+          this.recipe.likes = response.totalLikes;
+        }
+
+        this.snackBar.success(`Recipe ${response.isFavorite == true ? 'added to' : 'removed from'} favorites`);
+      },
+      error: () => {
+        this.snackBar.error('Failed to update favorite status');
       }
     });
-
-    this.loadRecipe();
   }
 
   rateRecipe(value: number) {
     if (!this.recipe || value < 0 || value > 5) return;
 
-    this.recipeService.rateRecipe(this.recipe!.id, +value).subscribe({});
+    // Optimistically update the UI first
     this.currentRating = value;
-    this.loadRecipe();
+
+    this.recipeService.rateRecipe(this.recipe.id, +value).subscribe({
+      next: response => {
+        // Update current user's rating
+        if (this.recipe) {
+          this.recipe.currentUserRating = value;
+          this.recipe.rating = +response;
+
+        }
+
+        this.snackBar.success(`You rated this recipe ${value} stars`);
+      },
+      error: () => {
+        // If the server call fails, revert the rating
+        this.currentRating = this.recipe?.currentUserRating || 0;
+        this.snackBar.error('Failed to submit rating');
+      }
+    });
   }
 
   onCommentSubmit() {
@@ -125,13 +152,11 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   startCommentEditing(comment: any) {
-    // Reset the edit form with the current comment details
     this.commentEditForm.patchValue({
       title: comment.title,
       body: comment.body
     });
 
-    // Set the current comment being edited
     this.editingCommentId = comment.id;
     this.isInEditMode = true;
   }

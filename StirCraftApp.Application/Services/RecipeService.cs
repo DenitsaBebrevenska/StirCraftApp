@@ -7,6 +7,7 @@ using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
+using static StirCraftApp.Domain.Constants.EntityConstraints;
 
 namespace StirCraftApp.Application.Services;
 
@@ -156,7 +157,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         await unit.CompleteAsync();
     }
 
-    public async Task<bool> ToggleFavoriteAsync(string userId, int recipeId)
+    public async Task<FavoriteRecipeToggleDto> ToggleFavoriteAsync(string userId, int recipeId)
     {
         var spec = new RecipeWithFavoritesApprovedSpecification();
         var recipes = await unit.Repository<Recipe>()
@@ -170,7 +171,11 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
                 .UserFavoriteRecipes
                 .Remove(recipeFound.UserFavoriteRecipes.First(ufr => ufr.UserId == userId));
             await unit.CompleteAsync();
-            return false;
+            return new FavoriteRecipeToggleDto()
+            {
+                IsFavorite = false,
+                TotalLikes = (uint)recipeFound.UserFavoriteRecipes.Count
+            };
         }
 
         recipes.First(r => r.Id == recipeId)
@@ -181,11 +186,28 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
                 RecipeId = recipeId
             });
         await unit.CompleteAsync();
-        return true;
+        return new FavoriteRecipeToggleDto()
+        {
+            IsFavorite = true,
+            TotalLikes = (uint)recipes.First(r => r.Id == recipeId).UserFavoriteRecipes.Count()
+        };
     }
 
-    public async Task RateRecipeAsync(string userId, int recipeId, int rating)
+    public async Task<double> RateRecipeAsync(string userId, int recipeId, int rating)
     {
+        var recipeExists = await unit.Repository<Recipe>().ExistsAsync(recipeId);
+
+        if (recipeExists == false)
+        {
+            throw new Exception("Recipe not found");
+        }
+
+        if (rating < RecipeRatingMinValue || rating > RecipeRatingMaxValue)
+        {
+            throw new Exception($"Invalid rating! The rating must be in the range between {RecipeRatingMinValue} and {RecipeRatingMaxValue} inclusive");
+        }
+
+
         var recipeRatings = await unit.Repository<RecipeRating>()
             .GetAllAsync(null);
 
@@ -207,6 +229,10 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
             await unit.CompleteAsync();
         }
+
+        return recipeRatings.Any(rr => rr.RecipeId == recipeId)
+            ? recipeRatings.Where(rr => rr.RecipeId == recipeId).Average(rr => rr.Value)
+            : 0;
     }
 
     private object ConvertToDto(Recipe recipe, string dtoName, string? userId = null)
