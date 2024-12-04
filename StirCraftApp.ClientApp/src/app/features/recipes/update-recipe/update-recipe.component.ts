@@ -59,7 +59,6 @@ export class UpdateRecipeComponent implements OnInit {
   measurementUnitsOptions: { value: number | null, label: string }[] = [];
   id: any;
 
-
   editRecipeForm = this.formBuilder.group({
     name: ['', Validators.required],
     preparationSteps: ['', Validators.required],

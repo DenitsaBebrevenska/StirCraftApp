@@ -20,5 +20,10 @@ public class Comment : BaseEntity
 
     [MaxLength(CommentBodyMaxLength)]
     public required string Body { get; set; }
+
+    public DateTime CreatedOn { get; set; }
+
+    public DateTime? UpdatedOn { get; set; }
+
     public virtual ICollection<Reply> Replies { get; set; } = new List<Reply>();
 }

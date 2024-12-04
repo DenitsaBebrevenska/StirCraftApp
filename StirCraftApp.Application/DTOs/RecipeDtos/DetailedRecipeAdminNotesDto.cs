@@ -1,6 +1,6 @@
 ﻿using StirCraftApp.Application.DTOs.CategoryDtos;
-using StirCraftApp.Application.DTOs.RecipeDtos.Image;
-using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
+using StirCraftApp.Application.DTOs.Image;
+using StirCraftApp.Application.DTOs.IngredientDtos;
 
 namespace StirCraftApp.Application.DTOs.RecipeDtos;
 public class DetailedRecipeAdminNotesDto

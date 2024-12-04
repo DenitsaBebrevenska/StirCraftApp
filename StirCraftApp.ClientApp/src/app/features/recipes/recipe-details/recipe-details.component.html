@@ -19,7 +19,7 @@
       @for(image of recipe.images; track image.id) {
       <img
         class="w-1/2 h-auto rounded-md shadow-lg"
-        [src]="recipe.images || 'default-image.jpg'"
+        [src]="image.url || 'default-image.jpg'"
         alt="Recipe Image"
       />
       }
@@ -48,23 +48,25 @@
         >Rate this Recipe:</span
       >
       @for (value of ratingOptions; track $index) {
-      <button
-        mat-button
-        mat-icon-button
-        (click)="rateRecipe(+value)"
-        [color]="value <= recipe.currentUserRating ? 'primary' : ''"
-      >
-        <mat-icon>star</mat-icon>
+      <button mat-icon-button (click)="rateRecipe(+value)">
+        <mat-icon
+          class="scale-125"
+          [color]="
+            this.currentRating <= recipe.currentUserRating ? 'primary' : ''
+          "
+          >star</mat-icon
+        >
       </button>
       }
     </div>
 
+    <!-- Like Section -->
     <div class="d-flex align-items-center mb-6">
       <span class="me-2 text-lg font-semibold text-primary"
         >Add to Favorites:</span
       >
-      <button mat-button mat-icon-button (click)="toggleFavorite()">
-        <mat-icon [color]="recipe.isLikedByCurrentUser ? 'primary' : ''"
+      <button mat-icon-button (click)="toggleFavorite()">
+        <mat-icon class="scale-150" [color]="isLiked ? 'primary' : ''"
           >favorite</mat-icon
         >
       </button>
@@ -101,16 +103,16 @@
   <div class="mt-10">
     <h4 class="text-2xl font-semibold text-primary mb-4">Comments:</h4>
     <mat-card class="max-w-screen-xl mx-auto mt-2 p-8 bg-white">
-      <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="commentForm" (ngSubmit)="onCommentSubmit()">
         <div class="text-center mb-6">
           <h2 class="text-2xl font-semibold">Add Comment</h2>
         </div>
         <app-text-input label="Title" formControlName="title" />
         <app-text-area label="Comment" rows="'5'" formControlName="body" />
-        @if (validationErrors) {
+        @if (commentValidationErrors) {
         <div class="mb-3 p-4 bg-red-100 text-red-600">
           <ul class="list-disc px-3">
-            @for (error of validationErrors; track $index) {
+            @for (error of commentValidationErrors; track $index) {
             <li>{{ error }}</li>
             }
           </ul>
@@ -128,15 +130,29 @@
     </mat-card>
 
     <ul class="space-y-4">
-      @for (comment of recipe.comments; track $index) {
+      @for (comment of recipe.comments; track comment.id) { @if
+      (editingCommentId !== comment.id) {
       <li class="bg-white p-4 rounded-lg shadow-md">
-        <h5 class="text-lg font-medium text-secondary">{{ comment.title }}</h5>
+        <h5 class="text-lg font-medium text-secondary">
+          {{ comment.title }}
+        </h5>
         <p class="text-sm text-gray-600">By: {{ comment.userDisplayName }}</p>
+        <p class="text-sm text-gray-600">Posted on: {{ comment.createdOn }}</p>
+        @if(comment.updatedOn){
+        <p class="text-sm text-gray-600">
+          Last updated on: {{ comment.updatedOn }}
+        </p>
+        }
         <p class="mt-2">{{ comment.body }}</p>
-
+        <button mat-raised-button (click)="startCommentEditing(comment)">
+          Edit
+        </button>
+        <button mat-raised-button (click)="startCommentEditing(comment)">
+          Delete
+        </button>
         <!-- Replies -->
         <ul class="mt-4 space-y-2">
-          @for (reply of comment.replies; track $index) {
+          @for (reply of comment.replies; track reply.id) {
           <li class="bg-gray-50 p-3 rounded-md">
             <p class="text-sm text-gray-700">
               <strong>{{ reply.userDisplayName }}</strong
@@ -146,15 +162,48 @@
           }
         </ul>
       </li>
-      <form [formGroup]="replyForm" (ngSubmit)="onSubmit()">
+      } @if(editingCommentId === comment.id && isInEditMode) {
+      <li class="bg-white p-4 rounded-lg shadow-md">
+        <mat-card class="max-w-screen-xl mx-auto mt-2 p-8 bg-white">
+          <form
+            [formGroup]="commentEditForm"
+            (ngSubmit)="onEditCommentSubmit()"
+          >
+            <div class="text-center mb-6">
+              <h2 class="text-xl font-semibold">Edit Comment Title</h2>
+            </div>
+            <app-text-input label="Title" formControlName="title" />
+            <div class="text-center mb-6">
+              <h2 class="text-xl font-semibold">Edit Comment Body</h2>
+            </div>
+            <app-text-area label="Comment" rows="'10'" formControlName="body" />
+            <button mat-raised-button (click)="saveComment()">Save</button>
+            <button mat-raised-button (click)="cancelCommentEditing()">
+              Cancel
+            </button>
+          </form>
+        </mat-card>
+
+        @if (commentEditValidationErrors) {
+        <div class="mb-3 p-4 bg-red-100 text-red-600">
+          <ul class="list-disc px-3">
+            @for (error of commentEditValidationErrors; track $index) {
+            <li>{{ error }}</li>
+            }
+          </ul>
+        </div>
+        }
+      </li>
+      }
+      <form [formGroup]="replyForm" (ngSubmit)="onReplySubmit()">
         <div class="text-center mb-6">
           <h2 class="text-2xl font-semibold">Reply to this comment:</h2>
         </div>
         <app-text-area label="Reply" rows="'5'" formControlName="body" />
-        @if (validationErrors) {
+        @if (commentEditValidationErrors) {
         <div class="mb-3 p-4 bg-red-100 text-red-600">
           <ul class="list-disc px-3">
-            @for (error of validationErrors; track $index) {
+            @for (error of commentEditValidationErrors; track $index) {
             <li>{{ error }}</li>
             }
           </ul>

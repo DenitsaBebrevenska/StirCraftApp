@@ -1,6 +1,6 @@
 ﻿using StirCraftApp.Application.Contracts;
-using StirCraftApp.Application.DTOs.RecipeDtos.Image;
-using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
+using StirCraftApp.Application.DTOs.Image;
+using StirCraftApp.Application.DTOs.IngredientDtos;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;

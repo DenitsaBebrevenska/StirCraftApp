@@ -3,12 +3,15 @@
     "Id": 1,
     "UserId": "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
     "CommentId": 3,
-    "Body": "Generally the beef strips need to be seared, not completely cooked so anything between 3 to 5 minutes at max heat."
+    "Body": "Generally the beef strips need to be seared, not completely cooked so anything between 3 to 5 minutes at max heat.",
+    "CreatedOn": "2024-12-10T01:00:00",
+    "UpdatedOn": "2024-10-03T01:27:00"
   },
   {
     "Id": 2,
     "UserId": "3b3c303f-b227-48d8-a30d-1932e90b058a",
     "CommentId": 3,
-    "Body": "Thank you! :)"
+    "Body": "Thank you! :)",
+    "CreatedOn": "2024-10-14T02:00:00"
   }
 ]

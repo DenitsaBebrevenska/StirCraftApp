@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StirCraftApp.Application.DTOs.CategoryDtos;
+using StirCraftApp.Application.DTOs.CommentDtos;
+using StirCraftApp.Application.DTOs.Image;
+using StirCraftApp.Application.DTOs.IngredientDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
-using StirCraftApp.Application.DTOs.RecipeDtos.Comment;
-using StirCraftApp.Application.DTOs.RecipeDtos.Image;
-using StirCraftApp.Application.DTOs.RecipeDtos.Ingredient;
-using StirCraftApp.Application.DTOs.RecipeDtos.Reply;
+using StirCraftApp.Application.DTOs.ReplyDtos;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.JoinedTables;
@@ -105,13 +105,17 @@ public static class RecipeMappingExtensions
                 Title = c.Title,
                 UserId = c.UserId,
                 UserDisplayName = userManager.Users.FirstOrDefault(u => u.Id == c.UserId)?.DisplayName ?? "",
+                CreatedOn = c.CreatedOn.ToString("dd/MM/yyyy HH:mm:ss"),
+                UpdatedOn = c.UpdatedOn?.ToString("dd/MM/yyyy HH:mm:ss"),
                 Replies = c.Replies
                         .Select(r => new CommentReplyDto()
                         {
                             Id = r.Id,
                             Body = r.Body,
                             UserId = r.UserId,
-                            UserDisplayName = userManager.Users.FirstOrDefault(u => u.Id == r.UserId)?.DisplayName ?? ""
+                            UserDisplayName = userManager.Users.FirstOrDefault(u => u.Id == r.UserId)?.DisplayName ?? "",
+                            CreatedOn = r.CreatedOn.ToString("dd/MM/yyyy HH:mm:ss"),
+                            UpdatedOn = r.UpdatedOn?.ToString("dd/MM/yyyy HH:mm:ss"),
                         })
                         .ToList()
             })

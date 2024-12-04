@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StirCraftApp.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StirCraftApp.Infrastructure.Data;
 namespace StirCraftApp.Infrastructure.Migrations
 {
     [DbContext(typeof(StirCraftDbContext))]
-    partial class StirCraftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203181059_AddedCreatedOnAndUpdatedOnForReplyAndComment")]
+    partial class AddedCreatedOnAndUpdatedOnForReplyAndComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,7 +285,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "d4f57e43-eb8a-4e5b-b741-511126fc9f77",
+                            ConcurrencyStamp = "ca768cdc-2315-48b6-8ab1-ea5a3b2d252b",
                             DisplayName = "ChefBob",
                             Email = "bob@example.com",
                             EmailConfirmed = false,
@@ -290,9 +293,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB@EXAMPLE.COM",
                             NormalizedUserName = "BOB@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJe6WNtersc0qTQwDRM2qsYiJ1uERHOllKdhm/faQVh8GrgcVHYDYdggdLBJfz7dkw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOx714plj9VxMCwPfbK/b6Sx0pPU1ZJfhKb/4Nk1q0uBGHTiPoLmx5T74KZ85GNMIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7ab88609-cbf5-4615-9caa-f48272555a57",
+                            SecurityStamp = "a97ba6e3-d948-4861-af7f-16efcc3f438b",
                             TwoFactorEnabled = false,
                             UserName = "bob@example.com"
                         },
@@ -301,7 +304,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "178462ed-f5eb-4bbb-89bb-5563cbf41b49",
+                            ConcurrencyStamp = "daa285e6-a66f-4161-870f-0dd3b9738221",
                             DisplayName = "KateMiddleton",
                             Email = "kate@example.com",
                             EmailConfirmed = false,
@@ -309,9 +312,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KATE@EXAMPLE.COM",
                             NormalizedUserName = "KATE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGfg0Dm9asXYQJlnZz7JKtTwmVKKqZNF3tleUVFkv0HCL+RucbP6zfDZqGQUJU4AHA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL0SG2B7AQlQgdLK8ZX+UsbFhASQA93O0Qt+0DOFqe3BU8MmB+NJmlWlbo9+VDXqDw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fdcaa993-f6c6-4b10-b530-55d8a8e3b9a8",
+                            SecurityStamp = "e029340f-a919-40f9-9051-ba17d1de63f7",
                             TwoFactorEnabled = false,
                             UserName = "kate@example.com"
                         },
@@ -320,7 +323,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "dc7463b2-4778-4a38-b524-6360352d7c8a",
+                            ConcurrencyStamp = "73262ce9-5e6f-45c5-8ebf-243dc715a0bb",
                             DisplayName = "AdrianTheAdventurer",
                             Email = "adrian@example.com",
                             EmailConfirmed = false,
@@ -328,9 +331,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADRIAN@EXAMPLE.COM",
                             NormalizedUserName = "ADRIAN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM79vX9XcRD/vnwNyXFwp57u4zgLNNPw8ZfX808TaRTqcBs+dk3uQczYN7kcI7Rbhg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPqnSK3BVAUUWLDRiLcLkDmNIP1atHo0cfkmq7Lz2ama656wzovrP3FynxTbflhwXg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "475c57ec-351f-4c27-a319-29aef62cb599",
+                            SecurityStamp = "40114093-89eb-4a6f-b48c-0d922377cbe8",
                             TwoFactorEnabled = false,
                             UserName = "adrian@example.com"
                         },
@@ -339,7 +342,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "55585f6a-692d-4638-a5c4-3a064dd25043",
+                            ConcurrencyStamp = "821f0ae2-62ca-4b3f-9aab-88fa8a115a7f",
                             DisplayName = "LoveLink",
                             Email = "zelda@example.com",
                             EmailConfirmed = false,
@@ -347,9 +350,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZELDA@EXAMPLE.COM",
                             NormalizedUserName = "ZELDA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELGUpdrqWW0o91arUewIaYw/TgqwOfn8kDQoU8d3PSGMgHkxxZU2tc8kxHzFcj3PVQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN7MqK/bBUrXAKN9tOFhb4BLSzQLLxWm36P1T/JrqNTbKMLv+7+nGehVmKa77u2oYw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bb316e15-9f8d-4b7e-9bfb-83d6019acc54",
+                            SecurityStamp = "929f5b2b-2f6d-4733-93c7-73e4a1ef4a7a",
                             TwoFactorEnabled = false,
                             UserName = "zelda@example.com"
                         },
@@ -358,7 +361,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "359d8319-617a-49a1-aca4-298aa46e6463",
+                            ConcurrencyStamp = "d256909c-0b9f-41b4-a606-2851ea5cb140",
                             DisplayName = "ThePowerOfMorgoth",
                             Email = "galadriel@example.com",
                             EmailConfirmed = false,
@@ -366,9 +369,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
                             NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKWs4UtYJVHXoI34HdpFpOgCtHd9Xh3WOY+DnZ+DhK47QfpsAStezbWS5AvwXE7cTQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB1AGXM3xikSMWNC1Z93GhMkL1cU15DJu0PDT1HyXpkMEys367w3sAgR1kRPwJKHIQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "54f51482-a214-4e86-8bb0-53243cc5366a",
+                            SecurityStamp = "9ff8c78e-d631-4121-b39b-402981821e9c",
                             TwoFactorEnabled = false,
                             UserName = "galadriel@example.com"
                         },
@@ -376,7 +379,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a8bb6da2-2eba-4e28-8388-0d653edd97e1",
+                            ConcurrencyStamp = "8e57c424-9350-4b81-bc3b-94942f9ebe6b",
                             DisplayName = "StirCraftAdmin",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
@@ -384,9 +387,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIE0NMCELayMYKhpbd9nXOSnJdd8tUs1OdGgmvhFpJIlAhOvQCLpi92rVSdxpAq0lA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDV6V1cYsRmTTZz47IPkRVLQdwNyeWwIqJrw3kATdZdrOu/sqI75dJfPRmNQpYMRzg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5cd398bb-e722-490c-8bc7-6817d8bf4d8b",
+                            SecurityStamp = "c9e788e9-9576-4ec4-b320-69211d1ab06f",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });
@@ -600,18 +603,17 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 1,
                             Body = "My grandchildren love these pancakes! They are a very good choice for a healthy breakfast!",
-                            CreatedOn = new DateTime(2024, 10, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 3,
                             Title = "Fabulous!",
-                            UpdatedOn = new DateTime(2024, 10, 10, 12, 5, 0, 0, DateTimeKind.Unspecified),
                             UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
                         },
                         new
                         {
                             Id = 2,
                             Body = "So delicious, yet so healthy!",
-                            CreatedOn = new DateTime(2024, 10, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 2,
                             Title = "Awesome salad",
@@ -621,7 +623,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 3,
                             Body = "I really need help. How long should I cook the beef strips for? I`m afraid they`ll end up raw...",
-                            CreatedOn = new DateTime(2024, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 5,
                             Title = "Need help!",
@@ -631,18 +633,17 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 4,
                             Body = "Best banana bread ever!",
-                            CreatedOn = new DateTime(2024, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 7,
                             Title = "Love",
-                            UpdatedOn = new DateTime(2024, 12, 13, 12, 5, 0, 0, DateTimeKind.Unspecified),
                             UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a"
                         },
                         new
                         {
                             Id = 5,
                             Body = "I love this. Cheers to the creator!",
-                            CreatedOn = new DateTime(2024, 2, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 6,
                             Title = "Great!",
@@ -652,22 +653,20 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 6,
                             Body = "I love this!",
-                            CreatedOn = new DateTime(2024, 10, 30, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 9,
                             Title = "NOM NOM!",
-                            UpdatedOn = new DateTime(2024, 10, 30, 12, 5, 0, 0, DateTimeKind.Unspecified),
                             UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
                         },
                         new
                         {
                             Id = 7,
                             Body = "Quick and easy, it is indeed a great recipe for fast dinner!",
-                            CreatedOn = new DateTime(2024, 10, 1, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 11,
                             Title = "Love it",
-                            UpdatedOn = new DateTime(2024, 10, 3, 10, 27, 0, 0, DateTimeKind.Unspecified),
                             UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
                         });
                 });
@@ -3018,9 +3017,8 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 1,
                             Body = "Generally the beef strips need to be seared, not completely cooked so anything between 3 to 5 minutes at max heat.",
                             CommentId = 3,
-                            CreatedOn = new DateTime(2024, 12, 10, 1, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
-                            UpdatedOn = new DateTime(2024, 10, 3, 1, 27, 0, 0, DateTimeKind.Unspecified),
                             UserId = "1a575c2a-065c-487a-8b56-cfd897b1b5ce"
                         },
                         new
@@ -3028,7 +3026,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 2,
                             Body = "Thank you! :)",
                             CommentId = 3,
-                            CreatedOn = new DateTime(2024, 10, 14, 2, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a"
                         });

@@ -10,6 +10,8 @@ import { CarouselRecipe } from '../../shared/models/carouselRecipe';
 import { RecipeOwn } from '../../shared/models/recipe/recipeOwn';
 import { RecipeCreateForm } from '../../shared/models/recipe/recipeCreateForm';
 import { PagingParams } from '../../shared/models/pagingParams';
+import { CommentForm } from '../../shared/models/recipe/commentForm';
+import { EditComment } from '../../shared/models/recipe/editComment';
 
 @Injectable({
   providedIn: 'root'
@@ -99,5 +101,13 @@ export class RecipesService {
 
   rateRecipe(recipeId: number, rating: number) {
     return this.http.post(this.baseUrl + 'recipes/' + recipeId + '/rate/' + rating, null);
+  }
+
+  addComment(recipeId: number, commentFormDto: CommentForm) {
+    return this.http.post(this.baseUrl + 'recipes/' + recipeId + '/comments', commentFormDto);
+  }
+
+  updateComment(recipeId: number, commentId: number, editFormDto: EditComment) {
+    return this.http.put(this.baseUrl + 'recipes/' + recipeId + '/comments/' + commentId, editFormDto);
   }
 }

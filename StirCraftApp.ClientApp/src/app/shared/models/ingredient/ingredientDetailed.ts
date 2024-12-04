@@ -3,6 +3,5 @@ export type IngredientDetailed = {
     name: string;
     isAllergen: boolean;
     nameInPlural: string;
-    isSolid: boolean;
     isAdminApproved: boolean;
 }

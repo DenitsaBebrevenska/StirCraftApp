@@ -17,4 +17,8 @@ public class Reply : BaseEntity
 
     [MaxLength(ReplyBodyMaxLength)]
     public required string Body { get; set; }
+
+    public DateTime CreatedOn { get; set; }
+
+    public DateTime? UpdatedOn { get; set; }
 }

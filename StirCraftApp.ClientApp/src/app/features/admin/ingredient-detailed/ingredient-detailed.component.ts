@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatCard } from '@angular/material/card';
-import { ActivatedRoute, RouterLink} from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IngredientDetailed } from '../../../shared/models/ingredient/ingredientDetailed';
 import { IngredientsService } from '../../../core/services/ingredients.service';
 import { MatIcon } from '@angular/material/icon';
@@ -13,13 +13,13 @@ import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-d
   standalone: true,
   imports: [
     MatCard,
-    MatIcon, 
+    MatIcon,
     RouterLink
   ],
   templateUrl: './ingredient-detailed.component.html',
   styleUrl: './ingredient-detailed.component.scss'
 })
-export class IngredientDetailedComponent implements OnInit{
+export class IngredientDetailedComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private ingredientsService = inject(IngredientsService);
   private dialogService = inject(MatDialog);
@@ -29,7 +29,7 @@ export class IngredientDetailedComponent implements OnInit{
   ngOnInit(): void {
     this.loadIngredient();
   }
-  
+
   loadIngredient() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if (!this.id) return;
@@ -42,7 +42,7 @@ export class IngredientDetailedComponent implements OnInit{
   }
 
   openDialog() {
-   this.dialogService.open(ConfirmDeleteDialogComponent, {
+    this.dialogService.open(ConfirmDeleteDialogComponent, {
       minWidth: '400px',
       data: {
         title: 'Delete ingredient',
@@ -51,5 +51,5 @@ export class IngredientDetailedComponent implements OnInit{
       }
     });
   }
-  
+
 }

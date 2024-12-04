@@ -16,7 +16,7 @@ import { IngredientCreateForm } from '../../../shared/models/ingredient/ingredie
     MatCard,
     TextInputComponent,
     SelectOptionComponent
-],
+  ],
   templateUrl: './create-ingredient.component.html',
   styleUrl: './create-ingredient.component.scss'
 })
@@ -30,33 +30,25 @@ export class CreateIngredientComponent {
   dto: IngredientCreateForm = {
     name: '',
     isAllergen: false,
-    nameInPlural: '',
-    isSolid: false
+    nameInPlural: ''
   };
-  
+
   allergenOptions = [
     { value: true, label: 'Yes' },
     { value: false, label: 'No' },
   ];
 
-  solidOptions = [
-    { value: true, label: 'Solid' },
-    { value: false, label: 'Liquid' },
-  ];
-
   createIngredientForm = this.formBuilder.group({
     name: ['', Validators.required],
     isAllergen: [null, Validators.required],
-    nameInPlural: [''],
-    isSolid: [null, Validators.required]
+    nameInPlural: ['']
   });
 
-  onSubmit(){
+  onSubmit() {
     this.dto = {
       name: this.createIngredientForm.value.name ?? '',
       isAllergen: this.createIngredientForm.value.isAllergen ?? false,
-      nameInPlural: this.createIngredientForm.value.nameInPlural ?? '',
-      isSolid: this.createIngredientForm.value.isSolid ?? false
+      nameInPlural: this.createIngredientForm.value.nameInPlural ?? ''
     };
 
     this.ingredientsService.createIngredient(this.dto).subscribe({
@@ -65,6 +57,6 @@ export class CreateIngredientComponent {
         this.router.navigateByUrl('/ingredients');
       },
       error: errors => this.validationErrors = errors
-  });
+    });
   }
 }

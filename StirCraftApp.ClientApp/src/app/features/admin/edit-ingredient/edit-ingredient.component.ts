@@ -35,13 +35,7 @@ export class EditIngredientComponent {
     { value: true, label: 'Yes' },
     { value: false, label: 'No' },
   ];
-
-  solidOptions = [
-    { value: true, label: 'Yes' },
-    { value: false, label: 'No' },
-  ];
-
-  approvalOptions = [ 
+  approvalOptions = [
     { value: true, label: 'Yes' },
     { value: false, label: 'No' },
   ]
@@ -50,7 +44,6 @@ export class EditIngredientComponent {
     name: ['', Validators.required],
     isAllergen: [null as boolean | null, Validators.required],
     nameInPlural: [''],
-    isSolid: [null as boolean | null, Validators.required],
     isAdminApproved: [null as boolean | null, Validators.required],
   });
 
@@ -67,7 +60,6 @@ export class EditIngredientComponent {
           name: response.name,
           isAllergen: response.isAllergen,
           nameInPlural: response.nameInPlural,
-          isSolid: response.isSolid,
           isAdminApproved: response.isAdminApproved
         }),
         error: err => console.error(err)
@@ -75,15 +67,14 @@ export class EditIngredientComponent {
     );
   }
 
-  onSubmit(){
-    if(this.editIngredientForm.invalid) return;
+  onSubmit() {
+    if (this.editIngredientForm.invalid) return;
 
     const updatedIngredient: IngredientDetailed = {
       id: Number(this.id),
       name: this.editIngredientForm.get('name')?.value ?? '',
       isAllergen: this.editIngredientForm.get('isAllergen')?.value ?? false,
       nameInPlural: this.editIngredientForm.get('nameInPlural')?.value ?? '',
-      isSolid: this.editIngredientForm.get('isSolid')?.value ?? false,
       isAdminApproved: this.editIngredientForm.get('isAdminApproved')?.value ?? false
     }
 
@@ -93,6 +84,6 @@ export class EditIngredientComponent {
         this.router.navigateByUrl('/admin/ingredients');
       },
       error: errors => this.validationErrors = errors
-  });
+    });
   }
 }

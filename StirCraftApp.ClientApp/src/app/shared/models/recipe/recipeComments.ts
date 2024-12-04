@@ -5,5 +5,7 @@ export type RecipeComment = {
     userDisplayName: string;
     title: string;
     body: string;
+    createdOn: string;
+    updatedOn?: string;
     replies: RecipeCommentReply[];
 }

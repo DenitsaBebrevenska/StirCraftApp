@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs.CommentDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
@@ -9,7 +10,7 @@ using StirCraftApp.Infrastructure.Extensions;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class RecipesController(IRecipeService recipeService, ICookService cookService) : ControllerBase
+public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService) : ControllerBase
 {
     // get recipes with specs and not, get recipe by id, create recipe, edit recipe, delete recipe
     [HttpGet]
@@ -101,6 +102,30 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var userId = User.GetId();
         await recipeService.RateRecipeAsync(userId, id, value);
+        return Ok();
+    }
+
+    [HttpPost("{id}/comments")]
+    public async Task<IActionResult> PostComment(int id, CommentFormDto commentFormDto)
+    {
+        var userId = User.GetId();
+
+        await commentService.AddCommentAsync(userId, id, commentFormDto);
+        return Ok(); //todo return created comment
+    }
+
+    [HttpPut("{id}/comments/{commentId}")]
+    public async Task<IActionResult> EditComment(int id, int commentId, EditFormCommentDto commentEditFormDto)
+    {
+        var userId = User.GetId();
+
+        if (commentId != commentEditFormDto.Id)
+        {
+            return BadRequest("Id in the body does not match the id in the route");
+        }
+
+        await commentService.EditCommentAsync(userId, id, commentEditFormDto);
+
         return Ok();
     }
 }
