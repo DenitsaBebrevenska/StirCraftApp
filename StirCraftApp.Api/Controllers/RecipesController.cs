@@ -115,7 +115,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [HttpPut("{id}/comments/{commentId}")]
-    public async Task<IActionResult> EditComment(int id, int commentId, EditFormCommentDto commentEditFormDto)
+    public async Task<IActionResult> EditComment(int commentId, EditFormCommentDto commentEditFormDto)
     {
         var userId = User.GetId();
 
@@ -124,8 +124,17 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
             return BadRequest("Id in the body does not match the id in the route");
         }
 
-        await commentService.EditCommentAsync(userId, id, commentEditFormDto);
+        await commentService.EditCommentAsync(userId, commentEditFormDto);
 
+        return Ok();
+    }
+
+    [HttpDelete("{id}/comments/{commentId}")]
+    public async Task<IActionResult> DeleteComment(int commentId)
+    {
+        var userId = User.GetId();
+
+        await commentService.DeleteCommentAsync(userId, commentId);
         return Ok();
     }
 }

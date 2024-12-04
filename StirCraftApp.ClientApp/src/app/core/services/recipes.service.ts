@@ -111,4 +111,17 @@ export class RecipesService {
   updateComment(recipeId: number, commentId: number, editFormDto: EditComment) {
     return this.http.put(this.baseUrl + 'recipes/' + recipeId + '/comments/' + commentId, editFormDto);
   }
+
+  deleteComment(recipeId: number, commentId: number) {
+    return this.http.delete(this.baseUrl + 'recipes/' + recipeId + '/comments/' + commentId);
+  }
+
+  replyToComment(recipeId: number, commentFormDto: CommentForm) {
+    return this.http.post(this.baseUrl + 'recipes/' + recipeId + '/comments', commentFormDto);
+  }
+
+  updateReplyToComment(recipeId: number, commentId: number, editFormDto: EditComment) {
+    return this.http.put(this.baseUrl + 'recipes/' + recipeId + '/comments/' + commentId, editFormDto);
+  }
+
 }

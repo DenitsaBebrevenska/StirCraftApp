@@ -11,6 +11,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { CommentForm } from '../../../shared/models/recipe/commentForm';
 import { EditComment } from '../../../shared/models/recipe/editComment';
+import { RecipeDeleteCommentDialogComponent } from '../recipe-delete-comment-dialog/recipe-delete-comment-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-details',
@@ -32,6 +34,7 @@ export class RecipeDetailsComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder);
   private snackBar = inject(SnackbarService);
+  private dialogService = inject(MatDialog);
   commentValidationErrors?: string[];
   commentEditValidationErrors?: string[];
   replyValidationErrors?: string[];
@@ -187,6 +190,20 @@ export class RecipeDetailsComponent implements OnInit {
   cancelCommentEditing() {
     this.isInEditMode = false;
     this.editingCommentId = undefined;
+  }
+
+  openDialog(commentId: number) {
+    {
+      this.dialogService.open(RecipeDeleteCommentDialogComponent, {
+        minWidth: '400px',
+        data: {
+          title: 'Delete recipe',
+          message: `Are you sure you want to delete this comment?`,
+          commentId: commentId,
+          recipeId: this.recipe?.id
+        }
+      });
+    }
   }
 
   onReplySubmit() { }

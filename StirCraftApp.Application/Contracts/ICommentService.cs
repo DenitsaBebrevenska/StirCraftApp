@@ -5,9 +5,9 @@ public interface ICommentService
 {
     Task AddCommentAsync(string userId, int recipeId, CommentFormDto commentFormDto);
 
-    Task EditCommentAsync(string userId, int recipeId, EditFormCommentDto commentFormDto);
+    Task EditCommentAsync(string userId, EditFormCommentDto commentFormDto);
 
-    Task DeleteCommentAsync(int commentId);
+    Task DeleteCommentAsync(string userId, int commentId);
     public Task<bool> UserIsCommentCreator(string userId, int commentId);
 
 }

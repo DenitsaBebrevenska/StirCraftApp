@@ -7,6 +7,7 @@ using StirCraftApp.Domain.Entities;
 namespace StirCraftApp.Application.Services;
 public class CommentService(IUnitOfWork unit) : ICommentService
 {
+
     public async Task AddCommentAsync(string userId, int recipeId, CommentFormDto commentFormDto)
     {
         var comment = commentFormDto.ToComment(userId, recipeId);
@@ -15,7 +16,7 @@ public class CommentService(IUnitOfWork unit) : ICommentService
         await unit.CompleteAsync();
     }
 
-    public async Task EditCommentAsync(string userId, int recipeId, EditFormCommentDto commentFormDto)
+    public async Task EditCommentAsync(string userId, EditFormCommentDto commentFormDto)
     {
         var comment = await unit.Repository<Comment>().GetByIdAsync(null, commentFormDto.Id);
 
@@ -37,9 +38,24 @@ public class CommentService(IUnitOfWork unit) : ICommentService
         await unit.CompleteAsync();
     }
 
-    public async Task DeleteCommentAsync(int commentId)
+    public async Task DeleteCommentAsync(string userId, int commentId)
     {
-        throw new NotImplementedException();
+        var comment = await unit.Repository<Comment>().GetByIdAsync(null, commentId);
+
+        if (comment == null)
+        {
+            throw new Exception("Comment not found");
+        }
+
+        if (comment.UserId != userId)
+        {
+            throw new Exception("You are not the creator of this comment");
+        }
+
+
+        unit.Repository<Comment>().Delete(comment);
+
+        await unit.CompleteAsync();
     }
 
     public async Task<bool> UserIsCommentCreator(string userId, int commentId)

@@ -144,8 +144,11 @@
         <button mat-raised-button (click)="startCommentEditing(comment)">
           Edit
         </button>
+        <button mat-raised-button color="warn" (click)="openDialog(comment.id)">
+          Delete Recipe
+        </button>
         <button mat-raised-button (click)="startCommentEditing(comment)">
-          Delete
+          Reply
         </button>
         <!-- Replies -->
         <ul class="mt-4 space-y-2">
@@ -191,31 +194,7 @@
         </div>
         }
       </li>
-      }
-      <form [formGroup]="replyForm" (ngSubmit)="onReplySubmit()">
-        <div class="text-center mb-6">
-          <h2 class="text-2xl font-semibold">Reply to this comment:</h2>
-        </div>
-        <app-text-area label="Reply" rows="'5'" formControlName="body" />
-        @if (commentEditValidationErrors) {
-        <div class="mb-3 p-4 bg-red-100 text-red-600">
-          <ul class="list-disc px-3">
-            @for (error of commentEditValidationErrors; track $index) {
-            <li>{{ error }}</li>
-            }
-          </ul>
-        </div>
-        }
-        <button
-          mat-flat-button
-          [disabled]="replyForm.invalid"
-          type="submit"
-          class="w-full py-2"
-        >
-          Post Reply
-        </button>
-      </form>
-      }
+      } }
     </ul>
   </div>
 </section>
