@@ -11,6 +11,7 @@ public class RecipeIncludeAllApprovedSpecification : BaseSpecification<Recipe>
         AddInclude(r => r.RecipeIngredients);
         AddInclude(r => r.CategoryRecipes);
         AddInclude(r => r.RecipeRatings);
+        AddInclude(r => r.UserFavoriteRecipes);
         AddIncludeStrings("CategoryRecipes.Category");
         AddIncludeStrings("Comments.Replies");
         AddIncludeStrings("RecipeIngredients.Ingredient");

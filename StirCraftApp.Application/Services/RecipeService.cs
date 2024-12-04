@@ -171,6 +171,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
                 .UserFavoriteRecipes
                 .Remove(recipeFound.UserFavoriteRecipes.First(ufr => ufr.UserId == userId));
             await unit.CompleteAsync();
+
             return new FavoriteRecipeToggleDto()
             {
                 IsFavorite = false,
@@ -186,6 +187,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
                 RecipeId = recipeId
             });
         await unit.CompleteAsync();
+
         return new FavoriteRecipeToggleDto()
         {
             IsFavorite = true,

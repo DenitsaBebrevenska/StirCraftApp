@@ -34,7 +34,7 @@ public class DetailedRecipeDto : IDto
 
     public IList<string> Categories { get; set; } = [];
 
-    public bool? IsLikedByCurrentUser { get; set; }
+    public bool IsLikedByCurrentUser { get; set; }
 
     public int CurrentUserRating { get; set; }
 

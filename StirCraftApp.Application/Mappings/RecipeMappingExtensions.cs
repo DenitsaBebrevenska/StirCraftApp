@@ -120,7 +120,7 @@ public static class RecipeMappingExtensions
                         .ToList()
             })
                 .ToList(),
-            IsLikedByCurrentUser = userId != null ? recipe.UserFavoriteRecipes.Any(ufr => ufr.UserId == userId) : null,
+            IsLikedByCurrentUser = userId != null && recipe.UserFavoriteRecipes.Any(ufr => ufr.UserId == userId),
             CurrentUserRating = userId != null ? recipe.RecipeRatings.FirstOrDefault(rr => rr.UserId == userId)?.Value ?? 0 : 0
         };
     }

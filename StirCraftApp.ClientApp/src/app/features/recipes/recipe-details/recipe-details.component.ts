@@ -75,6 +75,7 @@ export class RecipeDetailsComponent implements OnInit {
         next: response => {
           this.recipe = response,
             this.isLiked = response.isLikedByCurrentUser,
+            console.log(this.isLiked),
             this.currentRating = response.currentUserRating || 0
         },
         error: err => console.error(err)
@@ -87,15 +88,13 @@ export class RecipeDetailsComponent implements OnInit {
 
     this.recipeService.toggleFavorite(this.recipe.id).subscribe({
       next: response => {
-        // Directly update the local state
         this.isLiked = response.isFavorite;
 
-        // Optimistically update likes count
         if (this.recipe) {
           this.recipe.likes = response.totalLikes;
         }
 
-        this.snackBar.success(`Recipe ${response.isFavorite == true ? 'added to' : 'removed from'} favorites`);
+        this.snackBar.success(`Recipe successfully ${response.isFavorite == true ? 'added to' : 'removed from'} favorites`);
       },
       error: () => {
         this.snackBar.error('Failed to update favorite status');
@@ -105,23 +104,19 @@ export class RecipeDetailsComponent implements OnInit {
 
   rateRecipe(value: number) {
     if (!this.recipe || value < 0 || value > 5) return;
-
-    // Optimistically update the UI first
     this.currentRating = value;
 
     this.recipeService.rateRecipe(this.recipe.id, +value).subscribe({
       next: response => {
-        // Update current user's rating
+
         if (this.recipe) {
           this.recipe.currentUserRating = value;
           this.recipe.rating = +response;
-
         }
 
         this.snackBar.success(`You rated this recipe ${value} stars`);
       },
       error: () => {
-        // If the server call fails, revert the rating
         this.currentRating = this.recipe?.currentUserRating || 0;
         this.snackBar.error('Failed to submit rating');
       }
@@ -163,31 +158,25 @@ export class RecipeDetailsComponent implements OnInit {
 
 
   saveComment() {
-    // Check if form is valid
     if (this.commentEditForm.invalid) {
       return;
     }
 
-    // Prepare the updated comment data
     const updatedComment: EditComment = {
       id: this.editingCommentId!,
       title: this.commentEditForm.get('title')?.value || '',
       body: this.commentEditForm.get('body')?.value || ''
     };
 
-    // Call service method to update comment
     this.recipeService.updateComment(this.recipe!.id, this.editingCommentId!, updatedComment).subscribe({
       next: () => {
-        // Reset edit mode and refresh recipe details
         this.isInEditMode = false;
         this.editingCommentId = undefined;
         this.snackBar.success('Comment updated successfully');
 
-        // Optionally reload the recipe to get updated comments
         this.loadRecipe();
       },
       error: (errors) => {
-        // Handle any errors
         this.commentEditValidationErrors = errors;
         this.snackBar.error('Failed to update comment');
       }
@@ -196,7 +185,6 @@ export class RecipeDetailsComponent implements OnInit {
 
 
   cancelCommentEditing() {
-    // Reset edit mode
     this.isInEditMode = false;
     this.editingCommentId = undefined;
   }
