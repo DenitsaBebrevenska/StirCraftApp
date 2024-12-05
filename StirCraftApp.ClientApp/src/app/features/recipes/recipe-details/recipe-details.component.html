@@ -141,34 +141,128 @@
         </p>
         }
         <p class="mt-2">{{ comment.body }}</p>
-        <button mat-raised-button (click)="startCommentEditing(comment)">
-          Edit
-        </button>
-        <button mat-raised-button color="warn" (click)="openDialog(comment.id)">
-          Delete Recipe
-        </button>
-        <button mat-raised-button (click)="startCommentEditing(comment)">
-          Reply
-        </button>
-        <!-- Replies -->
+
+        <div class="flex space-x-2 mt-2">
+          <button mat-raised-button (click)="startCommentEditing(comment)">
+            Edit
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="openCommentDeletionDialog(comment.id)"
+          >
+            Delete
+          </button>
+          <button mat-raised-button (click)="startReplyToComment(comment.id)">
+            Reply
+          </button>
+        </div>
+
+        <!-- Replies Section -->
         <ul class="mt-4 space-y-2">
-          @for (reply of comment.replies; track reply.id) {
+          @for (reply of comment.replies; track reply.id) { @if (editingReplyId
+          !== reply.id) {
+          <li
+            class="bg-gray-50 p-3 rounded-md flex justify-between items-center"
+          >
+            <div>
+              <p class="text-sm text-gray-700">
+                <strong>{{ reply.userDisplayName }}</strong
+                >: {{ reply.body }}
+              </p>
+              @if(reply.updatedOn){
+              <p class="text-sm text-gray-600">
+                Last updated on: {{ reply.updatedOn }}
+              </p>
+              }
+            </div>
+            <div class="flex space-x-2">
+              <button
+                mat-icon-button
+                (click)="startReplyEditing(reply)"
+                aria-label="Edit reply"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="openReplyDeletionDialog(reply.id, comment.id)"
+                aria-label="Delete reply"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </li>
+          } @else {
+          <!-- Reply Edit Form -->
           <li class="bg-gray-50 p-3 rounded-md">
-            <p class="text-sm text-gray-700">
-              <strong>{{ reply.userDisplayName }}</strong
-              >: {{ reply.body }}
-            </p>
+            <form [formGroup]="replyEditForm" (ngSubmit)="saveReply()">
+              <app-text-area
+                label="Edit Reply"
+                formControlName="body"
+                rows="'3'"
+              />
+              <div class="flex space-x-2 mt-2">
+                <button
+                  mat-raised-button
+                  type="submit"
+                  [disabled]="replyEditForm.invalid"
+                >
+                  Save
+                </button>
+                <button
+                  mat-raised-button
+                  type="button"
+                  (click)="cancelReplyEditing()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </li>
+          } }
+
+          <!-- Reply Form -->
+          @if (replyingToCommentId === comment.id) {
+          <li class="bg-gray-50 p-3 rounded-md">
+            <form [formGroup]="replyForm" (ngSubmit)="submitReply()">
+              <app-text-area
+                label="Your Reply"
+                formControlName="body"
+                rows="'3'"
+              />
+              @if (replyValidationErrors) {
+              <div class="mb-3 p-4 bg-red-100 text-red-600">
+                <ul class="list-disc px-3">
+                  @for (error of replyValidationErrors; track $index) {
+                  <li>{{ error }}</li>
+                  }
+                </ul>
+              </div>
+              }
+              <div class="flex space-x-2 mt-2">
+                <button
+                  mat-raised-button
+                  type="submit"
+                  [disabled]="replyForm.invalid"
+                >
+                  Post Reply
+                </button>
+                <button mat-raised-button type="button" (click)="cancelReply()">
+                  Cancel
+                </button>
+              </div>
+            </form>
           </li>
           }
         </ul>
       </li>
-      } @if(editingCommentId === comment.id && isInEditMode) {
+      } @else {
+      <!-- Comment Edit Form (previous implementation) -->
       <li class="bg-white p-4 rounded-lg shadow-md">
         <mat-card class="max-w-screen-xl mx-auto mt-2 p-8 bg-white">
-          <form
-            [formGroup]="commentEditForm"
-            (ngSubmit)="onEditCommentSubmit()"
-          >
+          <form [formGroup]="commentEditForm">
             <div class="text-center mb-6">
               <h2 class="text-xl font-semibold">Edit Comment Title</h2>
             </div>
@@ -177,10 +271,12 @@
               <h2 class="text-xl font-semibold">Edit Comment Body</h2>
             </div>
             <app-text-area label="Comment" rows="'10'" formControlName="body" />
-            <button mat-raised-button (click)="saveComment()">Save</button>
-            <button mat-raised-button (click)="cancelCommentEditing()">
-              Cancel
-            </button>
+            <div class="flex space-x-2 mt-2">
+              <button mat-raised-button (click)="saveComment()">Save</button>
+              <button mat-raised-button (click)="cancelCommentEditing()">
+                Cancel
+              </button>
+            </div>
           </form>
         </mat-card>
 

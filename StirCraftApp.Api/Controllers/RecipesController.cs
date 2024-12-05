@@ -2,6 +2,7 @@
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CommentDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
+using StirCraftApp.Application.DTOs.ReplyDtos;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
@@ -10,7 +11,7 @@ using StirCraftApp.Infrastructure.Extensions;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService) : ControllerBase
+public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService, IReplyService replyService) : ControllerBase
 {
     // get recipes with specs and not, get recipe by id, create recipe, edit recipe, delete recipe
     [HttpGet]
@@ -137,4 +138,40 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         await commentService.DeleteCommentAsync(userId, commentId);
         return Ok();
     }
+
+    //replies
+
+    [HttpPost("{id}/comments/{commentId}/replies")]
+    public async Task<IActionResult> PostReply(ReplyFormDto replyFormDto, int commentId)
+    {
+        var userId = User.GetId();
+
+        await replyService.AddReplyAsync(userId, commentId, replyFormDto);
+        return Ok(); //todo return created reply
+    }
+
+    [HttpPut("{id}/comments/{commentId}/replies/{replyId}")]
+    public async Task<IActionResult> EditReply(int replyId, ReplyEditFormDto replyEditForm)
+    {
+        var userId = User.GetId();
+
+        if (replyId != replyEditForm.Id)
+        {
+            return BadRequest("Id in the body does not match the id in the route");
+        }
+
+        await replyService.EditReplyAsync(userId, replyEditForm);
+
+        return Ok();
+    }
+
+    [HttpDelete("{id}/comments/{commentId}/replies/{replyId}")]
+    public async Task<IActionResult> DeleteReply(int replyId)
+    {
+        var userId = User.GetId();
+
+        await replyService.DeleteReplyAsync(userId, replyId);
+        return Ok();
+    }
+
 }

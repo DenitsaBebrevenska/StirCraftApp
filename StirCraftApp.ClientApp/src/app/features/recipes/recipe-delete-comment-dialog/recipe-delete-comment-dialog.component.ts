@@ -3,6 +3,7 @@ import { RecipesService } from '../../../core/services/recipes.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
+import { CommentService } from '../../../core/services/comment.service';
 
 @Component({
   selector: 'app-recipe-delete-comment-dialog',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './recipe-delete-comment-dialog.component.scss'
 })
 export class RecipeDeleteCommentDialogComponent {
-  recipesService = inject(RecipesService);
+  commentService = inject(CommentService);
   private dialogReference = inject(MatDialogRef<RecipeDeleteCommentDialogComponent>);
   private snack = inject(SnackbarService);
   private router = inject(Router);
@@ -20,7 +21,7 @@ export class RecipeDeleteCommentDialogComponent {
 
   approveDeletion() {
     this.dialogReference.close(true);
-    this.recipesService.deleteComment(this.data.recipeId, this.data.commentId).subscribe({
+    this.commentService.deleteComment(this.data.recipeId, this.data.commentId).subscribe({
       next: () => {
         this.snack.success('Comment deleted successfully');
         window.location.reload();

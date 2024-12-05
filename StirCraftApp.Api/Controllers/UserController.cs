@@ -5,7 +5,7 @@ using StirCraftApp.Infrastructure.Extensions;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class UserController(IRecipeService recipeService, IUserService userService) : ControllerBase
+public class UserController(IUserService userService) : ControllerBase
 {
 
 

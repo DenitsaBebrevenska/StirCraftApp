@@ -52,6 +52,7 @@ public class CommentService(IUnitOfWork unit) : ICommentService
             throw new Exception("You are not the creator of this comment");
         }
 
+        //todo what happens with the replies?
 
         unit.Repository<Comment>().Delete(comment);
 

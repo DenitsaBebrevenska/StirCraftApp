@@ -13,6 +13,10 @@ import { CommentForm } from '../../../shared/models/recipe/commentForm';
 import { EditComment } from '../../../shared/models/recipe/editComment';
 import { RecipeDeleteCommentDialogComponent } from '../recipe-delete-comment-dialog/recipe-delete-comment-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CommentService } from '../../../core/services/comment.service';
+import { ReplyService } from '../../../core/services/reply.service';
+import { RecipeCommentReply } from '../../../shared/models/recipe/recipeCommentReply';
+import { RecipeDeleteReplyDialogComponent } from '../recipe-delete-reply-dialog/recipe-delete-reply-dialog.component';
 
 @Component({
   selector: 'app-recipe-details',
@@ -31,10 +35,14 @@ import { MatDialog } from '@angular/material/dialog';
 export class RecipeDetailsComponent implements OnInit {
 
   private recipeService = inject(RecipesService);
+  private commentService = inject(CommentService);
+  private replyService = inject(ReplyService);
   private activatedRoute = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder);
   private snackBar = inject(SnackbarService);
   private dialogService = inject(MatDialog);
+  replyingToCommentId: number | null = null;
+  editingReplyId: number | null = null;
   commentValidationErrors?: string[];
   commentEditValidationErrors?: string[];
   replyValidationErrors?: string[];
@@ -58,7 +66,11 @@ export class RecipeDetailsComponent implements OnInit {
 
 
   replyForm = this.formBuilder.group({
-    body: ['', Validators.required]
+    body: ['', [Validators.required]]
+  });
+
+  replyEditForm = this.formBuilder.group({
+    body: ['', [Validators.required]]
   });
 
   commentDto: CommentForm = {
@@ -78,7 +90,6 @@ export class RecipeDetailsComponent implements OnInit {
         next: response => {
           this.recipe = response,
             this.isLiked = response.isLikedByCurrentUser,
-            console.log(this.isLiked),
             this.currentRating = response.currentUserRating || 0
         },
         error: err => console.error(err)
@@ -138,7 +149,7 @@ export class RecipeDetailsComponent implements OnInit {
     };
 
     if (this.recipe) {
-      this.recipeService.addComment(this.recipe.id, this.commentDto).subscribe({
+      this.commentService.addComment(this.recipe.id, this.commentDto).subscribe({
         next: () => {
           this.snackBar.success('Successfully added comment.');
           this.loadRecipe();
@@ -171,7 +182,7 @@ export class RecipeDetailsComponent implements OnInit {
       body: this.commentEditForm.get('body')?.value || ''
     };
 
-    this.recipeService.updateComment(this.recipe!.id, this.editingCommentId!, updatedComment).subscribe({
+    this.commentService.updateComment(this.recipe!.id, this.editingCommentId!, updatedComment).subscribe({
       next: () => {
         this.isInEditMode = false;
         this.editingCommentId = undefined;
@@ -192,12 +203,12 @@ export class RecipeDetailsComponent implements OnInit {
     this.editingCommentId = undefined;
   }
 
-  openDialog(commentId: number) {
+  openCommentDeletionDialog(commentId: number) {
     {
       this.dialogService.open(RecipeDeleteCommentDialogComponent, {
         minWidth: '400px',
         data: {
-          title: 'Delete recipe',
+          title: 'Delete comment',
           message: `Are you sure you want to delete this comment?`,
           commentId: commentId,
           recipeId: this.recipe?.id
@@ -206,9 +217,92 @@ export class RecipeDetailsComponent implements OnInit {
     }
   }
 
-  onReplySubmit() { }
+  startReplyToComment(commentId: number) {
+    this.replyingToCommentId = commentId;
+    this.replyForm.reset();
+  }
 
-  onEditCommentSubmit() { }
+  cancelReply() {
+    this.replyingToCommentId = null;
+  }
 
+  submitReply() {
+    if (this.replyForm.invalid) {
+      return;
+    }
+
+    if (!this.recipe || this.replyingToCommentId === null) {
+      return;
+    }
+
+    const replyForm = {
+      body: this.replyForm.get('body')!.value || '',
+      commentId: this.replyingToCommentId
+    };
+
+    // Call your service method to submit the reply
+    this.replyService.replyToComment(this.recipe.id, this.replyingToCommentId, replyForm).subscribe({
+      next: () => {
+        this.replyingToCommentId = null;
+        this.replyForm.reset();
+        this.snackBar.success('Reply posted successfully');
+        this.loadRecipe();
+      },
+      error: (errors) => {
+        this.replyValidationErrors = errors;
+        this.snackBar.error('Failed to post reply');
+      }
+    }); ``
+  }
+
+  startReplyEditing(reply: RecipeCommentReply) {
+    this.editingReplyId = reply.id;
+    this.replyEditForm.patchValue({
+      body: reply.body
+    });
+  }
+
+  cancelReplyEditing() {
+    this.editingReplyId = null;
+  }
+
+  saveReply() {
+    if (this.replyEditForm.invalid) {
+      return;
+    }
+
+    const replyEditForm = {
+      id: this.editingReplyId!,
+      body: this.replyEditForm.get('body')!.value || ''
+    }
+    // Call your service method to update the reply
+
+    this.replyService.updateReply(this.recipe!.id, this.replyingToCommentId!, this.editingReplyId!, replyEditForm).subscribe({
+      next: () => {
+        this.editingReplyId = null;
+        this.loadRecipe();
+      },
+      error: (errors) => {
+        this.replyEditValidtionErrors = errors;
+        this.snackBar.error('Failed to update reply');
+      }
+    });
+  }
+
+  openReplyDeletionDialog(replyId: number, commentId: number) {
+    {
+      //todo fix this
+      this.dialogService.open(RecipeDeleteReplyDialogComponent, {
+        minWidth: '400px',
+        data: {
+          title: 'Delete reply',
+          message: `Are you sure you want to delete this reply?`,
+          recipeId: this.recipe?.id,
+          commentId: commentId,
+          replyId: replyId
+        }
+      });
+    }
+  }
 }
 
