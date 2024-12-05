@@ -1,0 +1,31 @@
+@if(recipes) { @for (recipe of recipes.data; track $index) {
+<mat-card appearance="raised" class="recipe-card flex-col gap-2">
+  <mat-card-header class="flex-col gap-1">
+    <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
+    <h3 class="font-extralight text-2xl">By: {{ recipe.cookName }}</h3>
+  </mat-card-header>
+  <div class="image-wrapper">
+    <img
+      [src]="recipe.mainImageUrl || 'default-image.jpg'"
+      alt="Recipe Image"
+    />
+  </div>
+  <div>
+    <mat-card-actions class="flex-row gap-2"> </mat-card-actions>
+  </div>
+</mat-card>
+} }
+
+<div>
+  <mat-paginator
+    class="page-paginator"
+    (page)="handlePage($event)"
+    [length]="recipes?.count"
+    [pageSize]="pagingParams.pageSize"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="pagingParams.pageIndex - 1"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

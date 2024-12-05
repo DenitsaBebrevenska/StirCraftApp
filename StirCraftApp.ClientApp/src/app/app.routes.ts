@@ -25,6 +25,7 @@ import { UpdateRecipeComponent } from './features/recipes/update-recipe/update-r
 import { CookOwnRecipesComponent } from './features/recipes/cook-own-recipes/cook-own-recipes.component';
 import { CookOwnRecipeComponent } from './features/recipes/cook-own-recipe/cook-own-recipe.component';
 import { AvatarChangeComponent } from './features/account/avatar-change/avatar-change.component';
+import { FavoritesComponent } from './features/recipes/favorites/favorites.component';
 
 
 
@@ -45,6 +46,7 @@ export const routes: Routes = [
     { path: 'admin/ingredients/edit/:id', component: EditIngredientComponent },//, canActivate: [authGuard]
     { path: 'admin/ingredients/:id', component: IngredientDetailedComponent },
     { path: 'recipes', component: RecipesComponent },
+    { path: 'recipes/user-favorites', component: FavoritesComponent },
     { path: 'recipes/cook/:id', component: RecipeCookComponent },
     { path: 'recipes/ingredient/:id', component: RecipeIngredientComponent },
     { path: 'recipes/:id', component: RecipeDetailsComponent },

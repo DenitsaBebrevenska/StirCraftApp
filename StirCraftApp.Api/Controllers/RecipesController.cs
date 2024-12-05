@@ -97,6 +97,15 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(dto);
     }
 
+    [HttpGet("user-favorites")]
+    public async Task<IActionResult> GetUserFavorites([FromQuery] PagingParams pagingParams)
+    {
+        var userId = User.GetId();
+        var spec = new RecipeFavoritesSpecification(userId, pagingParams);
+        var recipes = await recipeService.GetRecipesAsync(spec, nameof(BriefRecipeDto));
+        return Ok(recipes);
+    }
+
 
     [HttpPost("{id}/rate/{value}")]
     public async Task<IActionResult> RateRecipe(int id, int value)
@@ -138,8 +147,6 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         await commentService.DeleteCommentAsync(userId, commentId);
         return Ok();
     }
-
-    //replies
 
     [HttpPost("{id}/comments/{commentId}/replies")]
     public async Task<IActionResult> PostReply(ReplyFormDto replyFormDto, int commentId)

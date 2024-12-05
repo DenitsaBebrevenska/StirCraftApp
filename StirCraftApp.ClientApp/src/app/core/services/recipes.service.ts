@@ -104,4 +104,11 @@ export class RecipesService {
     return this.http.post<number>(this.baseUrl + 'recipes/' + recipeId + '/rate/' + rating, null);
   }
 
+  getUserFavoriteRecipes(pagingParams: PagingParams) {
+    let params = new HttpParams();
+    params = params.append('pageIndex', pagingParams.pageIndex);
+    params = params.append('pageSize', pagingParams.pageSize);
+    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes/user-favorites', { params });
+  }
+
 }
