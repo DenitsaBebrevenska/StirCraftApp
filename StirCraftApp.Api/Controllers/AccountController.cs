@@ -12,7 +12,7 @@ using System.Security.Claims;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController(SignInManager<AppUser> signInManager, ICookService cookService) : BaseApiController
+public class AccountController(SignInManager<AppUser> signInManager, ICookService cookService, IUserService userService) : BaseApiController
 {
     [AllowAnonymous]
     [HttpPost("register")]
@@ -48,12 +48,12 @@ public class AccountController(SignInManager<AppUser> signInManager, ICookServic
         return Ok();
     }
 
-    [HttpPost("avatar")]
-    public async Task<IActionResult> AddOrUpdateAvatar(IFormFile file)
+    [HttpPut("avatar")]
+    public async Task<IActionResult> UpdateAvatar(AvatarUpdateDto avatarDto)
     {
-        var user = await signInManager.UserManager.GetUserByEmail(User);
+        var userId = User.GetId();
 
-        //todo add image upload logic
+        await userService.UpdateAvatarAsync(userId, avatarDto);
 
         return Ok();
     }
