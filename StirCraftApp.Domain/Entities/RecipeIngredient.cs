@@ -1,5 +1,4 @@
-﻿using StirCraftApp.Domain.JoinedTables;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StirCraftApp.Domain.Entities;
 public class RecipeIngredient : BaseEntity
@@ -21,6 +20,5 @@ public class RecipeIngredient : BaseEntity
 
     public virtual Recipe Recipe { get; set; } = null!;
 
-    public virtual ICollection<ShoppingListRecipeIngredient> ShoppingListRecipeIngredients { get; set; } = new List<ShoppingListRecipeIngredient>();
 
 }

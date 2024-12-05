@@ -9,9 +9,6 @@ public class Ingredient : BaseEntity
 
     public bool IsAllergen { get; set; }
 
-    [MaxLength(IngredientPluralNameMaxLength)]
-    public string? NameInPlural { get; set; }
-
     public bool IsAdminApproved { get; set; }
 
     public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();

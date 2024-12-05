@@ -32,13 +32,10 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
     public DbSet<CookingRank> CookingRanks { get; set; } = null!;
 
-    public DbSet<ShoppingList> ShoppingLists { get; set; } = null!;
-
     public DbSet<UserFavoriteRecipe> UsersFavoriteRecipes { get; set; } = null!;
 
     public DbSet<CategoryRecipe> CategoriesRecipes { get; set; } = null!;
 
-    public DbSet<ShoppingListRecipeIngredient> ShoppingListsRecipeIngredients { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -56,18 +53,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
             .WithMany(c => c.CategoryRecipes)
             .HasForeignKey(cr => cr.CategoryId);
 
-        builder.Entity<ShoppingListRecipeIngredient>()
-            .HasKey(slri => new { slri.RecipeIngredientId, slri.ShoppingListId });
-
-        builder.Entity<ShoppingListRecipeIngredient>()
-            .HasOne(slri => slri.RecipeIngredient)
-            .WithMany(ri => ri.ShoppingListRecipeIngredients)
-            .HasForeignKey(slri => slri.RecipeIngredientId);
-
-        builder.Entity<ShoppingListRecipeIngredient>()
-            .HasOne(slri => slri.ShoppingList)
-            .WithMany(sl => sl.ShoppingListRecipeIngredients)
-            .HasForeignKey(slri => slri.ShoppingListId);
 
         builder.Entity<UserFavoriteRecipe>()
             .HasKey(ufr => new { ufr.UserId, ufr.RecipeId });
@@ -107,9 +92,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
         builder.Entity<CategoryRecipe>()
             .HasQueryFilter(cr => !cr.Category.IsDeleted && !cr.Recipe.IsDeleted);
 
-        builder.Entity<ShoppingListRecipeIngredient>()
-            .HasQueryFilter(slri => !slri.ShoppingList.IsDeleted && !slri.RecipeIngredient.IsDeleted);
-
         //adding soft delete flag
         var softDeletables = allEntityTypes
             .Where(et => typeof(ISoftDeletable).IsAssignableFrom(et.ClrType));
@@ -142,8 +124,6 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
         builder.ApplyConfiguration(new CategoryRecipeConfiguration());
         builder.ApplyConfiguration(new CommentConfiguration());
         builder.ApplyConfiguration(new ReplyConfiguration());
-        builder.ApplyConfiguration(new ShoppingListConfiguration());
-        builder.ApplyConfiguration(new ShoppingListRecipeIngredientConfiguration());
 
         base.OnModelCreating(builder);
     }

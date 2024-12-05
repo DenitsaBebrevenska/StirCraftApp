@@ -16,8 +16,6 @@ public class AppUser : IdentityUser, ISoftDeletable
     public string? AvatarUrl { get; set; }
     public virtual ICollection<UserFavoriteRecipe> FavoriteRecipes { get; set; } = new List<UserFavoriteRecipe>();
 
-    public virtual ICollection<ShoppingList> ShoppingLists { get; set; } = new List<ShoppingList>();
-
     public virtual ICollection<RecipeRating> RecipesRatings { get; set; } = new List<RecipeRating>();
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();

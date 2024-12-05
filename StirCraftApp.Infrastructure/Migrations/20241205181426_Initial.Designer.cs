@@ -12,7 +12,7 @@ using StirCraftApp.Infrastructure.Data;
 namespace StirCraftApp.Infrastructure.Migrations
 {
     [DbContext(typeof(StirCraftDbContext))]
-    [Migration("20241201174217_Initial")]
+    [Migration("20241205181426_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -285,7 +285,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "3d92c5f0-0f68-4e2b-9542-a5144cd14319",
+                            ConcurrencyStamp = "a326e2c4-5b09-4dd0-abf4-bdc24a1ebea9",
                             DisplayName = "ChefBob",
                             Email = "bob@example.com",
                             EmailConfirmed = false,
@@ -293,9 +293,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB@EXAMPLE.COM",
                             NormalizedUserName = "BOB@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA1tXIxdK6jxCka5t9eoMgbkUGAsQtyxhcQK3OvqL+wkvtdZdnM79Iw4PkUOHna3OQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAMaddOGTgu772A0HtUrDAJLckYnfirbCxwhSYHyWor+UKSqDSpmQdt1S+tQPZBpSw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f71ef3a0-7dba-4e25-8baa-a8f9b22cfdc4",
+                            SecurityStamp = "6f1e0697-06aa-4a7a-bfb7-5f21ae833620",
                             TwoFactorEnabled = false,
                             UserName = "bob@example.com"
                         },
@@ -304,7 +304,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "f8242cae-d157-45ad-80d3-115ffc875ab3",
+                            ConcurrencyStamp = "fee3d4e6-ad44-4cb5-8f1c-74a287c89586",
                             DisplayName = "KateMiddleton",
                             Email = "kate@example.com",
                             EmailConfirmed = false,
@@ -312,9 +312,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KATE@EXAMPLE.COM",
                             NormalizedUserName = "KATE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIEZzzxv4HIB1KF8ZXZpCoXTKuBlVgf5C+2UnUQUAm8Z+XAS3izPi7dFkhj+0sTmRQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPfw/4ey0uc3pau+3lkz+YbaJOPpGnu8zQmJPjN8FA6UZxNFh+S1ol0fV1IAtlhMew==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a4b63d26-cc52-4c18-bb3d-74fa19eb621d",
+                            SecurityStamp = "92e37f2a-d762-401d-ac72-1d2ffcbde9a7",
                             TwoFactorEnabled = false,
                             UserName = "kate@example.com"
                         },
@@ -323,7 +323,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "3b6333cc-d9b6-4619-a950-d7c5bb89969d",
+                            ConcurrencyStamp = "e5a322fb-d0f2-4e6c-bc5b-525bc781f23b",
                             DisplayName = "AdrianTheAdventurer",
                             Email = "adrian@example.com",
                             EmailConfirmed = false,
@@ -331,9 +331,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADRIAN@EXAMPLE.COM",
                             NormalizedUserName = "ADRIAN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELqEvyKDMv/ZOVJuh+N67OharS1OPKk5C8ejjkI1QI59sy68JyWHif5Hn0OlHkE07Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE4WLUMxx48S/oDtBQaoWeLgofdnGgpx6/x4AOGQLwgKpntkG648l8H3gAfHWZ2RNQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e11a20f0-1718-4714-a0f0-15f80229c42c",
+                            SecurityStamp = "66c6bdea-e1b8-45d8-a4d3-e98c8c1b8284",
                             TwoFactorEnabled = false,
                             UserName = "adrian@example.com"
                         },
@@ -342,7 +342,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "55a8732b-5723-4d35-ba1d-66e2393459a5",
+                            ConcurrencyStamp = "39ced363-9143-4e47-b8b5-5fcce017ae42",
                             DisplayName = "LoveLink",
                             Email = "zelda@example.com",
                             EmailConfirmed = false,
@@ -350,9 +350,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZELDA@EXAMPLE.COM",
                             NormalizedUserName = "ZELDA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBMEoIz9MU41/6TalEtU+7WbYVv0ZLj67osiY6P06IFfb06oybfsfkp2vosKSU443A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKBtM+9fApCKw+pUkmCPxJOgbp0RidthzXbqSWa0W7uaxb+nxJRGNBayulAGelhnMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0c1e9f2a-5817-465d-9543-c12df0a3a67e",
+                            SecurityStamp = "871fa3ec-bf87-4d66-842a-745a0a471bbe",
                             TwoFactorEnabled = false,
                             UserName = "zelda@example.com"
                         },
@@ -361,7 +361,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "fe3c83a9-bafc-42ba-be3f-6651a463e1a3",
+                            ConcurrencyStamp = "e70d7666-bafa-4dcd-b972-818c028f371d",
                             DisplayName = "ThePowerOfMorgoth",
                             Email = "galadriel@example.com",
                             EmailConfirmed = false,
@@ -369,9 +369,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
                             NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDYTZi+n8LMwfa5JVzhL2mS03v8KAdpK/oi37KS1z5QTBfM722tBKfXY733IEvokQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPpQdeJHZRbQBuPVBnm/fKCVPXUbQ3zl2FQgfATOjY9rmzvgg0VSlaVQf5Z8EZBGDw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2cbfc130-01cd-44a1-b64d-c6eaf06bbb88",
+                            SecurityStamp = "1584aeb8-043d-4b58-8dd3-41cd25ffa7d7",
                             TwoFactorEnabled = false,
                             UserName = "galadriel@example.com"
                         },
@@ -379,7 +379,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8a1f5390-65c2-4a80-bb66-0028049f6cb1",
+                            ConcurrencyStamp = "344677f9-cf53-4552-842c-3fc9f857cf18",
                             DisplayName = "StirCraftAdmin",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
@@ -387,9 +387,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO6uj6UnICieDMdNfxZZK+hMjbszcqoFSQ0Jpf4RSwjjOP8rEwFRlcdYfQhZsfTiPQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEInQygfdy0Lpnzr48FstlHfzqNyEPZ6UcFVfRy+ZJ00v6p9MDl0BP/O+rBiSfuvM6w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "10e35705-db1e-4710-a096-f4f4fb06ed59",
+                            SecurityStamp = "fc97e10e-6cad-49b4-81ee-cfa6aa752b03",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });
@@ -563,6 +563,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DeletedOnUtc")
                         .HasColumnType("datetime2");
 
@@ -576,6 +579,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -597,15 +603,18 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 1,
                             Body = "My grandchildren love these pancakes! They are a very good choice for a healthy breakfast!",
+                            CreatedOn = new DateTime(2024, 10, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 3,
                             Title = "Fabulous!",
+                            UpdatedOn = new DateTime(2024, 10, 10, 12, 5, 0, 0, DateTimeKind.Unspecified),
                             UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
                         },
                         new
                         {
                             Id = 2,
                             Body = "So delicious, yet so healthy!",
+                            CreatedOn = new DateTime(2024, 10, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 2,
                             Title = "Awesome salad",
@@ -615,6 +624,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 3,
                             Body = "I really need help. How long should I cook the beef strips for? I`m afraid they`ll end up raw...",
+                            CreatedOn = new DateTime(2024, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 5,
                             Title = "Need help!",
@@ -624,15 +634,18 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 4,
                             Body = "Best banana bread ever!",
+                            CreatedOn = new DateTime(2024, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 7,
                             Title = "Love",
+                            UpdatedOn = new DateTime(2024, 12, 13, 12, 5, 0, 0, DateTimeKind.Unspecified),
                             UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a"
                         },
                         new
                         {
                             Id = 5,
                             Body = "I love this. Cheers to the creator!",
+                            CreatedOn = new DateTime(2024, 2, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 6,
                             Title = "Great!",
@@ -642,18 +655,22 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = 6,
                             Body = "I love this!",
+                            CreatedOn = new DateTime(2024, 10, 30, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 9,
                             Title = "NOM NOM!",
+                            UpdatedOn = new DateTime(2024, 10, 30, 12, 5, 0, 0, DateTimeKind.Unspecified),
                             UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
                         },
                         new
                         {
                             Id = 7,
                             Body = "Quick and easy, it is indeed a great recipe for fast dinner!",
+                            CreatedOn = new DateTime(2024, 10, 1, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             RecipeId = 11,
                             Title = "Love it",
+                            UpdatedOn = new DateTime(2024, 10, 3, 10, 27, 0, 0, DateTimeKind.Unspecified),
                             UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
                         });
                 });
@@ -834,10 +851,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("NameInPlural")
-                        .HasMaxLength(104)
-                        .HasColumnType("nvarchar(104)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted")
@@ -860,8 +873,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            Name = "egg",
-                            NameInPlural = "eggs"
+                            Name = "egg"
                         },
                         new
                         {
@@ -909,8 +921,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "tomato",
-                            NameInPlural = "tomatoes"
+                            Name = "tomato"
                         },
                         new
                         {
@@ -926,8 +937,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "onion",
-                            NameInPlural = "onions"
+                            Name = "onion"
                         },
                         new
                         {
@@ -935,8 +945,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "chicken breast",
-                            NameInPlural = "chicken breasts"
+                            Name = "chicken breast"
                         },
                         new
                         {
@@ -952,8 +961,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "carrot",
-                            NameInPlural = "carrots"
+                            Name = "carrot"
                         },
                         new
                         {
@@ -961,8 +969,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            Name = "celery",
-                            NameInPlural = "celeries"
+                            Name = "celery"
                         },
                         new
                         {
@@ -970,8 +977,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            Name = "almond",
-                            NameInPlural = "almonds"
+                            Name = "almond"
                         },
                         new
                         {
@@ -979,8 +985,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            Name = "peanut",
-                            NameInPlural = "peanuts"
+                            Name = "peanut"
                         },
                         new
                         {
@@ -996,8 +1001,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "lemon",
-                            NameInPlural = "lemons"
+                            Name = "lemon"
                         },
                         new
                         {
@@ -1005,8 +1009,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "lime",
-                            NameInPlural = "limes"
+                            Name = "lime"
                         },
                         new
                         {
@@ -1030,8 +1033,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "mushroom",
-                            NameInPlural = "mushrooms"
+                            Name = "mushroom"
                         },
                         new
                         {
@@ -1055,8 +1057,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            Name = "shrimp",
-                            NameInPlural = "shrimps"
+                            Name = "shrimp"
                         },
                         new
                         {
@@ -1064,8 +1065,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "salmon",
-                            NameInPlural = "salmons"
+                            Name = "salmon"
                         },
                         new
                         {
@@ -1089,8 +1089,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "potato",
-                            NameInPlural = "potatoes"
+                            Name = "potato"
                         },
                         new
                         {
@@ -1138,8 +1137,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "zucchini",
-                            NameInPlural = "zucchinis"
+                            Name = "zucchini"
                         },
                         new
                         {
@@ -1147,8 +1145,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "corn",
-                            NameInPlural = "corns"
+                            Name = "corn"
                         },
                         new
                         {
@@ -1300,8 +1297,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "cucumber",
-                            NameInPlural = "cucumbers"
+                            Name = "cucumber"
                         },
                         new
                         {
@@ -1309,8 +1305,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "cherry tomato",
-                            NameInPlural = "cherry tomatoes"
+                            Name = "cherry tomato"
                         },
                         new
                         {
@@ -1318,8 +1313,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "red onion",
-                            NameInPlural = "red onions"
+                            Name = "red onion"
                         },
                         new
                         {
@@ -1327,8 +1321,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "avocado",
-                            NameInPlural = "avocados"
+                            Name = "avocado"
                         },
                         new
                         {
@@ -1368,8 +1361,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            Name = "taco shell",
-                            NameInPlural = "taco shells"
+                            Name = "taco shell"
                         },
                         new
                         {
@@ -1377,8 +1369,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = true,
                             IsDeleted = false,
-                            Name = "tortilla",
-                            NameInPlural = "tortillas"
+                            Name = "tortilla"
                         },
                         new
                         {
@@ -1418,8 +1409,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "jalapeño",
-                            NameInPlural = "jalapeños"
+                            Name = "jalapeño"
                         },
                         new
                         {
@@ -1435,8 +1425,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "banana",
-                            NameInPlural = "bananas"
+                            Name = "banana"
                         },
                         new
                         {
@@ -1612,8 +1601,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "pumpkin",
-                            NameInPlural = "pumpkins"
+                            Name = "pumpkin"
                         },
                         new
                         {
@@ -1645,8 +1633,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             IsAdminApproved = true,
                             IsAllergen = false,
                             IsDeleted = false,
-                            Name = "bay leaf",
-                            NameInPlural = "bay leaves"
+                            Name = "bay leaf"
                         },
                         new
                         {
@@ -2971,11 +2958,17 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Property<int>("CommentId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DeletedOnUtc")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -2998,7 +2991,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 1,
                             Body = "Generally the beef strips need to be seared, not completely cooked so anything between 3 to 5 minutes at max heat.",
                             CommentId = 3,
+                            CreatedOn = new DateTime(2024, 12, 10, 1, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            UpdatedOn = new DateTime(2024, 10, 3, 1, 27, 0, 0, DateTimeKind.Unspecified),
                             UserId = "1a575c2a-065c-487a-8b56-cfd897b1b5ce"
                         },
                         new
@@ -3006,55 +3001,8 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = 2,
                             Body = "Thank you! :)",
                             CommentId = 3,
+                            CreatedOn = new DateTime(2024, 10, 14, 2, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
-                            UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a"
-                        });
-                });
-
-            modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("DeletedOnUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted")
-                        .HasFilter("[IsDeleted] = 0");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ShoppingLists");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "Favorite pancakes",
-                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "Quinoa Salad NOM NOM",
                             UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a"
                         });
                 });
@@ -3178,123 +3126,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             RecipeId = 11,
                             CategoryId = 8
-                        });
-                });
-
-            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.ShoppingListRecipeIngredient", b =>
-                {
-                    b.Property<int>("RecipeIngredientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShoppingListId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RecipeIngredientId", "ShoppingListId");
-
-                    b.HasIndex("ShoppingListId");
-
-                    b.ToTable("ShoppingListsRecipeIngredients");
-
-                    b.HasData(
-                        new
-                        {
-                            RecipeIngredientId = 18,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 19,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 20,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 21,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 22,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 23,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 24,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 25,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 26,
-                            ShoppingListId = 1
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 7,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 8,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 9,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 10,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 11,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 12,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 13,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 14,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 15,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 16,
-                            ShoppingListId = 2
-                        },
-                        new
-                        {
-                            RecipeIngredientId = 17,
-                            ShoppingListId = 2
                         });
                 });
 
@@ -3545,17 +3376,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Navigation("Comment");
                 });
 
-            modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
-                {
-                    b.HasOne("StirCraftApp.Domain.Entities.AppUser", "AppUser")
-                        .WithMany("ShoppingLists")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.CategoryRecipe", b =>
                 {
                     b.HasOne("StirCraftApp.Domain.Entities.Category", "Category")
@@ -3573,25 +3393,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.ShoppingListRecipeIngredient", b =>
-                {
-                    b.HasOne("StirCraftApp.Domain.Entities.RecipeIngredient", "RecipeIngredient")
-                        .WithMany("ShoppingListRecipeIngredients")
-                        .HasForeignKey("RecipeIngredientId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("StirCraftApp.Domain.Entities.ShoppingList", "ShoppingList")
-                        .WithMany("ShoppingListRecipeIngredients")
-                        .HasForeignKey("ShoppingListId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("RecipeIngredient");
-
-                    b.Navigation("ShoppingList");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.JoinedTables.UserFavoriteRecipe", b =>
@@ -3622,8 +3423,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Navigation("RecipesRatings");
 
                     b.Navigation("Replies");
-
-                    b.Navigation("ShoppingLists");
                 });
 
             modelBuilder.Entity("StirCraftApp.Domain.Entities.Category", b =>
@@ -3669,16 +3468,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     b.Navigation("RecipeRatings");
 
                     b.Navigation("UserFavoriteRecipes");
-                });
-
-            modelBuilder.Entity("StirCraftApp.Domain.Entities.RecipeIngredient", b =>
-                {
-                    b.Navigation("ShoppingListRecipeIngredients");
-                });
-
-            modelBuilder.Entity("StirCraftApp.Domain.Entities.ShoppingList", b =>
-                {
-                    b.Navigation("ShoppingListRecipeIngredients");
                 });
 #pragma warning restore 612, 618
         }

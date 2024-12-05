@@ -95,7 +95,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsAllergen = table.Column<bool>(type: "bit", nullable: false),
-                    NameInPlural = table.Column<string>(type: "nvarchar(104)", maxLength: 104, nullable: true),
                     IsAdminApproved = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -228,27 +227,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingLists",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingLists", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ShoppingLists_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Cooks",
                 columns: table => new
                 {
@@ -335,6 +313,8 @@ namespace StirCraftApp.Infrastructure.Migrations
                     RecipeId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Body = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -465,6 +445,8 @@ namespace StirCraftApp.Infrastructure.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CommentId = table.Column<int>(type: "int", nullable: false),
                     Body = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -483,28 +465,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ShoppingListsRecipeIngredients",
-                columns: table => new
-                {
-                    ShoppingListId = table.Column<int>(type: "int", nullable: false),
-                    RecipeIngredientId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingListsRecipeIngredients", x => new { x.RecipeIngredientId, x.ShoppingListId });
-                    table.ForeignKey(
-                        name: "FK_ShoppingListsRecipeIngredients_RecipeIngredients_RecipeIngredientId",
-                        column: x => x.RecipeIngredientId,
-                        principalTable: "RecipeIngredients",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ShoppingListsRecipeIngredients_ShoppingLists_ShoppingListId",
-                        column: x => x.ShoppingListId,
-                        principalTable: "ShoppingLists",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -519,12 +479,12 @@ namespace StirCraftApp.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AvatarUrl", "ConcurrencyStamp", "DeletedOnUtc", "DisplayName", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1a575c2a-065c-487a-8b56-cfd897b1b5ce", 0, "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "fe3c83a9-bafc-42ba-be3f-6651a463e1a3", null, "ThePowerOfMorgoth", "galadriel@example.com", false, false, false, null, "GALADRIEL@EXAMPLE.COM", "GALADRIEL@EXAMPLE.COM", "AQAAAAIAAYagAAAAEGDYTZi+n8LMwfa5JVzhL2mS03v8KAdpK/oi37KS1z5QTBfM722tBKfXY733IEvokQ==", null, false, "2cbfc130-01cd-44a1-b64d-c6eaf06bbb88", false, "galadriel@example.com" },
-                    { "3b3c303f-b227-48d8-a30d-1932e90b058a", 0, "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "55a8732b-5723-4d35-ba1d-66e2393459a5", null, "LoveLink", "zelda@example.com", false, false, false, null, "ZELDA@EXAMPLE.COM", "ZELDA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEBMEoIz9MU41/6TalEtU+7WbYVv0ZLj67osiY6P06IFfb06oybfsfkp2vosKSU443A==", null, false, "0c1e9f2a-5817-465d-9543-c12df0a3a67e", false, "zelda@example.com" },
-                    { "6d362fcc-dc94-4385-8b38-844527a2c579", 0, null, "8a1f5390-65c2-4a80-bb66-0028049f6cb1", null, "StirCraftAdmin", "admin@example.com", false, false, false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEO6uj6UnICieDMdNfxZZK+hMjbszcqoFSQ0Jpf4RSwjjOP8rEwFRlcdYfQhZsfTiPQ==", null, false, "10e35705-db1e-4710-a096-f4f4fb06ed59", false, "admin@example.com" },
-                    { "98f61b51-9ae7-4107-a247-29d1c68a7d32", 0, "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "3b6333cc-d9b6-4619-a950-d7c5bb89969d", null, "AdrianTheAdventurer", "adrian@example.com", false, false, false, null, "ADRIAN@EXAMPLE.COM", "ADRIAN@EXAMPLE.COM", "AQAAAAIAAYagAAAAELqEvyKDMv/ZOVJuh+N67OharS1OPKk5C8ejjkI1QI59sy68JyWHif5Hn0OlHkE07Q==", null, false, "e11a20f0-1718-4714-a0f0-15f80229c42c", false, "adrian@example.com" },
-                    { "edc8a753-f0dc-483f-bbaf-d26dc2827d54", 0, "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "f8242cae-d157-45ad-80d3-115ffc875ab3", null, "KateMiddleton", "kate@example.com", false, false, false, null, "KATE@EXAMPLE.COM", "KATE@EXAMPLE.COM", "AQAAAAIAAYagAAAAEIEZzzxv4HIB1KF8ZXZpCoXTKuBlVgf5C+2UnUQUAm8Z+XAS3izPi7dFkhj+0sTmRQ==", null, false, "a4b63d26-cc52-4c18-bb3d-74fa19eb621d", false, "kate@example.com" },
-                    { "f44c3f06-172b-491e-b71d-8672ac7595cb", 0, "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "3d92c5f0-0f68-4e2b-9542-a5144cd14319", null, "ChefBob", "bob@example.com", false, false, false, null, "BOB@EXAMPLE.COM", "BOB@EXAMPLE.COM", "AQAAAAIAAYagAAAAEA1tXIxdK6jxCka5t9eoMgbkUGAsQtyxhcQK3OvqL+wkvtdZdnM79Iw4PkUOHna3OQ==", null, false, "f71ef3a0-7dba-4e25-8baa-a8f9b22cfdc4", false, "bob@example.com" }
+                    { "1a575c2a-065c-487a-8b56-cfd897b1b5ce", 0, "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "e70d7666-bafa-4dcd-b972-818c028f371d", null, "ThePowerOfMorgoth", "galadriel@example.com", false, false, false, null, "GALADRIEL@EXAMPLE.COM", "GALADRIEL@EXAMPLE.COM", "AQAAAAIAAYagAAAAEPpQdeJHZRbQBuPVBnm/fKCVPXUbQ3zl2FQgfATOjY9rmzvgg0VSlaVQf5Z8EZBGDw==", null, false, "1584aeb8-043d-4b58-8dd3-41cd25ffa7d7", false, "galadriel@example.com" },
+                    { "3b3c303f-b227-48d8-a30d-1932e90b058a", 0, "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "39ced363-9143-4e47-b8b5-5fcce017ae42", null, "LoveLink", "zelda@example.com", false, false, false, null, "ZELDA@EXAMPLE.COM", "ZELDA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEKBtM+9fApCKw+pUkmCPxJOgbp0RidthzXbqSWa0W7uaxb+nxJRGNBayulAGelhnMA==", null, false, "871fa3ec-bf87-4d66-842a-745a0a471bbe", false, "zelda@example.com" },
+                    { "6d362fcc-dc94-4385-8b38-844527a2c579", 0, null, "344677f9-cf53-4552-842c-3fc9f857cf18", null, "StirCraftAdmin", "admin@example.com", false, false, false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEInQygfdy0Lpnzr48FstlHfzqNyEPZ6UcFVfRy+ZJ00v6p9MDl0BP/O+rBiSfuvM6w==", null, false, "fc97e10e-6cad-49b4-81ee-cfa6aa752b03", false, "admin@example.com" },
+                    { "98f61b51-9ae7-4107-a247-29d1c68a7d32", 0, "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "e5a322fb-d0f2-4e6c-bc5b-525bc781f23b", null, "AdrianTheAdventurer", "adrian@example.com", false, false, false, null, "ADRIAN@EXAMPLE.COM", "ADRIAN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEE4WLUMxx48S/oDtBQaoWeLgofdnGgpx6/x4AOGQLwgKpntkG648l8H3gAfHWZ2RNQ==", null, false, "66c6bdea-e1b8-45d8-a4d3-e98c8c1b8284", false, "adrian@example.com" },
+                    { "edc8a753-f0dc-483f-bbaf-d26dc2827d54", 0, "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "fee3d4e6-ad44-4cb5-8f1c-74a287c89586", null, "KateMiddleton", "kate@example.com", false, false, false, null, "KATE@EXAMPLE.COM", "KATE@EXAMPLE.COM", "AQAAAAIAAYagAAAAEPfw/4ey0uc3pau+3lkz+YbaJOPpGnu8zQmJPjN8FA6UZxNFh+S1ol0fV1IAtlhMew==", null, false, "92e37f2a-d762-401d-ac72-1d2ffcbde9a7", false, "kate@example.com" },
+                    { "f44c3f06-172b-491e-b71d-8672ac7595cb", 0, "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "a326e2c4-5b09-4dd0-abf4-bdc24a1ebea9", null, "ChefBob", "bob@example.com", false, false, false, null, "BOB@EXAMPLE.COM", "BOB@EXAMPLE.COM", "AQAAAAIAAYagAAAAEAMaddOGTgu772A0HtUrDAJLckYnfirbCxwhSYHyWor+UKSqDSpmQdt1S+tQPZBpSw==", null, false, "6f1e0697-06aa-4a7a-bfb7-5f21ae833620", false, "bob@example.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -571,109 +531,109 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Ingredients",
-                columns: new[] { "Id", "DeletedOnUtc", "IsAdminApproved", "IsAllergen", "IsDeleted", "Name", "NameInPlural" },
+                columns: new[] { "Id", "DeletedOnUtc", "IsAdminApproved", "IsAllergen", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, true, false, false, "flour", null },
-                    { 2, null, true, true, false, "egg", "eggs" },
-                    { 3, null, true, false, false, "sugar", null },
-                    { 4, null, true, true, false, "milk", null },
-                    { 5, null, true, false, false, "salt", null },
-                    { 6, null, true, true, false, "butter", null },
-                    { 7, null, true, false, false, "olive oil", null },
-                    { 8, null, true, false, false, "tomato", "tomatoes" },
-                    { 9, null, true, false, false, "garlic", null },
-                    { 10, null, true, false, false, "onion", "onions" },
-                    { 11, null, true, false, false, "chicken breast", "chicken breasts" },
-                    { 12, null, true, false, false, "ground beef", null },
-                    { 13, null, true, false, false, "carrot", "carrots" },
-                    { 14, null, true, true, false, "celery", "celeries" },
-                    { 15, null, true, true, false, "almond", "almonds" },
-                    { 16, null, true, true, false, "peanut", "peanuts" },
-                    { 17, null, true, true, false, "soy sauce", null },
-                    { 18, null, true, false, false, "lemon", "lemons" },
-                    { 19, null, true, false, false, "lime", "limes" },
-                    { 20, null, true, false, false, "basil", null },
-                    { 21, null, true, false, false, "parsley", null },
-                    { 22, null, true, false, false, "mushroom", "mushrooms" },
-                    { 23, null, true, false, false, "spinach", null },
-                    { 24, null, true, false, false, "coconut milk", null },
-                    { 25, null, true, true, false, "shrimp", "shrimps" },
-                    { 26, null, true, false, false, "salmon", "salmons" },
-                    { 27, null, true, false, false, "tofu", null },
-                    { 28, null, true, false, false, "chickpeas", null },
-                    { 29, null, true, false, false, "potato", "potatoes" },
-                    { 30, null, true, false, false, "rice", null },
-                    { 31, null, true, false, false, "pasta", null },
-                    { 32, null, true, false, false, "broccoli", null },
-                    { 33, null, true, false, false, "cauliflower", null },
-                    { 34, null, true, false, false, "green beans", null },
-                    { 35, null, true, false, false, "zucchini", "zucchinis" },
-                    { 36, null, true, false, false, "corn", "corns" },
-                    { 37, null, true, true, false, "cheese", null },
-                    { 38, null, true, true, false, "cream", null },
-                    { 39, null, true, true, false, "yogurt", null },
-                    { 40, null, true, false, false, "honey", null },
-                    { 41, null, true, false, false, "maple syrup", null },
-                    { 42, null, true, false, false, "baking powder", null },
-                    { 43, null, true, false, false, "yeast", null },
-                    { 44, null, true, false, false, "cinnamon", null },
-                    { 45, null, true, false, false, "cumin", null },
-                    { 46, null, true, false, false, "ginger", null },
-                    { 47, null, true, false, false, "vanilla extract", null },
-                    { 48, null, true, false, false, "black pepper", null },
-                    { 49, null, true, false, false, "oregano", null },
-                    { 50, null, true, false, false, "paprika", null },
-                    { 51, null, true, true, false, "spaghetti", null },
-                    { 52, null, true, false, false, "chili flakes", null },
-                    { 53, null, true, false, false, "chili powder", null },
-                    { 54, null, true, false, false, "quinoa", null },
-                    { 55, null, true, false, false, "cucumber", "cucumbers" },
-                    { 56, null, true, false, false, "cherry tomato", "cherry tomatoes" },
-                    { 57, null, true, false, false, "red onion", "red onions" },
-                    { 58, null, true, false, false, "avocado", "avocados" },
-                    { 59, null, true, true, false, "tahini", null },
-                    { 60, null, true, false, false, "cilantro", null },
-                    { 61, null, true, true, false, "almond flour", null },
-                    { 62, null, true, true, false, "berries mix", null },
-                    { 63, null, true, true, false, "taco shell", "taco shells" },
-                    { 64, null, true, true, false, "tortilla", "tortillas" },
-                    { 65, null, true, true, false, "egg noodles", null },
-                    { 66, null, true, true, false, "mustard", null },
-                    { 67, null, true, true, false, "Worcestershire sauce", null },
-                    { 68, null, true, true, false, "sour cream", null },
-                    { 69, null, true, false, false, "jalapeño", "jalapeños" },
-                    { 70, null, true, false, false, "beef", null },
-                    { 71, null, true, false, false, "banana", "bananas" },
-                    { 72, null, true, true, false, "corn flour", null },
-                    { 73, null, true, false, false, "coconut flour", null },
-                    { 74, null, true, true, false, "oats", null },
-                    { 75, null, true, false, false, "brown sugar", null },
-                    { 76, null, true, false, false, "powdered sugar", null },
-                    { 77, null, true, false, false, "vegetable oil", null },
-                    { 78, null, true, false, false, "canned beans", null },
-                    { 79, null, true, false, false, "red bean paste", null },
-                    { 80, null, true, false, false, "lentils", null },
-                    { 81, null, true, false, false, "rice flour", null },
-                    { 82, null, true, true, false, "parmesan", null },
-                    { 83, null, true, false, false, "rice milk", null },
-                    { 84, null, true, true, false, "almond milk", null },
-                    { 85, null, true, false, false, "water", null },
-                    { 86, null, true, false, false, "matcha", null },
-                    { 87, null, true, false, false, "apple cider vinegar", null },
-                    { 88, null, true, false, false, "white wine vinegar", null },
-                    { 89, null, true, false, false, "balsamic vinegar", null },
-                    { 90, null, true, false, false, "red wine", null },
-                    { 91, null, true, false, false, "white wine", null },
-                    { 92, null, true, true, false, "chocolate chips", null },
-                    { 93, null, true, false, false, "pumpkin", "pumpkins" },
-                    { 94, null, true, false, false, "nutmeg", null },
-                    { 95, null, true, false, false, "cornstarch", null },
-                    { 96, null, true, false, false, "vegetable broth", null },
-                    { 97, null, true, false, false, "bay leaf", "bay leaves" },
-                    { 98, null, true, false, false, "green pumpkin seeds", null },
-                    { 99, null, true, false, false, "rosemary", null },
-                    { 100, null, true, false, false, "dill", null }
+                    { 1, null, true, false, false, "flour" },
+                    { 2, null, true, true, false, "egg" },
+                    { 3, null, true, false, false, "sugar" },
+                    { 4, null, true, true, false, "milk" },
+                    { 5, null, true, false, false, "salt" },
+                    { 6, null, true, true, false, "butter" },
+                    { 7, null, true, false, false, "olive oil" },
+                    { 8, null, true, false, false, "tomato" },
+                    { 9, null, true, false, false, "garlic" },
+                    { 10, null, true, false, false, "onion" },
+                    { 11, null, true, false, false, "chicken breast" },
+                    { 12, null, true, false, false, "ground beef" },
+                    { 13, null, true, false, false, "carrot" },
+                    { 14, null, true, true, false, "celery" },
+                    { 15, null, true, true, false, "almond" },
+                    { 16, null, true, true, false, "peanut" },
+                    { 17, null, true, true, false, "soy sauce" },
+                    { 18, null, true, false, false, "lemon" },
+                    { 19, null, true, false, false, "lime" },
+                    { 20, null, true, false, false, "basil" },
+                    { 21, null, true, false, false, "parsley" },
+                    { 22, null, true, false, false, "mushroom" },
+                    { 23, null, true, false, false, "spinach" },
+                    { 24, null, true, false, false, "coconut milk" },
+                    { 25, null, true, true, false, "shrimp" },
+                    { 26, null, true, false, false, "salmon" },
+                    { 27, null, true, false, false, "tofu" },
+                    { 28, null, true, false, false, "chickpeas" },
+                    { 29, null, true, false, false, "potato" },
+                    { 30, null, true, false, false, "rice" },
+                    { 31, null, true, false, false, "pasta" },
+                    { 32, null, true, false, false, "broccoli" },
+                    { 33, null, true, false, false, "cauliflower" },
+                    { 34, null, true, false, false, "green beans" },
+                    { 35, null, true, false, false, "zucchini" },
+                    { 36, null, true, false, false, "corn" },
+                    { 37, null, true, true, false, "cheese" },
+                    { 38, null, true, true, false, "cream" },
+                    { 39, null, true, true, false, "yogurt" },
+                    { 40, null, true, false, false, "honey" },
+                    { 41, null, true, false, false, "maple syrup" },
+                    { 42, null, true, false, false, "baking powder" },
+                    { 43, null, true, false, false, "yeast" },
+                    { 44, null, true, false, false, "cinnamon" },
+                    { 45, null, true, false, false, "cumin" },
+                    { 46, null, true, false, false, "ginger" },
+                    { 47, null, true, false, false, "vanilla extract" },
+                    { 48, null, true, false, false, "black pepper" },
+                    { 49, null, true, false, false, "oregano" },
+                    { 50, null, true, false, false, "paprika" },
+                    { 51, null, true, true, false, "spaghetti" },
+                    { 52, null, true, false, false, "chili flakes" },
+                    { 53, null, true, false, false, "chili powder" },
+                    { 54, null, true, false, false, "quinoa" },
+                    { 55, null, true, false, false, "cucumber" },
+                    { 56, null, true, false, false, "cherry tomato" },
+                    { 57, null, true, false, false, "red onion" },
+                    { 58, null, true, false, false, "avocado" },
+                    { 59, null, true, true, false, "tahini" },
+                    { 60, null, true, false, false, "cilantro" },
+                    { 61, null, true, true, false, "almond flour" },
+                    { 62, null, true, true, false, "berries mix" },
+                    { 63, null, true, true, false, "taco shell" },
+                    { 64, null, true, true, false, "tortilla" },
+                    { 65, null, true, true, false, "egg noodles" },
+                    { 66, null, true, true, false, "mustard" },
+                    { 67, null, true, true, false, "Worcestershire sauce" },
+                    { 68, null, true, true, false, "sour cream" },
+                    { 69, null, true, false, false, "jalapeño" },
+                    { 70, null, true, false, false, "beef" },
+                    { 71, null, true, false, false, "banana" },
+                    { 72, null, true, true, false, "corn flour" },
+                    { 73, null, true, false, false, "coconut flour" },
+                    { 74, null, true, true, false, "oats" },
+                    { 75, null, true, false, false, "brown sugar" },
+                    { 76, null, true, false, false, "powdered sugar" },
+                    { 77, null, true, false, false, "vegetable oil" },
+                    { 78, null, true, false, false, "canned beans" },
+                    { 79, null, true, false, false, "red bean paste" },
+                    { 80, null, true, false, false, "lentils" },
+                    { 81, null, true, false, false, "rice flour" },
+                    { 82, null, true, true, false, "parmesan" },
+                    { 83, null, true, false, false, "rice milk" },
+                    { 84, null, true, true, false, "almond milk" },
+                    { 85, null, true, false, false, "water" },
+                    { 86, null, true, false, false, "matcha" },
+                    { 87, null, true, false, false, "apple cider vinegar" },
+                    { 88, null, true, false, false, "white wine vinegar" },
+                    { 89, null, true, false, false, "balsamic vinegar" },
+                    { 90, null, true, false, false, "red wine" },
+                    { 91, null, true, false, false, "white wine" },
+                    { 92, null, true, true, false, "chocolate chips" },
+                    { 93, null, true, false, false, "pumpkin" },
+                    { 94, null, true, false, false, "nutmeg" },
+                    { 95, null, true, false, false, "cornstarch" },
+                    { 96, null, true, false, false, "vegetable broth" },
+                    { 97, null, true, false, false, "bay leaf" },
+                    { 98, null, true, false, false, "green pumpkin seeds" },
+                    { 99, null, true, false, false, "rosemary" },
+                    { 100, null, true, false, false, "dill" }
                 });
 
             migrationBuilder.InsertData(
@@ -713,15 +673,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                     { 1, "I am a home cook with love for classic comfort foods. I often experiment with traditional recipes, adding my personal twist to create something familiar yet unique.", 1, null, false, 10L, "f44c3f06-172b-491e-b71d-8672ac7595cb" },
                     { 2, "Inspired by my travels, I enjoy combining fresh, vibrant ingredients like olive oil, herbs, and seafood to create dishes that are both healthy and full of flavor. My philosophy in cooking revolves around simplicity. I love the Mediterranean Cuisine.", 3, null, false, 1200L, "98f61b51-9ae7-4107-a247-29d1c68a7d32" },
                     { 3, "I am passionate about modern fusion cuisine, blending flavors and techniques from around the world. I think of myself as quite innovative in the use of seasonal ingredients and attention to detail, making every meal an unforgettable experience. Also I excel at Asian cuisine, you can call me Senpai!", 5, null, false, 2200L, "1a575c2a-065c-487a-8b56-cfd897b1b5ce" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ShoppingLists",
-                columns: new[] { "Id", "DeletedOnUtc", "IsDeleted", "Name", "UserId" },
-                values: new object[,]
-                {
-                    { 1, null, false, "Favorite pancakes", "edc8a753-f0dc-483f-bbaf-d26dc2827d54" },
-                    { 2, null, false, "Quinoa Salad NOM NOM", "3b3c303f-b227-48d8-a30d-1932e90b058a" }
                 });
 
             migrationBuilder.InsertData(
@@ -772,16 +723,16 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Comments",
-                columns: new[] { "Id", "Body", "DeletedOnUtc", "IsDeleted", "RecipeId", "Title", "UserId" },
+                columns: new[] { "Id", "Body", "CreatedOn", "DeletedOnUtc", "IsDeleted", "RecipeId", "Title", "UpdatedOn", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "My grandchildren love these pancakes! They are a very good choice for a healthy breakfast!", null, false, 3, "Fabulous!", "edc8a753-f0dc-483f-bbaf-d26dc2827d54" },
-                    { 2, "So delicious, yet so healthy!", null, false, 2, "Awesome salad", "3b3c303f-b227-48d8-a30d-1932e90b058a" },
-                    { 3, "I really need help. How long should I cook the beef strips for? I`m afraid they`ll end up raw...", null, false, 5, "Need help!", "3b3c303f-b227-48d8-a30d-1932e90b058a" },
-                    { 4, "Best banana bread ever!", null, false, 7, "Love", "3b3c303f-b227-48d8-a30d-1932e90b058a" },
-                    { 5, "I love this. Cheers to the creator!", null, false, 6, "Great!", "edc8a753-f0dc-483f-bbaf-d26dc2827d54" },
-                    { 6, "I love this!", null, false, 9, "NOM NOM!", "edc8a753-f0dc-483f-bbaf-d26dc2827d54" },
-                    { 7, "Quick and easy, it is indeed a great recipe for fast dinner!", null, false, 11, "Love it", "edc8a753-f0dc-483f-bbaf-d26dc2827d54" }
+                    { 1, "My grandchildren love these pancakes! They are a very good choice for a healthy breakfast!", new DateTime(2024, 10, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, 3, "Fabulous!", new DateTime(2024, 10, 10, 12, 5, 0, 0, DateTimeKind.Unspecified), "edc8a753-f0dc-483f-bbaf-d26dc2827d54" },
+                    { 2, "So delicious, yet so healthy!", new DateTime(2024, 10, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, 2, "Awesome salad", null, "3b3c303f-b227-48d8-a30d-1932e90b058a" },
+                    { 3, "I really need help. How long should I cook the beef strips for? I`m afraid they`ll end up raw...", new DateTime(2024, 12, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, 5, "Need help!", null, "3b3c303f-b227-48d8-a30d-1932e90b058a" },
+                    { 4, "Best banana bread ever!", new DateTime(2024, 12, 12, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, 7, "Love", new DateTime(2024, 12, 13, 12, 5, 0, 0, DateTimeKind.Unspecified), "3b3c303f-b227-48d8-a30d-1932e90b058a" },
+                    { 5, "I love this. Cheers to the creator!", new DateTime(2024, 2, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, 6, "Great!", null, "edc8a753-f0dc-483f-bbaf-d26dc2827d54" },
+                    { 6, "I love this!", new DateTime(2024, 10, 30, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, 9, "NOM NOM!", new DateTime(2024, 10, 30, 12, 5, 0, 0, DateTimeKind.Unspecified), "edc8a753-f0dc-483f-bbaf-d26dc2827d54" },
+                    { 7, "Quick and easy, it is indeed a great recipe for fast dinner!", new DateTime(2024, 10, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), null, false, 11, "Love it", new DateTime(2024, 10, 3, 10, 27, 0, 0, DateTimeKind.Unspecified), "edc8a753-f0dc-483f-bbaf-d26dc2827d54" }
                 });
 
             migrationBuilder.InsertData(
@@ -934,38 +885,11 @@ namespace StirCraftApp.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Replies",
-                columns: new[] { "Id", "Body", "CommentId", "DeletedOnUtc", "IsDeleted", "UserId" },
+                columns: new[] { "Id", "Body", "CommentId", "CreatedOn", "DeletedOnUtc", "IsDeleted", "UpdatedOn", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Generally the beef strips need to be seared, not completely cooked so anything between 3 to 5 minutes at max heat.", 3, null, false, "1a575c2a-065c-487a-8b56-cfd897b1b5ce" },
-                    { 2, "Thank you! :)", 3, null, false, "3b3c303f-b227-48d8-a30d-1932e90b058a" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ShoppingListsRecipeIngredients",
-                columns: new[] { "RecipeIngredientId", "ShoppingListId" },
-                values: new object[,]
-                {
-                    { 7, 2 },
-                    { 8, 2 },
-                    { 9, 2 },
-                    { 10, 2 },
-                    { 11, 2 },
-                    { 12, 2 },
-                    { 13, 2 },
-                    { 14, 2 },
-                    { 15, 2 },
-                    { 16, 2 },
-                    { 17, 2 },
-                    { 18, 1 },
-                    { 19, 1 },
-                    { 20, 1 },
-                    { 21, 1 },
-                    { 22, 1 },
-                    { 23, 1 },
-                    { 24, 1 },
-                    { 25, 1 },
-                    { 26, 1 }
+                    { 1, "Generally the beef strips need to be seared, not completely cooked so anything between 3 to 5 minutes at max heat.", 3, new DateTime(2024, 12, 10, 1, 0, 0, 0, DateTimeKind.Unspecified), null, false, new DateTime(2024, 10, 3, 1, 27, 0, 0, DateTimeKind.Unspecified), "1a575c2a-065c-487a-8b56-cfd897b1b5ce" },
+                    { 2, "Thank you! :)", 3, new DateTime(2024, 10, 14, 2, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, "3b3c303f-b227-48d8-a30d-1932e90b058a" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -1157,22 +1081,6 @@ namespace StirCraftApp.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingLists_IsDeleted",
-                table: "ShoppingLists",
-                column: "IsDeleted",
-                filter: "[IsDeleted] = 0");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingLists_UserId",
-                table: "ShoppingLists",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingListsRecipeIngredients_ShoppingListId",
-                table: "ShoppingListsRecipeIngredients",
-                column: "ShoppingListId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UsersFavoriteRecipes_RecipeId",
                 table: "UsersFavoriteRecipes",
                 column: "RecipeId");
@@ -1203,13 +1111,13 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "RecipeImages");
 
             migrationBuilder.DropTable(
+                name: "RecipeIngredients");
+
+            migrationBuilder.DropTable(
                 name: "RecipeRatings");
 
             migrationBuilder.DropTable(
                 name: "Replies");
-
-            migrationBuilder.DropTable(
-                name: "ShoppingListsRecipeIngredients");
 
             migrationBuilder.DropTable(
                 name: "UsersFavoriteRecipes");
@@ -1221,19 +1129,13 @@ namespace StirCraftApp.Infrastructure.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Comments");
-
-            migrationBuilder.DropTable(
-                name: "RecipeIngredients");
-
-            migrationBuilder.DropTable(
-                name: "ShoppingLists");
-
-            migrationBuilder.DropTable(
                 name: "Ingredients");
 
             migrationBuilder.DropTable(
                 name: "MeasurementUnits");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Recipes");

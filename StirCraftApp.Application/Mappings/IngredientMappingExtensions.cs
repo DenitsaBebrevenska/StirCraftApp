@@ -26,8 +26,7 @@ public static class IngredientMappingExtensions
         return new FormIngredientDto
         {
             Name = ingredient.Name,
-            IsAllergen = ingredient.IsAllergen,
-            NameInPlural = ingredient.NameInPlural
+            IsAllergen = ingredient.IsAllergen
         };
     }
 
@@ -38,7 +37,6 @@ public static class IngredientMappingExtensions
             Id = ingredient.Id,
             Name = ingredient.Name,
             IsAllergen = ingredient.IsAllergen,
-            NameInPlural = ingredient.NameInPlural,
             IsAdminApproved = ingredient.IsAdminApproved
         };
     }
@@ -47,7 +45,6 @@ public static class IngredientMappingExtensions
     {
         ingredient.Name = formIngredientDto.Name;
         ingredient.IsAllergen = formIngredientDto.IsAllergen;
-        ingredient.NameInPlural = formIngredientDto.NameInPlural;
         ingredient.IsAdminApproved = true;
     }
 
