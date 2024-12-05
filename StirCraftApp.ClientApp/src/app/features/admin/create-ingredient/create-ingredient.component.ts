@@ -29,8 +29,7 @@ export class CreateIngredientComponent {
 
   dto: IngredientCreateForm = {
     name: '',
-    isAllergen: false,
-    nameInPlural: ''
+    isAllergen: false
   };
 
   allergenOptions = [
@@ -40,15 +39,13 @@ export class CreateIngredientComponent {
 
   createIngredientForm = this.formBuilder.group({
     name: ['', Validators.required],
-    isAllergen: [null, Validators.required],
-    nameInPlural: ['']
+    isAllergen: [null, Validators.required]
   });
 
   onSubmit() {
     this.dto = {
       name: this.createIngredientForm.value.name ?? '',
-      isAllergen: this.createIngredientForm.value.isAllergen ?? false,
-      nameInPlural: this.createIngredientForm.value.nameInPlural ?? ''
+      isAllergen: this.createIngredientForm.value.isAllergen ?? false
     };
 
     this.ingredientsService.createIngredient(this.dto).subscribe({

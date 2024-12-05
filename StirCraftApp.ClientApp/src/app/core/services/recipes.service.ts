@@ -6,7 +6,7 @@ import { RecipeDetailed } from '../../shared/models/recipe/recipeDetailed';
 import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 import { environment } from '../../../environments/environment.development';
 import { RecipeCook } from '../../shared/models/recipe/recipeCook';
-import { CarouselRecipe } from '../../shared/models/carouselRecipe';
+import { BriefRecipe } from '../../shared/models/briefRecipe';
 import { RecipeOwn } from '../../shared/models/recipe/recipeOwn';
 import { RecipeCreateForm } from '../../shared/models/recipe/recipeCreateForm';
 import { PagingParams } from '../../shared/models/pagingParams';
@@ -69,7 +69,7 @@ export class RecipesService {
   }
 
   getTopNRecipes(count: number) {
-    return this.http.get<CarouselRecipe[]>(this.baseUrl + 'recipes/top/' + count);
+    return this.http.get<BriefRecipe[]>(this.baseUrl + 'recipes/top/' + count);
   }
 
   createRecipe(recipe: RecipeCreateForm) {
@@ -108,7 +108,6 @@ export class RecipesService {
     let params = new HttpParams();
     params = params.append('pageIndex', pagingParams.pageIndex);
     params = params.append('pageSize', pagingParams.pageSize);
-    return this.http.get<Pagination<RecipeShort>>(this.baseUrl + 'recipes/user-favorites', { params });
+    return this.http.get<Pagination<BriefRecipe>>(this.baseUrl + 'recipes/user-favorites', { params });
   }
-
 }

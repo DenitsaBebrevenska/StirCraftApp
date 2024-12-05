@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CarouselRecipe } from '../../models/carouselRecipe';
+import { BriefRecipe } from '../../models/briefRecipe';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
 })
 
 export class CarouselComponent {
-  @Input() carouselRecipes: CarouselRecipe[] = [];
+  @Input() carouselRecipes: BriefRecipe[] = [];
 
   currentSlide = 1;
 

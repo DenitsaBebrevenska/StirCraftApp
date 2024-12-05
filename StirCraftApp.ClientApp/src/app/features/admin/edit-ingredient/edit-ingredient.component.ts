@@ -43,7 +43,6 @@ export class EditIngredientComponent {
   editIngredientForm = this.formBuilder.group({
     name: ['', Validators.required],
     isAllergen: [null as boolean | null, Validators.required],
-    nameInPlural: [''],
     isAdminApproved: [null as boolean | null, Validators.required],
   });
 
@@ -59,7 +58,6 @@ export class EditIngredientComponent {
         next: response => this.editIngredientForm.patchValue({
           name: response.name,
           isAllergen: response.isAllergen,
-          nameInPlural: response.nameInPlural,
           isAdminApproved: response.isAdminApproved
         }),
         error: err => console.error(err)
@@ -74,7 +72,6 @@ export class EditIngredientComponent {
       id: Number(this.id),
       name: this.editIngredientForm.get('name')?.value ?? '',
       isAllergen: this.editIngredientForm.get('isAllergen')?.value ?? false,
-      nameInPlural: this.editIngredientForm.get('nameInPlural')?.value ?? '',
       isAdminApproved: this.editIngredientForm.get('isAdminApproved')?.value ?? false
     }
 

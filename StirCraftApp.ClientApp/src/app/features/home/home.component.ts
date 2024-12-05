@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RecipesService } from '../../core/services/recipes.service';
-import { CarouselRecipe } from '../../shared/models/carouselRecipe';
+import { BriefRecipe } from '../../shared/models/briefRecipe';
 import { CarouselComponent } from "../../shared/components/carousel/carousel.component";
 
 @Component({
@@ -14,7 +14,7 @@ import { CarouselComponent } from "../../shared/components/carousel/carousel.com
 })
 export class HomeComponent implements OnInit {
   private RecipesService = inject(RecipesService);
-  carouselRecipes: CarouselRecipe[] = [];
+  carouselRecipes: BriefRecipe[] = [];
   count = 5;
 
   ngOnInit() {

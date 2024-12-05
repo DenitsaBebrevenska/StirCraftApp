@@ -10,6 +10,7 @@ public class RecipeFavoritesSpecification : BaseSpecification<Recipe>
         AddInclude(r => r.Cook);
         AddInclude(r => r.RecipeImages);
         AddInclude(r => r.UserFavoriteRecipes);
+        AddInclude(r => r.RecipeImages);
 
         AddOrderBy(r => r.Name);
         AddPaging(pagingParams.PageSize * (pagingParams.PageIndex - 1), pagingParams.PageSize);
