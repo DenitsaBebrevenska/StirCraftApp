@@ -237,6 +237,34 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             : 0;
     }
 
+    public async Task UpdateAdminNotesAsync(int id, AdminNotesDto adminNotesDto)
+    {
+        var recipe = await unit.Repository<Recipe>()
+            .GetByIdAsync(null, id);
+        if (recipe == null)
+        {
+            throw new Exception("Recipe not found");
+        }
+
+        recipe.AdminNotes = adminNotesDto.AdminNotes;
+        unit.Repository<Recipe>().Update(recipe);
+        await unit.CompleteAsync();
+    }
+
+    public async Task ApproveRecipeAsync(int id)
+    {
+        var recipe = await unit.Repository<Recipe>()
+            .GetByIdAsync(null, id);
+        if (recipe == null)
+        {
+            throw new Exception("Recipe not found");
+        }
+
+        recipe.IsAdminApproved = true;
+        unit.Repository<Recipe>().Update(recipe);
+        await unit.CompleteAsync();
+    }
+
     private object ConvertToDto(Recipe recipe, string dtoName, string? userId = null)
     {
         return dtoName switch

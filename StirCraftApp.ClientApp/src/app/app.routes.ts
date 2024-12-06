@@ -27,6 +27,8 @@ import { CookOwnRecipeComponent } from './features/recipes/cook-own-recipe/cook-
 import { AvatarChangeComponent } from './features/account/avatar-change/avatar-change.component';
 import { FavoritesComponent } from './features/recipes/favorites/favorites.component';
 import { UpdateAboutComponent } from './features/cooks/update-about/update-about.component';
+import { PendingRecipesPreviewComponent } from './features/admin/pending-recipes-preview/pending-recipes-preview.component';
+import { PendingRecipeComponent } from './features/admin/pending-recipe/pending-recipe.component';
 
 
 
@@ -44,6 +46,8 @@ export const routes: Routes = [
     { path: 'ingredients', component: IngredientsComponent },
     { path: 'ingredients/suggest', component: SuggestIngredientComponent, canActivate: [authGuard] },
     { path: 'admin/ingredients', component: AdminPanelIngredientsComponent, canActivate: [authGuard] },
+    { path: 'admin/recipes/pending-approval', component: PendingRecipesPreviewComponent, canActivate: [authGuard] },
+    { path: 'admin/recipes/pending-approval/:id', component: PendingRecipeComponent, canActivate: [authGuard] },
     { path: 'admin/ingredients/create', component: CreateIngredientComponent, canActivate: [authGuard] },
     { path: 'admin/ingredients/edit/:id', component: EditIngredientComponent, canActivate: [authGuard] },
     { path: 'admin/ingredients/:id', component: IngredientDetailedComponent, canActivate: [authGuard] },

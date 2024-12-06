@@ -24,8 +24,7 @@ public static class EntityConstraints
     //Ingredient
     public const int IngredientNameMinLength = 2;
     public const int IngredientNameMaxLength = 100;
-    public const int IngredientPluralNameMinLength = 3;
-    public const int IngredientPluralNameMaxLength = 104;
+
 
     //Rank
     public const int RankTitleMinLength = 3;
@@ -36,7 +35,6 @@ public static class EntityConstraints
     public const int RecipeNameMaxLength = 100;
     public const int RecipeDescriptionMinLength = 50;
     public const int RecipeDescriptionMaxLength = 2_000;
-    public const int RecipeAdminNotesMinLength = 2;
     public const int RecipeAdminNotesMaxLength = 250;
 
     //Rating
@@ -49,7 +47,6 @@ public static class EntityConstraints
     //Unit
     public const int UnitNameMinLength = 2;
     public const int UnitNameMaxLength = 20;
-    public const int UnitAbbreviationMinLength = 1;
     public const int UnitAbbreviationMaxLength = 5;
 
     //User

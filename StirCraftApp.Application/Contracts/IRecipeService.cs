@@ -15,5 +15,9 @@ public interface IRecipeService
     Task<FavoriteRecipeToggleDto> ToggleFavoriteAsync(string userId, int recipeId);
 
     Task<double> RateRecipeAsync(string userId, int recipeId, int rating);
+
+    Task UpdateAdminNotesAsync(int id, AdminNotesDto adminNotesDto);
+
+    Task ApproveRecipeAsync(int id);
 }
 

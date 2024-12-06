@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.IngredientDtos;
+using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Specifications.IngredientSpec;
+using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class AdminController(IIngredientService ingredientService) : ControllerBase
+public class AdminController(IIngredientService ingredientService, IRecipeService recipeService) : ControllerBase
 {
 
     [HttpGet("ingredients")]
@@ -47,4 +49,37 @@ public class AdminController(IIngredientService ingredientService) : ControllerB
         await ingredientService.DeleteIngredientAsync(id);
         return Ok();
     }
+
+    [HttpGet("recipes/pending-approval")]
+    public async Task<IActionResult> GetRecipesPendingApproval([FromQuery] PagingParams pagingParams)
+    {
+        var spec = new RecipePendingApprovalBriefSpecification(pagingParams);
+        var recipes = await recipeService.GetRecipesAsync(spec, nameof(BriefRecipeDto));
+        return Ok(recipes);
+    }
+
+
+    [HttpGet("recipes/pending-approval/{id}")]
+    public async Task<IActionResult> GetRecipePendingApproval(int id)
+    {
+        var spec = new RecipePendingApprovalSpecification();
+        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeAdminNotesDto), null);
+        return Ok(recipe);
+    }
+
+
+    [HttpPut("recipes/pending-approval/{id}/notes")] //or patch
+    public async Task<IActionResult> UpdateAdminNotesOnRecipe(int id, AdminNotesDto adminNotesDto)
+    {
+        await recipeService.UpdateAdminNotesAsync(id, adminNotesDto);
+        return Ok(); //no content probably
+    }
+
+    [HttpPost("recipes/pending-approval/{id}/approve")]
+    public async Task<IActionResult> ApproveRecipe(int id)
+    {
+        await recipeService.ApproveRecipeAsync(id);
+        return Ok();
+    }
+
 }

@@ -13,6 +13,8 @@ import { PagingParams } from '../../shared/models/pagingParams';
 import { CommentForm } from '../../shared/models/recipe/commentForm';
 import { EditComment } from '../../shared/models/recipe/editComment';
 import { ToggleFavoriteRecipe } from '../../shared/models/recipe/toggleFavoriteRecipe';
+import { RecipeOwnDetailed } from '../../shared/models/recipe/recipeOwnDetailed';
+import { RecipeAdminNotes } from '../../shared/models/recipe/recipeAdminNotes';
 
 @Injectable({
   providedIn: 'root'
@@ -110,4 +112,24 @@ export class RecipesService {
     params = params.append('pageSize', pagingParams.pageSize);
     return this.http.get<Pagination<BriefRecipe>>(this.baseUrl + 'recipes/user-favorites', { params });
   }
+
+  getRecipesPendingApproval(pagingParams: PagingParams) {
+    let params = new HttpParams();
+    params = params.append('pageIndex', pagingParams.pageIndex);
+    params = params.append('pageSize', pagingParams.pageSize);
+    return this.http.get<Pagination<BriefRecipe>>(this.baseUrl + 'admin/recipes/pending-approval', { params });
+  }
+
+  getRecipePendingApprovalById(id: number) {
+    return this.http.get<RecipeOwnDetailed>(this.baseUrl + 'admin/recipes/pending-approval/' + id);
+  }
+
+  approveRecipe(id: number) {
+    return this.http.post(this.baseUrl + 'admin/recipes/pending-approval/' + id + '/approve', null);
+  }
+
+  updateAdminNotes(id: number, adminNotes: RecipeAdminNotes) {
+    return this.http.put(this.baseUrl + 'admin/recipes/pending-approval/' + id + '/notes', adminNotes);
+  }
+
 }

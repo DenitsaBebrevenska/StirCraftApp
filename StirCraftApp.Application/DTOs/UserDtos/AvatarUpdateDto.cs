@@ -6,6 +6,6 @@ namespace StirCraftApp.Application.DTOs.UserDtos;
 public class AvatarUpdateDto
 {
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
-    [StringLength(ImageUrlMaxLength, ErrorMessage = UrlLengthValidationErrorMessage)]
+    [StringLength(ImageUrlMaxLength, ErrorMessage = StringMaxLengthValidationErrorMessage)]
     public required string ImageUrl { get; set; }
 }
