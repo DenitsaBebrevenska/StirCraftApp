@@ -26,34 +26,36 @@ import { CookOwnRecipesComponent } from './features/recipes/cook-own-recipes/coo
 import { CookOwnRecipeComponent } from './features/recipes/cook-own-recipe/cook-own-recipe.component';
 import { AvatarChangeComponent } from './features/account/avatar-change/avatar-change.component';
 import { FavoritesComponent } from './features/recipes/favorites/favorites.component';
+import { UpdateAboutComponent } from './features/cooks/update-about/update-about.component';
 
 
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'cook/become', component: BecomeCookComponent },
-    { path: 'cook/recipes', component: CookOwnRecipesComponent },
+    { path: 'cook/become', component: BecomeCookComponent, canActivate: [authGuard] },
+    { path: 'cook/about', component: UpdateAboutComponent, canActivate: [authGuard] },
+    { path: 'cook/recipes', component: CookOwnRecipesComponent, canActivate: [authGuard] },
     { path: 'cook/recipes/create', component: CreateRecipeComponent, canActivate: [authGuard] },
     { path: 'cook/recipes/:id/edit', component: UpdateRecipeComponent, canActivate: [authGuard] },
-    { path: 'cook/recipes/:id', component: CookOwnRecipeComponent },
+    { path: 'cook/recipes/:id', component: CookOwnRecipeComponent, canActivate: [authGuard] },
     { path: 'cooks/top/10', component: LeaderboardComponent },
     { path: 'cooks', component: CooksComponent },
     { path: 'cooks/:id', component: CookDetailsComponent },
     { path: 'ingredients', component: IngredientsComponent },
-    { path: 'ingredients/suggest', component: SuggestIngredientComponent },
-    { path: 'admin/ingredients', component: AdminPanelIngredientsComponent },
-    { path: 'admin/ingredients/create', component: CreateIngredientComponent },
-    { path: 'admin/ingredients/edit/:id', component: EditIngredientComponent },//, canActivate: [authGuard]
-    { path: 'admin/ingredients/:id', component: IngredientDetailedComponent },
+    { path: 'ingredients/suggest', component: SuggestIngredientComponent, canActivate: [authGuard] },
+    { path: 'admin/ingredients', component: AdminPanelIngredientsComponent, canActivate: [authGuard] },
+    { path: 'admin/ingredients/create', component: CreateIngredientComponent, canActivate: [authGuard] },
+    { path: 'admin/ingredients/edit/:id', component: EditIngredientComponent, canActivate: [authGuard] },
+    { path: 'admin/ingredients/:id', component: IngredientDetailedComponent, canActivate: [authGuard] },
     { path: 'recipes', component: RecipesComponent },
-    { path: 'recipes/user-favorites', component: FavoritesComponent },
+    { path: 'recipes/user-favorites', component: FavoritesComponent, canActivate: [authGuard] },
     { path: 'recipes/cook/:id', component: RecipeCookComponent },
     { path: 'recipes/ingredient/:id', component: RecipeIngredientComponent },
     { path: 'recipes/:id', component: RecipeDetailsComponent },
     { path: 'account/login', component: LoginComponent },
     { path: 'account/register', component: RegisterComponent },
-    { path: 'account/profile', component: ProfilePageComponent },
-    { path: 'account/profile/avatar/change', component: AvatarChangeComponent },
+    { path: 'account/profile', component: ProfilePageComponent, canActivate: [authGuard] },
+    { path: 'account/profile/avatar/change', component: AvatarChangeComponent, canActivate: [authGuard] },
     { path: 'not-fount', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },
     { path: '**', redirectTo: 'not-found', pathMatch: 'full' }

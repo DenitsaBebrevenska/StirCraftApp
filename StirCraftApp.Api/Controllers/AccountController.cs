@@ -58,7 +58,6 @@ public class AccountController(SignInManager<AppUser> signInManager, ICookServic
         return Ok();
     }
 
-
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {

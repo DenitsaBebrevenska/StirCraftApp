@@ -18,7 +18,25 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         return cook?.Id;
     }
 
-    public async Task CreateCookAsync(BecomeCookDto dto, string userId)
+    public async Task<CookAboutDto> GetCookAbout(string userId)
+    {
+
+        var cooks = await unit.Repository<Cook>().GetAllAsync(null);
+
+        var cook = cooks.FirstOrDefault(c => c.UserId == userId);
+
+        if (cook == null)
+        {
+            throw new Exception($"Cook not found.");
+        }
+
+        return new CookAboutDto
+        {
+            About = cook.About
+        };
+    }
+
+    public async Task CreateCookAsync(CookAboutDto aboutDto, string userId)
     {
         var cooks = await unit.Repository<Cook>().GetAllAsync(null);
 
@@ -30,7 +48,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         var newCook = new Cook
         {
             UserId = userId,
-            About = dto.About,
+            About = aboutDto.About,
             RankingPoints = 0,
             CookingRankId = 1
         };
@@ -44,6 +62,22 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         {
             await userManager.AddToRoleAsync(user, CookRoleName);
         }
+    }
+
+    public async Task UpdateAboutAsync(string userId, CookAboutDto aboutDto)
+    {
+        var cooks = await unit.Repository<Cook>().GetAllAsync(null);
+
+        var cook = cooks.FirstOrDefault(c => c.UserId == userId);
+
+        if (cook == null)
+        {
+            throw new Exception($"Cook not found.");
+        }
+
+        cook.About = aboutDto.About;
+
+        await unit.CompleteAsync();
     }
 
     public async Task<bool> CookIsTheRecipeOwner(int cookId, int recipeId)

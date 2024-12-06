@@ -6,7 +6,6 @@ import { CookShort } from '../../shared/models/cook/cookShort';
 import { CookDetailed } from '../../shared/models/cook/cookDetailed';
 import { Pagination } from '../../shared/models/pagination';
 import { CookRankLeaderBoard } from '../../shared/models/cook/cookRankLeaderBoard';
-import { BecomeCook } from '../../shared/models/cook/becomeCook';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +13,11 @@ import { BecomeCook } from '../../shared/models/cook/becomeCook';
 export class CooksService {
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
-  
+
   getCooks(cookParams: CookParams) {
     let httpParams = new HttpParams();
 
-    if(cookParams.sort) {
+    if (cookParams.sort) {
       httpParams = httpParams.append('sort', cookParams.sort);
     }
 
@@ -32,11 +31,9 @@ export class CooksService {
     return this.http.get<CookDetailed>(this.baseUrl + 'cooks/' + id);
   }
 
-  getTopTenCooks(){
+  getTopTenCooks() {
     return this.http.get<Pagination<CookRankLeaderBoard>>(this.baseUrl + 'cooks/top/10');
   }
 
-  becomeCook(dto: BecomeCook) {
-    return this.http.post(this.baseUrl + 'cook/become', { about: dto.about });
-  }
+
 }

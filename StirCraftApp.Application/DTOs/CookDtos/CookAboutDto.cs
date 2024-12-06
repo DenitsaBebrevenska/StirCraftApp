@@ -4,7 +4,7 @@ using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 
 namespace StirCraftApp.Application.DTOs.CookDtos;
-public class BecomeCookDto : IDto
+public class CookAboutDto : IDto
 {
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
     [StringLength(CookAboutMaxLength, MinimumLength = CookAboutMinLength, ErrorMessage = StringLengthValidationErrorMessage)]

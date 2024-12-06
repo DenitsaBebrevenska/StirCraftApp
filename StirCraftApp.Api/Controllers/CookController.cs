@@ -12,14 +12,34 @@ namespace StirCraftApp.Api.Controllers;
 public class CookController(IRecipeService recipeService, ICookService cookService) : ControllerBase
 {
 
-    [HttpPost("become")]
-    public async Task<IActionResult> BecomeCook(BecomeCookDto dto)
+    [HttpGet("about")]
+    public async Task<IActionResult> GetAbout()
     {
         var userId = User.GetId();
 
-        await cookService.CreateCookAsync(dto, userId);
+        var about = await cookService.GetCookAbout(userId);
+        return Ok(about);
+    }
+
+
+    [HttpPost("about")]
+    public async Task<IActionResult> BecomeCook(CookAboutDto aboutDto)
+    {
+        var userId = User.GetId();
+
+        await cookService.CreateCookAsync(aboutDto, userId);
         return Ok();
     }
+
+
+    [HttpPut("about")]
+    public async Task<IActionResult> UpdateAbout(CookAboutDto aboutDto)
+    {
+        var userId = User.GetId();
+        await cookService.UpdateAboutAsync(userId, aboutDto);
+        return Ok();
+    }
+
 
 
     [HttpGet("recipes")]

@@ -27,10 +27,6 @@ public static class EntityConstraints
     public const int IngredientPluralNameMinLength = 3;
     public const int IngredientPluralNameMaxLength = 104;
 
-    //List
-    public const int ShoppingListNameMinLength = 2;
-    public const int ShoppingListNameMaxLength = 25;
-
     //Rank
     public const int RankTitleMinLength = 3;
     public const int RankTitleMaxLength = 30;
