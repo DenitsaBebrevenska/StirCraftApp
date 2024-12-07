@@ -22,11 +22,11 @@ export class IngredientsService {
   getIngredients(ingredientParams: IngredientParams) {
     let params = new HttpParams();
 
-    if(ingredientParams.searchName) {
+    if (ingredientParams.searchName) {
       params = params.append('ingredientName', ingredientParams.searchName);
     }
 
-    if(ingredientParams.isAllergen){
+    if (ingredientParams.isAllergen) {
       params = params.append('isAllergen', ingredientParams.isAllergen.toString());
     }
 
@@ -39,11 +39,11 @@ export class IngredientsService {
   getAdminIngredients(ingredientAdminParams: IngredientAdminParams) {
     let params = new HttpParams();
 
-    if(ingredientAdminParams.searchName) {
+    if (ingredientAdminParams.searchName) {
       params = params.append('ingredientName', ingredientAdminParams.searchName);
     }
 
-    if(ingredientAdminParams.isAdminApproved){
+    if (ingredientAdminParams.isAdminApproved) {
       params = params.append('isAdminApproved', ingredientAdminParams.isAdminApproved.toString());
     }
 
@@ -74,6 +74,6 @@ export class IngredientsService {
   }
 
   deleteIngredient(id: number) {
-  return this.http.delete(this.baseUrl + 'admin/ingredients/delete/' + id);
+    return this.http.delete(this.baseUrl + 'admin/ingredients/delete/' + id);
   }
 }

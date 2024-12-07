@@ -6,7 +6,7 @@ using StirCraftApp.Domain.Specifications.SpecParams;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class MeasurementUnitsController(IMeasurementUnitService measurementUnitsService) : ControllerBase
+public class MeasurementUnitsController(IMeasurementUnitService measurementUnitsService) : BaseApiController
 {
     [HttpGet]
     public async Task<IActionResult> GetMeasurementUnits([FromQuery] MeasurementUnitParams unitParams)

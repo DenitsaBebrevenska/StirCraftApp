@@ -80,7 +80,7 @@ export class CreateRecipeComponent implements OnInit {
         error: error => console.error(error)
       });
 
-    this.measurementUnitsService.getUnits(new MeasurementUnitParams)
+    this.measurementUnitsService.getUnits()
       .subscribe({
         next: response => {
           this.measurementUnitsOptions = response

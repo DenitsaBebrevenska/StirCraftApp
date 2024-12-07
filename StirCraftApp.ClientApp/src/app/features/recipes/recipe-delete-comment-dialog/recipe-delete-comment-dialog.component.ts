@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
 import { CommentService } from '../../../core/services/comment.service';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-delete-comment-dialog',
@@ -24,7 +25,8 @@ export class RecipeDeleteCommentDialogComponent {
     this.commentService.deleteComment(this.data.recipeId, this.data.commentId).subscribe({
       next: () => {
         this.snack.success('Comment deleted successfully');
-        window.location.reload();
+        setTimeout(() => { window.location.reload(); }, 300);
+
       },
       error: err => {
         this.snack.error('An error occurred while deleting the comment');

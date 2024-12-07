@@ -33,14 +33,9 @@ public static class ClaimsPrincipleExtensions
         return email;
     }
 
-    public static string GetId(this ClaimsPrincipal user)
+    public static string? GetId(this ClaimsPrincipal user)
     {
         var id = user.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        if (id == null)
-        {
-            throw new AuthenticationException("Id claim not found");
-        }
 
         return id;
     }

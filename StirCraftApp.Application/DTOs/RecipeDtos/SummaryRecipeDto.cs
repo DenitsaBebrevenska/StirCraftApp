@@ -13,7 +13,7 @@ public class SummaryRecipeDto : IDto
 
     public required string CookName { get; set; }
 
-    public required string Rating { get; set; }
+    public double Rating { get; set; }
 
     public int Likes { get; set; }
 

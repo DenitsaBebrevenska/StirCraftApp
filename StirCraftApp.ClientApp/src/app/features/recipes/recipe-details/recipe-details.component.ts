@@ -17,6 +17,8 @@ import { CommentService } from '../../../core/services/comment.service';
 import { ReplyService } from '../../../core/services/reply.service';
 import { RecipeCommentReply } from '../../../shared/models/recipe/recipeCommentReply';
 import { RecipeDeleteReplyDialogComponent } from '../recipe-delete-reply-dialog/recipe-delete-reply-dialog.component';
+import { UserInfo } from '../../../shared/models/user/userInfo';
+import { AccountService } from '../../../core/services/account.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -33,7 +35,7 @@ import { RecipeDeleteReplyDialogComponent } from '../recipe-delete-reply-dialog/
   styleUrl: './recipe-details.component.scss'
 })
 export class RecipeDetailsComponent implements OnInit {
-
+  private accountService = inject(AccountService);
   private recipeService = inject(RecipesService);
   private commentService = inject(CommentService);
   private replyService = inject(ReplyService);
@@ -53,6 +55,7 @@ export class RecipeDetailsComponent implements OnInit {
   isLiked?: boolean;
   recipe?: RecipeDetailed;
   editingCommentId?: number;
+  user: UserInfo | undefined;
 
   commentForm = this.formBuilder.group({
     title: ['', Validators.required],
@@ -79,7 +82,16 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUser();
     this.loadRecipe();
+  }
+
+
+  loadUser() {
+    this.accountService.getCurrentUserInfo().subscribe({
+      next: response => this.user = response,
+      error: err => console.log(err)
+    });
   }
 
   loadRecipe() {
@@ -152,6 +164,7 @@ export class RecipeDetailsComponent implements OnInit {
       this.commentService.addComment(this.recipe.id, this.commentDto).subscribe({
         next: () => {
           this.snackBar.success('Successfully added comment.');
+          this.commentForm.reset();
           this.loadRecipe();
         },
         error: errors => this.commentValidationErrors = errors
@@ -187,7 +200,6 @@ export class RecipeDetailsComponent implements OnInit {
         this.isInEditMode = false;
         this.editingCommentId = undefined;
         this.snackBar.success('Comment updated successfully');
-
         this.loadRecipe();
       },
       error: (errors) => {

@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Extensions;
+using static StirCraftApp.Domain.Constants.RoleConstants;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = CookRoleName)]
 public class CookController(IRecipeService recipeService, ICookService cookService) : ControllerBase
 {
 
@@ -21,7 +24,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok(about);
     }
 
-
+    [Authorize(Roles = UserRoleName)]
     [HttpPost("become")]
     public async Task<IActionResult> BecomeCook(CookAboutDto aboutDto)
     {
@@ -77,6 +80,5 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeAdminNotesDto), null);
         return Ok(recipe);
     }
-    //todo comment, reply, rate, view profile, edit avatar, view liked recipes
 
 }

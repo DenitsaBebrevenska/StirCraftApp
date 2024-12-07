@@ -7,6 +7,7 @@ using StirCraftApp.Application.DTOs.UserDtos;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Extensions;
 using System.Security.Claims;
+using static StirCraftApp.Domain.Constants.RoleConstants;
 
 
 namespace StirCraftApp.Api.Controllers;
@@ -44,6 +45,8 @@ public class AccountController(SignInManager<AppUser> signInManager, ICookServic
 
             return ValidationProblem();
         }
+
+        await signInManager.UserManager.AddToRoleAsync(user, UserRoleName);
 
         return Ok();
     }
@@ -100,7 +103,7 @@ public class AccountController(SignInManager<AppUser> signInManager, ICookServic
         var isUniqueDisplayName = await signInManager
             .UserManager
             .Users
-            .AnyAsync(u => u.DisplayName == desiredName);
+            .AllAsync(u => u.DisplayName != desiredName);
 
         return isUniqueDisplayName;
     }

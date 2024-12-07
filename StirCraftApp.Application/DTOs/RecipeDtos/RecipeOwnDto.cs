@@ -5,7 +5,7 @@ public class RecipeOwnDto
     public required string Name { get; set; }
     public string? MainImageUrl { get; set; }
     public uint Likes { get; set; }
-    public string? Rating { get; set; }
+    public double Rating { get; set; }
     public bool IsAdminApproved { get; set; }
 
 }

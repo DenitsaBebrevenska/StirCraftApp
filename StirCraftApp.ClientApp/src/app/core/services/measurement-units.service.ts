@@ -10,19 +10,9 @@ import { MeasurementUnit } from '../../shared/models/measurementUnit/measurement
 export class MeasurementUnitsService {
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
-  
-  getUnits(measurementUnitParams: MeasurementUnitParams) {
-    let params = new HttpParams();
 
-    if(measurementUnitParams.isSolidSpecific){
-      params = params.append('isSolidSpecific', measurementUnitParams.isSolidSpecific.toString());
-    }
-
-    if(measurementUnitParams.isLiquidSpecific){
-      params = params.append('isLiquidSpecific', measurementUnitParams.isLiquidSpecific.toString());
-    }
-
-    return this.http.get<MeasurementUnit[]>(this.baseUrl + 'measurementUnits', { params });
+  getUnits() {
+    return this.http.get<MeasurementUnit[]>(this.baseUrl + 'measurementUnits');
   }
 
 }

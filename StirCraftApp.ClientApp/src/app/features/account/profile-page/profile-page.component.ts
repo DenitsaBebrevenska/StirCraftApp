@@ -20,15 +20,10 @@ export class ProfilePageComponent implements OnInit {
     this.loadUser();
   }
 
-  loadUser(){
+  loadUser() {
     this.accountService.getCurrentUserInfo().subscribe({
       next: response => this.user = response,
       error: err => console.log(err)
     });
   }
-
-  changeAvatar(){
-    console.log("Change Avatar");
-  }
-
 }

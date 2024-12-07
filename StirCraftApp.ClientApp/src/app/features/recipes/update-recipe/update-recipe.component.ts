@@ -134,7 +134,7 @@ export class UpdateRecipeComponent implements OnInit {
       error: error => console.error(error)
     });
 
-    this.measurementUnitsService.getUnits(new MeasurementUnitParams).subscribe({
+    this.measurementUnitsService.getUnits().subscribe({
       next: response => {
         this.measurementUnitsOptions = response.map(measurementUnit => ({ value: measurementUnit.id, label: measurementUnit.abbreviation }));
         this.measurementUnitsOptions.unshift({ value: null, label: 'No unit' });

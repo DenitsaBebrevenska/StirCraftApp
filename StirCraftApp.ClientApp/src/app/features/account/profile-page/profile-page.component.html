@@ -21,13 +21,14 @@
     >
       Change Avatar
     </button>
+    @if(user.role == "User"){
     <a
       routerLink="/recipes/user-favorites"
       class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
     >
       Favorite Recipes
     </a>
-    @if (user.cookId) {
+    } @if (user.cookId) {
     <a
       class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
       routerLink="/cook/about"
@@ -42,6 +43,12 @@
     </a>
     <a
       class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
+      routerLink="/ingredients/suggest"
+    >
+      Suggest Ingredient
+    </a>
+    <a
+      class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
       routerLink="/cook/recipes"
     >
       Your StirCraft Creations
@@ -52,6 +59,12 @@
       routerLink="/admin/recipes/pending-approval"
     >
       Review Recipes Pending Approval
+    </a>
+    <a
+      class="block text-center bg-gray-100 text-blue-600 py-2 px-4 rounded hover:bg-gray-200"
+      routerLink="/admin/ingredients"
+    >
+      View Ingredients
     </a>
     }
   </div>

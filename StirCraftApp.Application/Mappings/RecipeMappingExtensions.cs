@@ -31,7 +31,7 @@ public static class RecipeMappingExtensions
             Id = recipe.Id,
             Name = recipe.Name,
             MainImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
-            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
+            Rating = recipe.RecipeRatings.Any() ? Math.Round(recipe.RecipeRatings.Average(rr => rr.Value), 2) : 0,
             Likes = (uint)userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id))
         };
     }
@@ -44,7 +44,7 @@ public static class RecipeMappingExtensions
             Name = recipe.Name,
             DifficultyLevel = recipe.DifficultyLevel.ToString(),
             MainImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
-            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
+            Rating = recipe.RecipeRatings.Any() ? Math.Round(recipe.RecipeRatings.Average(rr => rr.Value), 2) : 0,
             Likes = (uint)userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
             Categories = recipe.CategoryRecipes.Select(cr => cr.Category.Name).ToList()
         };
@@ -60,7 +60,7 @@ public static class RecipeMappingExtensions
             MainImageUrl =
                 recipe.RecipeImages.FirstOrDefault()?.Url,
             CookName = userManager.Users.FirstOrDefault(u => u.Id == recipe.Cook.UserId)?.DisplayName ?? "",
-            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value).ToString("F2") : "0",
+            Rating = recipe.RecipeRatings.Any() ? Math.Round(recipe.RecipeRatings.Average(rr => rr.Value), 2) : 0,
             Likes = userManager
                 .Users
                 .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
@@ -81,7 +81,7 @@ public static class RecipeMappingExtensions
             CookName = userManager.Users.FirstOrDefault(u => u.Id == recipe.Cook.UserId)?.DisplayName ?? "",
             CreatedOn = recipe.CreatedOn.ToString("dd/MM/yyyy"),
             UpdatedOn = recipe.UpdatedOn.ToString("dd/MM/yyyy"),
-            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
+            Rating = recipe.RecipeRatings.Any() ? Math.Round(recipe.RecipeRatings.Average(rr => rr.Value), 2) : 0,
             Likes = userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
             Ingredients = recipe.RecipeIngredients.Select(ri => new RecipeIngredientDto
             {
@@ -132,7 +132,7 @@ public static class RecipeMappingExtensions
             Id = recipe.Id,
             Name = recipe.Name,
             MainImageUrl = recipe.RecipeImages.FirstOrDefault()?.Url,
-            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value).ToString("F2") : "0",
+            Rating = recipe.RecipeRatings.Any() ? Math.Round(recipe.RecipeRatings.Average(rr => rr.Value), 2) : 0,
             Likes = (uint)userManager
                 .Users
                 .Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
@@ -152,7 +152,7 @@ public static class RecipeMappingExtensions
             CookName = userManager.Users.FirstOrDefault(u => u.Id == recipe.Cook.UserId)?.DisplayName ?? "",
             CreatedOn = recipe.CreatedOn.ToString("dd/MM/yyyy"),
             UpdatedOn = recipe.UpdatedOn.ToString("dd/MM/yyyy"),
-            Rating = recipe.RecipeRatings.Any() ? recipe.RecipeRatings.Average(rr => rr.Value) : 0,
+            Rating = recipe.RecipeRatings.Any() ? Math.Round(recipe.RecipeRatings.Average(rr => rr.Value), 2) : 0,
             Likes = userManager.Users.Count(u => u.FavoriteRecipes.Any(ufr => ufr.RecipeId == recipe.Id)),
             Ingredients = recipe.RecipeIngredients.Select(ri => new EditRecipeIngredientDto
             {

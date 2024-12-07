@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CommentDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
@@ -7,13 +8,14 @@ using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Extensions;
+using static StirCraftApp.Domain.Constants.RoleConstants;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService, IReplyService replyService) : ControllerBase
+public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService, IReplyService replyService) : BaseApiController
 {
-    // get recipes with specs and not, get recipe by id, create recipe, edit recipe, delete recipe
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams specParams)
     {
@@ -22,6 +24,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipes);
     }
 
+    [AllowAnonymous]
     [HttpGet("top/{count}")]
     public async Task<IActionResult> GetTopNRecipes(int count)
     {
@@ -29,6 +32,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipes);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRecipe(int id)
     {
@@ -38,6 +42,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipe);
     }
 
+    [AllowAnonymous]
     [HttpGet("cook/{id}")]
     public async Task<IActionResult> GetRecipesByCookId(int id, [FromQuery] PagingParams pagingParams)
     {
@@ -47,6 +52,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     //implementing that through any service is not necessary, complicates it for no good reason
+    [AllowAnonymous]
     [HttpGet("difficultyLevels")]
     public IActionResult GetDifficultyLevels()
     {
@@ -54,6 +60,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(difficultyLevels);
     }
 
+    [Authorize(Roles = CookRoleName)]
     [HttpPost]
     public async Task<IActionResult> CreateRecipe(FormRecipeDto createRecipeDto)
     {
@@ -70,6 +77,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
+    [Authorize(Roles = CookRoleName)]
     [HttpPut("{id}/edit")]
     public async Task<IActionResult> UpdateRecipe(int id, EditFormRecipeDto updateRecipeDto)
     {
@@ -82,6 +90,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
+    [Authorize(Roles = CookRoleName)]
     [HttpDelete("{id}/delete")]
     public async Task<IActionResult> DeleteRecipe(int id)
     {
@@ -89,6 +98,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
+    [Authorize(Roles = UserRoleName)]
     [HttpPost("{id}/toggle-favorite")]
     public async Task<IActionResult> ToggleFavorite(int id)
     {
@@ -97,6 +107,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(dto);
     }
 
+    [Authorize(Roles = UserRoleName)]
     [HttpGet("user-favorites")]
     public async Task<IActionResult> GetUserFavorites([FromQuery] PagingParams pagingParams)
     {
@@ -106,7 +117,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipes);
     }
 
-
+    [Authorize(Roles = UserRoleName)]
     [HttpPost("{id}/rate/{value}")]
     public async Task<IActionResult> RateRecipe(int id, int value)
     {
@@ -114,6 +125,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         var averageRating = await recipeService.RateRecipeAsync(userId, id, value);
         return Ok(averageRating);
     }
+
+    [Authorize(Roles = UserAndCookRoleName)]
 
     [HttpPost("{id}/comments")]
     public async Task<IActionResult> PostComment(int id, CommentFormDto commentFormDto)
@@ -124,6 +137,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(); //todo return created comment
     }
 
+    [Authorize(Roles = UserAndCookRoleName)]
     [HttpPut("{id}/comments/{commentId}")]
     public async Task<IActionResult> EditComment(int commentId, EditFormCommentDto commentEditFormDto)
     {
@@ -139,6 +153,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
+    [Authorize(Roles = UserAndCookRoleName)]
     [HttpDelete("{id}/comments/{commentId}")]
     public async Task<IActionResult> DeleteComment(int commentId)
     {
@@ -148,6 +163,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
+    [Authorize(Roles = UserAndCookRoleName)]
     [HttpPost("{id}/comments/{commentId}/replies")]
     public async Task<IActionResult> PostReply(ReplyFormDto replyFormDto, int commentId)
     {
@@ -157,6 +173,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(); //todo return created reply
     }
 
+    [Authorize(Roles = UserAndCookRoleName)]
     [HttpPut("{id}/comments/{commentId}/replies/{replyId}")]
     public async Task<IActionResult> EditReply(int replyId, ReplyEditFormDto replyEditForm)
     {
@@ -172,6 +189,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok();
     }
 
+    [Authorize(Roles = UserAndCookRoleName)]
     [HttpDelete("{id}/comments/{commentId}/replies/{replyId}")]
     public async Task<IActionResult> DeleteReply(int replyId)
     {

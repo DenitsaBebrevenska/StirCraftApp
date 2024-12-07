@@ -42,6 +42,7 @@
       </ul>
     </div>
 
+    @if (user?.role && user?.role === "User") {
     <!-- Rating Section -->
     <div class="d-flex align-items-center mb-6">
       <span class="me-2 text-lg font-semibold text-primary"
@@ -57,8 +58,9 @@
       </button>
       }
     </div>
-    <!-- Like Section -->
-    <div class="d-flex align-items-center mb-6">
+
+     <!-- Like Section -->
+     <div class="d-flex align-items-center mb-6">
       <span class="me-2 text-lg font-semibold text-primary"
         >Add to Favorites:</span
       >
@@ -68,6 +70,10 @@
         >
       </button>
     </div>
+  }
+   
+
+
     <!-- Ingredients and preparation -->
     <div class="flex gap-5">
       <div class="mb-6 w-auto">
@@ -96,6 +102,7 @@
     </div>
   </article>
 
+  @if (user?.role && (user?.role === "User" || user?.role === "Cook")) {
   <!-- Comments Section -->
   <div class="mt-10">
     <h4 class="text-2xl font-semibold text-primary mb-4">Comments:</h4>
@@ -125,10 +132,11 @@
         </button>
       </form>
     </mat-card>
-
+  </div>
+  }
     <ul class="space-y-4">
-      @for (comment of recipe.comments; track comment.id) { @if
-      (editingCommentId !== comment.id) {
+      @for (comment of recipe.comments; track comment.id) { 
+        @if(editingCommentId !== comment.id) {
       <li class="bg-white p-4 rounded-lg shadow-md">
         <h5 class="text-lg font-medium text-secondary">
           {{ comment.title }}
@@ -141,23 +149,27 @@
         </p>
         }
         <p class="mt-2">{{ comment.body }}</p>
-
-        <div class="flex space-x-2 mt-2">
-          <button mat-raised-button (click)="startCommentEditing(comment)">
-            Edit
-          </button>
-          <button
-            mat-raised-button
-            color="warn"
-            (click)="openCommentDeletionDialog(comment.id)"
-          >
-            Delete
-          </button>
+        @if(user?.displayName === comment.userDisplayName) {
+          <div class="flex space-x-2 mt-2">
+            <button mat-raised-button (click)="startCommentEditing(comment)">
+              Edit
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="openCommentDeletionDialog(comment.id)"
+            >
+              Delete
+            </button>
+          </div>
+        }
+        @if (user?.role && (user?.role === "User" || user?.role === "Cook")) {
+       <div>
           <button mat-raised-button (click)="startReplyToComment(comment.id)">
             Reply
           </button>
         </div>
-
+      }
         <!-- Replies Section -->
         <ul class="mt-4 space-y-2">
           @for (reply of comment.replies; track reply.id) { @if (editingReplyId
@@ -176,6 +188,7 @@
               </p>
               }
             </div>
+            @if(user?.displayName === comment.userDisplayName) {
             <div class="flex space-x-2">
               <button
                 mat-icon-button
@@ -192,7 +205,7 @@
               >
                 <mat-icon>delete</mat-icon>
               </button>
-            </div>
+            </div>}
           </li>
           } @else {
           <!-- Reply Edit Form -->
@@ -224,7 +237,7 @@
           } }
 
           <!-- Reply Form -->
-          @if (replyingToCommentId === comment.id) {
+          @if (replyingToCommentId === comment.id && user?.role === "User" || user?.role === "Cook") {
           <li class="bg-gray-50 p-3 rounded-md">
             <form [formGroup]="replyForm" (ngSubmit)="submitReply()">
               <app-text-area
@@ -293,6 +306,7 @@
       } }
     </ul>
   </div>
+  }
 </section>
 
 }

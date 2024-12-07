@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class CategoriesController(ICategoryService categoryService) : ControllerBase
+[AllowAnonymous]
+public class CategoriesController(ICategoryService categoryService) : BaseApiController
 {
     [HttpGet("names")]
     public async Task<ActionResult<List<string>>> GetCategoriesNames()
