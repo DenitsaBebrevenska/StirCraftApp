@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StirCraftApp.Api.Controllers;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.Services;
 using StirCraftApp.Domain.Contracts;
@@ -21,6 +20,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMeasurementUnitService, MeasurementUnitService>();
         services.AddScoped<ICommentService, CommentService>();
         services.AddScoped<IReplyService, ReplyService>();
+        services.AddScoped<IAccountService, AccountService>();
 
         return services;
     }

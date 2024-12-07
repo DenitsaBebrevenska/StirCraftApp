@@ -44,10 +44,7 @@ export class AvatarChangeComponent implements OnInit {
     this.accountService.updateAvatar(avatarDto).subscribe({
       next: () => {
         this.snack.success('Avatar updated successfully');
-
-        setTimeout(() => {
-          this.router.navigate(['/account/profile']);
-        }, 1000);
+        this.router.navigate(['/account/profile']);
       },
       error: (error) => {
         this.validationErrors = error.messages;

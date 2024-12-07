@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { AccountService } from '../../../core/services/account.service';
@@ -15,7 +15,7 @@ import { TextInputComponent } from "../../../shared/components/text-input/text-i
     MatCard,
     MatButton,
     TextInputComponent
-],
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -26,20 +26,46 @@ export class RegisterComponent {
   private snack = inject(SnackbarService);
   validationErrors?: string[];
 
-  registerForm = this.formBuilder.group({
-    displayName: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', [Validators.required]]
-  });
+  passwordMatchValidator(): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const password = formGroup.get('password');
+      const confirmPassword = formGroup.get('confirmPassword');
 
-  onSubmit(){
-    this.accountService.register(this.registerForm.value).subscribe({
+      if (password?.value !== confirmPassword?.value) {
+        confirmPassword?.setErrors({ passwordMismatch: true });
+        return { passwordMismatch: true };
+      }
+
+      if (confirmPassword?.hasError('passwordMismatch')) {
+        confirmPassword?.setErrors(null);
+      }
+
+      return null;
+    };
+  }
+
+
+  registerForm = this.formBuilder.group(
+    {
+      displayName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      confirmPassword: ['', [Validators.required]]
+    },
+    {
+      validators: this.passwordMatchValidator()
+    }
+  );
+
+
+  onSubmit() {
+    const { confirmPassword, ...registrationData } = this.registerForm.value;
+    this.accountService.register(registrationData).subscribe({
       next: () => {
         this.snack.success('Successful registration! You can now log in.');
         this.router.navigateByUrl('/account/login');
       },
       error: errors => this.validationErrors = errors
-  });
+    });
   }
 }

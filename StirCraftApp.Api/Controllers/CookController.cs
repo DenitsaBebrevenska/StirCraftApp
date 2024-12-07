@@ -22,7 +22,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     }
 
 
-    [HttpPost("about")]
+    [HttpPost("become")]
     public async Task<IActionResult> BecomeCook(CookAboutDto aboutDto)
     {
         var userId = User.GetId();

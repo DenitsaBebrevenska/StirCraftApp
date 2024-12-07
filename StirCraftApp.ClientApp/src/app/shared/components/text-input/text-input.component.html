@@ -10,5 +10,7 @@
   <mat-error>{{ label }} is required</mat-error>
   } @if (control.hasError('email')) {
   <mat-error>Invalid email</mat-error>
+  }@if (control.hasError('passwordMismatch')) {
+  <mat-error>Passwords don`t match</mat-error>
   }
 </mat-form-field>
