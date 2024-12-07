@@ -60,6 +60,12 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "c63bad56-e374-4a01-ac1a-f49231cd1e2f",
                             Name = "Cook",
                             NormalizedName = "COOK"
+                        },
+                        new
+                        {
+                            Id = "9f89760b-50a8-478d-b44a-f711a4d6abe6",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -169,6 +175,16 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             UserId = "6d362fcc-dc94-4385-8b38-844527a2c579",
                             RoleId = "eec0c147-bcdc-49f0-aadc-9b2d906ee763"
+                        },
+                        new
+                        {
+                            UserId = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
+                            RoleId = "9f89760b-50a8-478d-b44a-f711a4d6abe6"
+                        },
+                        new
+                        {
+                            UserId = "3b3c303f-b227-48d8-a30d-1932e90b058a",
+                            RoleId = "9f89760b-50a8-478d-b44a-f711a4d6abe6"
                         });
                 });
 
@@ -282,7 +298,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "f44c3f06-172b-491e-b71d-8672ac7595cb",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1677852512190-5a89ee399aed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "a326e2c4-5b09-4dd0-abf4-bdc24a1ebea9",
+                            ConcurrencyStamp = "26505f68-681b-4240-ac85-674616f45c67",
                             DisplayName = "ChefBob",
                             Email = "bob@example.com",
                             EmailConfirmed = false,
@@ -290,9 +306,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB@EXAMPLE.COM",
                             NormalizedUserName = "BOB@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAMaddOGTgu772A0HtUrDAJLckYnfirbCxwhSYHyWor+UKSqDSpmQdt1S+tQPZBpSw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJA94plcjq1M3UO/WuhvYkXUnIBiUWYZI4NfDLX9fdkAx6OyYnd8CPP6oPKvwgeSeQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6f1e0697-06aa-4a7a-bfb7-5f21ae833620",
+                            SecurityStamp = "1d8518e4-bc1a-4eab-a2f2-d2096225a8c5",
                             TwoFactorEnabled = false,
                             UserName = "bob@example.com"
                         },
@@ -301,7 +317,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "edc8a753-f0dc-483f-bbaf-d26dc2827d54",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661768360749-b60196445a6d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "fee3d4e6-ad44-4cb5-8f1c-74a287c89586",
+                            ConcurrencyStamp = "2cf71b2b-d6ff-426a-a613-de3132c4980b",
                             DisplayName = "KateMiddleton",
                             Email = "kate@example.com",
                             EmailConfirmed = false,
@@ -309,9 +325,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KATE@EXAMPLE.COM",
                             NormalizedUserName = "KATE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPfw/4ey0uc3pau+3lkz+YbaJOPpGnu8zQmJPjN8FA6UZxNFh+S1ol0fV1IAtlhMew==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHaRqa/hXIyWUoB8yffIY6BVBGoax3QbXo0U8PjloYPtTe2FVLKVCfgJZpc/ckKZ0Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "92e37f2a-d762-401d-ac72-1d2ffcbde9a7",
+                            SecurityStamp = "5145dc2f-86cd-4f7f-97e5-5b3d6dc35c42",
                             TwoFactorEnabled = false,
                             UserName = "kate@example.com"
                         },
@@ -320,7 +336,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "98f61b51-9ae7-4107-a247-29d1c68a7d32",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1673830185832-2d5f30a900ed?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "e5a322fb-d0f2-4e6c-bc5b-525bc781f23b",
+                            ConcurrencyStamp = "71881705-3d86-441e-8a26-28111c51a0d1",
                             DisplayName = "AdrianTheAdventurer",
                             Email = "adrian@example.com",
                             EmailConfirmed = false,
@@ -328,9 +344,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADRIAN@EXAMPLE.COM",
                             NormalizedUserName = "ADRIAN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE4WLUMxx48S/oDtBQaoWeLgofdnGgpx6/x4AOGQLwgKpntkG648l8H3gAfHWZ2RNQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELvpu+/1JWXARtjL/2fzUZ4dXKrWO4OY13w+V87h+6TIFAeF2DNgA6TCjuSWAsIf8w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "66c6bdea-e1b8-45d8-a4d3-e98c8c1b8284",
+                            SecurityStamp = "aaae6515-b9c3-4653-ab0e-111c6160bc6c",
                             TwoFactorEnabled = false,
                             UserName = "adrian@example.com"
                         },
@@ -339,7 +355,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "3b3c303f-b227-48d8-a30d-1932e90b058a",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1658506818080-0546c7636830?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "39ced363-9143-4e47-b8b5-5fcce017ae42",
+                            ConcurrencyStamp = "2b70c7e4-cd0f-4945-b8a9-ac78b50af2d7",
                             DisplayName = "LoveLink",
                             Email = "zelda@example.com",
                             EmailConfirmed = false,
@@ -347,9 +363,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ZELDA@EXAMPLE.COM",
                             NormalizedUserName = "ZELDA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKBtM+9fApCKw+pUkmCPxJOgbp0RidthzXbqSWa0W7uaxb+nxJRGNBayulAGelhnMA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDO13MQXBIzzG3nCZA/xnt7EhaQceXjoq8Rc6LxzNAXuwekxZLVR3vc7G4XYuSLAnA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "871fa3ec-bf87-4d66-842a-745a0a471bbe",
+                            SecurityStamp = "048ccd6a-7532-4106-934c-a2131796683b",
                             TwoFactorEnabled = false,
                             UserName = "zelda@example.com"
                         },
@@ -358,7 +374,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                             Id = "1a575c2a-065c-487a-8b56-cfd897b1b5ce",
                             AccessFailedCount = 0,
                             AvatarUrl = "https://plus.unsplash.com/premium_photo-1661778091956-15dbe6e47442?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            ConcurrencyStamp = "e70d7666-bafa-4dcd-b972-818c028f371d",
+                            ConcurrencyStamp = "dadea3e4-3e39-4ea5-9766-2ce3393d7021",
                             DisplayName = "ThePowerOfMorgoth",
                             Email = "galadriel@example.com",
                             EmailConfirmed = false,
@@ -366,9 +382,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GALADRIEL@EXAMPLE.COM",
                             NormalizedUserName = "GALADRIEL@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPpQdeJHZRbQBuPVBnm/fKCVPXUbQ3zl2FQgfATOjY9rmzvgg0VSlaVQf5Z8EZBGDw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENAtisk7EF/PZP9RTKnU8brLb/VSvE7WuattuTjJxF4x0Lf4UjnA//R6zMFIgYf9NA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1584aeb8-043d-4b58-8dd3-41cd25ffa7d7",
+                            SecurityStamp = "6b68298e-9425-413a-9227-3124a236f929",
                             TwoFactorEnabled = false,
                             UserName = "galadriel@example.com"
                         },
@@ -376,7 +392,7 @@ namespace StirCraftApp.Infrastructure.Migrations
                         {
                             Id = "6d362fcc-dc94-4385-8b38-844527a2c579",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "344677f9-cf53-4552-842c-3fc9f857cf18",
+                            ConcurrencyStamp = "808c8c32-1d16-4da1-bb84-1a6e8212f66e",
                             DisplayName = "StirCraftAdmin",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
@@ -384,9 +400,9 @@ namespace StirCraftApp.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEInQygfdy0Lpnzr48FstlHfzqNyEPZ6UcFVfRy+ZJ00v6p9MDl0BP/O+rBiSfuvM6w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJTPWWkkcSRxAAYWR3bqSBJ5+qZR69K4z50yaYuLGdlNy1Kn0OZ/57MItzfNHh+w2Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fc97e10e-6cad-49b4-81ee-cfa6aa752b03",
+                            SecurityStamp = "f9e2a94e-f09d-4b91-a402-940a98d0463c",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });
