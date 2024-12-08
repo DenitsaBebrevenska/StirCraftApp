@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
-using StirCraftApp.Application.Common;
-using StirCraftApp.Application.Contracts;
-using StirCraftApp.Application.DTOs.CookDtos;
-using StirCraftApp.Application.Mappings;
+﻿using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs;
+using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.CookSpec;
 
 
 namespace StirCraftApp.Application.Services;
-public class CooksService(IUnitOfWork unit, UserManager<AppUser> userManager) : ICooksService
+public class CooksService(IUnitOfWork unit) : ICooksService
 {
-    public async Task<object> GetCookByIdAsync(int id, string dtoName)
+    public async Task<T> GetCookByIdAsync<T>(int id, Func<Cook, Task<T>> convertToDto) where T : BaseDto
     {
         var cookExists = await unit.Repository<Cook>()
             .ExistsAsync(id);
@@ -25,19 +23,24 @@ public class CooksService(IUnitOfWork unit, UserManager<AppUser> userManager) : 
         var cook = await unit.Repository<Cook>()
             .GetByIdAsync(spec, id);
 
-        var cookDto = ConvertToDto(cook!, dtoName);
+        var cookDto = await convertToDto(cook!);
 
         return cookDto;
     }
 
-    public async Task<PaginatedResult> GetCooksAsync(ISpecification<Cook> spec, string dtoName)
+    public async Task<PaginatedResult<T>> GetCooksAsync<T>(ISpecification<Cook> spec, Func<Cook, Task<T>> convertToDto) where T : BaseDto
     {
         var cooks = await unit.Repository<Cook>()
             .GetAllAsync(spec);
 
-        var cookDtos = cooks.Select(c => ConvertToDto(c, dtoName)).ToList();
+        var cookDtos = new List<T>();
 
-        var paginatedResult = new PaginatedResult(spec.Skip,
+        foreach (var cook in cooks)
+        {
+            cookDtos.Add(await convertToDto(cook));
+        }
+
+        var paginatedResult = new PaginatedResult<T>(spec.Skip,
             spec.Take,
             cookDtos.Count,
             cookDtos);
@@ -45,14 +48,5 @@ public class CooksService(IUnitOfWork unit, UserManager<AppUser> userManager) : 
         return paginatedResult;
 
     }
-    private object ConvertToDto(Cook cook, string dtoName)
-    {
-        return dtoName switch
-        {
-            nameof(SummaryCookDto) => cook.ToSummaryCookDto(userManager),
-            nameof(DetailedCookDto) => cook.ToDetailedCookDto(userManager),
-            nameof(CookWithRankDto) => cook.ToCookWithRankDto(userManager),
-            _ => throw new ArgumentException("Invalid DTO type")
-        };
-    }
+
 }

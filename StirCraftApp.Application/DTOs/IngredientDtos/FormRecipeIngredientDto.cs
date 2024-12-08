@@ -1,8 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-
-namespace StirCraftApp.Application.DTOs.IngredientDtos;
-public class FormRecipeIngredientDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.IngredientDtos;
+public class FormRecipeIngredientDto : BaseDto
 {
     public int Id { get; set; }
     public int IngredientId { get; set; }

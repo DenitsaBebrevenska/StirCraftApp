@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CommentDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.DTOs.ReplyDtos;
+using StirCraftApp.Application.Mappings;
+using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
@@ -13,14 +16,16 @@ using static StirCraftApp.Domain.Constants.RoleConstants;
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService, IReplyService replyService) : BaseApiController
+public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService, IReplyService replyService, UserManager<AppUser> userManager) : BaseApiController
 {
     [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams specParams)
     {
         var spec = new RecipeFilterSortIncludeSpecification(specParams);
-        var recipes = await recipeService.GetRecipesAsync(spec, nameof(SummaryRecipeDto));
+        var recipes = await recipeService
+            .GetRecipesAsync(spec, async recipe => await recipe
+                .ToSummaryRecipeDtoAsync(userManager));
         return Ok(recipes);
     }
 
@@ -28,7 +33,9 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     [HttpGet("top/{count}")]
     public async Task<IActionResult> GetTopNRecipes(int count)
     {
-        var recipes = await recipeService.GetTopNRecipes(count, nameof(BriefRecipeDto));
+        var recipes = await recipeService
+            .GetTopNRecipes(count, async recipe => await recipe
+                .ToBriefRecipeDtoAsync(userManager));
         return Ok(recipes);
     }
 
@@ -38,7 +45,9 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var currentUserId = User.GetId();
         var spec = new RecipeIncludeAllApprovedSpecification();
-        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeDto), currentUserId);
+        var recipe = await recipeService
+            .GetRecipeByIdAsync(spec, id, async recipe => await recipe
+                .ToDetailedRecipeDtoAsync(userManager, currentUserId));
         return Ok(recipe);
     }
 
@@ -47,7 +56,9 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     public async Task<IActionResult> GetRecipesByCookId(int id, [FromQuery] PagingParams pagingParams)
     {
         var spec = new RecipeByCookIdSpecification(pagingParams, id);
-        var cookRecipes = await recipeService.GetRecipesAsync(spec, nameof(CookRecipeSummaryDto));
+        var cookRecipes = await recipeService
+            .GetRecipesAsync(spec, async recipe => await recipe
+                .ToCookRecipeSummaryDtoAsync(userManager));
         return Ok(cookRecipes);
     }
 
@@ -113,7 +124,9 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var userId = User.GetId();
         var spec = new RecipeFavoritesSpecification(userId, pagingParams);
-        var recipes = await recipeService.GetRecipesAsync(spec, nameof(BriefRecipeDto));
+        var recipes = await recipeService
+            .GetRecipesAsync(spec, async recipe => await recipe
+                .ToBriefRecipeDtoAsync(userManager));
         return Ok(recipes);
     }
 
@@ -122,7 +135,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     public async Task<IActionResult> RateRecipe(int id, int value)
     {
         var userId = User.GetId();
-        var averageRating = await recipeService.RateRecipeAsync(userId, id, value);
+        var averageRating = await recipeService
+            .RateRecipeAsync(userId, id, value);
         return Ok(averageRating);
     }
 
@@ -133,7 +147,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var userId = User.GetId();
 
-        await commentService.AddCommentAsync(userId, id, commentFormDto);
+        await commentService
+            .AddCommentAsync(userId, id, commentFormDto);
         return Ok(); //todo return created comment
     }
 
@@ -148,7 +163,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
             return BadRequest("Id in the body does not match the id in the route");
         }
 
-        await commentService.EditCommentAsync(userId, commentEditFormDto);
+        await commentService
+            .EditCommentAsync(userId, commentEditFormDto);
 
         return Ok();
     }
@@ -159,7 +175,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var userId = User.GetId();
 
-        await commentService.DeleteCommentAsync(userId, commentId);
+        await commentService
+            .DeleteCommentAsync(userId, commentId);
         return Ok();
     }
 
@@ -169,7 +186,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var userId = User.GetId();
 
-        await replyService.AddReplyAsync(userId, commentId, replyFormDto);
+        await replyService
+            .AddReplyAsync(userId, commentId, replyFormDto);
         return Ok(); //todo return created reply
     }
 
@@ -184,7 +202,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
             return BadRequest("Id in the body does not match the id in the route");
         }
 
-        await replyService.EditReplyAsync(userId, replyEditForm);
+        await replyService
+            .EditReplyAsync(userId, replyEditForm);
 
         return Ok();
     }
@@ -195,7 +214,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var userId = User.GetId();
 
-        await replyService.DeleteReplyAsync(userId, replyId);
+        await replyService
+            .DeleteReplyAsync(userId, replyId);
         return Ok();
     }
 

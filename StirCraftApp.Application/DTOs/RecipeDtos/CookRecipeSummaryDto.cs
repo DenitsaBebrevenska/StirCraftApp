@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.RecipeDtos;
-public class CookRecipeSummaryDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.RecipeDtos;
+public class CookRecipeSummaryDto : BaseDto
 {
     public int Id { get; set; }
 
@@ -13,7 +11,7 @@ public class CookRecipeSummaryDto : IDto
 
     public double Rating { get; set; }
 
-    public uint Likes { get; set; }
+    public int Likes { get; set; }
 
     public IList<string> Categories { get; set; } = [];
 }

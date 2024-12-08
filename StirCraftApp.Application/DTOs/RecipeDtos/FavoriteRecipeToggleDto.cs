@@ -1,5 +1,5 @@
 ﻿namespace StirCraftApp.Application.DTOs.RecipeDtos;
-public class FavoriteRecipeToggleDto
+public class FavoriteRecipeToggleDto : BaseDto
 {
     public bool IsFavorite { get; set; }
 

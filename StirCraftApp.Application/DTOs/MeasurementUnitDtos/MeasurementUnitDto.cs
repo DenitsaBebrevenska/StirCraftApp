@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.MeasurementUnitDtos;
-public class MeasurementUnitDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.MeasurementUnitDtos;
+public class MeasurementUnitDto : BaseDto
 {
     public int Id { get; set; }
     public required string Name { get; set; }

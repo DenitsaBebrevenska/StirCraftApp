@@ -3,7 +3,7 @@ using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 
 namespace StirCraftApp.Application.DTOs.UserDtos;
-public class AvatarUpdateDto
+public class AvatarUpdateDto : BaseDto
 {
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
     [StringLength(ImageUrlMaxLength, ErrorMessage = StringMaxLengthValidationErrorMessage)]

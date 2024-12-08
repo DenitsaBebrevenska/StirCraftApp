@@ -48,4 +48,14 @@ public static class IngredientMappingExtensions
         ingredient.IsAdminApproved = true;
     }
 
+    public static Ingredient ToIngredient(this FormIngredientDto formIngredientDto)
+    {
+        return new Ingredient
+        {
+            Name = formIngredientDto.Name,
+            IsAllergen = formIngredientDto.IsAllergen,
+            IsAdminApproved = true
+        };
+    }
+
 }

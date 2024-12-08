@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.RecipeDtos;
-public class BriefRecipeDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.RecipeDtos;
+public class BriefRecipeDto : BaseDto
 {
     public int Id { get; set; }
 

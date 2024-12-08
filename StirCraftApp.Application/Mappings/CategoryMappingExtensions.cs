@@ -6,7 +6,7 @@ public static class CategoryMappingExtensions
 {
     public static CategoryDto ToDto(this Category category)
     {
-        return new CategoryDto()
+        return new CategoryDto
         {
             Id = category.Id,
             Name = category.Name

@@ -15,10 +15,10 @@
 
     <!-- Recipe Details -->
     <!-- Fix images -->
-    <div class="flex flex-col items-center mb-6">
+    <div class="flex flex-col items-center mb-6 rounded-lg w-1/2 h-1/2">
       @for(image of recipe.images; track image.id) {
       <img
-        class="w-1/2 h-auto rounded-md shadow-lg"
+        class="w-1/2 h-auto rounded-md shadow-lg object-cover"
         [src]="image.url || 'default-image.jpg'"
         alt="Recipe Image"
       />
@@ -28,18 +28,6 @@
       </p>
       <p class="text-lg"><strong>Rating:</strong> {{ recipe.rating }} ⭐</p>
       <p class="text-lg"><strong>Likes:</strong> {{ recipe.likes }} ❤️</p>
-    </div>
-
-    <!-- Categories -->
-    <div class="mb-6">
-      <h3 class="text-xl font-semibold text-primary mb-2">Categories:</h3>
-      <ul class="flex flex-wrap gap-2 list-disc">
-        @for (category of recipe.categories; track $index) {
-        <li class="bg-primary py-1 px-3 rounded-md text-lg">
-          {{ category }}
-        </li>
-        }
-      </ul>
     </div>
 
     @if (user?.role && user?.role === "User") {
@@ -59,8 +47,8 @@
       }
     </div>
 
-     <!-- Like Section -->
-     <div class="d-flex align-items-center mb-6">
+    <!-- Like Section -->
+    <div class="d-flex align-items-center mb-6">
       <span class="me-2 text-lg font-semibold text-primary"
         >Add to Favorites:</span
       >
@@ -70,12 +58,10 @@
         >
       </button>
     </div>
-  }
-   
+    }
 
-
-    <!-- Ingredients and preparation -->
-    <div class="flex gap-5">
+    <!-- Ingredients and preparation and categories -->
+    <div class="flex gap-5 justify-center">
       <div class="mb-6 w-auto">
         <h3 class="text-xl font-semibold text-primary mb-2">Ingredients:</h3>
         <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-md">
@@ -99,44 +85,55 @@
           {{ recipe.preparationSteps }}
         </p>
       </div>
-    </div>
-  </article>
 
-  @if (user?.role && (user?.role === "User" || user?.role === "Cook")) {
-  <!-- Comments Section -->
-  <div class="mt-10">
-    <h4 class="text-2xl font-semibold text-primary mb-4">Comments:</h4>
-    <mat-card class="max-w-screen-xl mx-auto mt-2 p-8 bg-white">
-      <form [formGroup]="commentForm" (ngSubmit)="onCommentSubmit()">
-        <div class="text-center mb-6">
-          <h2 class="text-2xl font-semibold">Add Comment</h2>
-        </div>
-        <app-text-input label="Title" formControlName="title" />
-        <app-text-area label="Comment" rows="'5'" formControlName="body" />
-        @if (commentValidationErrors) {
-        <div class="mb-3 p-4 bg-red-100 text-red-600">
-          <ul class="list-disc px-3">
-            @for (error of commentValidationErrors; track $index) {
-            <li>{{ error }}</li>
-            }
-          </ul>
-        </div>
-        }
-        <button
-          mat-flat-button
-          [disabled]="commentForm.invalid"
-          type="submit"
-          class="w-full py-2"
-        >
-          Post Comment
-        </button>
-      </form>
-    </mat-card>
-  </div>
-  }
+      <!-- Categories -->
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-primary mb-2">Categories:</h3>
+        <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-md">
+          @for (category of recipe.categories; track $index) {
+          <li class="bg-primary py-1 px-3 rounded-md text-lg">
+            {{ category }}
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    @if (user?.role && (user?.role === "User" || user?.role === "Cook")) {
+    <div class="mt-10">
+      <h4 class="text-2xl font-semibold text-primary mb-4">Comments:</h4>
+      <mat-card class="max-w-screen-xl mx-auto mt-2 p-8 bg-white">
+        <form [formGroup]="commentForm" (ngSubmit)="onCommentSubmit()">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl font-semibold">Add Comment</h2>
+          </div>
+          <app-text-input label="Title" formControlName="title" />
+          <app-text-area label="Comment" rows="'5'" formControlName="body" />
+          @if (commentValidationErrors) {
+          <div class="mb-3 p-4 bg-red-100 text-red-600">
+            <ul class="list-disc px-3">
+              @for (error of commentValidationErrors; track $index) {
+              <li>{{ error }}</li>
+              }
+            </ul>
+          </div>
+          }
+          <button
+            mat-flat-button
+            [disabled]="commentForm.invalid"
+            type="submit"
+            class="w-full py-2"
+          >
+            Post Comment
+          </button>
+        </form>
+      </mat-card>
+    </div>
+    }
     <ul class="space-y-4">
-      @for (comment of recipe.comments; track comment.id) { 
-        @if(editingCommentId !== comment.id) {
+      @for (comment of recipe.comments; track comment.id) { @if(editingCommentId
+      !== comment.id) {
       <li class="bg-white p-4 rounded-lg shadow-md">
         <h5 class="text-lg font-medium text-secondary">
           {{ comment.title }}
@@ -150,26 +147,25 @@
         }
         <p class="mt-2">{{ comment.body }}</p>
         @if(user?.displayName === comment.userDisplayName) {
-          <div class="flex space-x-2 mt-2">
-            <button mat-raised-button (click)="startCommentEditing(comment)">
-              Edit
-            </button>
-            <button
-              mat-raised-button
-              color="warn"
-              (click)="openCommentDeletionDialog(comment.id)"
-            >
-              Delete
-            </button>
-          </div>
-        }
-        @if (user?.role && (user?.role === "User" || user?.role === "Cook")) {
-       <div>
+        <div class="flex space-x-2 mt-2">
+          <button mat-raised-button (click)="startCommentEditing(comment)">
+            Edit
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="openCommentDeletionDialog(comment.id)"
+          >
+            Delete
+          </button>
+        </div>
+        } @if (user?.role && (user?.role === "User" || user?.role === "Cook")) {
+        <div>
           <button mat-raised-button (click)="startReplyToComment(comment.id)">
             Reply
           </button>
         </div>
-      }
+        }
         <!-- Replies Section -->
         <ul class="mt-4 space-y-2">
           @for (reply of comment.replies; track reply.id) { @if (editingReplyId
@@ -205,7 +201,8 @@
               >
                 <mat-icon>delete</mat-icon>
               </button>
-            </div>}
+            </div>
+            }
           </li>
           } @else {
           <!-- Reply Edit Form -->
@@ -237,7 +234,8 @@
           } }
 
           <!-- Reply Form -->
-          @if (replyingToCommentId === comment.id && user?.role === "User" || user?.role === "Cook") {
+          @if (replyingToCommentId === comment.id && user?.role === "User" ||
+          user?.role === "Cook") {
           <li class="bg-gray-50 p-3 rounded-md">
             <form [formGroup]="replyForm" (ngSubmit)="submitReply()">
               <app-text-area
@@ -305,8 +303,6 @@
       </li>
       } }
     </ul>
-  </div>
-  }
+  </article>
 </section>
-
 }

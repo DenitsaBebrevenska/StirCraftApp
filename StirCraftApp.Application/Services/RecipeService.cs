@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using StirCraftApp.Application.Common;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.Mappings;
+using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Enums;
@@ -15,7 +16,7 @@ namespace StirCraftApp.Application.Services;
 public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) : IRecipeService
 {
     //todo handle exceptions better
-    public async Task<object> GetRecipeByIdAsync(ISpecification<Recipe>? spec, int id, string dtoName, string? userId)
+    public async Task<T> GetRecipeByIdAsync<T>(ISpecification<Recipe>? spec, int id, Func<Recipe, Task<T>> convertToDto) where T : BaseDto
     {
         var recipeIsFound = await unit.Repository<Recipe>()
             .ExistsAsync(id);
@@ -28,12 +29,12 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         var recipe = await unit.Repository<Recipe>()
             .GetByIdAsync(spec, id);
 
-        var model = ConvertToDto(recipe!, dtoName, userId);
+        var dto = await convertToDto(recipe!);
 
-        return model;
+        return dto;
     }
 
-    public async Task<PaginatedResult> GetRecipesAsync(ISpecification<Recipe> spec, string dtoName)
+    public async Task<PaginatedResult<T>> GetRecipesAsync<T>(ISpecification<Recipe> spec, Func<Recipe, Task<T>> convertToDto) where T : BaseDto
     {
         var recipes = await unit.Repository<Recipe>()
             .GetAllAsync(spec);
@@ -41,9 +42,14 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         var count = await unit.Repository<Recipe>()
             .CountAsync(spec);
 
-        var recipeDtos = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
+        var recipeDtos = new List<T>();
 
-        var paginatedResult = new PaginatedResult(spec.Skip,
+        foreach (var recipe in recipes)
+        {
+            recipeDtos.Add(await convertToDto(recipe));
+        }
+
+        var paginatedResult = new PaginatedResult<T>(spec.Skip,
             spec.Take,
             count,
             recipeDtos);
@@ -52,14 +58,18 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         return paginatedResult;
     }
 
-    public async Task<IEnumerable<object>> GetTopNRecipes(int count, string dtoName)
+    public async Task<IEnumerable<T>> GetTopNRecipes<T>(int count, Func<Recipe, Task<T>> convertToDto) where T : BaseDto
     {
-        //todo probably different dto to use something for the home carousel
+
         var spec = new RecipeTopNSpecification(count);
         var recipes = await unit.Repository<Recipe>()
             .GetAllAsync(spec);
 
-        var topRecipes = recipes.Select(r => ConvertToDto(r, dtoName)).ToList();
+        var topRecipes = new List<T>();
+        foreach (var recipe in recipes)
+        {
+            topRecipes.Add(await convertToDto(recipe));
+        }
 
         return topRecipes;
     }
@@ -264,21 +274,6 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         recipe.IsAdminApproved = true;
         unit.Repository<Recipe>().Update(recipe);
         await unit.CompleteAsync();
-    }
-
-    private object ConvertToDto(Recipe recipe, string dtoName, string? userId = null)
-    {
-        return dtoName switch
-        {
-            nameof(SummaryRecipeDto) => recipe.ToSummaryRecipeDto(userManager),
-            nameof(DetailedRecipeDto) => recipe.ToDetailedRecipeDto(userManager, userId),
-            nameof(CookRecipeSummaryDto) => recipe.ToCookRecipeSummaryDto(userManager),
-            nameof(BriefRecipeDto) => recipe.ToBriefRecipeDto(userManager),
-            nameof(BriefCookRecipeDto) => recipe.ToBriefCookRecipeDto(userManager),
-            nameof(RecipeOwnDto) => recipe.ToRecipeOwnDto(userManager),
-            nameof(DetailedRecipeAdminNotesDto) => recipe.ToDetailedRecipeAdminNotesDto(userManager),
-            _ => throw new ArgumentException("Invalid DTO type")
-        };
     }
 
 }

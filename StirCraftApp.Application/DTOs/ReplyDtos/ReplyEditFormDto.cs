@@ -3,7 +3,7 @@ using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 
 namespace StirCraftApp.Application.DTOs.ReplyDtos;
-public class ReplyEditFormDto
+public class ReplyEditFormDto : BaseDto
 {
     public int Id { get; set; }
 

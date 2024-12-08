@@ -102,7 +102,8 @@ export class RecipeDetailsComponent implements OnInit {
         next: response => {
           this.recipe = response,
             this.isLiked = response.isLikedByCurrentUser,
-            this.currentRating = response.currentUserRating || 0
+            this.currentRating = response.currentUserRating || 0,
+            console.log(response)
         },
         error: err => console.error(err)
       }
@@ -264,7 +265,7 @@ export class RecipeDetailsComponent implements OnInit {
         this.replyValidationErrors = errors;
         this.snackBar.error('Failed to post reply');
       }
-    }); ``
+    });
   }
 
   startReplyEditing(reply: RecipeCommentReply) {

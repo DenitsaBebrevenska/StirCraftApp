@@ -1,11 +1,11 @@
-﻿using StirCraftApp.Application.DTOs.Image;
+﻿using StirCraftApp.Application.DTOs.ImageDtos;
 using StirCraftApp.Application.DTOs.IngredientDtos;
 using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 
 namespace StirCraftApp.Application.DTOs.RecipeDtos;
-public class EditFormRecipeDto
+public class EditFormRecipeDto : BaseDto
 {
     public int Id { get; set; }
 

@@ -1,9 +1,9 @@
 ﻿using StirCraftApp.Application.DTOs.CategoryDtos;
-using StirCraftApp.Application.DTOs.Image;
+using StirCraftApp.Application.DTOs.ImageDtos;
 using StirCraftApp.Application.DTOs.IngredientDtos;
 
 namespace StirCraftApp.Application.DTOs.RecipeDtos;
-public class DetailedRecipeAdminNotesDto
+public class DetailedRecipeAdminNotesDto : BaseDto
 {
     public int Id { get; set; }
 

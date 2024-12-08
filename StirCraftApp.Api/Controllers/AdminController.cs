@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.IngredientDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
+using StirCraftApp.Application.Mappings;
+using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.IngredientSpec;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
@@ -12,14 +15,16 @@ namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize(Roles = AdminRoleName)]
-public class AdminController(IIngredientService ingredientService, IRecipeService recipeService) : BaseApiController
+public class AdminController(IIngredientService ingredientService, IRecipeService recipeService, UserManager<AppUser> userManager) : BaseApiController
 {
 
     [HttpGet("ingredients")]
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientAdminPanelSpecParams specParams)
     {
         var spec = new IngredientFilterAdminPanelSpecification(specParams);
-        var ingredients = await ingredientService.GetIngredientsAsync(spec, nameof(BriefIngredientDto));
+        var ingredients = await ingredientService
+            .GetIngredientsAsync(spec, ingredient => ingredient
+                .ToBriefIngredientDto());
 
         return Ok(ingredients);
     }
@@ -27,7 +32,9 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     [HttpGet("ingredients/{id}")]
     public async Task<IActionResult> GetIngredient(int id)
     {
-        var ingredient = await ingredientService.GetIngredientByIdAsync(id, null);
+        var ingredient = await ingredientService
+            .GetIngredientByIdAsync(id, null, ingredient => ingredient
+                .ToEditFormIngredientDto());
 
         return Ok(ingredient);
     }
@@ -57,7 +64,9 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     public async Task<IActionResult> GetRecipesPendingApproval([FromQuery] PagingParams pagingParams)
     {
         var spec = new RecipePendingApprovalBriefSpecification(pagingParams);
-        var recipes = await recipeService.GetRecipesAsync(spec, nameof(BriefRecipeDto));
+        var recipes = await recipeService
+            .GetRecipesAsync(spec, async recipe => await recipe
+                .ToBriefRecipeDtoAsync(userManager));
         return Ok(recipes);
     }
 
@@ -66,7 +75,9 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     public async Task<IActionResult> GetRecipePendingApproval(int id)
     {
         var spec = new RecipePendingApprovalSpecification();
-        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeAdminNotesDto), null);
+        var recipe = await recipeService
+            .GetRecipeByIdAsync(spec, id, async recipe => await recipe
+                .ToDetailedRecipeAdminNotesDtoAsync(userManager));
         return Ok(recipe);
     }
 

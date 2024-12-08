@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.RecipeDtos;
-public class BriefCookRecipeDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.RecipeDtos;
+public class BriefCookRecipeDto : BaseDto
 {
     public int Id { get; set; }
 
@@ -11,6 +9,6 @@ public class BriefCookRecipeDto : IDto
 
     public double Rating { get; set; }
 
-    public uint Likes { get; set; }
+    public int Likes { get; set; }
 
 }

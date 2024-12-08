@@ -1,5 +1,5 @@
 ﻿namespace StirCraftApp.Application.DTOs.IngredientDtos;
-public class AbbreviationIngredientDto
+public class AbbreviationIngredientDto : BaseDto
 {
     public int Id { get; set; }
 

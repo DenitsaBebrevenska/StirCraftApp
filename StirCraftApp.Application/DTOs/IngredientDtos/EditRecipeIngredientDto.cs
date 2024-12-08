@@ -1,5 +1,5 @@
 ﻿namespace StirCraftApp.Application.DTOs.IngredientDtos;
-public class EditRecipeIngredientDto
+public class EditRecipeIngredientDto : BaseDto
 {
     public int Id { get; set; }
 

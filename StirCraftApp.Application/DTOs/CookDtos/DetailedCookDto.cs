@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.CookDtos;
-public class DetailedCookDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.CookDtos;
+public class DetailedCookDto : BaseDto
 {
     public int Id { get; set; }
     public required string DisplayName { get; set; }

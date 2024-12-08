@@ -1,15 +1,17 @@
-﻿using StirCraftApp.Application.Common;
+﻿using StirCraftApp.Application.DTOs;
 using StirCraftApp.Application.DTOs.RecipeDtos;
+using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Contracts;
 public interface IRecipeService
 {
-    //todo object should be replaced with a dto probably marker base class
-    Task<object> GetRecipeByIdAsync(ISpecification<Recipe>? spec, int id, string dtoName, string? userId);
-    Task<PaginatedResult> GetRecipesAsync(ISpecification<Recipe> spec, string dtoName);
-    Task<IEnumerable<object>> GetTopNRecipes(int count, string dtoName);
+    Task<T> GetRecipeByIdAsync<T>(ISpecification<Recipe>? spec, int id, Func<Recipe, Task<T>> convertToDto) where T : BaseDto;
+
+    Task<PaginatedResult<T>> GetRecipesAsync<T>(ISpecification<Recipe> spec, Func<Recipe, Task<T>> convertToDto)
+        where T : BaseDto;
+    Task<IEnumerable<T>> GetTopNRecipes<T>(int count, Func<Recipe, Task<T>> convertToDto) where T : BaseDto;
     Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId);
     Task UpdateRecipeAsync(EditFormRecipeDto updateRecipeDto);
     Task DeleteRecipeAsync(int id);

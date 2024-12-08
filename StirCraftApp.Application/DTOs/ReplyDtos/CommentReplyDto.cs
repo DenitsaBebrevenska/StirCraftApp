@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.ReplyDtos;
-public class CommentReplyDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.ReplyDtos;
+public class CommentReplyDto : BaseDto
 {
     public int Id { get; set; }
 

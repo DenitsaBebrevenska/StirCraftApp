@@ -2,7 +2,7 @@
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 namespace StirCraftApp.Application.DTOs.UserDtos;
-public class UserRegisterDto
+public class UserRegisterDto : BaseDto
 {
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
     [StringLength(UserDisplayNameMaxLength, MinimumLength = UserDisplayNameMinLength, ErrorMessage = StringLengthValidationErrorMessage)]

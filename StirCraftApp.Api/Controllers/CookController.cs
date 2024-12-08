@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CookDtos;
-using StirCraftApp.Application.DTOs.RecipeDtos;
+using StirCraftApp.Application.Mappings;
+using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Extensions;
@@ -12,13 +14,18 @@ namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize(Roles = CookRoleName)]
-public class CookController(IRecipeService recipeService, ICookService cookService) : ControllerBase
+public class CookController(IRecipeService recipeService, ICookService cookService, UserManager<AppUser> userManager) : ControllerBase
 {
 
     [HttpGet("about")]
     public async Task<IActionResult> GetAbout()
     {
-        var userId = User.GetId();
+        var userId = User?.GetId();
+
+        if (userId == null)
+        {
+            return NotFound();
+        }
 
         var about = await cookService.GetCookAbout(userId);
         return Ok(about);
@@ -56,7 +63,9 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         }
 
         var spec = new RecipesByCurrentCookSpecification(pagingParams, (int)cookId);
-        var cookRecipes = await recipeService.GetRecipesAsync(spec, nameof(RecipeOwnDto));
+        var cookRecipes = await recipeService
+            .GetRecipesAsync(spec, async recipe => await recipe
+                .ToRecipeOwnDtoAsync(userManager));
         return Ok(cookRecipes);
     }
 
@@ -77,7 +86,10 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
 
         var spec = new RecipeIncludeAllSpecification();
 
-        var recipe = await recipeService.GetRecipeByIdAsync(spec, id, nameof(DetailedRecipeAdminNotesDto), null);
+
+        var recipe = await recipeService
+            .GetRecipeByIdAsync(spec, id, async recipe => await recipe
+                .ToDetailedRecipeAdminNotesDtoAsync(userManager));
         return Ok(recipe);
     }
 

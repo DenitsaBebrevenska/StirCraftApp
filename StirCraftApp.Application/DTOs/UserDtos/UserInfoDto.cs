@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.UserDtos;
-public class UserInfoDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.UserDtos;
+public class UserInfoDto : BaseDto
 {
     public string? DisplayName { get; set; }
 

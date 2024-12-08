@@ -1,10 +1,9 @@
-﻿using StirCraftApp.Application.Contracts;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 
 
-namespace StirCraftApp.Application.DTOs.Image;
-public class RecipeImageDto : IDto
+namespace StirCraftApp.Application.DTOs.ImageDtos;
+public class RecipeImageDto : BaseDto
 {
     public int Id { get; set; }
 

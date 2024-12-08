@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.IngredientDtos;
+using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Specifications.IngredientSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using static StirCraftApp.Domain.Constants.RoleConstants;
@@ -16,7 +17,9 @@ public class IngredientsController(IIngredientService ingredientService) : BaseA
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientSpecParams specParams)
     {
         var spec = new IngredientFilterAdminApprovedSpecification(specParams);
-        return Ok(await ingredientService.GetIngredientsAsync(spec, nameof(BriefIngredientDto)));
+        return Ok(await ingredientService
+            .GetIngredientsAsync(spec, ingredient => ingredient
+                .ToBriefIngredientDto()));
     }
 
     [HttpGet("all")]

@@ -1,7 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
-
-namespace StirCraftApp.Application.DTOs.CategoryDtos;
-public class CategoryDto : IDto
+﻿namespace StirCraftApp.Application.DTOs.CategoryDtos;
+public class CategoryDto : BaseDto
 {
     public int Id { get; set; }
 

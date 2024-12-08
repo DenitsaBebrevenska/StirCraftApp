@@ -1,10 +1,9 @@
-﻿using StirCraftApp.Application.Contracts;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
 using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 
 namespace StirCraftApp.Application.DTOs.IngredientDtos;
-public class FormIngredientDto : IDto
+public class FormIngredientDto : BaseDto
 {
     [Required]
     [StringLength(IngredientNameMaxLength, MinimumLength = IngredientNameMinLength,

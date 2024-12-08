@@ -4,7 +4,7 @@ namespace StirCraftApp.Application.DTOs.CommentDtos;
 using static Domain.Constants.EntityConstraints;
 using static Domain.Constants.ValidationErrorMessages;
 
-public class CommentFormDto
+public class CommentFormDto : BaseDto
 {
 
     [Required(ErrorMessage = RequiredValidationErrorMessage)]
