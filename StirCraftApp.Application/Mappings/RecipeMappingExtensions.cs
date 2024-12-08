@@ -129,6 +129,8 @@ public static class RecipeMappingExtensions
                     UpdatedOn = reply.UpdatedOn?.ToString("dd/MM/yyyy HH:mm:ss")
                 });
             }
+
+            comments.Add(commentDto);
         }
 
         dto.Comments = comments;

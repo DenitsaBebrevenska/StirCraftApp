@@ -1,6 +1,21 @@
-<div class="container mt-5">
-  <h1 class="text-3xl">Server Error</h1>
-  <button routerLink="/home" mat-flat-button class="mt-4">
-    Back to Home page
-  </button>
+<div class="container justify-items-center">
+  <mat-card class="flex-col w-4/6 py-5">
+    <div class="flex-col justify-items-center pb-10">
+      <h1 class="text-4xl">Server Error</h1>
+      <button routerLink="/" mat-raised-button class="my-4 text-2xl">
+        Back to Home page
+      </button>
+      <h2 class="text-xl italic font-semibold">
+        The current state of our server represented by this lovely pasta
+        cartoon!
+      </h2>
+    </div>
+    <div>
+      <img
+        [src]="'sleeping-pasta.jpeg'"
+        alt="Server Error"
+        class="w-1/2 mx-auto"
+      />
+    </div>
+  </mat-card>
 </div>

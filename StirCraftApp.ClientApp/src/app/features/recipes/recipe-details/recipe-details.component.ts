@@ -102,8 +102,7 @@ export class RecipeDetailsComponent implements OnInit {
         next: response => {
           this.recipe = response,
             this.isLiked = response.isLikedByCurrentUser,
-            this.currentRating = response.currentUserRating || 0,
-            console.log(response)
+            this.currentRating = response.currentUserRating || 0
         },
         error: err => console.error(err)
       }

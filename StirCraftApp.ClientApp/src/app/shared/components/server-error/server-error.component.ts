@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatCard } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,11 +8,12 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [
     MatButton,
-    RouterLink
+    RouterLink,
+    MatCard
   ],
   templateUrl: './server-error.component.html',
   styleUrl: './server-error.component.scss'
 })
 export class ServerErrorComponent {
-  
+
 }

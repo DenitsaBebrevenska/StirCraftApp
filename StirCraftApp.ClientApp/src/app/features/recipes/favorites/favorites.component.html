@@ -1,27 +1,29 @@
 @if(recipes) { @for (recipe of recipes.data; track $index) {
-<mat-card appearance="raised" class="recipe-card flex-col gap-2">
-  <mat-card-header class="flex-col gap-1">
-    <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
-    <h3 class="font-extralight text-2xl">By: {{ recipe.cookName }}</h3>
-  </mat-card-header>
-  <div class="image-wrapper w-80 h-auto">
-    <img
-      [src]="recipe.mainImageUrl || 'default-image.jpg'"
-      alt="Recipe Image"
-      class="object-contain"
-    />
-  </div>
-  <div>
-    <mat-card-actions class="flex-row gap-2">
-      <a mat-raised-button routerLink="/recipes/{{ recipe.id }}">
-        View Recipe
-      </a>
-      <button mat-raised-button (click)="removeFromFavorites(recipe.id)">
-        Remove from favorites
-      </button>
-    </mat-card-actions>
-  </div>
-</mat-card>
+<article class="flex gap-2">
+  <mat-card appearance="raised" class="flex gap-2">
+    <mat-card-header class="flex-col gap-1">
+      <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
+      <h3 class="font-extralight text-2xl">By: {{ recipe.cookName }}</h3>
+    </mat-card-header>
+    <div class="image-wrapper w-80 h-auto">
+      <img
+        [src]="recipe.mainImageUrl || 'default-image.jpg'"
+        alt="Recipe Image"
+        class="object-cover"
+      />
+    </div>
+    <div>
+      <mat-card-actions class="flex-row justify-around">
+        <a mat-raised-button routerLink="/recipes/{{ recipe.id }}">
+          View Recipe
+        </a>
+        <button mat-raised-button (click)="removeFromFavorites(recipe.id)">
+          Remove from favorites
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</article>
 } }
 
 <div>

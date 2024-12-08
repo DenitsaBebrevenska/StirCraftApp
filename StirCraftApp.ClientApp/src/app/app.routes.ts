@@ -60,7 +60,7 @@ export const routes: Routes = [
     { path: 'account/register', component: RegisterComponent },
     { path: 'account/profile', component: ProfilePageComponent, canActivate: [authGuard] },
     { path: 'account/profile/avatar/change', component: AvatarChangeComponent, canActivate: [authGuard] },
-    { path: 'not-fount', component: NotFoundComponent },
+    { path: 'not-found', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },
     { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ];

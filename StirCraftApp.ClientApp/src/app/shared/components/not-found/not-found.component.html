@@ -1,6 +1,16 @@
-<div class="container mt-5">
-  <h1 class="text-3xl">Not found</h1>
-  <button routerLink="/home" mat-flat-button class="mt-4">
-    Back to Home page
-  </button>
+<div class="container justify-items-center">
+  <mat-card class="flex-col w-4/6 py-5">
+    <div class="flex-col justify-items-center pb-10">
+      <h1 class="text-4xl">Not Found</h1>
+      <button routerLink="/" mat-raised-button class="my-4 text-2xl">
+        Back to Home page
+      </button>
+      <h2 class="text-xl italic font-semibold">
+        The resource you are looking for is not available
+      </h2>
+    </div>
+    <div>
+      <img [src]="'confused-buns.jpg'" alt="Not Found" class="w-1/2 mx-auto" />
+    </div>
+  </mat-card>
 </div>

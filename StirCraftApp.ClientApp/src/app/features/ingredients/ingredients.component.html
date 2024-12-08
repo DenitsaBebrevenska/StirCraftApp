@@ -1,7 +1,7 @@
-<div class="flex flex-col gap-5">
+<div class="flex-col pt-10 m-0">
   <div class="flex px-10">
     <form
-      class="relative flex items-center w-full max-w-md mx-4"
+      class="relative flex w-full max-w-md"
       #searchForm="ngForm"
       (ngSubmit)="onSearchChange()"
     >
@@ -22,7 +22,7 @@
     </form>
   </div>
 
-  <div class="flex space-x-4">
+  <mat-card class="flex space-x-4 max-w-xs my-10 mx-10">
     <mat-selection-list
       class="flex"
       [multiple]="false"
@@ -38,11 +38,11 @@
       </mat-list-option>
       }
     </mat-selection-list>
-  </div>
+  </mat-card>
 
-  <ul>
+  <ul class="flex flex-col gap-4 px-20 pb-10">
     @for (ingredient of ingredients?.data; track ingredient.id) {
-    <li>
+    <li class="list-disc">
       <div class="flex items-center gap-2">
         <a
           (click)="onClickIngredientName(ingredient.id)"
