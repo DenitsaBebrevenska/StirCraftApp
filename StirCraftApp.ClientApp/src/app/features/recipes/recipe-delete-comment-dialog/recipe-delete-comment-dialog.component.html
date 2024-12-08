@@ -1,8 +1,12 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
-<div mat-dialog-content>{{ data.message }}</div>
-<div mat-dialog-actions>
-  <div class="flex justify-end p-4 gap-4">
-    <button mat-raised-button (click)="approveDeletion()">Yes</button>
-    <button mat-raised-button (click)="cancelDeletion()">Cancel</button>
+<div class="p-5">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+  <div mat-dialog-content>{{ data.message }}</div>
+  <div mat-dialog-actions>
+    <div class="flex justify-end p-4 gap-4">
+      <button mat-raised-button (click)="approveDeletion()">Yes</button>
+      <button color="warn" mat-raised-button (click)="cancelDeletion()">
+        Cancel
+      </button>
+    </div>
   </div>
 </div>

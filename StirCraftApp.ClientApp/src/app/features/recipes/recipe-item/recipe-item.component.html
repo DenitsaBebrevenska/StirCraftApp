@@ -1,7 +1,3 @@
-<!-- todo check if default image is rendered when server returns null for image
- [src]="recipe.imageUrl ?? 'default-image.jpg'"
-    mat-card-image
-    alt="{{ recipe.name }} main image" -->
 @if(recipe){
 <mat-card
   appearance="raised"
@@ -14,16 +10,22 @@
   </mat-card-header>
   <div class="image-wrapper">
     <img
+      class="object-cover"
       [src]="recipe.mainImageUrl || 'default-image.jpg'"
       alt="Recipe Image"
     />
   </div>
   <mat-card-content>
-    <p class="font-light">Difficulty level: {{ recipe.difficultyLevel }}</p>
-    <p class="font-light">Rating: {{ recipe.rating }}</p>
-    <ul class="font-light">
+    <p class="font-semibold">
+      Difficulty level:
+      <span class="font-light">{{ recipe.difficultyLevel }}</span>
+    </p>
+    <p class="font-semibold">
+      Rating: <span class="font-light">{{ recipe.rating }} ⭐</span>
+    </p>
+    <ul class="font-semibold">
       Categories: @for (category of recipe.categories; track $index) {
-      <li>{{ category }}</li>
+      <li class="font-light">🍗 {{ category }}</li>
       }
     </ul>
   </mat-card-content>

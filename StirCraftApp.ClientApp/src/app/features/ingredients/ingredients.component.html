@@ -42,12 +42,12 @@
 
   <ul class="flex flex-col gap-4 px-20 pb-10">
     @for (ingredient of ingredients?.data; track ingredient.id) {
-    <li class="list-disc">
+    <li>
       <div class="flex items-center gap-2">
         <a
           (click)="onClickIngredientName(ingredient.id)"
           class="text-lg font-semibold hover:cursor-pointer"
-          >{{ ingredient.name }}
+          >🥕 {{ ingredient.name }}
         </a>
       </div>
     </li>

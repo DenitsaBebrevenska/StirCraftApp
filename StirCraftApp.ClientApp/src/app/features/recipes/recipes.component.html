@@ -42,7 +42,7 @@
     </form>
   </div>
 
-  <div class="flex flex-wrap gap-6 justify-center mx-14">
+  <div class="flex flex-wrap gap-10 justify-center mx-14">
     @for (recipe of recipes?.data; track recipe.id) {
     <app-recipe-item [recipe]="recipe"></app-recipe-item>
     }
