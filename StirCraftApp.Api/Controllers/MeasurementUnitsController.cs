@@ -12,14 +12,16 @@ public class MeasurementUnitsController(IMeasurementUnitService measurementUnits
     public async Task<IActionResult> GetMeasurementUnits([FromQuery] MeasurementUnitParams unitParams)
     {
         var spec = new MeasurementUnitFilterSpecification(unitParams);
-        var measurementUnits = await measurementUnitsService.GetUnitsAsync(spec);
+        var measurementUnits = await measurementUnitsService
+            .GetUnitsAsync(spec);
         return Ok(measurementUnits);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetMeasurementUnit(int id)
     {
-        var measurementUnit = await measurementUnitsService.GetUnitById(null, id);
+        var measurementUnit = await measurementUnitsService
+            .GetUnitById(null, id);
         return Ok(measurementUnit);
     }
 

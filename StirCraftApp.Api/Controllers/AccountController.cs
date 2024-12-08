@@ -86,7 +86,7 @@ public class AccountController(SignInManager<AppUser> signInManager, ICookServic
                 DisplayName = user.DisplayName,
                 Email = user.Email,
                 AvatarUrl = user.AvatarUrl,
-                CookId = await cookService.GetCookId(user.Id),
+                CookId = await cookService.GetCookIdAsync(user.Id),
                 Role = User.FindFirstValue(ClaimTypes.Role)
             });
     }

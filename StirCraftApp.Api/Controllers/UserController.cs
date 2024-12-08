@@ -7,19 +7,6 @@ namespace StirCraftApp.Api.Controllers;
 [ApiController]
 public class UserController(IUserService userService) : ControllerBase
 {
-
-    [HttpGet("badrequest")]
-    public IActionResult GetBadRequest()
-    {
-        return BadRequest("Not a good request");
-    }
-
-    [HttpGet("notfound")]
-    public IActionResult GetNotFound()
-    {
-        return NotFound();
-    }
-
     [HttpGet("profile")]
     public async Task<IActionResult> GetProfile()
     {

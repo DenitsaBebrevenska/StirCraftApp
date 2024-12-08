@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using StirCraftApp.Application.Contracts;
+﻿using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs;
 using StirCraftApp.Application.DTOs.RecipeDtos;
+using StirCraftApp.Application.Exceptions;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Contracts;
@@ -10,26 +10,25 @@ using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.JoinedTables;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using static StirCraftApp.Domain.Constants.EntityConstraints;
+using static StirCraftApp.Domain.Constants.ExceptionErrorMessages;
 
 namespace StirCraftApp.Application.Services;
 
-public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) : IRecipeService
+public class RecipeService(IUnitOfWork unit) : IRecipeService
 {
     //todo handle exceptions better
     public async Task<T> GetRecipeByIdAsync<T>(ISpecification<Recipe>? spec, int id, Func<Recipe, Task<T>> convertToDto) where T : BaseDto
     {
-        var recipeIsFound = await unit.Repository<Recipe>()
-            .ExistsAsync(id);
-
-        if (!recipeIsFound)
-        {
-            throw new Exception("Recipe not found");
-        }
-
         var recipe = await unit.Repository<Recipe>()
             .GetByIdAsync(spec, id);
 
-        var dto = await convertToDto(recipe!);
+
+        if (recipe == null)
+        {
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), id));
+        }
+
+        var dto = await convertToDto(recipe);
 
         return dto;
     }
@@ -84,8 +83,13 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
         await unit.CompleteAsync();
     }
 
-    public async Task UpdateRecipeAsync(EditFormRecipeDto updateRecipeDto)
+    public async Task UpdateRecipeAsync(int id, EditFormRecipeDto updateRecipeDto)
     {
+        if (id != updateRecipeDto.Id)
+        {
+            throw new ValidationException(string.Format(UrlIdMismatch, nameof(Recipe)));
+        }
+
         //todo clear up this monstrous method
         var spec = new RecipeIncludeAllSpecification();
         var recipe = await unit.Repository<Recipe>()
@@ -93,7 +97,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
         if (recipe == null)
         {
-            throw new ArgumentException("Recipe not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), id));
         }
 
         recipe.Name = updateRecipeDto.Name;
@@ -103,6 +107,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             ? DifficultyLevel.Easy
             : level;
         recipe.UpdatedOn = DateTime.UtcNow;
+        recipe.IsAdminApproved = false;
 
         recipe.CategoryRecipes.Clear();
 
@@ -115,8 +120,18 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             });
         }
 
+        var removedIngredients = recipe.RecipeIngredients
+            .Where(ri => updateRecipeDto.RecipeIngredients.All(riDto => riDto.Id != ri.Id))
+            .ToList();
+
+        foreach (var ri in removedIngredients)
+        {
+            unit.Repository<RecipeIngredient>().Delete(ri);
+        }
+
         foreach (var ri in updateRecipeDto.RecipeIngredients)
         {
+
             if (recipe.RecipeIngredients.Any(i => i.Id == ri.Id))
             {
                 var ingredient = recipe.RecipeIngredients.First(i => i.Id == ri.Id);
@@ -130,8 +145,18 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             {
                 IngredientId = ri.IngredientId,
                 Quantity = ri.Quantity,
-                MeasurementUnitId = ri.MeasurementUnitId
+                MeasurementUnitId = ri.MeasurementUnitId,
+                RecipeId = recipe.Id
             });
+        }
+
+        var removedImages = recipe.RecipeImages
+            .Where(ri => updateRecipeDto.RecipeImages.All(riDto => riDto.Id != ri.Id))
+            .ToList();
+
+        foreach (var ri in removedImages)
+        {
+            unit.Repository<RecipeImage>().Delete(ri);
         }
 
         foreach (var image in updateRecipeDto.RecipeImages)
@@ -160,7 +185,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
         if (recipeToDelete == null)
         {
-            throw new Exception($"Recipe with id {id} not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), id));
         }
 
         unit.Repository<Recipe>().Delete(recipeToDelete);
@@ -199,7 +224,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             });
         await unit.CompleteAsync();
 
-        return new FavoriteRecipeToggleDto()
+        return new FavoriteRecipeToggleDto
         {
             IsFavorite = true,
             TotalLikes = (uint)recipes.First(r => r.Id == recipeId).UserFavoriteRecipes.Count()
@@ -212,12 +237,12 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
 
         if (recipeExists == false)
         {
-            throw new Exception("Recipe not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), recipeId));
         }
 
         if (rating < RecipeRatingMinValue || rating > RecipeRatingMaxValue)
         {
-            throw new Exception($"Invalid rating! The rating must be in the range between {RecipeRatingMinValue} and {RecipeRatingMaxValue} inclusive");
+            throw new ValidationException(string.Format(RangeError, nameof(rating), RecipeRatingMinValue, RecipeRatingMaxValue));
         }
 
 
@@ -254,7 +279,7 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
             .GetByIdAsync(null, id);
         if (recipe == null)
         {
-            throw new Exception("Recipe not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), id));
         }
 
         recipe.AdminNotes = adminNotesDto.AdminNotes;
@@ -266,9 +291,10 @@ public class RecipeService(IUnitOfWork unit, UserManager<AppUser> userManager) :
     {
         var recipe = await unit.Repository<Recipe>()
             .GetByIdAsync(null, id);
+
         if (recipe == null)
         {
-            throw new Exception("Recipe not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), id));
         }
 
         recipe.IsAdminApproved = true;

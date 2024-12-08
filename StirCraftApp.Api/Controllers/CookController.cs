@@ -14,20 +14,15 @@ namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize(Roles = CookRoleName)]
-public class CookController(IRecipeService recipeService, ICookService cookService, UserManager<AppUser> userManager) : ControllerBase
+public class CookController(IRecipeService recipeService, ICookService cookService, UserManager<AppUser> userManager) : BaseApiController
 {
 
     [HttpGet("about")]
     public async Task<IActionResult> GetAbout()
     {
-        var userId = User?.GetId();
+        var userId = User.GetId();
 
-        if (userId == null)
-        {
-            return NotFound();
-        }
-
-        var about = await cookService.GetCookAbout(userId);
+        var about = await cookService.GetCookAboutAsync(userId);
         return Ok(about);
     }
 
@@ -41,7 +36,6 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok();
     }
 
-
     [HttpPut("about")]
     public async Task<IActionResult> UpdateAbout(CookAboutDto aboutDto)
     {
@@ -51,18 +45,12 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     }
 
 
-
     [HttpGet("recipes")]
     public async Task<IActionResult> GetCooksOwnRecipes([FromQuery] PagingParams pagingParams)
     {
-        var cookId = await cookService.GetCookId(User.GetId());
+        var cookId = await cookService.GetCookIdAsync(User.GetId());
 
-        if (cookId == null)
-        {
-            return NotFound();
-        }
-
-        var spec = new RecipesByCurrentCookSpecification(pagingParams, (int)cookId);
+        var spec = new RecipesByCurrentCookSpecification(pagingParams, cookId);
         var cookRecipes = await recipeService
             .GetRecipesAsync(spec, async recipe => await recipe
                 .ToRecipeOwnDtoAsync(userManager));
@@ -72,21 +60,9 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     [HttpGet("recipes/{id}")]
     public async Task<IActionResult> GetCookOwnRecipeById(int id)
     {
-        var cookId = await cookService.GetCookId(User.GetId());
+        var cookId = await cookService.GetCookIdAsync(User.GetId());
 
-        if (cookId == null)
-        {
-            return NotFound();
-        }
-
-        if (await cookService.CookIsTheRecipeOwner((int)cookId, id) == false)
-        {
-            return Unauthorized();
-        }
-
-        var spec = new RecipeIncludeAllSpecification();
-
-
+        var spec = new RecipeIncludeAllByCookSpecification(cookId);
         var recipe = await recipeService
             .GetRecipeByIdAsync(spec, id, async recipe => await recipe
                 .ToDetailedRecipeAdminNotesDtoAsync(userManager));

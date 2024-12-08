@@ -16,7 +16,8 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
     {
         var spec = new CookSortIncludeSpecification(specParams);
         var cooks = await cooksService
-            .GetCooksAsync(spec, cook => cook.ToSummaryCookDtoAsync(userManager));
+            .GetCooksAsync(spec, cook => cook
+                .ToSummaryCookDtoAsync(userManager));
         return Ok(cooks);
     }
 
@@ -24,7 +25,8 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
     public async Task<IActionResult> GetCookById(int id)
     {
         var cook = await cooksService
-            .GetCookByIdAsync(id, cook => cook.ToDetailedCookDtoAsync(userManager));
+            .GetCookByIdAsync(id, cook => cook
+                .ToDetailedCookDtoAsync(userManager));
         return Ok(cook);
     }
 
@@ -33,7 +35,8 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
     {
         var spec = new CookTopRankSpecification(count);
         var cooks = await cooksService
-            .GetCooksAsync(spec, cook => cook.ToCookWithRankDtoAsync(userManager));
+            .GetCooksAsync(spec, cook => cook
+                .ToCookWithRankDtoAsync(userManager));
         return Ok(cooks);
     }
 }

@@ -1,10 +1,12 @@
 ﻿using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs;
 using StirCraftApp.Application.DTOs.IngredientDtos;
+using StirCraftApp.Application.Exceptions;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using static StirCraftApp.Domain.Constants.ExceptionErrorMessages;
 
 namespace StirCraftApp.Application.Services;
 public class IngredientService(IUnitOfWork unit) : IIngredientService
@@ -16,7 +18,7 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
 
         if (ingredient == null)
         {
-            throw new Exception($"Ingredient with id {id} was not found.");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Ingredient), id));
         }
 
         var ingredientDto = convertToDto(ingredient);
@@ -85,12 +87,12 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
 
         if (ingredientToUpdate == null)
         {
-            throw new Exception($"Ingredient with id {id} not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Ingredient), id));
         }
 
         if (ingredientDto.Id != id)
         {
-            throw new Exception("Id mismatch");
+            throw new ValidationException(string.Format(UrlIdMismatch, nameof(Ingredient)));
         }
 
         ingredientToUpdate.UpdateFromDto(ingredientDto);
@@ -109,7 +111,7 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
 
         if (ingredientToDelete == null)
         {
-            throw new Exception($"Ingredient with id {id} not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Ingredient), id));
         }
 
         unit.Repository<Ingredient>().Delete(ingredientToDelete);

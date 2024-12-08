@@ -1,6 +1,8 @@
 ﻿using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.Exceptions;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using static StirCraftApp.Domain.Constants.ExceptionErrorMessages;
 using static StirCraftApp.Domain.Constants.RankingConstants;
 
 namespace StirCraftApp.Application.Services;
@@ -14,7 +16,7 @@ public class CookingRankService(IUnitOfWork unit) : ICookingRankService
 
         if (cook == null)
         {
-            throw new Exception($"Cook with id {cookId} was not found.");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Cook), cookId));
         }
 
         switch (action)

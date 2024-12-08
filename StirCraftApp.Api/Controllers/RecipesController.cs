@@ -75,12 +75,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     [HttpPost]
     public async Task<IActionResult> CreateRecipe(FormRecipeDto createRecipeDto)
     {
-        var cookId = await cookService.GetCookId(User.GetId());
-
-        if (cookId == null)
-        {
-            return BadRequest("You need to become a cook to create a recipe");
-        }
+        var cookId = await cookService.GetCookIdAsync(User.GetId());
 
         await recipeService.CreateRecipeAsync(createRecipeDto, (int)cookId);
 
@@ -89,20 +84,16 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = CookRoleName)]
-    [HttpPut("{id}/edit")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateRecipe(int id, EditFormRecipeDto updateRecipeDto)
     {
-        if (updateRecipeDto.Id != id)
-        {
-            return BadRequest("Id in the body does not match the id in the route");
-        }
 
-        await recipeService.UpdateRecipeAsync(updateRecipeDto);
+        await recipeService.UpdateRecipeAsync(id, updateRecipeDto);
         return Ok();
     }
 
     [Authorize(Roles = CookRoleName)]
-    [HttpDelete("{id}/delete")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRecipe(int id)
     {
         await recipeService.DeleteRecipeAsync(id);
@@ -158,13 +149,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var userId = User.GetId();
 
-        if (commentId != commentEditFormDto.Id)
-        {
-            return BadRequest("Id in the body does not match the id in the route");
-        }
-
         await commentService
-            .EditCommentAsync(userId, commentEditFormDto);
+            .EditCommentAsync(userId, commentId, commentEditFormDto);
 
         return Ok();
     }
@@ -216,7 +202,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
         await replyService
             .DeleteReplyAsync(userId, replyId);
-        return Ok();
+        return NoContent();
     }
 
 }

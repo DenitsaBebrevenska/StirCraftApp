@@ -145,7 +145,7 @@ export class UpdateRecipeComponent implements OnInit {
 
   createIngredient() {
     return this.formBuilder.group({
-      ingredientId: [null, Validators.required],
+      name: [null, Validators.required],
       quantity: [null, Validators.min(1)],
       measurementUnit: [null],
     });

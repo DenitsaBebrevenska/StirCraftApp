@@ -155,7 +155,7 @@ public static class RecipeMappingExtensions
     {
         return new DetailedRecipeAdminNotesDto
         {
-            Id = recipe!.Id,
+            Id = recipe.Id,
             Name = recipe.Name,
             PreparationSteps = recipe.PreparationSteps,
             DifficultyLevel = recipe.DifficultyLevel.ToString(),

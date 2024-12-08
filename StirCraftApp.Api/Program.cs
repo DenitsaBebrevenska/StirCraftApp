@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using StirCraftApp.Api.Extensions;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Data;
 
@@ -43,9 +44,10 @@ if (app.Environment.IsDevelopment())
     {
         c.SwaggerEndpoint("v1/swagger.json", "StirCraft API V1");
     });
+    //app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
+app.UseGlobalExceptionMiddleware();
 
 //is that for cookie only?
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()

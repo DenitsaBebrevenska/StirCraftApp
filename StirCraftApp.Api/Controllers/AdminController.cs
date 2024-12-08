@@ -39,21 +39,21 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok(ingredient);
     }
 
-    [HttpPost("ingredients/create")]
+    [HttpPost("ingredients")]
     public async Task<IActionResult> AddIngredient(FormIngredientDto ingredientDto)
     {
         await ingredientService.CreateIngredientAsync(ingredientDto);
         return Ok(); //todo return created ingredient
     }
 
-    [HttpPut("ingredients/update/{id}")]
+    [HttpPut("ingredients/{id}")]
     public async Task<IActionResult> UpdateOrApproveIngredient(EditFormIngredientDto ingredientDto, int id)
     {
         await ingredientService.UpdateIngredientAsync(ingredientDto, id);
         return Ok();
     }
 
-    [HttpDelete("ingredients/delete/{id}")]
+    [HttpDelete("ingredients/{id}")]
     public async Task<IActionResult> DeleteIngredient(int id)
     {
         await ingredientService.DeleteIngredientAsync(id);
