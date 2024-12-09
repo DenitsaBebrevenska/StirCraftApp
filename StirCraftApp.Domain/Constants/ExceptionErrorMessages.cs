@@ -3,6 +3,8 @@ public static class ExceptionErrorMessages
 {
     public const string ResourceNotFound = "{0} with id {1} not found.";
 
+    public const string UserIsNotCook = "The user with id {0} is not a cook.";
+
     public const string UserIsCookAlready = "The user with id {0} is a cook already.";
 
     public const string NotOwner = "You are not the owner of {0} with id {1}.";

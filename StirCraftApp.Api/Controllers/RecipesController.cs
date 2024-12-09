@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CommentDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
@@ -11,6 +12,7 @@ using StirCraftApp.Domain.Enums;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Extensions;
+using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
 
 namespace StirCraftApp.Api.Controllers;
@@ -20,6 +22,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 {
     [AllowAnonymous]
     [HttpGet]
+    [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetRecipes([FromQuery] RecipeSpecParams specParams)
     {
         var spec = new RecipeFilterSortIncludeSpecification(specParams);
@@ -31,6 +34,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
     [AllowAnonymous]
     [HttpGet("top/{count}")]
+    [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetTopNRecipes(int count)
     {
         var recipes = await recipeService
@@ -39,6 +43,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipes);
     }
 
+    [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRecipe(int id)
@@ -53,6 +58,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
     [AllowAnonymous]
     [HttpGet("cook/{id}")]
+    [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetRecipesByCookId(int id, [FromQuery] PagingParams pagingParams)
     {
         var spec = new RecipeByCookIdSpecification(pagingParams, id);
@@ -111,6 +117,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
     [Authorize(Roles = UserRoleName)]
     [HttpGet("user-favorites")]
+    [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetUserFavorites([FromQuery] PagingParams pagingParams)
     {
         var userId = User.GetId();

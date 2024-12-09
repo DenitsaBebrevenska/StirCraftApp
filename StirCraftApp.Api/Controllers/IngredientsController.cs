@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.IngredientDtos;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Specifications.IngredientSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
+using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
+
+
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -14,6 +18,7 @@ public class IngredientsController(IIngredientService ingredientService) : BaseA
 {
     [HttpGet]
     [AllowAnonymous]
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientSpecParams specParams)
     {
         var spec = new IngredientFilterAdminApprovedSpecification(specParams);
@@ -23,6 +28,7 @@ public class IngredientsController(IIngredientService ingredientService) : BaseA
     }
 
     [HttpGet("all")]
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     public async Task<IActionResult> GetIngredientsAllNonPaged()
     {
         return Ok(await ingredientService.GetIngredientsNotPaged());

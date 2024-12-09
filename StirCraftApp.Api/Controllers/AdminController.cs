@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.IngredientDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
@@ -9,7 +10,10 @@ using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.IngredientSpec;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
+using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
+
+
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -17,7 +21,7 @@ namespace StirCraftApp.Api.Controllers;
 [Authorize(Roles = AdminRoleName)]
 public class AdminController(IIngredientService ingredientService, IRecipeService recipeService, UserManager<AppUser> userManager) : BaseApiController
 {
-
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [HttpGet("ingredients")]
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientAdminPanelSpecParams specParams)
     {
@@ -29,6 +33,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok(ingredients);
     }
 
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [HttpGet("ingredients/{id}")]
     public async Task<IActionResult> GetIngredient(int id)
     {
@@ -60,6 +65,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok();
     }
 
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [HttpGet("recipes/pending-approval")]
     public async Task<IActionResult> GetRecipesPendingApproval([FromQuery] PagingParams pagingParams)
     {
@@ -70,7 +76,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok(recipes);
     }
 
-
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [HttpGet("recipes/pending-approval/{id}")]
     public async Task<IActionResult> GetRecipePendingApproval(int id)
     {

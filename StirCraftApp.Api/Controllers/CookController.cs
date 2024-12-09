@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Application.Mappings;
@@ -8,7 +9,10 @@ using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using StirCraftApp.Infrastructure.Extensions;
+using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
+
+
 
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
@@ -46,6 +50,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
 
 
     [HttpGet("recipes")]
+    [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetCooksOwnRecipes([FromQuery] PagingParams pagingParams)
     {
         var cookId = await cookService.GetCookIdAsync(User.GetId());
@@ -58,6 +63,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     }
 
     [HttpGet("recipes/{id}")]
+    [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetCookOwnRecipeById(int id)
     {
         var cookId = await cookService.GetCookIdAsync(User.GetId());

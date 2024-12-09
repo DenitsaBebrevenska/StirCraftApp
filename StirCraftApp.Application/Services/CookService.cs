@@ -20,7 +20,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
 
         if (cook == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Cook), string.Join(nameof(userId), userId, " ")));
+            throw new ValidationException(string.Format(UserIsNotCook, userId));
         }
 
         return cook.Id;
@@ -35,7 +35,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
 
         if (cook == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Cook), string.Join(nameof(userId), userId, " ")));
+            throw new ValidationException(string.Format(UserIsNotCook, userId));
         }
 
         return new CookAboutDto
@@ -73,8 +73,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
 
         if (cook == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Cook),
-                string.Join(nameof(userId), userId, " ")));
+            throw new ValidationException(string.Format(UserIsNotCook, userId));
         }
 
         cook.About = aboutDto.About;
@@ -95,5 +94,11 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         }
 
         return cookEntity.Recipes.Any(r => r.Id == recipeId);
+    }
+
+    public async Task<bool> IsCookAsync(string userId)
+    {
+        var cooks = await unit.Repository<Cook>().GetAllAsync(null);
+        return cooks.Any(c => c.UserId == userId);
     }
 }

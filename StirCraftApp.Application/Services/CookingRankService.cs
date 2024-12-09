@@ -21,16 +21,16 @@ public class CookingRankService(IUnitOfWork unit) : ICookingRankService
 
         switch (action)
         {
-            case "like":
+            case LikingARecipe:
                 cook.RankingPoints += RecipeLikeRankingPointsValue;
                 break;
-            case "unlike":
+            case UnlikingARecipe:
                 cook.RankingPoints -= RecipeLikeRankingPointsValue;
                 break;
-            case "upload":
+            case UploadingARecipe:
                 cook.RankingPoints += RecipeUploadRankingPointsValue;
                 break;
-            case "delete":
+            case DeletingARecipe:
                 cook.RankingPoints -= RecipeUploadRankingPointsValue;
                 break;
             default:

@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
+        services.AddSingleton<IResponseCacheService, ResponseCacheService>();
         services.AddScoped<IRecipeService, RecipeService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ICooksService, CooksService>();
