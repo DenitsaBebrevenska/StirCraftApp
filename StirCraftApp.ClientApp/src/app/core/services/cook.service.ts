@@ -13,10 +13,7 @@ import { AboutCook } from '../../shared/models/cook/aboutCook';
 @Injectable({
   providedIn: 'root'
 })
-export class CookService implements OnInit {
-  ngOnInit(): void {
-
-  }
+export class CookService {
 
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
@@ -34,7 +31,7 @@ export class CookService implements OnInit {
   }
 
   becomeCook(dto: AboutCook) {
-    return this.http.post(this.baseUrl + 'cook/about', { about: dto.about });
+    return this.http.post(this.baseUrl + 'cook/become', { about: dto.about });
   }
 
   getAbout() {

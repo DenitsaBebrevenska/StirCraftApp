@@ -9,6 +9,27 @@
         <mat-icon>swap_vert</mat-icon>
         Sort
       </button>
+
+      <form
+        class="relative flex items-center w-full max-w-md mx-4"
+        #searchForm="ngForm"
+        (ngSubmit)="onSearchChange()"
+      >
+        <input
+          type="search"
+          class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg"
+          placeholder="Search by name"
+          name="cookName"
+          [(ngModel)]="cookParams.cookName"
+        />
+        <button
+          mat-icon-button
+          type="submit"
+          class="absolute inset-y-0 right-3 top-0.5 flex items-center pl-3"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </form>
     </div>
   </div>
 

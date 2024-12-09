@@ -12,15 +12,13 @@ using StirCraftApp.Infrastructure.Extensions;
 using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
 
-
-
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = CookRoleName)]
+
 public class CookController(IRecipeService recipeService, ICookService cookService, UserManager<AppUser> userManager) : BaseApiController
 {
-
+    [Authorize(Roles = CookRoleName)]
     [HttpGet("about")]
     public async Task<IActionResult> GetAbout()
     {
@@ -41,6 +39,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok();
     }
 
+    [Authorize(Roles = CookRoleName)]
     [HttpPut("about")]
     public async Task<IActionResult> UpdateAbout(CookAboutDto aboutDto)
     {
@@ -49,7 +48,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok();
     }
 
-
+    [Authorize(Roles = CookRoleName)]
     [HttpGet("recipes")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetCooksOwnRecipes([FromQuery] PagingParams pagingParams)
@@ -63,6 +62,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok(cookRecipes);
     }
 
+    [Authorize(Roles = CookRoleName)]
     [HttpGet("recipes/{id}")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     public async Task<IActionResult> GetCookOwnRecipeById(int id)

@@ -20,22 +20,22 @@ import { FormsModule } from '@angular/forms';
     MatIcon,
     MatMenu,
     MatListOption,
-    MatSelectionList, 
-    MatMenuTrigger, 
+    MatSelectionList,
+    MatMenuTrigger,
     MatPaginator,
     FormsModule
   ],
   templateUrl: './cooks.component.html',
   styleUrl: './cooks.component.scss'
 })
-export class CooksComponent implements OnInit{
+export class CooksComponent implements OnInit {
   private cooksService = inject(CooksService);
   cooks?: Pagination<CookShort>;
   sortOptions = [
-    {name: "Rank-Descending", value: "default"},
-    {name: "Rank-Ascending", value: "rankAsc"},
-    {name: "Recipe Count-Ascending", value: "recipeCountAsc"},
-    {name: "Recipe Count-Descending", value: "recipeCountDesc"}
+    { name: "Rank-Descending", value: "default" },
+    { name: "Rank-Ascending", value: "rankAsc" },
+    { name: "Recipe Count-Ascending", value: "recipeCountAsc" },
+    { name: "Recipe Count-Descending", value: "recipeCountDesc" }
   ];
 
   cookParams = new CookParams();
@@ -45,11 +45,11 @@ export class CooksComponent implements OnInit{
     this.initializeCooks();
   }
 
-  initializeCooks() { 
+  initializeCooks() {
     this.getCooks();
   }
 
-  getCooks(){
+  getCooks() {
     this.cooksService.getCooks(this.cookParams)
       .subscribe({
         next: response => this.cooks = response,
@@ -59,7 +59,7 @@ export class CooksComponent implements OnInit{
 
   onSortChange(event: MatSelectionListChange) {
     const selectedOption = event.options[0];
-    if(selectedOption) {
+    if (selectedOption) {
       this.cookParams.sort = selectedOption.value;
       this.cookParams.pageIndex = 1;
       this.getCooks();
@@ -71,4 +71,10 @@ export class CooksComponent implements OnInit{
     this.cookParams.pageSize = event.pageSize;
     this.getCooks();
   }
+
+  onSearchChange() {
+    this.cookParams.pageIndex = 1;
+    this.initializeCooks();
+  }
+
 }

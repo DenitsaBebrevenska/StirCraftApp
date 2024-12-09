@@ -1,4 +1,4 @@
-import { Component, inject, OnInit} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RecipesService } from '../../core/services/recipes.service';
 import { RecipeShort } from '../../shared/models/recipe/recipeShort';
 import { RecipeItemComponent } from "./recipe-item/recipe-item.component";
@@ -8,13 +8,13 @@ import { FiltersDialogComponent } from './filters-dialog/filters-dialog.componen
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
-import { MatListOption, MatSelectionListChange} from '@angular/material/list';
+import { MatListOption, MatSelectionListChange } from '@angular/material/list';
 import { MatSelectionList } from '@angular/material/list';
 import { RecipeParams } from '../../shared/models/recipe/recipeParams';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Pagination } from '../../shared/models/pagination';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, NavigationEnd  } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { distinctUntilChanged } from 'rxjs';
 
 
@@ -27,28 +27,27 @@ import { distinctUntilChanged } from 'rxjs';
     MatIcon,
     MatMenu,
     MatListOption,
-    MatSelectionList, 
-    MatMenuTrigger, 
+    MatSelectionList,
+    MatMenuTrigger,
     MatPaginator,
     FormsModule
-],
+  ],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.scss'
 })
 
-export class RecipesComponent implements OnInit{
+export class RecipesComponent implements OnInit {
   private recipesService = inject(RecipesService);
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   recipes?: Pagination<RecipeShort>;
   private categoriesService = inject(CategoriesService);
   categories: string[] = [];
   private dialogService = inject(MatDialog);
   sortOptions = [
-    {name: "Rating-Descending", value: "default"},
-    {name: "Rating-Ascending", value: "ratingAsc"},
-    {name: "Difficulty-Ascending", value: "difficultyLevelAsc"},
-    {name: "Difficulty-Descending", value: "difficultyLevelDesc"}
+    { name: "Rating-Descending", value: "default" },
+    { name: "Rating-Ascending", value: "ratingAsc" },
+    { name: "Difficulty-Ascending", value: "difficultyLevelAsc" },
+    { name: "Difficulty-Descending", value: "difficultyLevelDesc" }
   ];
 
   recipesParams = new RecipeParams();
@@ -67,26 +66,26 @@ export class RecipesComponent implements OnInit{
       this.initializeRecipes();
     });
   }
-  
+
   resetState() {
-    this.recipesParams = new RecipeParams(); 
+    this.recipesParams = new RecipeParams();
   }
 
-  initializeRecipes() { 
+  initializeRecipes() {
     this.recipesService.getDifficultyLevelsNames();
     this.categoriesService.getCategoriesNames();
     this.getRecipes();
   }
 
-  getRecipes(){
+  getRecipes() {
     this.recipesService.getRecipes(this.recipesParams)
-    .subscribe({
-      next: response => this.recipes = response,
-      error: error => console.error(error)
-    });
+      .subscribe({
+        next: response => this.recipes = response,
+        error: error => console.error(error)
+      });
   }
 
-  onSearchChange(){
+  onSearchChange() {
     this.recipesParams.pageIndex = 1;
     this.getRecipes();
   }
@@ -99,7 +98,7 @@ export class RecipesComponent implements OnInit{
 
   onSortChange(event: MatSelectionListChange) {
     const selectedOption = event.options[0];
-    if(selectedOption) {
+    if (selectedOption) {
       this.recipesParams.sort = selectedOption.value;
       this.recipesParams.pageIndex = 1;
       this.getRecipes();
@@ -117,14 +116,14 @@ export class RecipesComponent implements OnInit{
     });
 
     dialogReference.afterClosed()
-    .subscribe({
-      next: result =>{
-        this.recipesParams.categories = result.selectedCategories;
-        this.recipesParams.difficultyLevels = result.selectedDifficultyLevels;
-        this.recipesParams.searchName = result.searchName;
-        this.recipesParams.pageIndex = 1;
-        this.getRecipes();
-      }
-    });
+      .subscribe({
+        next: result => {
+          this.recipesParams.categories = result.selectedCategories;
+          this.recipesParams.difficultyLevels = result.selectedDifficultyLevels;
+          this.recipesParams.searchName = result.searchName;
+          this.recipesParams.pageIndex = 1;
+          this.getRecipes();
+        }
+      });
   }
 }

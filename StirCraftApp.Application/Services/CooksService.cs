@@ -31,7 +31,8 @@ public class CooksService(IUnitOfWork unit) : ICooksService
     {
         var cooks = await unit.Repository<Cook>()
             .GetAllAsync(spec);
-
+        var count = await unit.Repository<Cook>()
+            .CountAsync(spec);
         var cookDtos = new List<T>();
 
         foreach (var cook in cooks)
@@ -41,7 +42,7 @@ public class CooksService(IUnitOfWork unit) : ICooksService
 
         var paginatedResult = new PaginatedResult<T>(spec.Skip,
             spec.Take,
-            cookDtos.Count,
+            count,
             cookDtos);
 
         return paginatedResult;

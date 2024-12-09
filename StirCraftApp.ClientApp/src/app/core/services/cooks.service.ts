@@ -21,6 +21,10 @@ export class CooksService {
       httpParams = httpParams.append('sort', cookParams.sort);
     }
 
+    if (cookParams.cookName) {
+      httpParams = httpParams.append('cookName', cookParams.cookName);
+    }
+
     httpParams = httpParams.append('pageIndex', cookParams.pageIndex);
     httpParams = httpParams.append('pageSize', cookParams.pageSize);
 

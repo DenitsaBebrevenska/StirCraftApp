@@ -5,7 +5,10 @@ namespace StirCraftApp.Domain.Specifications.CookSpec;
 public class CookSortIncludeSpecification : BaseSpecification<Cook>
 {
     public CookSortIncludeSpecification(CookSpecParams specParams)
+        : base(c => c.AppUser.DisplayName != null && (string.IsNullOrEmpty(specParams.CookName)
+                                                      || c.AppUser.DisplayName.Contains(specParams.CookName.ToLower())))
     {
+        AddInclude(c => c.AppUser);
         AddInclude(c => c.CookingRank);
         AddInclude(c => c.Recipes);
 
