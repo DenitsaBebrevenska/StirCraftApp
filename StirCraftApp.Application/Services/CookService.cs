@@ -44,7 +44,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
         };
     }
 
-    public async Task CreateCookAsync(CookAboutDto aboutDto, string userId)
+    public async Task BecomeCookAsync(CookAboutDto aboutDto, string userId)
     {
         var cooks = await unit.Repository<Cook>().GetAllAsync(null);
 
@@ -63,6 +63,7 @@ public class CookService(IUnitOfWork unit, UserManager<AppUser> userManager) : I
 
         await userManager.AddToRoleAsync(user!, CookRoleName);
         await userManager.RemoveFromRoleAsync(user!, UserRoleName);
+
     }
 
     public async Task UpdateAboutAsync(string userId, CookAboutDto aboutDto)

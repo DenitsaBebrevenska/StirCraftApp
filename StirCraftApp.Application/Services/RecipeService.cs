@@ -1,4 +1,5 @@
-﻿using StirCraftApp.Application.Contracts;
+﻿using Microsoft.AspNetCore.Identity;
+using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs;
 using StirCraftApp.Application.DTOs.ImageDtos;
 using StirCraftApp.Application.DTOs.IngredientDtos;
@@ -16,7 +17,7 @@ using static StirCraftApp.Domain.Constants.RankingConstants;
 
 namespace StirCraftApp.Application.Services;
 
-public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankService) : IRecipeService
+public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankService, UserManager<AppUser> userManager) : IRecipeService
 {
     public async Task<T> GetRecipeByIdAsync<T>(ISpecification<Recipe>? spec, int id, Func<Recipe, Task<T>> convertToDto)
         where T : BaseDto
@@ -69,13 +70,19 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
     }
 
 
-    public async Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId)
+    public async Task<DetailedRecipeDto> CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId)
     {
         var recipe = createRecipeDto.ToRecipe(cookId);
 
         await unit.Repository<Recipe>().AddAsync(recipe);
 
         await unit.CompleteAsync();
+
+        var userId = await unit.Repository<Cook>()
+            .GetByIdAsync(null, cookId)
+            .ContinueWith(t => t.Result!.UserId);
+
+        return await recipe.ToDetailedRecipeDtoAsync(userManager, userId);
     }
 
     public async Task UpdateRecipeAsync(int id, EditFormRecipeDto updateRecipeDto)

@@ -6,6 +6,7 @@ using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.IngredientDtos;
 using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.Mappings;
+using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.IngredientSpec;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
@@ -21,8 +22,11 @@ namespace StirCraftApp.Api.Controllers;
 [Authorize(Roles = AdminRoleName)]
 public class AdminController(IIngredientService ingredientService, IRecipeService recipeService, UserManager<AppUser> userManager) : BaseApiController
 {
-    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
+    #region Ingredient Management
+
     [HttpGet("ingredients")]
+    [ProducesResponseType(typeof(PaginatedResult<BriefIngredientDto>), StatusCodes.Status200OK)]
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientAdminPanelSpecParams specParams)
     {
         var spec = new IngredientFilterAdminPanelSpecification(specParams);
@@ -33,8 +37,9 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok(ingredients);
     }
 
-    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [HttpGet("ingredients/{id}")]
+    [ProducesResponseType(typeof(EditFormIngredientDto), StatusCodes.Status200OK)]
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     public async Task<IActionResult> GetIngredient(int id)
     {
         var ingredient = await ingredientService
@@ -45,31 +50,39 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     }
 
     [HttpPost("ingredients")]
+    [ProducesResponseType(typeof(EditFormIngredientDto), StatusCodes.Status201Created)]
     [InvalidateCache(IngredientsAdminCachePattern, IngredientsCachePattern)]
     public async Task<IActionResult> AddIngredient(FormIngredientDto ingredientDto)
     {
-        await ingredientService.CreateIngredientAsync(ingredientDto);
-        return Ok(); //todo return created ingredient
+        var createdIngredient = await ingredientService.CreateIngredientAsync(ingredientDto);
+        return CreatedAtAction(nameof(GetIngredient), new { id = createdIngredient.Id }, createdIngredient);
     }
 
     [HttpPut("ingredients/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [InvalidateCache(IngredientsAdminCachePattern, IngredientsCachePattern)]
     public async Task<IActionResult> UpdateOrApproveIngredient(EditFormIngredientDto ingredientDto, int id)
     {
         await ingredientService.UpdateIngredientAsync(ingredientDto, id);
-        return Ok();
+        return NoContent();
     }
 
     [HttpDelete("ingredients/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [InvalidateCache(IngredientsAdminCachePattern, IngredientsCachePattern)]
     public async Task<IActionResult> DeleteIngredient(int id)
     {
         await ingredientService.DeleteIngredientAsync(id);
-        return Ok();
+        return NoContent();
     }
 
-    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
+    #endregion
+
+    #region Recipe Approval
+
     [HttpGet("recipes/pending-approval")]
+    [ProducesResponseType(typeof(PaginatedResult<BriefRecipeDto>), StatusCodes.Status200OK)]
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     public async Task<IActionResult> GetRecipesPendingApproval([FromQuery] PagingParams pagingParams)
     {
         var spec = new RecipePendingApprovalBriefSpecification(pagingParams);
@@ -79,8 +92,9 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok(recipes);
     }
 
-    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [HttpGet("recipes/pending-approval/{id}")]
+    [ProducesResponseType(typeof(DetailedRecipeAdminNotesDto), StatusCodes.Status200OK)]
+    [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     public async Task<IActionResult> GetRecipePendingApproval(int id)
     {
         var spec = new RecipePendingApprovalSpecification();
@@ -90,21 +104,23 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok(recipe);
     }
 
-
+    [HttpPut("recipes/pending-approval/{id}/notes")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [InvalidateCache(RecipeAdminCachePattern, CookOwnRecipesCachePattern)]
-    [HttpPut("recipes/pending-approval/{id}/notes")] //or patch
     public async Task<IActionResult> UpdateAdminNotesOnRecipe(int id, AdminNotesDto adminNotesDto)
     {
         await recipeService.UpdateAdminNotesAsync(id, adminNotesDto);
-        return Ok(); //no content probably
+        return NoContent();
     }
 
-    [InvalidateCache(RecipeAdminCachePattern, CookOwnRecipesCachePattern, RecipesCachePattern)]
     [HttpPost("recipes/pending-approval/{id}/approve")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [InvalidateCache(RecipeAdminCachePattern, CookOwnRecipesCachePattern, RecipesCachePattern)]
     public async Task<IActionResult> ApproveRecipe(int id)
     {
         await recipeService.ApproveRecipeAsync(id);
-        return Ok();
+        return NoContent();
     }
 
+    #endregion
 }

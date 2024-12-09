@@ -1,8 +1,10 @@
 ﻿using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.MeasurementUnitDtos;
+using StirCraftApp.Application.Exceptions;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using static StirCraftApp.Domain.Constants.ExceptionErrorMessages;
 
 namespace StirCraftApp.Application.Services;
 public class MeasurementUnitService(IUnitOfWork unit) : IMeasurementUnitService
@@ -13,7 +15,7 @@ public class MeasurementUnitService(IUnitOfWork unit) : IMeasurementUnitService
 
         if (measurementUnit == null)
         {
-            throw new Exception("Measurement unit not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(MeasurementUnit), id));
         }
 
         return measurementUnit.ToMeasurementUnitDto();

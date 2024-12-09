@@ -84,10 +84,9 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
         var cookId = await cookService.GetCookIdAsync(User.GetId());
 
-        await recipeService.CreateRecipeAsync(createRecipeDto, (int)cookId);
+        var createdRecipe = await recipeService.CreateRecipeAsync(createRecipeDto, cookId);
 
-        //todo return created recipe ???
-        return Ok();
+        return CreatedAtAction(nameof(GetRecipe), new { id = createdRecipe.Id }, createdRecipe);
     }
 
     [Authorize(Roles = CookRoleName)]
@@ -97,7 +96,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     {
 
         await recipeService.UpdateRecipeAsync(id, updateRecipeDto);
-        return Ok();
+        return NoContent();
     }
 
     [Authorize(Roles = CookRoleName)]
@@ -106,7 +105,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     public async Task<IActionResult> DeleteRecipe(int id)
     {
         await recipeService.DeleteRecipeAsync(id);
-        return Ok();
+        return NoContent();
     }
 
     [Authorize(Roles = UserRoleName)]
@@ -152,8 +151,8 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         var userId = User.GetId();
 
         await commentService
-            .AddCommentAsync(userId, id, commentFormDto);
-        return Ok(); //todo return created comment
+             .AddCommentAsync(userId, id, commentFormDto);
+        return NoContent();
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
@@ -165,8 +164,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
         await commentService
             .EditCommentAsync(userId, commentId, commentEditFormDto);
-
-        return Ok();
+        return NoContent();
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
@@ -178,7 +176,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
         await commentService
             .DeleteCommentAsync(userId, commentId);
-        return Ok();
+        return NoContent();
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
@@ -190,7 +188,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
         await replyService
             .AddReplyAsync(userId, commentId, replyFormDto);
-        return Ok(); //todo return created reply
+        return NoContent();
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
@@ -208,7 +206,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         await replyService
             .EditReplyAsync(userId, replyEditForm);
 
-        return Ok();
+        return NoContent();
     }
 
     [Authorize(Roles = UserAndCookRoleName)]

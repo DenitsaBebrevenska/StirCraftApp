@@ -26,6 +26,7 @@ public class IngredientsController(IIngredientService ingredientService) : BaseA
     }
 
     [HttpGet("all")]
+    [AllowAnonymous]
     [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     public async Task<IActionResult> GetIngredientsAllNonPaged()
     {
@@ -38,7 +39,6 @@ public class IngredientsController(IIngredientService ingredientService) : BaseA
     public async Task<IActionResult> SuggestIngredient(SuggestIngredientDto dto)
     {
         await ingredientService.SuggestIngredient(dto);
-        return Ok();
-        //todo name check
+        return NoContent();
     }
 }

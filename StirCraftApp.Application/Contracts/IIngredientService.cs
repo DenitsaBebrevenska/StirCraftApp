@@ -14,7 +14,7 @@ public interface IIngredientService
 
     Task SuggestIngredient(SuggestIngredientDto ingredient);
 
-    Task CreateIngredientAsync(FormIngredientDto ingredient);
+    Task<EditFormIngredientDto> CreateIngredientAsync(FormIngredientDto ingredientDto);
 
     Task UpdateIngredientAsync(EditFormIngredientDto ingredientDto, int id);
 

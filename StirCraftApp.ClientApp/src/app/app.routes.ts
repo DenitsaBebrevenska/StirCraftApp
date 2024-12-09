@@ -12,11 +12,7 @@ import { CookDetailsComponent } from './features/cooks/cook-details/cook-details
 import { RecipeCookComponent } from './features/recipes/recipe-cook/recipe-cook.component';
 import { LeaderboardComponent } from './features/cooks/leaderboard/leaderboard.component';
 import { IngredientsComponent } from './features/ingredients/ingredients.component';
-import { IngredientDetailedComponent } from './features/admin/ingredient-detailed/ingredient-detailed.component';
-import { CreateIngredientComponent } from './features/admin/create-ingredient/create-ingredient.component';
 import { SuggestIngredientComponent } from './features/ingredients/suggest-ingredient/suggest-ingredient.component';
-import { AdminPanelIngredientsComponent } from './features/admin/admin-panel-ingredients/admin-panel-ingredients.component';
-import { EditIngredientComponent } from './features/admin/edit-ingredient/edit-ingredient.component';
 import { RecipeIngredientComponent } from './features/recipes/recipe-ingredient/recipe-ingredient.component';
 import { BecomeCookComponent } from './features/cooks/become-cook/become-cook.component';
 import { ProfilePageComponent } from './features/account/profile-page/profile-page.component';
@@ -27,39 +23,33 @@ import { CookOwnRecipeComponent } from './features/recipes/cook-own-recipe/cook-
 import { AvatarChangeComponent } from './features/account/avatar-change/avatar-change.component';
 import { FavoritesComponent } from './features/recipes/favorites/favorites.component';
 import { UpdateAboutComponent } from './features/cooks/update-about/update-about.component';
-import { PendingRecipesPreviewComponent } from './features/admin/pending-recipes-preview/pending-recipes-preview.component';
-import { PendingRecipeComponent } from './features/admin/pending-recipe/pending-recipe.component';
 
 
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'cook/become', component: BecomeCookComponent, canActivate: [authGuard] },
-    { path: 'cook/about', component: UpdateAboutComponent, canActivate: [authGuard] },
-    { path: 'cook/recipes', component: CookOwnRecipesComponent, canActivate: [authGuard] },
-    { path: 'cook/recipes/create', component: CreateRecipeComponent, canActivate: [authGuard] },
-    { path: 'cook/recipes/:id/edit', component: UpdateRecipeComponent, canActivate: [authGuard] },
-    { path: 'cook/recipes/:id', component: CookOwnRecipeComponent, canActivate: [authGuard] },
+    {
+        path: 'cook', loadChildren: () => import('./features/cooks/routes')
+            .then(r => r.cookRoutes)
+    },
     { path: 'cooks/top/10', component: LeaderboardComponent },
     { path: 'cooks', component: CooksComponent },
     { path: 'cooks/:id', component: CookDetailsComponent },
     { path: 'ingredients', component: IngredientsComponent },
     { path: 'ingredients/suggest', component: SuggestIngredientComponent, canActivate: [authGuard] },
-    { path: 'admin/ingredients', component: AdminPanelIngredientsComponent, canActivate: [authGuard] },
-    { path: 'admin/recipes/pending-approval', component: PendingRecipesPreviewComponent, canActivate: [authGuard] },
-    { path: 'admin/recipes/pending-approval/:id', component: PendingRecipeComponent, canActivate: [authGuard] },
-    { path: 'admin/ingredients/create', component: CreateIngredientComponent, canActivate: [authGuard] },
-    { path: 'admin/ingredients/edit/:id', component: EditIngredientComponent, canActivate: [authGuard] },
-    { path: 'admin/ingredients/:id', component: IngredientDetailedComponent, canActivate: [authGuard] },
+    {
+        path: 'admin', loadChildren: () => import('./features/admin/routes')
+            .then(r => r.adminRoutes)
+    },
     { path: 'recipes', component: RecipesComponent },
     { path: 'recipes/user-favorites', component: FavoritesComponent, canActivate: [authGuard] },
     { path: 'recipes/cook/:id', component: RecipeCookComponent },
     { path: 'recipes/ingredient/:id', component: RecipeIngredientComponent },
     { path: 'recipes/:id', component: RecipeDetailsComponent },
-    { path: 'account/login', component: LoginComponent },
-    { path: 'account/register', component: RegisterComponent },
-    { path: 'account/profile', component: ProfilePageComponent, canActivate: [authGuard] },
-    { path: 'account/profile/avatar/change', component: AvatarChangeComponent, canActivate: [authGuard] },
+    {
+        path: 'account', loadChildren: () => import('./features/account/routes')
+            .then(r => r.accountRoutes)
+    },
     { path: 'not-found', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },
     { path: '**', redirectTo: 'not-found', pathMatch: 'full' }

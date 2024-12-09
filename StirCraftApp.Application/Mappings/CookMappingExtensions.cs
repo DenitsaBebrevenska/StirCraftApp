@@ -45,14 +45,6 @@ public static class CookMappingExtensions
         };
     }
 
-    public static CookAboutDto ToCookAboutDtoAsync(this Cook cook)
-    {
-        return new CookAboutDto
-        {
-            About = cook.About
-        };
-    }
-
     public static Cook ToCook(this CookAboutDto aboutDto, string userId)
     {
         return new Cook

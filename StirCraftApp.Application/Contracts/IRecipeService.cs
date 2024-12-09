@@ -12,7 +12,7 @@ public interface IRecipeService
     Task<PaginatedResult<T>> GetRecipesAsync<T>(ISpecification<Recipe> spec, Func<Recipe, Task<T>> convertToDto)
         where T : BaseDto;
     Task<IEnumerable<T>> GetTopNRecipes<T>(int count, Func<Recipe, Task<T>> convertToDto) where T : BaseDto;
-    Task CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId);
+    Task<DetailedRecipeDto> CreateRecipeAsync(FormRecipeDto createRecipeDto, int cookId);
     Task UpdateRecipeAsync(int id, EditFormRecipeDto updateRecipeDto);
     Task DeleteRecipeAsync(int id);
     Task<FavoriteRecipeToggleDto> ToggleFavoriteAsync(string userId, int recipeId);

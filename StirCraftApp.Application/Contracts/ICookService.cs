@@ -6,7 +6,7 @@ public interface ICookService
     Task<int> GetCookIdAsync(string userId);
 
     Task<CookAboutDto> GetCookAboutAsync(string userId);
-    Task CreateCookAsync(CookAboutDto aboutDto, string userId);
+    Task BecomeCookAsync(CookAboutDto aboutDto, string userId);
 
     Task UpdateAboutAsync(string userId, CookAboutDto aboutDto);
 

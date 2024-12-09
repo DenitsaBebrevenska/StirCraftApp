@@ -21,14 +21,6 @@ public static class IngredientMappingExtensions
             IsAllergen = ingredient.IsAllergen
         };
     }
-    public static FormIngredientDto ToFormIngredientDto(this Ingredient ingredient)
-    {
-        return new FormIngredientDto
-        {
-            Name = ingredient.Name,
-            IsAllergen = ingredient.IsAllergen
-        };
-    }
 
     public static EditFormIngredientDto ToEditFormIngredientDto(this Ingredient ingredient)
     {
@@ -55,6 +47,14 @@ public static class IngredientMappingExtensions
             Name = formIngredientDto.Name,
             IsAllergen = formIngredientDto.IsAllergen,
             IsAdminApproved = true
+        };
+    }
+
+    public static Ingredient ToIngredient(this SuggestIngredientDto suggestIngredientDto)
+    {
+        return new Ingredient
+        {
+            Name = suggestIngredientDto.Name
         };
     }
 

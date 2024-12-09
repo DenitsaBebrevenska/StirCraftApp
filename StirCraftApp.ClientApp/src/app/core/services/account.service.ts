@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../../shared/models/user/user';
@@ -14,6 +14,18 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
   currentUser = signal<UserInfo | null>(null);
+  isAdmin = computed(() => {
+    const role = this.currentUser()?.role;
+    return role === 'Admin';
+  });
+  isCook = computed(() => {
+    const role = this.currentUser()?.role;
+    return role === 'Cook';
+  });
+  isUser = computed(() => {
+    const role = this.currentUser()?.role;
+    return role === 'User';
+  });
 
   logIn(values: any) {
     let params = new HttpParams();

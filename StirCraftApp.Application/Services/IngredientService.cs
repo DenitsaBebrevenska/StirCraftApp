@@ -63,21 +63,20 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
     public async Task SuggestIngredient(SuggestIngredientDto ingredient)
     {
         await unit.Repository<Ingredient>()
-            .AddAsync(new Ingredient
-            {
-                Name = ingredient.Name
-            });
+            .AddAsync(ingredient.ToIngredient());
 
         await unit.CompleteAsync();
     }
 
-    public async Task CreateIngredientAsync(FormIngredientDto ingredientDto)
+    public async Task<EditFormIngredientDto> CreateIngredientAsync(FormIngredientDto ingredientDto)
     {
         var ingredient = ingredientDto.ToIngredient();
         await unit.Repository<Ingredient>()
             .AddAsync(ingredient);
 
         await unit.CompleteAsync();
+
+        return ingredient.ToEditFormIngredientDto();
     }
 
     public async Task UpdateIngredientAsync(EditFormIngredientDto ingredientDto, int id)

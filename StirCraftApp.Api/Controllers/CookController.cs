@@ -35,8 +35,8 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     {
         var userId = User.GetId();
 
-        await cookService.CreateCookAsync(aboutDto, userId);
-        return Ok();
+        await cookService.BecomeCookAsync(aboutDto, userId);
+        return NoContent();
     }
 
     [Authorize(Roles = CookRoleName)]

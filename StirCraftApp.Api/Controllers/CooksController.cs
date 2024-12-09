@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
@@ -8,11 +9,10 @@ using StirCraftApp.Domain.Specifications.CookSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using static StirCraftApp.Domain.Constants.CachingValues;
 
-
-
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class CooksController(ICooksService cooksService, UserManager<AppUser> userManager) : ControllerBase
 {
     [HttpGet]
