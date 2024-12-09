@@ -19,14 +19,6 @@ public static class CommentMappingExtensions
         };
     }
 
-    public static CommentFormDto ToCommentFormDto(this Comment comment)
-    {
-        return new CommentFormDto
-        {
-            Title = comment.Title,
-            Body = comment.Body
-        };
-    }
 
     public static async Task<RecipeCommentDto> ToRecipeCommentDtoAsync(this Comment comment, UserManager<AppUser> userManager)
     {

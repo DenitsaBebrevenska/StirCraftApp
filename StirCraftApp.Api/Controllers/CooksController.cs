@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Application.Mappings;
+using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.CookSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
@@ -17,6 +19,7 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
 {
     [HttpGet]
     [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
+    [ProducesResponseType(typeof(PaginatedResult<SummaryCookDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCooks([FromQuery] CookSpecParams specParams)
     {
         var spec = new CookSortIncludeSpecification(specParams);
@@ -28,6 +31,7 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
 
     [HttpGet("{id}")]
     [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
+    [ProducesResponseType(typeof(DetailedCookDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCookById(int id)
     {
         var cook = await cooksService
@@ -38,6 +42,7 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
 
     [HttpGet("top/{count}")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
+    [ProducesResponseType(typeof(PaginatedResult<CookWithRankDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetTopTenCooksWithRanks(int count)
     {
         var spec = new CookTopRankSpecification(count);

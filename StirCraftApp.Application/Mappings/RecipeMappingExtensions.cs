@@ -118,18 +118,6 @@ public static class RecipeMappingExtensions
         };
     }
 
-    public static FormRecipeDto ToFormRecipeDto(this Recipe recipe)
-    {
-        return new FormRecipeDto
-        {
-            Name = recipe.Name,
-            PreparationSteps = recipe.PreparationSteps,
-            DifficultyLevel = recipe.DifficultyLevel.ToString(),
-            RecipeIngredients = recipe.RecipeIngredients.Select(ri => ri.ToFormRecipeIngredientDto()).ToList(),
-            RecipeImages = recipe.RecipeImages.Select(ri => ri.ToRecipeImageDto()).ToList(),
-            CategoryRecipes = recipe.CategoryRecipes.Select(cr => cr.CategoryId).ToList()
-        };
-    }
 
     public static async Task<DetailedRecipeAdminNotesDto> ToDetailedRecipeAdminNotesDtoAsync(this Recipe recipe,
         UserManager<AppUser> userManager)

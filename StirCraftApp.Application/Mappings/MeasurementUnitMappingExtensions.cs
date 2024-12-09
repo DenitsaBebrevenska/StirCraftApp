@@ -13,13 +13,4 @@ public static class MeasurementUnitMappingExtensions
             Abbreviation = measurementUnit.Abbreviation
         };
     }
-    public static MeasurementUnit ToMeasurementUnit(this MeasurementUnitDto measurementUnitDto)
-    {
-        return new MeasurementUnit
-        {
-            Id = measurementUnitDto.Id,
-            Name = measurementUnitDto.Name,
-            Abbreviation = measurementUnitDto.Abbreviation
-        };
-    }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs.CategoryDtos;
 using static StirCraftApp.Domain.Constants.CachingValues;
 
 namespace StirCraftApp.Api.Controllers;
@@ -12,14 +13,16 @@ namespace StirCraftApp.Api.Controllers;
 public class CategoriesController(ICategoryService categoryService) : BaseApiController
 {
     [HttpGet("names")]
-    public async Task<ActionResult<List<string>>> GetCategoriesNames()
+    [ProducesResponseType(typeof(IList<string>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetCategoriesNames()
     {
         var categories = await categoryService.GetCategoriesNamesAsync();
         return Ok(categories);
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<string>>> GetCategories()
+    [ProducesResponseType(typeof(IList<CategoryDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetCategories()
     {
         var categories = await categoryService.GetAll();
         return Ok(categories);

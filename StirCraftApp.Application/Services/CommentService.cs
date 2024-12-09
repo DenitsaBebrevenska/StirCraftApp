@@ -68,8 +68,6 @@ public class CommentService(IUnitOfWork unit) : ICommentService
             throw new UnauthorizedAccessException(string.Format(NotOwner, nameof(Comment), commentId));
         }
 
-        //todo what happens with the replies?
-
         unit.Repository<Comment>().Delete(comment);
 
         await unit.CompleteAsync();

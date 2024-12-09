@@ -12,13 +12,4 @@ public static class CategoryMappingExtensions
             Name = category.Name
         };
     }
-
-    public static Category ToCategory(this CategoryDto categoryDto)
-    {
-        return new Category
-        {
-            Id = categoryDto.Id,
-            Name = categoryDto.Name
-        };
-    }
 }

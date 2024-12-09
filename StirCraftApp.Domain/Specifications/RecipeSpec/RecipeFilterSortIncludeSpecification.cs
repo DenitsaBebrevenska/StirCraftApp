@@ -4,8 +4,6 @@ using StirCraftApp.Domain.Specifications.SpecParams;
 namespace StirCraftApp.Domain.Specifications.RecipeSpec;
 public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
 {
-    //a recipe could be filtered by name, difficulty level, categories
-    //sort by difficulty lvl, by average rating
     public RecipeFilterSortIncludeSpecification(RecipeSpecParams specParams)
     : base(r =>
         r.IsAdminApproved == true &&
@@ -15,7 +13,6 @@ public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
        (!specParams.DifficultyLevels.Any() || specParams.DifficultyLevels.Contains(r.DifficultyLevel))
         )
     {
-        //todo have to decide whether to use single or split queries and in which cases
         AddInclude(r => r.RecipeImages);
         AddInclude(r => r.RecipeRatings);
         AddInclude(r => r.Cook);
@@ -24,7 +21,6 @@ public class RecipeFilterSortIncludeSpecification : BaseSpecification<Recipe>
         AddIncludeStrings("RecipeIngredients.Ingredient");
 
 
-        //todo check if pagination is well implemented after more recipes are accumulated
         AddPaging(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
 
         switch (specParams.Sort)

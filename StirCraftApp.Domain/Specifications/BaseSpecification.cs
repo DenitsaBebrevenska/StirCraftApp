@@ -50,8 +50,4 @@ public abstract class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) 
         IsPaginationEnabled = true;
     }
 
-    protected void EnableSplitQuery()
-    {
-        SplitQueryEnabled = true;
-    }
 }

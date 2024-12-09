@@ -23,8 +23,3 @@ public interface ISpecification<T>
 
     IQueryable<T> ApplyCriteria(IQueryable<T> query);
 }
-
-public interface ISpecification<T, TResult> : ISpecification<T>
-{
-    Expression<Func<T, TResult>>? Select { get; }
-}

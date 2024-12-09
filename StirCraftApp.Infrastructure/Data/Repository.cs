@@ -9,10 +9,6 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
     private DbSet<T> GetDbSet()
         => context.Set<T>();
 
-    //public async Task<T?> GetByIdAsync(int id)
-    //    => await GetDbSet()
-    //        .FindAsync(id);
-
     public async Task<T?> GetByIdAsync(ISpecification<T>? spec, int id)
     {
         if (spec == null)
@@ -25,10 +21,6 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
             .FirstOrDefaultAsync(x => x.Id == id); ;
     }
 
-    //public async Task<IList<T>> GetAllAsync()
-    //    => await GetDbSet()
-    //        .ToListAsync();
-
     public async Task<IList<T>> GetAllAsync(ISpecification<T>? spec)
     {
         if (spec == null)
@@ -40,14 +32,6 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         return await ApplySpecification(spec)
             .ToListAsync();
     }
-
-    //public async Task<TResult?> GetEntityWithSpecAsync<TResult>(ISpecification<T, TResult> spec)
-    // => await ApplySpecification(spec)
-    //     .FirstOrDefaultAsync();
-
-    //public async Task<IList<TResult>> GetAllAsync<TResult>(ISpecification<T, TResult> spec)
-    //    => await ApplySpecification(spec)
-    //        .ToListAsync();
 
     public async Task AddAsync(T entity)
         => await GetDbSet()
@@ -101,11 +85,4 @@ public class Repository<T>(StirCraftDbContext context) : IRepository<T>
         return SpecificationEvaluator<T>.GetQuery(query, spec);
     }
 
-    //private IQueryable<TResult> ApplySpecification<TResult>(ISpecification<T, TResult> spec)
-    //{
-    //    var query = GetDbSet()
-    //        .AsQueryable()
-    //        .AsNoTracking();
-    //    return SpecificationEvaluator<T>.GetQuery<T, TResult>(query, spec);
-    //}
 }

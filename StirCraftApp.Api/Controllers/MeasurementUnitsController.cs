@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
+using StirCraftApp.Application.DTOs.MeasurementUnitDtos;
 using StirCraftApp.Domain.Specifications.MeasurementUnitSpec;
-using StirCraftApp.Domain.Specifications.SpecParams;
 using static StirCraftApp.Domain.Constants.CachingValues;
 
 namespace StirCraftApp.Api.Controllers;
@@ -14,15 +14,17 @@ namespace StirCraftApp.Api.Controllers;
 public class MeasurementUnitsController(IMeasurementUnitService measurementUnitsService) : BaseApiController
 {
     [HttpGet]
-    public async Task<IActionResult> GetMeasurementUnits([FromQuery] MeasurementUnitParams unitParams)
+    [ProducesResponseType(typeof(IList<MeasurementUnitDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetMeasurementUnits()
     {
-        var spec = new MeasurementUnitFilterSpecification(unitParams);
+        var spec = new MeasurementUnitFilterSpecification();
         var measurementUnits = await measurementUnitsService
             .GetUnitsAsync(spec);
         return Ok(measurementUnits);
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(typeof(MeasurementUnitDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetMeasurementUnit(int id)
     {
         var measurementUnit = await measurementUnitsService

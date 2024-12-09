@@ -1,8 +1,10 @@
 ﻿using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.ReplyDtos;
+using StirCraftApp.Application.Exceptions;
 using StirCraftApp.Application.Mappings;
 using StirCraftApp.Domain.Contracts;
 using StirCraftApp.Domain.Entities;
+using static StirCraftApp.Domain.Constants.ExceptionErrorMessages;
 
 namespace StirCraftApp.Application.Services;
 public class ReplyService(IUnitOfWork unit) : IReplyService
@@ -13,7 +15,7 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
 
         if (commentExists == null)
         {
-            throw new InvalidOperationException("Comment does not exist");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Comment), commentId));
         }
 
         var reply = replyFormDto.ToReply(userId, commentId);
@@ -21,18 +23,23 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
         await unit.CompleteAsync();
     }
 
-    public async Task EditReplyAsync(string userId, ReplyEditFormDto replyEditForm)
+    public async Task EditReplyAsync(string userId, int replyId, ReplyEditFormDto replyEditForm)
     {
         var reply = await unit.Repository<Reply>().GetByIdAsync(null, replyEditForm.Id);
 
         if (reply == null)
         {
-            throw new Exception("Reply not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Reply), replyId));
+        }
+
+        if (replyId != replyEditForm.Id)
+        {
+            throw new ValidationException(string.Format(UrlIdMismatch, nameof(Reply)));
         }
 
         if (reply.UserId != userId)
         {
-            throw new Exception("You are not the creator of this reply");
+            throw new NotResourceOwnerException(string.Format(NotOwner, nameof(Reply), replyId));
         }
 
         reply.Body = replyEditForm.Body;
@@ -48,12 +55,12 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
 
         if (reply == null)
         {
-            throw new Exception("Reply not found");
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Reply), replyId));
         }
 
         if (reply.UserId != userId)
         {
-            throw new Exception("You are not the creator of this reply");
+            throw new NotResourceOwnerException(string.Format(NotOwner, nameof(Reply), replyId));
         }
 
         unit.Repository<Reply>().Delete(reply);
@@ -61,15 +68,4 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
         await unit.CompleteAsync();
     }
 
-    public async Task<bool> UserIsReplyCreator(string userId, int replyId)
-    {
-        var reply = await unit.Repository<Reply>().GetByIdAsync(null, replyId);
-
-        if (reply == null)
-        {
-            throw new Exception("Reply not found");
-        }
-
-        return reply.UserId == userId;
-    }
 }

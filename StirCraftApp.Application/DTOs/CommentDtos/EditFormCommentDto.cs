@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static StirCraftApp.Domain.Constants.EntityConstraints;
+using static StirCraftApp.Domain.Constants.ValidationErrorMessages;
 
 namespace StirCraftApp.Application.DTOs.CommentDtos;
-using static Domain.Constants.EntityConstraints;
-using static Domain.Constants.ValidationErrorMessages;
-
 public class EditFormCommentDto : BaseDto
 {
     public int Id { get; set; }

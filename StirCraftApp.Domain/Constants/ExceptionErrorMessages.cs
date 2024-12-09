@@ -12,4 +12,5 @@ public static class ExceptionErrorMessages
     public const string UrlIdMismatch = "The {0} id in the url does not match the {0} id in the form.";
 
     public const string RangeError = "The {0} must be between {1} and {2}.";
+
 }

@@ -4,14 +4,6 @@ using StirCraftApp.Domain.Entities;
 namespace StirCraftApp.Application.Mappings;
 public static class IngredientMappingExtensions
 {
-    public static SuggestIngredientDto ToSuggestIngredientDto(this Ingredient ingredient)
-    {
-        return new SuggestIngredientDto
-        {
-            Name = ingredient.Name
-        };
-    }
-
     public static BriefIngredientDto ToBriefIngredientDto(this Ingredient ingredient)
     {
         return new BriefIngredientDto

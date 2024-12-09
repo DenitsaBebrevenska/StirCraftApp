@@ -4,6 +4,7 @@ using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.IngredientDtos;
 using StirCraftApp.Application.Mappings;
+using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Specifications.IngredientSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
 using static StirCraftApp.Domain.Constants.CachingValues;
@@ -17,25 +18,30 @@ public class IngredientsController(IIngredientService ingredientService) : BaseA
     [HttpGet]
     [AllowAnonymous]
     [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
+    [ProducesResponseType(typeof(PaginatedResult<BriefIngredientDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetIngredients([FromQuery] IngredientSpecParams specParams)
     {
         var spec = new IngredientFilterAdminApprovedSpecification(specParams);
-        return Ok(await ingredientService
+        var ingredients = await ingredientService
             .GetIngredientsAsync(spec, ingredient => ingredient
-                .ToBriefIngredientDto()));
+                .ToBriefIngredientDto());
+        return Ok(ingredients);
     }
 
     [HttpGet("all")]
     [AllowAnonymous]
     [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
+    [ProducesResponseType(typeof(IList<BriefIngredientDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetIngredientsAllNonPaged()
     {
-        return Ok(await ingredientService.GetIngredientsNotPaged());
+        var nonPagedIngredients = await ingredientService.GetIngredientsNotPaged();
+        return Ok(nonPagedIngredients);
     }
 
-    [InvalidateCache(IngredientsAdminCachePattern)]
-    [Authorize(Roles = CookRoleName)]
     [HttpPost("suggest")]
+    [Authorize(Roles = CookRoleName)]
+    [InvalidateCache(IngredientsAdminCachePattern)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> SuggestIngredient(SuggestIngredientDto dto)
     {
         await ingredientService.SuggestIngredient(dto);

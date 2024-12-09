@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using StirCraftApp.Api.Attributes;
 using StirCraftApp.Application.Contracts;
 using StirCraftApp.Application.DTOs.CookDtos;
+using StirCraftApp.Application.DTOs.RecipeDtos;
 using StirCraftApp.Application.Mappings;
+using StirCraftApp.Application.Results;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Domain.Specifications.RecipeSpec;
 using StirCraftApp.Domain.Specifications.SpecParams;
@@ -20,6 +22,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
 {
     [Authorize(Roles = CookRoleName)]
     [HttpGet("about")]
+    [ProducesResponseType(typeof(CookAboutDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAbout()
     {
         var userId = User.GetId();
@@ -28,9 +31,10 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok(about);
     }
 
-    [InvalidateCache(CooksCachePattern)]
     [Authorize(Roles = UserRoleName)]
+    [InvalidateCache(CooksCachePattern)]
     [HttpPost("become")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> BecomeCook(CookAboutDto aboutDto)
     {
         var userId = User.GetId();
@@ -41,16 +45,18 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
 
     [Authorize(Roles = CookRoleName)]
     [HttpPut("about")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> UpdateAbout(CookAboutDto aboutDto)
     {
         var userId = User.GetId();
         await cookService.UpdateAboutAsync(userId, aboutDto);
-        return Ok();
+        return NoContent();
     }
 
     [Authorize(Roles = CookRoleName)]
-    [HttpGet("recipes")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
+    [HttpGet("recipes")]
+    [ProducesResponseType(typeof(PaginatedResult<RecipeOwnDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCooksOwnRecipes([FromQuery] PagingParams pagingParams)
     {
         var cookId = await cookService.GetCookIdAsync(User.GetId());
@@ -63,8 +69,9 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     }
 
     [Authorize(Roles = CookRoleName)]
-    [HttpGet("recipes/{id}")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
+    [HttpGet("recipes/{id}")]
+    [ProducesResponseType(typeof(DetailedRecipeAdminNotesDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCookOwnRecipeById(int id)
     {
         var cookId = await cookService.GetCookIdAsync(User.GetId());

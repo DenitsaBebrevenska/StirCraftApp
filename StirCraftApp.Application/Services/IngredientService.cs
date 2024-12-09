@@ -49,7 +49,6 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         var ingredients = await unit.Repository<Ingredient>()
             .GetAllAsync(null);
 
-        //todo rethink this one
         var dtos = ingredients
             .Where(i => i.IsAdminApproved)
             .OrderBy(i => i.Name)
