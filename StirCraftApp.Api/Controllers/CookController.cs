@@ -30,6 +30,7 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok(about);
     }
 
+    [InvalidateCache(CooksCachePattern)]
     [Authorize(Roles = UserRoleName)]
     [HttpPost("become")]
     public async Task<IActionResult> BecomeCook(CookAboutDto aboutDto)

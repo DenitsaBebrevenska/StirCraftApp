@@ -5,5 +5,5 @@ public interface IResponseCacheService
 
     string? GetCachedResponse(string cacheKey);
 
-    void RemoveCache(string cacheKey);
+    void RemoveCacheKeysByPattern(string cacheKeyPattern);
 }

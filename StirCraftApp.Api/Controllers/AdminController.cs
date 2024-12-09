@@ -45,6 +45,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     }
 
     [HttpPost("ingredients")]
+    [InvalidateCache(IngredientsAdminCachePattern, IngredientsCachePattern)]
     public async Task<IActionResult> AddIngredient(FormIngredientDto ingredientDto)
     {
         await ingredientService.CreateIngredientAsync(ingredientDto);
@@ -52,6 +53,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     }
 
     [HttpPut("ingredients/{id}")]
+    [InvalidateCache(IngredientsAdminCachePattern, IngredientsCachePattern)]
     public async Task<IActionResult> UpdateOrApproveIngredient(EditFormIngredientDto ingredientDto, int id)
     {
         await ingredientService.UpdateIngredientAsync(ingredientDto, id);
@@ -59,6 +61,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     }
 
     [HttpDelete("ingredients/{id}")]
+    [InvalidateCache(IngredientsAdminCachePattern, IngredientsCachePattern)]
     public async Task<IActionResult> DeleteIngredient(int id)
     {
         await ingredientService.DeleteIngredientAsync(id);
@@ -88,6 +91,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
     }
 
 
+    [InvalidateCache(RecipeAdminCachePattern, CookOwnRecipesCachePattern)]
     [HttpPut("recipes/pending-approval/{id}/notes")] //or patch
     public async Task<IActionResult> UpdateAdminNotesOnRecipe(int id, AdminNotesDto adminNotesDto)
     {
@@ -95,6 +99,7 @@ public class AdminController(IIngredientService ingredientService, IRecipeServic
         return Ok(); //no content probably
     }
 
+    [InvalidateCache(RecipeAdminCachePattern, CookOwnRecipesCachePattern, RecipesCachePattern)]
     [HttpPost("recipes/pending-approval/{id}/approve")]
     public async Task<IActionResult> ApproveRecipe(int id)
     {

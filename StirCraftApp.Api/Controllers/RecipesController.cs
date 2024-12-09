@@ -78,6 +78,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = CookRoleName)]
+    [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern)]
     [HttpPost]
     public async Task<IActionResult> CreateRecipe(FormRecipeDto createRecipeDto)
     {
@@ -90,6 +91,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = CookRoleName)]
+    [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern)]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateRecipe(int id, EditFormRecipeDto updateRecipeDto)
     {
@@ -99,6 +101,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = CookRoleName)]
+    [InvalidateCache(CookOwnRecipesCachePattern, RecipesCachePattern)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRecipe(int id)
     {
@@ -107,6 +110,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserRoleName)]
+    [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/toggle-favorite")]
     public async Task<IActionResult> ToggleFavorite(int id)
     {
@@ -118,6 +122,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     [Authorize(Roles = UserRoleName)]
     [HttpGet("user-favorites")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
+    [InvalidateCache(RecipesCachePattern)]
     public async Task<IActionResult> GetUserFavorites([FromQuery] PagingParams pagingParams)
     {
         var userId = User.GetId();
@@ -129,6 +134,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserRoleName)]
+    [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/rate/{value}")]
     public async Task<IActionResult> RateRecipe(int id, int value)
     {
@@ -139,7 +145,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
-
+    [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/comments")]
     public async Task<IActionResult> PostComment(int id, CommentFormDto commentFormDto)
     {
@@ -151,6 +157,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
+    [InvalidateCache(RecipesCachePattern)]
     [HttpPut("{id}/comments/{commentId}")]
     public async Task<IActionResult> EditComment(int commentId, EditFormCommentDto commentEditFormDto)
     {
@@ -163,6 +170,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
+    [InvalidateCache(RecipesCachePattern)]
     [HttpDelete("{id}/comments/{commentId}")]
     public async Task<IActionResult> DeleteComment(int commentId)
     {
@@ -174,6 +182,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
+    [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/comments/{commentId}/replies")]
     public async Task<IActionResult> PostReply(ReplyFormDto replyFormDto, int commentId)
     {
@@ -185,6 +194,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
+    [InvalidateCache(RecipesCachePattern)]
     [HttpPut("{id}/comments/{commentId}/replies/{replyId}")]
     public async Task<IActionResult> EditReply(int replyId, ReplyEditFormDto replyEditForm)
     {
@@ -202,6 +212,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
     [Authorize(Roles = UserAndCookRoleName)]
+    [InvalidateCache(RecipesCachePattern)]
     [HttpDelete("{id}/comments/{commentId}/replies/{replyId}")]
     public async Task<IActionResult> DeleteReply(int replyId)
     {

@@ -9,8 +9,6 @@ using StirCraftApp.Domain.Specifications.SpecParams;
 using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
 
-
-
 namespace StirCraftApp.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
@@ -34,6 +32,7 @@ public class IngredientsController(IIngredientService ingredientService) : BaseA
         return Ok(await ingredientService.GetIngredientsNotPaged());
     }
 
+    [InvalidateCache(IngredientsAdminCachePattern)]
     [Authorize(Roles = CookRoleName)]
     [HttpPost("suggest")]
     public async Task<IActionResult> SuggestIngredient(SuggestIngredientDto dto)

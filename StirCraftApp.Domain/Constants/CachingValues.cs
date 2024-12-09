@@ -9,4 +9,13 @@ public static class CachingValues
 
     public const int GenerousSlidingSeconds = 120;
     public const int GenerousAbsoluteSeconds = 1200;
+
+    public const string RecipesCachePattern = "api/recipes|";
+    public const string RecipeAdminCachePattern = "api/admin/recipes/pending-approval|";
+    public const string CookOwnRecipesCachePattern = "api/cook/recipes|";
+    public const string IngredientsCachePattern = "api/ingredients|";
+    public const string IngredientsAdminCachePattern = "api/admin/ingredients|";
+    public const string CooksCachePattern = "api/cooks|";
+
+
 }

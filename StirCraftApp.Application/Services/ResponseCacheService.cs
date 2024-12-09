@@ -6,6 +6,7 @@ using System.Text.Json;
 namespace StirCraftApp.Application.Services;
 public class ResponseCacheService(IMemoryCache memoryCache, ILogger<ResponseCacheService> logger) : IResponseCacheService
 {
+    private IDictionary<string, string> _cacheKeys = new Dictionary<string, string>();
     public void CacheResponse(string cacheKey, object response, TimeSpan timeToLiveSliding, TimeSpan timeToLiveAbsolute)
     {
         var serializedResponse = JsonSerializer.Serialize(response, new JsonSerializerOptions
@@ -18,6 +19,8 @@ public class ResponseCacheService(IMemoryCache memoryCache, ILogger<ResponseCach
             SlidingExpiration = timeToLiveSliding,
             AbsoluteExpirationRelativeToNow = timeToLiveAbsolute
         });
+
+        _cacheKeys.TryAdd(cacheKey, cacheKey);
 
         logger.LogInformation($"Response is cached - key {cacheKey}.");
     }
@@ -33,9 +36,18 @@ public class ResponseCacheService(IMemoryCache memoryCache, ILogger<ResponseCach
         return cachedResponse;
     }
 
-    public void RemoveCache(string cacheKey)
+    public void RemoveCacheKeysByPattern(string cacheKeyPattern)
     {
-        memoryCache.Remove(cacheKey);
-        logger.LogInformation($"Removing from cache - key {cacheKey}");
+        var keysToRemove = _cacheKeys.Keys
+            .Where(k => k.Contains(cacheKeyPattern))
+            .ToList();
+
+        foreach (var key in keysToRemove)
+        {
+            memoryCache.Remove(key);
+            _cacheKeys.Remove(key);
+            logger.LogInformation($"Removing from cache - key {key}");
+        }
+
     }
 }
