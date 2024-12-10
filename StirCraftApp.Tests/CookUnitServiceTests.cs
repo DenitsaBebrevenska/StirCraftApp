@@ -125,7 +125,8 @@ public class CookUnitServiceTests
             .ReturnsAsync(_cooks);
         _cookRepositoryMock.Setup(c => c.AddAsync(It.IsAny<Cook>()))
             .Returns(Task.CompletedTask);
-
+        _mockUnitOfWork.Setup(u => u.CompleteAsync())
+            .ReturnsAsync(true);
 
         _mockUserManager.Setup(x => x.FindByIdAsync(userId))
             .ReturnsAsync(user);
@@ -179,7 +180,8 @@ public class CookUnitServiceTests
         _cookRepositoryMock.Setup(c => c.GetAllAsync(null))
             .ReturnsAsync(_cooks);
         _cookRepositoryMock.Setup(c => c.Update(It.IsAny<Cook>()));
-
+        _mockUnitOfWork.Setup(u => u.CompleteAsync())
+            .ReturnsAsync(true);
 
         var aboutDto = new CookAboutDto { About = TestAbout2 };
 

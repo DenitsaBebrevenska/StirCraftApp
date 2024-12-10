@@ -55,6 +55,8 @@ public class CommentUnitServiceTests
         _mockRecipeRepository
             .Setup(x => x.ExistsAsync(TestRecipeId))
             .ReturnsAsync(true);
+        _mockUnitOfWork.Setup(u => u.CompleteAsync())
+            .ReturnsAsync(true);
 
         await _service.AddCommentAsync(TestUserId, TestRecipeId, commentFormDto);
 
@@ -113,6 +115,8 @@ public class CommentUnitServiceTests
         _mockCommentRepository
             .Setup(x => x.GetByIdAsync(null, TestCommentId))
             .ReturnsAsync(existingComment);
+        _mockUnitOfWork.Setup(u => u.CompleteAsync())
+            .ReturnsAsync(true);
 
         await _service.EditCommentAsync(TestUserId, TestCommentId, editFormDto);
 
@@ -202,6 +206,8 @@ public class CommentUnitServiceTests
         _mockCommentRepository
             .Setup(x => x.GetByIdAsync(null, TestCommentId))
             .ReturnsAsync(existingComment);
+        _mockUnitOfWork.Setup(u => u.CompleteAsync())
+            .ReturnsAsync(true);
 
         await _service.DeleteCommentAsync(TestUserId, TestCommentId);
 

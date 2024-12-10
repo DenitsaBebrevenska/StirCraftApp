@@ -43,11 +43,11 @@ public class CooksUnitServiceTests
         }
     };
 
-    private readonly List<Cook> _cooks = new()
-    {
+    private readonly List<Cook> _cooks =
+    [
         TestCook1,
         TestCook2
-    };
+    ];
 
     private readonly Func<Cook, Task<DetailedCookDto>> _convertFunc = c => Task.FromResult(new DetailedCookDto
     {
@@ -142,7 +142,6 @@ public class CooksUnitServiceTests
 
         var result = await _cooksService.GetCooksAsync(spec, _convertFunc);
 
-        // Assert
         Assert.NotNull(result);
         Assert.Empty(result.Data);
     }
