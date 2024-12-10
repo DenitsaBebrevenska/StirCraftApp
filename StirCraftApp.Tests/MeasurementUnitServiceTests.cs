@@ -35,12 +35,12 @@ public class MeasurementUnitServiceTests
                 .GetByIdAsync(It.IsAny<ISpecification<MeasurementUnit>>(), TestId1))
                        .ReturnsAsync(measurementUnit);
 
-        var result = await _service.GetUnitById(null, TestId1);
+        var resultDto = await _service.GetUnitById(null, TestId1);
 
-        Assert.NotNull(result);
-        Assert.Equal(measurementUnit.Id, result.Id);
-        Assert.Equal(measurementUnit.Name, result.Name);
-        Assert.Equal(measurementUnit.Abbreviation, result.Abbreviation);
+        Assert.NotNull(resultDto);
+        Assert.Equal(measurementUnit.Id, resultDto.Id);
+        Assert.Equal(measurementUnit.Name, resultDto.Name);
+        Assert.Equal(measurementUnit.Abbreviation, resultDto.Abbreviation);
     }
 
     [Fact]
@@ -69,13 +69,13 @@ public class MeasurementUnitServiceTests
                 .GetAllAsync(It.IsAny<ISpecification<MeasurementUnit>>()))
                        .ReturnsAsync(measurementUnits);
 
-        var result = await _service.GetUnitsAsync(null);
+        var resultDtos = await _service.GetUnitsAsync(null);
 
-        Assert.NotNull(result);
-        Assert.Equal(2, result.Count);
-        Assert.Equal(measurementUnits[0].Id, result[0].Id);
-        Assert.Equal(measurementUnits[1].Id, result[1].Id);
-        Assert.Collection(result,
+        Assert.NotNull(resultDtos);
+        Assert.Equal(2, resultDtos.Count);
+        Assert.Equal(measurementUnits[0].Id, resultDtos[0].Id);
+        Assert.Equal(measurementUnits[1].Id, resultDtos[1].Id);
+        Assert.Collection(resultDtos,
             item =>
             {
                 Assert.Equal(TestId1, item.Id);
@@ -106,13 +106,13 @@ public class MeasurementUnitServiceTests
                 .GetAllAsync(mockSpecification.Object))
             .ReturnsAsync(measurementUnits);
 
-        var result = await _service.GetUnitsAsync(mockSpecification.Object);
+        var resultDtos = await _service.GetUnitsAsync(mockSpecification.Object);
 
-        Assert.NotNull(result);
-        Assert.Single(result);
-        Assert.Equal(TestId1, result[0].Id);
-        Assert.Equal(TestUnitName1, result[0].Name);
-        Assert.Equal(TestUnitAbbreviation1, result[0].Abbreviation);
+        Assert.NotNull(resultDtos);
+        Assert.Single(resultDtos);
+        Assert.Equal(TestId1, resultDtos[0].Id);
+        Assert.Equal(TestUnitName1, resultDtos[0].Name);
+        Assert.Equal(TestUnitAbbreviation1, resultDtos[0].Abbreviation);
     }
 
     [Fact]
@@ -130,7 +130,7 @@ public class MeasurementUnitServiceTests
             .Setup(x => x.GetByIdAsync(mockSpecification.Object, TestId1))
             .ReturnsAsync(measurementUnit);
 
-        var result = await _service.GetUnitById(mockSpecification.Object, TestId1);
+        await _service.GetUnitById(mockSpecification.Object, TestId1);
 
         _repositoryMock.Verify(
             x => x.GetByIdAsync(mockSpecification.Object, TestId1),
