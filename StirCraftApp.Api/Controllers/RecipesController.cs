@@ -21,6 +21,7 @@ namespace StirCraftApp.Api.Controllers;
 [ApiController]
 public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService, IReplyService replyService, UserManager<AppUser> userManager) : BaseApiController
 {
+    #region Recipe CRUD
     [AllowAnonymous]
     [HttpGet]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
@@ -72,6 +73,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(cookRecipes);
     }
 
+
     [AllowAnonymous]
     [HttpGet("difficultyLevels")]
     [ProducesResponseType(typeof(string[]), StatusCodes.Status200OK)]
@@ -80,6 +82,7 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         var difficultyLevels = Enum.GetNames(typeof(DifficultyLevel));
         return Ok(difficultyLevels);
     }
+
 
     [Authorize(Roles = CookRoleName)]
     [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern)]
@@ -114,6 +117,10 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         await recipeService.DeleteRecipeAsync(id);
         return NoContent();
     }
+
+    #endregion
+
+    #region User Recipe Actions
 
     [Authorize(Roles = UserRoleName)]
     [InvalidateCache(RecipesCachePattern)]
@@ -153,6 +160,10 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(averageRating);
     }
 
+    #endregion
+
+    #region Comments CRUD
+
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/comments")]
@@ -191,6 +202,10 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
             .DeleteCommentAsync(userId!, commentId);
         return NoContent();
     }
+
+    #endregion
+
+    #region Reply CRUD
 
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
@@ -232,4 +247,5 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return NoContent();
     }
 
+    #endregion
 }

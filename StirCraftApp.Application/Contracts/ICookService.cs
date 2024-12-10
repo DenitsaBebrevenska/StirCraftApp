@@ -10,7 +10,5 @@ public interface ICookService
 
     Task UpdateAboutAsync(string userId, CookAboutDto aboutDto);
 
-    Task<bool> CookIsTheRecipeOwner(int cookId, int recipeId);
-
     Task<bool> IsCookAsync(string userId);
 }

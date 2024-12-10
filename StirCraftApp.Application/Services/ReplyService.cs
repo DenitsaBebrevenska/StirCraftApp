@@ -11,7 +11,7 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
 {
     public async Task AddReplyAsync(string userId, int commentId, ReplyFormDto replyFormDto)
     {
-        var commentExists = unit.Repository<Comment>().GetByIdAsync(null, commentId);
+        var commentExists = await unit.Repository<Comment>().GetByIdAsync(null, commentId);
 
         if (commentExists == null)
         {

@@ -9,6 +9,7 @@ using System.Reflection;
 namespace StirCraftApp.Infrastructure.Data;
 public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : IdentityDbContext<AppUser>(options)
 {
+    #region DbSets
     public DbSet<AppUser> AppUsers { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
 
@@ -36,10 +37,11 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
 
     public DbSet<CategoryRecipe> CategoriesRecipes { get; set; } = null!;
 
-
+    #endregion
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //joined tables configurations
+        #region Joined tables config
+
         builder.Entity<CategoryRecipe>()
             .HasKey(cr => new { cr.RecipeId, cr.CategoryId });
 
@@ -67,16 +69,16 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
             .WithMany(r => r.UserFavoriteRecipes)
             .HasForeignKey(ufr => ufr.RecipeId);
 
-        //Adding unique restraint on display name
+        #endregion
         builder.Entity<AppUser>()
             .HasIndex(u => u.DisplayName)
             .IsUnique();
 
+        #region delete behaviour no action for all FK and explicit filter for joined tables
         var allEntityTypes = builder
             .Model
             .GetEntityTypes();
 
-        //Delete behavior no action for all FK
         foreach (var entityType in allEntityTypes)
         {
             foreach (var fk in entityType.GetForeignKeys())
@@ -85,14 +87,16 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
             }
         }
 
-        //Joined tables explicit filters so that I don`t get unexpected results
         builder.Entity<UserFavoriteRecipe>()
             .HasQueryFilter(ufr => !ufr.Recipe.IsDeleted && !ufr.AppUser.IsDeleted);
 
         builder.Entity<CategoryRecipe>()
             .HasQueryFilter(cr => !cr.Category.IsDeleted && !cr.Recipe.IsDeleted);
 
-        //adding soft delete flag
+        #endregion
+
+
+        #region Soft delete filter
         var softDeletables = allEntityTypes
             .Where(et => typeof(ISoftDeletable).IsAssignableFrom(et.ClrType));
 
@@ -107,6 +111,7 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
             ApplyFilteredIndex(builder, entityType.ClrType);
         }
 
+        #endregion
         //applying configurations to seed data
         builder.ApplyConfiguration(new AppUserConfiguration());
         builder.ApplyConfiguration(new RolesConfiguration());
