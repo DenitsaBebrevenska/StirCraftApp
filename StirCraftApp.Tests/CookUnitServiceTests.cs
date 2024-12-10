@@ -218,7 +218,7 @@ public class CookUnitServiceTests
         };
 
         var spec = new CookIncludeAllSpecification();
-        _cookRepositoryMock.Setup(c => c.GetByIdAsync(spec, cook.Id))
+        _cookRepositoryMock.Setup(c => c.GetByIdAsync(It.IsAny<CookIncludeAllSpecification>(), cook.Id))
             .ReturnsAsync(cook);
 
         var result = await _cookService.CookIsTheRecipeOwner(TestCook1Id, _testRecipe1.Id);
@@ -242,8 +242,7 @@ public class CookUnitServiceTests
 
         _testRecipe2.CookId = TestCook2Id;
 
-        var spec = new CookIncludeAllSpecification();
-        _cookRepositoryMock.Setup(c => c.GetByIdAsync(spec, cook.Id))
+        _cookRepositoryMock.Setup(c => c.GetByIdAsync(It.IsAny<CookIncludeAllSpecification>(), cook.Id))
             .ReturnsAsync(cook);
 
         var result = await _cookService.CookIsTheRecipeOwner(cook.Id, _testRecipe2.Id);
@@ -256,8 +255,7 @@ public class CookUnitServiceTests
         var cookId = TestCook1Id;
         var recipeId = TestRecipeId1;
 
-        var spec = new CookIncludeAllSpecification();
-        _cookRepositoryMock.Setup(c => c.GetByIdAsync(spec, cookId))
+        _cookRepositoryMock.Setup(c => c.GetByIdAsync(It.IsAny<CookIncludeAllSpecification>(), cookId))
             .ReturnsAsync((Cook)null);
 
         await Assert.ThrowsAsync<NotFoundException>(
