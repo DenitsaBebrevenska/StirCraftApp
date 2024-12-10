@@ -11,6 +11,7 @@ using static StirCraftApp.Domain.Constants.ExceptionErrorMessages;
 namespace StirCraftApp.Application.Services;
 public class IngredientService(IUnitOfWork unit) : IIngredientService
 {
+    #region Get Ingredients
     public async Task<T> GetIngredientByIdAsync<T>(int id, ISpecification<Ingredient>? spec, Func<Ingredient, T> convertToDto) where T : BaseDto
     {
         var ingredient = await unit.Repository<Ingredient>()
@@ -58,7 +59,9 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
         return dtos;
     }
 
+    #endregion
 
+    #region Suggest and CUD Operations on Ingredients
     public async Task SuggestIngredient(SuggestIngredientDto ingredient)
     {
         await unit.Repository<Ingredient>()
@@ -116,4 +119,5 @@ public class IngredientService(IUnitOfWork unit) : IIngredientService
 
         await unit.CompleteAsync();
     }
+    #endregion
 }

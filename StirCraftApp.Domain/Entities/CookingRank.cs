@@ -8,7 +8,7 @@ namespace StirCraftApp.Domain.Entities
         [MaxLength(RankTitleMaxLength)]
         public required string Title { get; set; }
 
-        public uint RequiredPoints { get; set; }
+        public int RequiredPoints { get; set; }
 
         public virtual ICollection<Cook> CooksWithThatRank { get; set; } = new List<Cook>();
     }

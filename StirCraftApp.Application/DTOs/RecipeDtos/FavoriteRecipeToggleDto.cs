@@ -3,5 +3,5 @@ public class FavoriteRecipeToggleDto : BaseDto
 {
     public bool IsFavorite { get; set; }
 
-    public uint TotalLikes { get; set; }
+    public int TotalLikes { get; set; }
 }

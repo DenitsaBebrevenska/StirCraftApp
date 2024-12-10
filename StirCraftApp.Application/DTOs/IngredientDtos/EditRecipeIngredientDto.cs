@@ -5,7 +5,7 @@ public class EditRecipeIngredientDto : BaseDto
 
     public required string IngredientName { get; set; }
     public int IngredientId { get; set; }
-    public uint? Quantity { get; set; }
+    public int? Quantity { get; set; }
 
     public string? MeasurementAbbreviation { get; set; }
     public int? MeasurementUnitId { get; set; }

@@ -32,7 +32,7 @@ export const routes: Routes = [
         path: 'cook', loadChildren: () => import('./features/cooks/routes')
             .then(r => r.cookRoutes)
     },
-    { path: 'cooks/top/10', component: LeaderboardComponent },
+    { path: 'leaderboard', component: LeaderboardComponent },
     { path: 'cooks', component: CooksComponent },
     { path: 'cooks/:id', component: CookDetailsComponent },
     { path: 'ingredients', component: IngredientsComponent },

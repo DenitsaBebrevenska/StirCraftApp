@@ -19,6 +19,7 @@ namespace StirCraftApp.Application.Services;
 
 public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankService, UserManager<AppUser> userManager) : IRecipeService
 {
+    #region CRUD
     public async Task<T> GetRecipeByIdAsync<T>(ISpecification<Recipe>? spec, int id, Func<Recipe, Task<T>> convertToDto)
         where T : BaseDto
     {
@@ -115,6 +116,9 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
         await cookingRankService.CalculatePoints(recipe.CookId, DeletingARecipe);
     }
 
+    #endregion
+
+    #region User Related Actions
     public async Task<FavoriteRecipeToggleDto> ToggleFavoriteAsync(string userId, int recipeId)
     {
         var spec = new RecipeWithFavoritesApprovedSpecification();
@@ -136,7 +140,7 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
             return new FavoriteRecipeToggleDto()
             {
                 IsFavorite = false,
-                TotalLikes = (uint)recipeFound.UserFavoriteRecipes.Count
+                TotalLikes = recipeFound.UserFavoriteRecipes.Count
             };
         }
 
@@ -156,7 +160,7 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
         return new FavoriteRecipeToggleDto
         {
             IsFavorite = true,
-            TotalLikes = (uint)recipes.First(r => r.Id == recipeId).UserFavoriteRecipes.Count()
+            TotalLikes = recipes.First(r => r.Id == recipeId).UserFavoriteRecipes.Count()
         };
     }
 
@@ -196,6 +200,9 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
             : 0;
     }
 
+    #endregion
+
+    #region Admin Related Actions
     public async Task UpdateAdminNotesAsync(int id, AdminNotesDto adminNotesDto)
     {
         var recipe = await EnsureRecipeExistsAsync(id);
@@ -215,6 +222,10 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
 
         await cookingRankService.CalculatePoints(recipe.CookId, UploadingARecipe);
     }
+
+    #endregion
+
+    #region Helper Methods for recipe update
 
     private async Task<Recipe> EnsureRecipeExistsAsync(int id, ISpecification<Recipe>? spec = null)
     {
@@ -252,5 +263,5 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
             unit.Repository<RecipeImage>().Delete(ri);
         }
     }
-
+    #endregion
 }

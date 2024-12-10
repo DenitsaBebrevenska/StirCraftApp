@@ -8,7 +8,7 @@ public class RecipeIngredient : BaseEntity
 
     public virtual Ingredient Ingredient { get; set; } = null!;
 
-    public uint? Quantity { get; set; }
+    public int? Quantity { get; set; }
 
     [ForeignKey(nameof(MeasurementUnit))]
     public int? MeasurementUnitId { get; set; }
