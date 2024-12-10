@@ -7,11 +7,11 @@ public class DetailedCookDto : BaseDto
     public string? AvatarUrl { get; set; }
     public required string About { get; set; }
 
-    public uint RankingPoints { get; set; }
+    public int RankingPoints { get; set; }
 
-    public uint RecipesCount { get; set; }
+    public int RecipesCount { get; set; }
 
-    public uint RecipeLikes { get; set; }
+    public int RecipeLikes { get; set; }
 
     public required string CookingRank { get; set; }
 }

@@ -6,10 +6,10 @@ public class SummaryCookDto : BaseDto
     public required string DisplayName { get; set; }
 
     public string? AvatarUrl { get; set; }
-    public uint RankingPoints { get; set; }
+    public int RankingPoints { get; set; }
 
     public required string CookingRank { get; set; }
 
-    public uint RecipesCount { get; set; }
+    public int RecipesCount { get; set; }
 
 }

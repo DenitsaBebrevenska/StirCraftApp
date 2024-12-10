@@ -24,7 +24,7 @@ public static class CookMappingExtensions
             Id = cook.Id,
             DisplayName = (await userManager.Users.FirstOrDefaultAsync(u => u.Id == cook.UserId))?.DisplayName ?? "",
             AvatarUrl = (await userManager.Users.FirstAsync(u => u.Id == cook.UserId)).AvatarUrl,
-            RecipesCount = cook.Recipes.Any() ? (uint)cook.Recipes.Count(r => r.IsAdminApproved) : 0,
+            RecipesCount = cook.Recipes.Any() ? cook.Recipes.Count(r => r.IsAdminApproved) : 0,
             CookingRank = cook.CookingRank.Title,
             RankingPoints = cook.RankingPoints,
         };
@@ -38,9 +38,9 @@ public static class CookMappingExtensions
             DisplayName = (await userManager.Users.FirstOrDefaultAsync(u => u.Id == cook.UserId))?.DisplayName ?? "",
             AvatarUrl = (await userManager.Users.FirstAsync(u => u.Id == cook.UserId)).AvatarUrl,
             About = cook.About,
-            RecipesCount = cook.Recipes.Any() ? (uint)cook.Recipes.Count(r => r.IsAdminApproved == true) : 0,
+            RecipesCount = cook.Recipes.Any() ? cook.Recipes.Count(r => r.IsAdminApproved == true) : 0,
             CookingRank = cook.CookingRank.Title,
-            RecipeLikes = cook.Recipes.Any() ? (uint)cook.Recipes.Sum(r => r.UserFavoriteRecipes.Count) : 0,
+            RecipeLikes = cook.Recipes.Any() ? cook.Recipes.Sum(r => r.UserFavoriteRecipes.Count) : 0,
             RankingPoints = cook.RankingPoints,
         };
     }

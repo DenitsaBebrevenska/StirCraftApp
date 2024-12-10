@@ -37,6 +37,12 @@ public class CookingRankService(IUnitOfWork unit) : ICookingRankService
                 throw new ArgumentException("Invalid action");
         }
 
+
+        if (cook.RankingPoints < 0)
+        {
+            cook.RankingPoints = 0;
+        }
+
         await RecalculateRank(cook);
 
     }

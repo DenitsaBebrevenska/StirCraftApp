@@ -7,5 +7,5 @@ public class CookWithRankDto : BaseDto
 
     public required string RankTitle { get; set; }
 
-    public required uint RankPoints { get; set; }
+    public required int RankPoints { get; set; }
 }

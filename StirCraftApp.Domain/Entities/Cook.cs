@@ -16,7 +16,7 @@ public class Cook : BaseEntity
     [MaxLength(CookAboutMaxLength)]
     public required string About { get; set; }
 
-    public uint RankingPoints { get; set; }
+    public int RankingPoints { get; set; }
 
     [ForeignKey(nameof(CookingRank))]
     public int CookingRankId { get; set; }
