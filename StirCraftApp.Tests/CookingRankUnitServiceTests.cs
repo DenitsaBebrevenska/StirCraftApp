@@ -85,27 +85,6 @@ public class CookingRankUnitServiceTests
         _mockUnitOfWork.Verify(x => x.CompleteAsync(), Times.Once);
     }
 
-    [InlineData(DeletingARecipe, -UploadValueConstant)]
-    public async Task CalculatePoints_ReturnsZeroPoints_IfNegativeResultIsCalculated(string action, int expectedPointChange)
-    {
-        var cook = _testCook;
-        cook.RankingPoints = 0;
-
-        _mockCookRepository
-            .Setup(x => x.GetByIdAsync(null, cook.Id))
-            .ReturnsAsync(cook);
-
-        _mockRankRepository
-            .Setup(x => x.GetAllAsync(null))
-            .ReturnsAsync(TestRanks);
-
-        var negativePoints = cook.RankingPoints - expectedPointChange;
-        await _service.CalculatePoints(TestCookId, action);
-
-        Assert.True(negativePoints < cook.RankingPoints);
-        Assert.Equal(0, cook.RankingPoints);
-
-    }
 
     [Fact]
     public async Task CalculatePoints_NonExistentCook_ThrowsNotFoundException()

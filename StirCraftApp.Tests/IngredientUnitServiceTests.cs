@@ -208,11 +208,12 @@ public class IngredientUnitServiceTests
     [Fact]
     public async Task UpdateIngredientAsync_IdMismatch_ThrowsValidationException()
     {
-        //todo check why the ingredient gets whiped out in the service
         var updateDto = new EditFormIngredientDto { Id = TestIngredient1.Id, Name = "New Name" };
 
         _mockIngredientRepository.Setup(r => r.GetByIdAsync(null, TestIngredient1.Id))
             .ReturnsAsync(TestIngredient1);
+        _mockIngredientRepository.Setup(r => r.GetByIdAsync(null, TestIngredient2.Id))
+            .ReturnsAsync(TestIngredient2);
 
         await Assert.ThrowsAsync<ValidationException>(() =>
             _ingredientService.UpdateIngredientAsync(updateDto, TestIngredient2.Id));
