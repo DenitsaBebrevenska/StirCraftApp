@@ -101,7 +101,7 @@
       <h4 class="text-2xl font-semibold text-primary mb-4">Comments:</h4>
       <ul class="space-y-4">
         <li class="bg-gray-50 rounded-lg shadow-md p-8 justify-items-center">
-          @if (user?.role && (user?.role === "User" || user?.role === "Cook")) {
+          @if (user?.role === "User" || user?.role === "Cook") {
           <form
             [formGroup]="commentForm"
             (ngSubmit)="onCommentSubmit()"
@@ -124,6 +124,7 @@
             </div>
             }
             <button
+              color="primary"
               mat-flat-button
               [disabled]="commentForm.invalid"
               type="submit"
@@ -150,9 +151,14 @@
           </p>
           }
           <p class="mt-2">{{ comment.body }}</p>
-          @if(user?.displayName === comment.userDisplayName) {
+
           <div class="flex space-x-2 mt-2">
-            <button mat-raised-button (click)="startCommentEditing(comment)">
+            @if(user?.displayName === comment.userDisplayName) {
+            <button
+              color="primary"
+              mat-raised-button
+              (click)="startCommentEditing(comment)"
+            >
               Edit
             </button>
             <button
@@ -160,16 +166,17 @@
               color="warn"
               (click)="openCommentDeletionDialog(comment.id)"
             >
-              Delete
-            </button>
-            @if (user?.role && (user?.role === "User" || user?.role === "Cook"))
-            {
-            <button mat-raised-button (click)="startReplyToComment(comment.id)">
+              Delete</button
+            >} @if (user?.role === "User" || user?.role === "Cook") {
+            <button
+              color="primary"
+              mat-raised-button
+              (click)="startReplyToComment(comment.id)"
+            >
               Reply
             </button>
             }
           </div>
-          }
           <!-- Replies Section -->
           <ul class="mt-4 space-y-2">
             @for (reply of comment.replies; track reply.id) { @if

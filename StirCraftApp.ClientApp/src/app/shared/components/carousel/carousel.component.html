@@ -1,14 +1,13 @@
 <div class="carousel-container">
-  @for (recipe of carouselRecipes; track recipe.id) {
+  @for (recipe of carouselRecipes; track $index) {
   <div
-    routerLink="/recipes/{{ currentSlide }}"
     class="carousel-slide"
-    [class.active]="recipe.id === currentSlide"
+    [class.active]="currentSlide === carouselRecipes.indexOf(recipe)"
     [style.backgroundImage]="'url(' + recipe.mainImageUrl + ')'"
   >
-    <div class="carousel-caption">
+    <div class="carousel-caption text-3xl italic">
       <h1>{{ recipe.name }}</h1>
-      <p class="">By {{ recipe.cookName }}</p>
+      <p>By {{ recipe.cookName }}</p>
     </div>
   </div>
   }

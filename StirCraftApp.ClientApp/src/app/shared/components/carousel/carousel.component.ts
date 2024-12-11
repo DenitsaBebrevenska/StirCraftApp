@@ -20,6 +20,7 @@ export class CarouselComponent {
   currentSlide = 1;
 
   nextSlide() {
+    console.log(this.carouselRecipes[this.currentSlide - 1])
     if (this.currentSlide === this.carouselRecipes.length) {
       this.currentSlide = 1;
     } else {

@@ -3,11 +3,14 @@ import { ReplyService } from '../../../core/services/reply.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-recipe-delete-reply-dialog',
   standalone: true,
-  imports: [],
+  imports: [
+    MatButton
+  ],
   templateUrl: './recipe-delete-reply-dialog.component.html',
   styleUrl: './recipe-delete-reply-dialog.component.scss'
 })

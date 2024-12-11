@@ -19,6 +19,7 @@ import { RecipeCommentReply } from '../../../shared/models/recipe/recipeCommentR
 import { RecipeDeleteReplyDialogComponent } from '../recipe-delete-reply-dialog/recipe-delete-reply-dialog.component';
 import { UserInfo } from '../../../shared/models/user/userInfo';
 import { AccountService } from '../../../core/services/account.service';
+import { EMPTY, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-details',
@@ -56,6 +57,7 @@ export class RecipeDetailsComponent implements OnInit {
   recipe?: RecipeDetailed;
   editingCommentId?: number;
   user: UserInfo | undefined;
+  isLoading?: boolean;
 
   commentForm = this.formBuilder.group({
     title: ['', Validators.required],
@@ -82,10 +84,26 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadUser();
-    this.loadRecipe();
+    this.isLoading = true;
+    this.accountService.getCurrentUserInfo().pipe(
+      switchMap(user => {
+        this.user = user;
+        const id = this.activatedRoute.snapshot.paramMap.get('id');
+        return id ? this.recipeService.getRecipe(+id) : EMPTY;
+      })
+    ).subscribe({
+      next: recipe => {
+        this.recipe = recipe;
+        this.isLiked = recipe.isLikedByCurrentUser;
+        this.currentRating = recipe.currentUserRating || 0;
+        this.isLoading = false;
+      },
+      error: err => {
+        console.error(err);
+        this.isLoading = false;
+      }
+    });
   }
-
 
   loadUser() {
     this.accountService.getCurrentUserInfo().subscribe({
@@ -164,6 +182,7 @@ export class RecipeDetailsComponent implements OnInit {
       this.commentService.addComment(this.recipe.id, this.commentDto).subscribe({
         next: () => {
           this.snackBar.success('Successfully added comment.');
+          this.commentForm.reset();
           this.loadRecipe();
         },
         error: errors => this.commentValidationErrors = errors

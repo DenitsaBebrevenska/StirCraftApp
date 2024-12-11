@@ -5,11 +5,14 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
 import { CommentService } from '../../../core/services/comment.service';
 import { timeout } from 'rxjs';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-recipe-delete-comment-dialog',
   standalone: true,
-  imports: [],
+  imports: [
+    MatButton
+  ],
   templateUrl: './recipe-delete-comment-dialog.component.html',
   styleUrl: './recipe-delete-comment-dialog.component.scss'
 })

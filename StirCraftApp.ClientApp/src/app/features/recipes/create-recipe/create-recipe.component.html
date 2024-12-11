@@ -33,15 +33,15 @@
               (click)="removeIngredientLine($index)"
               class="ml-2"
             >
-              <mat-icon>remove</mat-icon>
+              <mat-icon class="text-3xl">remove</mat-icon>
             </a>
           </div>
         </div>
         }
       </div>
     </div>
-    <a mat-mini-fab color="primary" (click)="addIngredientLine()">
-      <mat-icon>add</mat-icon>
+    <a mat-mini-fab (click)="addIngredientLine()">
+      <mat-icon class="text-3xl">add</mat-icon>
     </a>
     <app-text-area
       label="Preparation Steps"
