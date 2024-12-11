@@ -11,7 +11,7 @@ The project is developed during the ASP.NET Advanced course in Soft Uni and afte
 2. [Features](#features)
 3. [Tech Stack](#tech-stack)
 4. [Getting Started](#getting-started)
-5. [Folder Structure](#folder-structure)
+5. [Folder Structure /Project Structure](#folder-structure)
 6. [Database Design](#database-design)
 7. [Gamification System](#gamification-system)
 8. [Security Features](#security-features)
@@ -146,6 +146,19 @@ StirCraftApp/
 └── README.md
 ```
 
+The attempted structure of the project follows principles of Clean Architecture.
+However the assignment calls for the usage of ASP.Net Identity and there for in the domain layer
+a dependency on Microsoft.Extensions.Identity.Stores is introduced. While the project initially
+kept its domain "pure", the trade off for keeping it that way were not worth it.
+
+-- Domain Layer - Contains entities, contracts, constants, enums, specifications
+-- Infrastructure Layer - Contains Seed data as json files and a json seed helper, context configurations, specification evaluator, actual implementation of
+Unit of work and Repositoty, entity configurations
+-- Application Layer - Contains service contracts, actual service implementations, paginated result class,
+DTOs, custom exceptions, mapping extensions (personal preference not to use AutoMapper)
+-- Api Layer - Contains controllers, custom attributes, service collection extensions
+-- Client App - Angular project with its belonging structure
+
 ---
 
 ## Database Design
@@ -172,6 +185,7 @@ Soft deletion is implemented for entities using an `ISoftDeletable` interface.
 Initial data is seeded using JSON files located in `StirCraftApp.Infrastructure/Data/SeedData/SeedJsons`.
 
 ### Database Diagram
+
 ![Database diagram](https://github.com/user-attachments/assets/0bb6195c-1920-4750-b4ff-87b0003ee73f)
 
 ---
@@ -210,8 +224,7 @@ Ranks:
 ## Testing
 
 - Unit tests cover at currently 83% of the application services.
-![testCoverage](https://github.com/user-attachments/assets/e0de60b9-579f-42d1-ad98-47a74eab158e)
-
+  ![testCoverage](https://github.com/user-attachments/assets/e0de60b9-579f-42d1-ad98-47a74eab158e)
 
 To run tests:
 
