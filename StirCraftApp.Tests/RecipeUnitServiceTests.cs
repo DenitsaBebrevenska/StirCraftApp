@@ -48,7 +48,15 @@ public class RecipeUnitServiceTests
             DifficultyLevel = DifficultyLevel.Easy,
             CreatedOn = DateTime.UtcNow,
             UpdatedOn = DateTime.UtcNow,
-            RecipeRatings = new List<RecipeRating>(),
+            RecipeRatings = new List<RecipeRating>()
+            {
+                new RecipeRating()
+                {
+                    Value =5,
+                    UserId = "user111122323",
+                    RecipeId = 1
+                }
+            },
             RecipeIngredients = new List<RecipeIngredient>()
             {
                 new RecipeIngredient()
@@ -90,6 +98,14 @@ public class RecipeUnitServiceTests
                         Name = "Unit2",
                         Abbreviation = "U2"
                     }
+                }
+            },
+            UserFavoriteRecipes = new List<UserFavoriteRecipe>()
+            {
+                new UserFavoriteRecipe()
+                {
+                    UserId = "user1010",
+                    RecipeId = 1
                 }
             }
 
@@ -388,7 +404,7 @@ public class RecipeUnitServiceTests
         [Fact]
         public async Task ToggleFavoriteAsync_AddFavorite_ReturnsCorrectDto()
         {
-            var userId = "user1";
+            var userId = "user1111";
             _mockRecipeRepository.Setup(r => r.GetAllAsync(It.IsAny<ISpecification<Recipe>>()))
                 .ReturnsAsync(new List<Recipe> { TestRecipe1 });
 
@@ -398,8 +414,15 @@ public class RecipeUnitServiceTests
 
             var result = await _recipeService.ToggleFavoriteAsync(userId, TestRecipe1.Id);
 
+            var expectedDto = new FavoriteRecipeToggleDto
+            {
+                IsFavorite = true,
+                TotalLikes = 2
+            };
+
             Assert.True(result.IsFavorite);
-            Assert.Equal(1, result.TotalLikes);
+            Assert.Equal(expectedDto.IsFavorite, result.IsFavorite);
+            Assert.Equal(expectedDto.TotalLikes, result.TotalLikes);
             _mockCookingRankService.Verify(s => s.CalculatePoints(TestRecipe1.CookId, It.IsAny<string>()), Times.Once);
         }
 
@@ -407,9 +430,7 @@ public class RecipeUnitServiceTests
         [Fact]
         public async Task ToggleFavoriteAsync_RemoveFavorite_ReturnsCorrectDto()
         {
-            var userId = "user1";
-            var recipeId = 1;
-            var existingFavorite = new UserFavoriteRecipe { UserId = userId, RecipeId = TestRecipe1.Id };
+            var userId = "user1010";
 
             _mockRecipeRepository.Setup(r => r.GetAllAsync(It.IsAny<ISpecification<Recipe>>()))
                 .ReturnsAsync(new List<Recipe> { TestRecipe1 });
@@ -418,10 +439,18 @@ public class RecipeUnitServiceTests
             _mockCookingRankService.Setup(s => s.CalculatePoints(TestRecipe1.CookId, It.IsAny<string>()))
                 .Returns(Task.CompletedTask);
 
-            var result = await _recipeService.ToggleFavoriteAsync(userId, recipeId);
+            var expectedDto = new FavoriteRecipeToggleDto
+            {
+                IsFavorite = false,
+                TotalLikes = 0
+            };
+
+
+            var result = await _recipeService.ToggleFavoriteAsync(userId, TestRecipe1.Id);
 
             Assert.False(result.IsFavorite);
-            Assert.Equal(0, result.TotalLikes);
+            Assert.Equal(expectedDto.TotalLikes, result.TotalLikes);
+            Assert.Equal(expectedDto.IsFavorite, result.IsFavorite);
             _mockCookingRankService.Verify(s => s.CalculatePoints(TestRecipe1.CookId, It.IsAny<string>()), Times.Once);
         }
         #endregion
@@ -437,13 +466,15 @@ public class RecipeUnitServiceTests
                 .ReturnsAsync(TestRecipe1);
 
             _mockRecipeRatingRepository.Setup(r => r.AddAsync(It.IsAny<RecipeRating>()))
+                .Callback<RecipeRating>(rr => TestRecipe1.RecipeRatings.Add(rr))
                 .Returns(Task.CompletedTask);
 
             _mockUnitOfWork.Setup(u => u.CompleteAsync()).ReturnsAsync(true);
 
             var result = await _recipeService.RateRecipeAsync(userId, TestRecipe1.Id, rating);
 
-            Assert.Equal(rating, result);
+            var expectedResult = 4.5;
+            Assert.Equal(expectedResult, result);
             _mockRecipeRatingRepository.Verify(r => r.AddAsync(It.IsAny<RecipeRating>()), Times.Once);
             _mockUnitOfWork.Verify(u => u.CompleteAsync(), Times.Once);
         }
