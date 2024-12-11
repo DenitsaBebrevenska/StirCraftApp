@@ -79,7 +79,7 @@ Admins manage content quality by reviewing and approving new recipes and ingredi
 
 ### Frontend:
 
-- **Framework:** Angular
+- **Framework:** Angular 18
 - **Styling:** Angular Material with Tailwind
 
 ### Tools:
@@ -172,6 +172,7 @@ Soft deletion is implemented for entities using an `ISoftDeletable` interface.
 Initial data is seeded using JSON files located in `StirCraftApp.Infrastructure/Data/SeedData/SeedJsons`.
 
 ### Database Diagram
+![Database diagram](https://github.com/user-attachments/assets/0bb6195c-1920-4750-b4ff-87b0003ee73f)
 
 ---
 
