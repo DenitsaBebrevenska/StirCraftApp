@@ -24,6 +24,23 @@ public class CommentUnitServiceTests
     private const string TestCommentEditedBody = "Edited Body";
     private const int NonExistentCommentId = 999;
 
+    private static readonly Comment ExistingComment = new Comment
+    {
+        Id = TestCommentId,
+        UserId = TestUserId,
+        Title = TestCommentTitle,
+        Body = TestCommentBody
+    };
+    private readonly Recipe _existingRecipe = new Recipe
+    {
+        Id = 1,
+        Name = "Test Recipe",
+        PreparationSteps = "Test Steps",
+        Comments =
+        {
+            ExistingComment
+        }
+    };
     public CommentUnitServiceTests()
     {
         _mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -102,29 +119,24 @@ public class CommentUnitServiceTests
             Body = TestCommentEditedBody
         };
 
-
-        var existingComment = new Comment
-        {
-            Id = TestCommentId,
-            UserId = TestUserId,
-            Title = TestCommentTitle,
-            Body = TestCommentBody
-        };
+        _mockRecipeRepository
+            .Setup(x => x.GetByIdAsync(It.IsAny<ISpecification<Recipe>>(), _existingRecipe.Id))
+            .ReturnsAsync(_existingRecipe);
 
         _mockCommentRepository
-            .Setup(x => x.GetByIdAsync(null, TestCommentId))
-            .ReturnsAsync(existingComment);
+            .Setup(x => x.GetByIdAsync(null, ExistingComment.Id))
+            .ReturnsAsync(ExistingComment);
         _mockUnitOfWork.Setup(u => u.CompleteAsync())
             .ReturnsAsync(true);
 
         await _service.EditCommentAsync(TestRecipeId, TestCommentId, editFormDto, TestUserId);
 
 
-        Assert.Equal(TestCommentEditedTitle, existingComment.Title);
-        Assert.Equal(TestCommentEditedBody, existingComment.Body);
-        Assert.NotEqual(DateTime.MinValue, existingComment.UpdatedOn);
+        Assert.Equal(TestCommentEditedTitle, ExistingComment.Title);
+        Assert.Equal(TestCommentEditedBody, ExistingComment.Body);
+        Assert.NotEqual(DateTime.MinValue, ExistingComment.UpdatedOn);
 
-        _mockCommentRepository.Verify(x => x.Update(existingComment), Times.Once);
+        _mockCommentRepository.Verify(x => x.Update(ExistingComment), Times.Once);
         _mockUnitOfWork.Verify(x => x.CompleteAsync(), Times.Once);
     }
 
@@ -138,6 +150,13 @@ public class CommentUnitServiceTests
             Body = TestCommentEditedBody
         };
 
+        _mockRecipeRepository
+            .Setup(x => x.GetByIdAsync(It.IsAny<ISpecification<Recipe>>(), _existingRecipe.Id))
+            .ReturnsAsync(_existingRecipe);
+
+        _mockCommentRepository
+            .Setup(x => x.GetByIdAsync(null, ExistingComment.Id))
+            .ReturnsAsync(ExistingComment);
 
         await Assert.ThrowsAsync<ValidationException>(() =>
             _service.EditCommentAsync(TestRecipeId, TestCommentId, editFormDto, TestUserId));
@@ -172,17 +191,16 @@ public class CommentUnitServiceTests
             Body = TestCommentEditedBody
         };
 
-        var existingComment = new Comment
-        {
-            Id = TestCommentId,
-            UserId = TestUserId,
-            Title = TestCommentTitle,
-            Body = TestCommentBody
-        };
+
+
+        _mockRecipeRepository
+            .Setup(x => x.GetByIdAsync(It.IsAny<ISpecification<Recipe>>(), _existingRecipe.Id))
+            .ReturnsAsync(_existingRecipe);
+
 
         _mockCommentRepository
             .Setup(x => x.GetByIdAsync(null, TestCommentId))
-            .ReturnsAsync(existingComment);
+            .ReturnsAsync(ExistingComment);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
             _service.EditCommentAsync(TestRecipeId, TestCommentId, editFormDto, TestUserNotOwnerId));
@@ -194,23 +212,19 @@ public class CommentUnitServiceTests
     public async Task DeleteCommentAsync_ValidInput_DeletesCommentSuccessfully()
     {
 
-        var existingComment = new Comment
-        {
-            Id = TestCommentId,
-            UserId = TestUserId,
-            Title = TestCommentTitle,
-            Body = TestCommentBody
-        };
+        _mockRecipeRepository
+            .Setup(x => x.GetByIdAsync(It.IsAny<ISpecification<Recipe>>(), _existingRecipe.Id))
+            .ReturnsAsync(_existingRecipe);
 
         _mockCommentRepository
             .Setup(x => x.GetByIdAsync(null, TestCommentId))
-            .ReturnsAsync(existingComment);
+            .ReturnsAsync(ExistingComment);
         _mockUnitOfWork.Setup(u => u.CompleteAsync())
             .ReturnsAsync(true);
 
         await _service.DeleteCommentAsync(TestRecipeId, TestCommentId, TestUserId);
 
-        _mockCommentRepository.Verify(x => x.Delete(existingComment), Times.Once);
+        _mockCommentRepository.Verify(x => x.Delete(ExistingComment), Times.Once);
         _mockUnitOfWork.Verify(x => x.CompleteAsync(), Times.Once);
     }
 
@@ -228,20 +242,16 @@ public class CommentUnitServiceTests
     [Fact]
     public async Task DeleteCommentAsync_DifferentUser_ThrowsUnauthorizedAccessException()
     {
-        var existingComment = new Comment
-        {
-            Id = TestCommentId,
-            UserId = TestUserId,
-            Title = TestCommentTitle,
-            Body = TestCommentBody
-        };
 
+        _mockRecipeRepository
+            .Setup(x => x.GetByIdAsync(It.IsAny<ISpecification<Recipe>>(), _existingRecipe.Id))
+            .ReturnsAsync(_existingRecipe);
         _mockCommentRepository
-            .Setup(x => x.GetByIdAsync(null, TestCommentId))
-            .ReturnsAsync(existingComment);
+            .Setup(x => x.GetByIdAsync(It.IsAny<ISpecification<Comment>>(), TestCommentId))
+            .ReturnsAsync(ExistingComment);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
-            _service.DeleteCommentAsync(TestRecipeId, TestCommentId, TestUserId));
+            _service.DeleteCommentAsync(TestRecipeId, TestCommentId, TestUserNotOwnerId));
     }
     #endregion
 }

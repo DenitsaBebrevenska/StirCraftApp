@@ -240,7 +240,6 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
         if (ratingFound != null)
         {
             ratingFound.Value = rating;
-            await unit.CompleteAsync();
         }
         else
         {
@@ -250,9 +249,9 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
                 RecipeId = recipeId,
                 Value = rating
             });
-
-            await unit.CompleteAsync();
         }
+
+        await unit.CompleteAsync();
 
         return recipe.RecipeRatings.Any(rr => rr.RecipeId == recipeId)
             ? recipe.RecipeRatings.Where(rr => rr.RecipeId == recipeId)

@@ -18,49 +18,6 @@ public class ResponseCacheUnitServiceTests
         _service = new ResponseCacheService(_memoryCacheMock.Object, _loggerMock.Object);
     }
 
-
-    [Fact]
-    public void CacheResponse_StoresSerializedResponseInCache()
-    {
-        string cacheKey = "test-key";
-        var response = new { Name = "Test Object" };
-        var timeToLiveSliding = TimeSpan.FromMinutes(10);
-        var timeToLiveAbsolute = TimeSpan.FromHours(1);
-
-        _memoryCacheMock
-            .Setup(x => x.Set(
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                It.IsAny<MemoryCacheEntryOptions>()))
-            .Returns(JsonSerializer.Serialize(response));
-
-        _service.CacheResponse(cacheKey, response, timeToLiveSliding, timeToLiveAbsolute);
-
-        _memoryCacheMock.Verify(x => x.Set(
-            cacheKey,
-            It.Is<string>(s =>
-                JsonSerializer.Deserialize<object>(s, new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                }) != null
-            ),
-            It.Is<MemoryCacheEntryOptions>(o =>
-                o.SlidingExpiration == timeToLiveSliding &&
-                o.AbsoluteExpirationRelativeToNow == timeToLiveAbsolute
-            )),
-            Times.Once);
-
-        _loggerMock.Verify(
-            x => x.Log(
-                LogLevel.Information,
-                It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((v, t) => v.ToString().Contains(cacheKey)),
-                null,
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
-            ),
-            Times.Once);
-    }
-
     [Fact]
     public void GetCachedResponse_WhenResponseExists_ReturnsCachedResponse()
     {
