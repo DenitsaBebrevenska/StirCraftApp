@@ -19,7 +19,7 @@ export class RecipeDeleteReplyDialogComponent {
 
   approveDeletion(commentId: number) {
     this.dialogReference.close(true);
-    this.replyService.deleteReply(this.data.recipeId, commentId, this.data.replyId).subscribe({
+    this.replyService.deleteReply(this.data.recipeId, this.data.commentId, this.data.replyId).subscribe({
       next: () => {
         this.snack.success('Reply deleted successfully');
         window.location.reload();

@@ -194,7 +194,7 @@ export class UpdateRecipeComponent implements OnInit {
     this.recipesService.updateRecipe(this.id, recipeDTO).subscribe({
       next: () => {
         this.snack.success('Successfully updated the recipe.');
-        this.router.navigateByUrl('/recipes');
+        this.router.navigateByUrl('/cook/recipes');
       },
       error: errors => this.validationErrors = errors
     });

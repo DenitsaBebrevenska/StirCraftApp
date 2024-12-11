@@ -32,7 +32,7 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
 
         if (recipe == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Comment), recipeId));
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), recipeId));
         }
 
         var commentExists = await unit.Repository<Comment>().GetByIdAsync(null, commentId);
@@ -67,7 +67,7 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
 
         if (recipe == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Comment), recipeId));
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), recipeId));
         }
 
         var comment = await unit.Repository<Comment>().GetByIdAsync(new CommentIncludeRepliesSpecification(), commentId);
@@ -119,7 +119,7 @@ public class ReplyService(IUnitOfWork unit) : IReplyService
 
         if (recipe == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Comment), recipeId));
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), recipeId));
         }
 
         var comment = await unit.Repository<Comment>().GetByIdAsync(new CommentIncludeRepliesSpecification(), commentId);

@@ -226,9 +226,12 @@ public static class RecipeMappingExtensions
 
     public static void UpdateRecipeImages(this Recipe recipe, IEnumerable<RecipeImageDto> imageDtos)
     {
-        recipe.RecipeImages.Clear();
         foreach (var image in imageDtos)
         {
+            if (recipe.RecipeImages.Any(ri => ri.Url == image.Url))
+            {
+                continue;
+            }
             recipe.RecipeImages.Add(new RecipeImage
             {
                 Url = image.Url

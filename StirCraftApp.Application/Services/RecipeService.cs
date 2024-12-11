@@ -116,7 +116,9 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
             .GetByIdAsync(null, cookId)
             .ContinueWith(t => t.Result!.UserId);
 
-        return await recipe.ToDetailedRecipeDtoAsync(userManager, userId);
+        var recipeFound = await unit.Repository<Recipe>()
+            .GetByIdAsync(new RecipeIncludeAllSpecification(), recipe.Id);
+        return await recipeFound!.ToDetailedRecipeDtoAsync(userManager, userId);
     }
 
     /// <summary>
@@ -338,7 +340,7 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
     private void RemoveUnusedImages(Recipe recipe, IEnumerable<RecipeImageDto> formImages)
     {
         var removedImages = recipe.RecipeImages
-            .Where(ri => formImages.All(riDto => riDto.Id != ri.Id))
+            .Where(ri => formImages.All(riDto => riDto.Url != ri.Url))
             .ToList();
 
         foreach (var ri in removedImages)

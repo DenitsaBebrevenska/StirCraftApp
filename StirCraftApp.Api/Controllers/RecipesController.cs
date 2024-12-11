@@ -163,12 +163,11 @@ public class RecipesController(IRecipeService recipeService,
     /// Restricted to authenticated cooks and invalidates relevant cache entries upon success.
     /// </remarks>
     [Authorize(Roles = CookRoleName)]
-    [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern)]
+    [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern, RecipesCachePattern)]
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> UpdateRecipe(int id, EditFormRecipeDto updateRecipeDto)
     {
-
         await recipeService.UpdateRecipeAsync(id, updateRecipeDto);
         return NoContent();
     }
@@ -183,7 +182,7 @@ public class RecipesController(IRecipeService recipeService,
     /// Restricted to authenticated cooks and invalidates relevant cache entries upon success.
     /// </remarks>
     [Authorize(Roles = CookRoleName)]
-    [InvalidateCache(CookOwnRecipesCachePattern, RecipesCachePattern)]
+    [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern, RecipesCachePattern)]
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteRecipe(int id)
@@ -273,7 +272,7 @@ public class RecipesController(IRecipeService recipeService,
     /// Restricted to authenticated users or cooks and invalidates relevant cache entries.
     /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
-    [InvalidateCache(RecipesCachePattern)]
+    [InvalidateCache(RecipesCachePattern, CookOwnRecipesCachePattern)]
     [HttpPost("{id}/comments")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> PostComment(int id, CommentFormDto commentFormDto)
@@ -293,7 +292,7 @@ public class RecipesController(IRecipeService recipeService,
     /// <param name="commentEditFormDto">Data transfer object containing updated comment details.</param>
     /// <returns>A 204 No Content response upon successful update.</returns>
     [Authorize(Roles = UserAndCookRoleName)]
-    [InvalidateCache(RecipesCachePattern)]
+    [InvalidateCache(RecipesCachePattern, CookOwnRecipesCachePattern)]
     [HttpPut("{id}/comments/{commentId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> EditComment(int id, int commentId, EditFormCommentDto commentEditFormDto)
@@ -315,7 +314,7 @@ public class RecipesController(IRecipeService recipeService,
     /// Invalidates relevant cache entries upon success.
     /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
-    [InvalidateCache(RecipesCachePattern)]
+    [InvalidateCache(RecipesCachePattern, CookOwnRecipesCachePattern)]
     [HttpDelete("{id}/comments/{commentId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteComment(int id, int commentId)
@@ -342,7 +341,7 @@ public class RecipesController(IRecipeService recipeService,
     /// Restricted to authenticated users or cooks and invalidates relevant cache entries.
     /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
-    [InvalidateCache(RecipesCachePattern)]
+    [InvalidateCache(RecipesCachePattern, CookOwnRecipesCachePattern)]
     [HttpPost("{id}/comments/{commentId}/replies")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> PostReply(int id, ReplyFormDto replyFormDto, int commentId)
@@ -363,7 +362,7 @@ public class RecipesController(IRecipeService recipeService,
     /// <param name="replyEditForm">Data transfer object containing updated reply details.</param>
     /// <returns>A 204 No Content response upon successful update.</returns>
     [Authorize(Roles = UserAndCookRoleName)]
-    [InvalidateCache(RecipesCachePattern)]
+    [InvalidateCache(RecipesCachePattern, CookOwnRecipesCachePattern)]
     [HttpPut("{id}/comments/{commentId}/replies/{replyId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> EditReply(int id, int commentId, int replyId, ReplyEditFormDto replyEditForm)
@@ -387,7 +386,7 @@ public class RecipesController(IRecipeService recipeService,
     /// Invalidates relevant cache entries upon success.
     /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
-    [InvalidateCache(RecipesCachePattern)]
+    [InvalidateCache(RecipesCachePattern, CookOwnRecipesCachePattern)]
     [HttpDelete("{id}/comments/{commentId}/replies/{replyId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteReply(int id, int commentId, int replyId)

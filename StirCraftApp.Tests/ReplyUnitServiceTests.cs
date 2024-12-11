@@ -55,7 +55,7 @@ public class ReplyUnitServiceTests
 
         _mockUnitOfWork.Setup(u => u.CompleteAsync()).ReturnsAsync(true);
 
-        await _service.AddReplyAsync(_testComment.UserId, _testComment.Id, replyFormDto);
+        await _service.AddReplyAsync(_testComment.RecipeId, _testComment.Id, replyFormDto, _testComment.UserId);
 
         _replyRepoMock.Verify(r => r.AddAsync(It.IsAny<Reply>()), Times.Once);
         _mockUnitOfWork.Verify(u => u.CompleteAsync(), Times.Once);
@@ -71,7 +71,7 @@ public class ReplyUnitServiceTests
 
         _commentRepoMock.Setup(r => r.GetByIdAsync(null, _testComment.Id)).ReturnsAsync((Comment)null);
 
-        await Assert.ThrowsAsync<NotFoundException>(() => _service.AddReplyAsync(_testComment.UserId, _testComment.Id, replyFormDto));
+        await Assert.ThrowsAsync<NotFoundException>(() => _service.AddReplyAsync(_testComment.RecipeId, _testComment.Id, replyFormDto, _testComment.UserId));
     }
     #endregion
 
@@ -85,7 +85,7 @@ public class ReplyUnitServiceTests
         _replyRepoMock.Setup(r => r.GetByIdAsync(null, _testReply.Id)).ReturnsAsync(_testReply);
         _mockUnitOfWork.Setup(u => u.CompleteAsync()).ReturnsAsync(true);
 
-        await _service.EditReplyAsync(_testReply.UserId, _testReply.Id, editFormDto);
+        await _service.EditReplyAsync(_testComment.RecipeId, _testComment.Id, _testReply.Id, editFormDto, _testReply.UserId);
 
         Assert.Equal("Updated body", _testReply.Body);
         _replyRepoMock.Verify(r => r.Update(_testReply), Times.Once);
@@ -98,8 +98,7 @@ public class ReplyUnitServiceTests
         var editFormDto = new ReplyEditFormDto { Id = _testReply.Id, Body = "Updated body" };
         _replyRepoMock.Setup(r => r.GetByIdAsync(null, _testReply.Id)).ReturnsAsync((Reply)null);
 
-        await Assert.ThrowsAsync<NotFoundException>(() => _service.EditReplyAsync(
-            _testReply.UserId, _testReply.Id, editFormDto));
+        await Assert.ThrowsAsync<NotFoundException>(() => _service.EditReplyAsync(_testComment.RecipeId, _testComment.Id, _testReply.Id, editFormDto, _testReply.UserId));
     }
 
     #endregion
@@ -111,7 +110,7 @@ public class ReplyUnitServiceTests
         _replyRepoMock.Setup(r => r.GetByIdAsync(null, _testReply.Id)).ReturnsAsync(_testReply);
         _mockUnitOfWork.Setup(u => u.CompleteAsync()).ReturnsAsync(true);
 
-        await _service.DeleteReplyAsync(_testReply.UserId, _testReply.Id);
+        await _service.DeleteReplyAsync(_testComment.RecipeId, _testComment.Id, _testReply.Id, _testReply.UserId);
 
         _replyRepoMock.Verify(r => r.Delete(_testReply), Times.Once);
         _mockUnitOfWork.Verify(u => u.CompleteAsync(), Times.Once);
@@ -122,7 +121,7 @@ public class ReplyUnitServiceTests
     {
         _replyRepoMock.Setup(r => r.GetByIdAsync(null, _testReply.Id)).ReturnsAsync((Reply)null);
 
-        await Assert.ThrowsAsync<NotFoundException>(() => _service.DeleteReplyAsync(_testReply.UserId, _testReply.Id));
+        await Assert.ThrowsAsync<NotFoundException>(() => _service.DeleteReplyAsync(_testComment.RecipeId, _testComment.Id, _testReply.Id, _testReply.UserId));
     }
 
     [Fact]
@@ -130,7 +129,7 @@ public class ReplyUnitServiceTests
     {
         _replyRepoMock.Setup(r => r.GetByIdAsync(null, _testReply.Id)).ReturnsAsync(_testReply);
 
-        await Assert.ThrowsAsync<NotResourceOwnerException>(() => _service.DeleteReplyAsync(_testComment.UserId, _testReply.Id));
+        await Assert.ThrowsAsync<NotResourceOwnerException>(() => _service.DeleteReplyAsync(_testComment.RecipeId, _testComment.Id, _testReply.Id, _testReply.UserId));
     }
     #endregion
 }

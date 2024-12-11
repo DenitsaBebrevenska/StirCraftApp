@@ -30,7 +30,7 @@ public class CommentService(IUnitOfWork unit) : ICommentService
 
         if (recipeExists == false)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Comment), recipeId));
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), recipeId));
         }
 
         var comment = commentFormDto.ToComment(userId, recipeId);
@@ -58,7 +58,7 @@ public class CommentService(IUnitOfWork unit) : ICommentService
 
         if (recipe == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Comment), recipeId));
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), recipeId));
         }
 
         if (commentId != commentFormDto.Id)
@@ -102,7 +102,7 @@ public class CommentService(IUnitOfWork unit) : ICommentService
 
         if (recipe == null)
         {
-            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Comment), recipeId));
+            throw new NotFoundException(string.Format(ResourceNotFound, nameof(Recipe), recipeId));
         }
 
         var commentFound = await unit.Repository<Comment>().GetByIdAsync(null, commentId);

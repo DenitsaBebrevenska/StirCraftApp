@@ -24,7 +24,6 @@ public class CommentUnitServiceTests
     private const string TestCommentEditedBody = "Edited Body";
     private const int NonExistentCommentId = 999;
 
-
     public CommentUnitServiceTests()
     {
         _mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -58,7 +57,7 @@ public class CommentUnitServiceTests
         _mockUnitOfWork.Setup(u => u.CompleteAsync())
             .ReturnsAsync(true);
 
-        await _service.AddCommentAsync(TestUserId, TestRecipeId, commentFormDto);
+        await _service.AddCommentAsync(TestRecipeId, commentFormDto, TestUserId);
 
 
         _mockCommentRepository.Verify(
@@ -88,7 +87,7 @@ public class CommentUnitServiceTests
             .ReturnsAsync(false);
 
         await Assert.ThrowsAsync<NotFoundException>(() =>
-            _service.AddCommentAsync(TestUserId, NonExistentCommentId, commentFormDto));
+            _service.AddCommentAsync(TestRecipeId, commentFormDto, TestUserNotOwnerId));
     }
     #endregion
 
@@ -118,7 +117,7 @@ public class CommentUnitServiceTests
         _mockUnitOfWork.Setup(u => u.CompleteAsync())
             .ReturnsAsync(true);
 
-        await _service.EditCommentAsync(TestUserId, TestCommentId, editFormDto);
+        await _service.EditCommentAsync(TestRecipeId, TestCommentId, editFormDto, TestUserId);
 
 
         Assert.Equal(TestCommentEditedTitle, existingComment.Title);
@@ -141,7 +140,7 @@ public class CommentUnitServiceTests
 
 
         await Assert.ThrowsAsync<ValidationException>(() =>
-            _service.EditCommentAsync(TestUserId, TestRecipeId, editFormDto));
+            _service.EditCommentAsync(TestRecipeId, TestCommentId, editFormDto, TestUserId));
     }
 
     [Fact]
@@ -160,7 +159,7 @@ public class CommentUnitServiceTests
             .ReturnsAsync((Comment)null);
 
         await Assert.ThrowsAsync<NotFoundException>(() =>
-            _service.EditCommentAsync(TestUserId, NonExistentCommentId, editFormDto));
+            _service.EditCommentAsync(TestRecipeId, TestCommentId, editFormDto, TestUserId));
     }
 
     [Fact]
@@ -186,7 +185,7 @@ public class CommentUnitServiceTests
             .ReturnsAsync(existingComment);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
-            _service.EditCommentAsync(TestUserNotOwnerId, TestCommentId, editFormDto));
+            _service.EditCommentAsync(TestRecipeId, TestCommentId, editFormDto, TestUserNotOwnerId));
     }
     #endregion
 
@@ -209,7 +208,7 @@ public class CommentUnitServiceTests
         _mockUnitOfWork.Setup(u => u.CompleteAsync())
             .ReturnsAsync(true);
 
-        await _service.DeleteCommentAsync(TestUserId, TestCommentId);
+        await _service.DeleteCommentAsync(TestRecipeId, TestCommentId, TestUserId);
 
         _mockCommentRepository.Verify(x => x.Delete(existingComment), Times.Once);
         _mockUnitOfWork.Verify(x => x.CompleteAsync(), Times.Once);
@@ -223,7 +222,7 @@ public class CommentUnitServiceTests
             .ReturnsAsync((Comment)null);
 
         await Assert.ThrowsAsync<NotFoundException>(() =>
-            _service.DeleteCommentAsync(TestUserId, NonExistentCommentId));
+            _service.DeleteCommentAsync(TestRecipeId, NonExistentCommentId, TestUserId));
     }
 
     [Fact]
@@ -237,14 +236,12 @@ public class CommentUnitServiceTests
             Body = TestCommentBody
         };
 
-        // Setup repository to return existing comment
         _mockCommentRepository
             .Setup(x => x.GetByIdAsync(null, TestCommentId))
             .ReturnsAsync(existingComment);
 
-        // Act & Assert
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
-            _service.DeleteCommentAsync(TestUserNotOwnerId, TestCommentId));
+            _service.DeleteCommentAsync(TestRecipeId, TestCommentId, TestUserId));
     }
     #endregion
 }

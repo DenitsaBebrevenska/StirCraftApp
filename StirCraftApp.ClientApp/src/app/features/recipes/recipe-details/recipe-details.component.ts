@@ -164,7 +164,6 @@ export class RecipeDetailsComponent implements OnInit {
       this.commentService.addComment(this.recipe.id, this.commentDto).subscribe({
         next: () => {
           this.snackBar.success('Successfully added comment.');
-          this.commentForm.reset();
           this.loadRecipe();
         },
         error: errors => this.commentValidationErrors = errors
@@ -267,8 +266,9 @@ export class RecipeDetailsComponent implements OnInit {
     });
   }
 
-  startReplyEditing(reply: RecipeCommentReply) {
+  startReplyEditing(reply: RecipeCommentReply, commentId: number) {
     this.editingReplyId = reply.id;
+    this.replyingToCommentId = commentId;
     this.replyEditForm.patchValue({
       body: reply.body
     });
@@ -303,15 +303,15 @@ export class RecipeDetailsComponent implements OnInit {
 
   openReplyDeletionDialog(replyId: number, commentId: number) {
     {
-      //todo fix this
+
       this.dialogService.open(RecipeDeleteReplyDialogComponent, {
         minWidth: '400px',
         data: {
           title: 'Delete reply',
           message: `Are you sure you want to delete this reply?`,
           recipeId: this.recipe?.id,
-          commentId: commentId,
-          replyId: replyId
+          commentId: +commentId,
+          replyId: +replyId
         }
       });
     }
