@@ -11,12 +11,12 @@
       </button>
 
       <form
-        class="relative flex items-center w-full max-w-md mx-4"
+        class="relative flex w-full max-w-md"
         #searchForm="ngForm"
         (ngSubmit)="onSearchChange()"
       >
         <input
-          type="search"
+          type="text"
           class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg"
           placeholder="Search by name"
           name="cookName"
@@ -30,6 +30,9 @@
           <mat-icon>search</mat-icon>
         </button>
       </form>
+      <button mat-icon-button (click)="clearInputField()">
+        <mat-icon>clear icon</mat-icon>
+      </button>
     </div>
   </div>
 

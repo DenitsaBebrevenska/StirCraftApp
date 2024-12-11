@@ -1,30 +1,38 @@
-@if(recipesCook) { @for (recipe of recipesCook.data; track $index) {
-<mat-card
-  appearance="raised"
-  routerLink="/recipes/{{ recipe.id }}"
-  class="recipe-card flex-col gap-2"
->
-  <mat-card-header class="flex-col gap-1">
-    <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
-    <p class="italic">{{ recipe.difficultyLevel }}</p>
-  </mat-card-header>
-  <div class="image-wrapper">
-    <img
-      [src]="recipe.mainImageUrl || 'default-image.jpg'"
-      alt="Recipe Image"
-    />
-  </div>
-  <mat-card-content>
-    <p class="font-light">Difficulty level: {{ recipe.difficultyLevel }}</p>
-    <p class="font-light">Rating: {{ recipe.rating }}</p>
-    <ul class="font-light">
-      Categories: @for (category of recipe.categories; track $index) {
-      <li>{{ category }}</li>
-      }
-    </ul>
-  </mat-card-content>
-</mat-card>
-} }
+<div class="my-10 mx-20 flex gap-10 justify-center flex-wrap">
+  @if(recipesCook) { @for (recipe of recipesCook.data; track $index) {
+  <mat-card
+    appearance="raised"
+    routerLink="/recipes/{{ recipe.id }}"
+    class="recipe-card flex-col gap-2"
+  >
+    <mat-card-header class="flex-col gap-1">
+      <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
+      <p class="italic">{{ recipe.difficultyLevel }}</p>
+    </mat-card-header>
+    <div class="image-wrapper overflow-hidden w-full h-80">
+      <img
+        class="object-cover w-full h-auto"
+        [src]="recipe.mainImageUrl || 'default-image.jpg'"
+        alt="Recipe Image"
+      />
+    </div>
+    <mat-card-content>
+      <p class="font-bold">
+        Difficulty level:
+        <span class="font-normal italic">{{ recipe.difficultyLevel }}</span>
+      </p>
+      <p class="font-bold">
+        Rating: <span class="font-normal italic">{{ recipe.rating }}</span>
+      </p>
+      <ul class="font-bold">
+        Categories: @for (category of recipe.categories; track $index) {
+        <li class="font-normal italic">{{ category }}</li>
+        }
+      </ul>
+    </mat-card-content>
+  </mat-card>
+  } }
+</div>
 
 <div>
   <mat-paginator

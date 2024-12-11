@@ -22,7 +22,7 @@ namespace StirCraftApp.Api.Controllers;
 /// Routing is configured to use the "api/cooks/" path by BaseApiController configurations.
 /// </remarks>
 [AllowAnonymous]
-public class CooksController(ICooksService cooksService, UserManager<AppUser> userManager) : ControllerBase
+public class CooksController(ICooksService cooksService, UserManager<AppUser> userManager) : BaseApiController
 {
     /// <summary>
     /// Retrieves a paginated list of cooks based on the provided specifications.

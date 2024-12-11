@@ -1,31 +1,38 @@
-@if(recipes) { @for (recipe of recipes.data; track $index) {
-<article class="flex gap-2">
-  <mat-card appearance="raised" class="flex gap-2">
+<div class="my-10 mx-20 flex gap-10 justify-center flex-wrap">
+  @if(recipes) { @for (recipe of recipes.data; track $index) {
+  <mat-card appearance="raised" class="recipe-card flex-col gap-2">
     <mat-card-header class="flex-col gap-1">
       <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
       <h3 class="font-extralight text-2xl">By: {{ recipe.cookName }}</h3>
     </mat-card-header>
-    <div class="image-wrapper w-80 h-auto">
+    <div class="image-wrapper overflow-hidden w-full h-80">
       <img
         [src]="recipe.mainImageUrl || 'default-image.jpg'"
         alt="Recipe Image"
-        class="object-cover"
+        class="object-cover w-full h-auto"
       />
     </div>
     <div>
-      <mat-card-actions class="flex-row justify-around">
-        <a mat-raised-button routerLink="/recipes/{{ recipe.id }}">
+      <mat-card-actions class="flex-row justify-around mb-5">
+        <a
+          class="block text-center bg-green-300 py-2 px-4 rounded hover:bg-green-400"
+          mat-raised-button
+          routerLink="/recipes/{{ recipe.id }}"
+        >
           View Recipe
         </a>
-        <button mat-raised-button (click)="removeFromFavorites(recipe.id)">
-          Remove from favorites
+        <button
+          class="block text-center bg-red-300 py-2 px-4 rounded hover:bg-red-400"
+          mat-raised-button
+          (click)="removeFromFavorites(recipe.id)"
+        >
+          Remove favorite
         </button>
       </mat-card-actions>
     </div>
   </mat-card>
-</article>
-} }
-
+  } }
+</div>
 <div>
   <mat-paginator
     class="page-paginator"

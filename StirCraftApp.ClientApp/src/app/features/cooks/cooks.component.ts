@@ -77,4 +77,8 @@ export class CooksComponent implements OnInit {
     this.initializeCooks();
   }
 
+  clearInputField() {
+    this.cookParams.cookName = '';
+    this.initializeCooks();
+  }
 }

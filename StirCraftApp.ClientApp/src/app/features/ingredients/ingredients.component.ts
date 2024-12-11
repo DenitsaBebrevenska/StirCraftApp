@@ -81,6 +81,10 @@ export class IngredientsComponent implements OnInit {
     params.ingredientId = id;
 
     this.router.navigate(['/recipes'], { queryParams: params });
+  }
 
+  clearInputField() {
+    this.ingredientParams.searchName = '';
+    this.getIngredients();
   }
 }

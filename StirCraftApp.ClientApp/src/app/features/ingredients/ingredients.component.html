@@ -6,7 +6,7 @@
       (ngSubmit)="onSearchChange()"
     >
       <input
-        type="search"
+        type="text"
         class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg"
         placeholder="Search by name"
         name="searchName"
@@ -20,6 +20,9 @@
         <mat-icon>search</mat-icon>
       </button>
     </form>
+    <button class="pl-1" mat-icon-button (click)="clearInputField()">
+      <mat-icon>clear icon</mat-icon>
+    </button>
   </div>
 
   <mat-card class="flex space-x-4 max-w-xs my-10 mx-10">
