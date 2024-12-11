@@ -209,7 +209,9 @@ Ranks:
 
 ## Testing
 
-- Unit tests cover at currently ... of the application services.
+- Unit tests cover at currently 83% of the application services.
+![testCoverage](https://github.com/user-attachments/assets/e0de60b9-579f-42d1-ad98-47a74eab158e)
+
 
 To run tests:
 
