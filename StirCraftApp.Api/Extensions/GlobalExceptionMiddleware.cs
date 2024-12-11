@@ -2,6 +2,11 @@
 
 namespace StirCraftApp.Api.Extensions;
 
+/// <summary>
+/// Middleware to handle exceptions globally.
+/// </summary>
+/// <param name="next"></param>
+/// <param name="logger"></param>
 public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context)

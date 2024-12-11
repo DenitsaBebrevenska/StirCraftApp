@@ -6,12 +6,26 @@ using StirCraftApp.Application.DTOs.UserDtos;
 using StirCraftApp.Domain.Entities;
 using StirCraftApp.Infrastructure.Extensions;
 
-
 namespace StirCraftApp.Api.Controllers;
-[Route("api/[controller]")]
-[ApiController]
+/// <summary>
+/// Provides endpoints for user account management, including registration, login, logout, and profile updates.
+/// </summary>
+/// <remarks>
+/// Inherits from the BaseApiController class, Authorize attribute is applied by default, unless overridden.
+/// Routing is configured to use the "api/account" path.
+/// This controller handles account-related operations for the StirCraft application. 
+/// It supports user registration, authentication state retrieval, logout, avatar updates, and fetching user information.
+/// </remarks>
 public class AccountController(SignInManager<AppUser> signInManager, IAccountService accountService) : BaseApiController
 {
+    /// <summary>
+    /// Registers a new user in the system. Allows anonymous access.
+    /// </summary>
+    /// <param name="userRegisterDto">The data transfer object containing user registration details.</param>
+    /// <returns>
+    /// Returns a 204 No Content status if registration is successful. 
+    /// Returns a 400 Bad Request status with validation errors if the registration fails.
+    /// </returns>
     [AllowAnonymous]
     [HttpPost("register")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -33,7 +47,12 @@ public class AccountController(SignInManager<AppUser> signInManager, IAccountSer
         return NoContent();
     }
 
-
+    /// <summary>
+    /// Logs out the current user by terminating their session.
+    /// </summary>
+    /// <returns>
+    /// Always returns a 204 No Content status on successful logout.
+    /// </returns>
     [HttpPost("logout")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Logout()
@@ -42,7 +61,12 @@ public class AccountController(SignInManager<AppUser> signInManager, IAccountSer
         return NoContent();
     }
 
-
+    /// <summary>
+    /// Retrieves the current user's information. Allows anonymous access.
+    /// </summary>
+    /// <returns>
+    /// Returns a 200 OK status with user details if available, otherwise returns a 204 No Content status.
+    /// </returns>
     [AllowAnonymous]
     [HttpGet("user-info")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -59,6 +83,13 @@ public class AccountController(SignInManager<AppUser> signInManager, IAccountSer
         return Ok(userInfo);
     }
 
+    /// <summary>
+    /// Updates the avatar for the currently authenticated user.
+    /// </summary>
+    /// <param name="avatarDto">The data transfer object containing the avatar update information.</param>
+    /// <returns>
+    /// Always returns a 204 No Content status on successful update.
+    /// </returns>
     [Authorize]
     [HttpPut("avatar")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -71,7 +102,12 @@ public class AccountController(SignInManager<AppUser> signInManager, IAccountSer
         return NoContent();
     }
 
-
+    /// <summary>
+    /// Checks and returns the current user's authentication state. Allows anonymous access.
+    /// </summary>
+    /// <returns>
+    /// Returns a 200 OK status with a boolean indicating whether the user is authenticated.
+    /// </returns>
     [AllowAnonymous]
     [HttpGet("auth")]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]

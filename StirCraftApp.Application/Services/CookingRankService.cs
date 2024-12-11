@@ -7,8 +7,21 @@ using static StirCraftApp.Domain.Constants.RankingConstants;
 
 namespace StirCraftApp.Application.Services;
 
+/// <summary>
+/// Implements the ICookingRankService interface and uses the Unit of Work pattern for data access.
+/// Provides functionality for calculating and updating the ranking points of cooks based on various actions, 
+/// such as liking, unliking, uploading, and deleting recipes. It also handles recalculating the cook's rank 
+/// based on their total ranking points and the required points for different ranks.
+/// </summary>
 public class CookingRankService(IUnitOfWork unit) : ICookingRankService
 {
+
+    /// <summary>
+    /// Calculates the ranking points for a cook based on the specified action.
+    /// Adjusts the cook's ranking points and updates their rank accordingly.
+    /// </summary>
+    /// <param name="cookId">The ID of the cook whose ranking points are to be updated.</param>
+    /// <param name="action">The action that triggers the change in ranking points (e.g., LikingARecipe, UploadingARecipe).</param>
     public async Task CalculatePoints(int cookId, string action)
     {
         var cook = await unit.Repository<Cook>()
@@ -47,6 +60,12 @@ public class CookingRankService(IUnitOfWork unit) : ICookingRankService
 
     }
 
+
+    /// <summary>
+    /// Recalculates the rank of a cook based on their total ranking points.
+    /// Adjusts the cook's rank ID based on the available ranks and required points.
+    /// </summary>
+    /// <param name="cook">The cook whose rank is to be recalculated.</param>
     private async Task RecalculateRank(Cook cook)
     {
         var ranks = await unit.Repository<CookingRank>()

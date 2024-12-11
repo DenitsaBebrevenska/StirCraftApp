@@ -1,4 +1,8 @@
 ﻿namespace StirCraftApp.Domain.Constants;
+
+/// <summary>
+/// Role constants
+/// </summary>
 public static class RoleConstants
 {
     public const string AdminRoleName = "Admin";

@@ -1,4 +1,8 @@
 ﻿namespace StirCraftApp.Domain.Constants;
+
+/// <summary>
+/// Constants for caching values
+/// </summary>
 public static class CachingValues
 {
     public const int ModerateSlidingSeconds = 60;

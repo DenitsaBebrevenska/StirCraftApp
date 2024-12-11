@@ -112,7 +112,8 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
         }
 
         #endregion
-        //applying configurations to seed data
+
+        #region Applying configuration that seed data
         builder.ApplyConfiguration(new AppUserConfiguration());
         builder.ApplyConfiguration(new RolesConfiguration());
         builder.ApplyConfiguration(new UsersRolesConfiguration());
@@ -130,15 +131,28 @@ public class StirCraftDbContext(DbContextOptions<StirCraftDbContext> options) : 
         builder.ApplyConfiguration(new CommentConfiguration());
         builder.ApplyConfiguration(new ReplyConfiguration());
 
+        #endregion
         base.OnModelCreating(builder);
     }
 
+    /// <summary>
+    /// Applies a global query filter to the entity type <typeparamref name="TEntity"/> 
+    /// to exclude soft-deleted entities based on the "IsDeleted" property.
+    /// This ensures that soft-deleted entities are automatically excluded from query results.
+    /// </summary>
+    /// <typeparam name="TEntity">The entity type to which the filter will be applied.</typeparam>
     private static void ApplySoftDeleteFilter<TEntity>(ModelBuilder builder) where TEntity : class
     {
         builder.Entity<TEntity>()
             .HasQueryFilter(e => EF.Property<bool>(e, "IsDeleted") == false);
     }
 
+    /// <summary>
+    /// Applies a filtered index on the "IsDeleted" property of the specified entity type.
+    /// This helps optimize queries that filter on the "IsDeleted" field by making them more efficient.
+    /// </summary>
+    /// <param name="builder">The ModelBuilder used to configure the entity.</param>
+    /// <param name="entityType">The type of the entity to which the index will be applied.</param>
     private static void ApplyFilteredIndex(ModelBuilder builder, Type entityType)
     {
         var entityBuilder = builder.Entity(entityType);

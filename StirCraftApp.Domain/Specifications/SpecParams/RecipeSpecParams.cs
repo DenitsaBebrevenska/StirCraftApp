@@ -1,6 +1,11 @@
 ﻿using StirCraftApp.Domain.Enums;
 
 namespace StirCraftApp.Domain.Specifications.SpecParams;
+
+/// <summary>
+/// A class that contains the parameters for filtering recipes
+/// Inherits from Paging params therefor it has the properties for pagination
+/// </summary>
 public class RecipeSpecParams : PagingParams
 {
     private string? _recipeName;

@@ -1,4 +1,8 @@
 ﻿namespace StirCraftApp.Domain.Constants;
+
+/// <summary>
+/// Cooking rank related constants
+/// </summary>
 public static class RankingConstants
 {
     public const int RecipeLikeRankingPointsValue = 20;

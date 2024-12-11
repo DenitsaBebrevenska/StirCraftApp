@@ -2,6 +2,10 @@
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Mappings;
+
+/// <summary>
+/// Contains extension methods for mapping between <see cref="RecipeImage"/> and <see cref="RecipeImageDto"/>.
+/// </summary>
 public static class RecipeImageMappingExtensions
 {
     public static RecipeImageDto ToRecipeImageDto(this RecipeImage recipeImage)

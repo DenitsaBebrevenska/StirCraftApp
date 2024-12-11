@@ -2,6 +2,10 @@
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Mappings;
+
+/// <summary>
+/// This class contains extension methods for mapping RecipeIngredient entities to RecipeIngredient DTOs
+/// </summary>
 public static class RecipeIngredientMappingExtensions
 {
     public static RecipeIngredientDto ToRecipeIngredientDto(this RecipeIngredient recipeIngredient)

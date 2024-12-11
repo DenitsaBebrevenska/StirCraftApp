@@ -12,11 +12,28 @@ using StirCraftApp.Domain.Specifications.SpecParams;
 using static StirCraftApp.Domain.Constants.CachingValues;
 
 namespace StirCraftApp.Api.Controllers;
-[Route("api/[controller]")]
-[ApiController]
+
+/// <summary>
+/// Provides endpoints for retrieving cook information, including paginated lists of cooks, 
+/// detailed profiles by ID, and top-ranked cooks.
+/// </summary>
+/// <remarks>
+/// This controller is publicly accessible without authentication.
+/// Routing is configured to use the "api/cooks/" path by BaseApiController configurations.
+/// </remarks>
 [AllowAnonymous]
 public class CooksController(ICooksService cooksService, UserManager<AppUser> userManager) : ControllerBase
 {
+    /// <summary>
+    /// Retrieves a paginated list of cooks based on the provided specifications.
+    /// </summary>
+    /// <param name="specParams">Parameters for filtering, sorting, and paginating the list of cooks.</param>
+    /// <returns>
+    /// Returns a 200 OK status with a paginated result of cooks as <see cref="PaginatedResult{SummaryCookDto}"/>.
+    /// </returns>
+    /// <remarks>
+    /// Results are cached for moderate duration to improve performance.
+    /// </remarks>
     [HttpGet]
     [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [ProducesResponseType(typeof(PaginatedResult<SummaryCookDto>), StatusCodes.Status200OK)]
@@ -29,6 +46,16 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
         return Ok(cooks);
     }
 
+    /// <summary>
+    /// Retrieves detailed information about a specific cook by their ID.
+    /// </summary>
+    /// <param name="id">The ID of the cook to retrieve.</param>
+    /// <returns>
+    /// Returns a 200 OK status with the cook's detailed information as a <see cref="DetailedCookDto"/>.
+    /// </returns>
+    /// <remarks>
+    /// Results are cached for moderate duration to improve performance.
+    /// </remarks>
     [HttpGet("{id}")]
     [Cache(ModerateSlidingSeconds, ModerateAbsoluteSeconds)]
     [ProducesResponseType(typeof(DetailedCookDto), StatusCodes.Status200OK)]
@@ -40,6 +67,16 @@ public class CooksController(ICooksService cooksService, UserManager<AppUser> us
         return Ok(cook);
     }
 
+    /// <summary>
+    /// Retrieves the top cooks with the highest ranks, limited by the specified count.
+    /// </summary>
+    /// <param name="count">The number of top-ranked cooks to retrieve.</param>
+    /// <returns>
+    /// Returns a 200 OK status with a result of top-ranked cooks as <see cref="PaginatedResult{CookWithRankDto}"/>.
+    /// </returns>
+    /// <remarks>
+    /// Results are cached for a short duration to improve performance.
+    /// </remarks>
     [HttpGet("top/{count}")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     [ProducesResponseType(typeof(PaginatedResult<CookWithRankDto>), StatusCodes.Status200OK)]

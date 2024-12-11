@@ -5,6 +5,10 @@ using StirCraftApp.Application.DTOs.ReplyDtos;
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Mappings;
+
+/// <summary>
+/// Contains extension methods for mapping between Comment related entities and DTOs.
+/// </summary>
 public static class CommentMappingExtensions
 {
     public static Comment ToComment(this CommentFormDto commentFormDto, string userId, int recipeId)

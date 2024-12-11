@@ -3,6 +3,8 @@ using StirCraftApp.Application.DTOs.UserDtos;
 using System.Security.Claims;
 
 namespace StirCraftApp.Application.Contracts;
+
+
 public interface IAccountService
 {
     Task<List<IdentityError>> RegisterUserAsync(UserRegisterDto userRegisterDto);

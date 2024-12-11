@@ -4,6 +4,10 @@ using StirCraftApp.Application.DTOs.CookDtos;
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Mappings;
+
+/// <summary>
+/// Contains extension methods for mapping between Cook related entities and DTOs.
+/// </summary>
 public static class CookMappingExtensions
 {
     public static async Task<CookWithRankDto> ToCookWithRankDtoAsync(this Cook cook, UserManager<AppUser> userManager)

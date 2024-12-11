@@ -4,6 +4,10 @@ using StirCraftApp.Application.DTOs.ReplyDtos;
 using StirCraftApp.Domain.Entities;
 
 namespace StirCraftApp.Application.Mappings;
+
+/// <summary>
+/// Contains extension methods for mapping between <see cref="Reply"/> and <see cref="ReplyFormDto"/>.
+/// </summary>
 public static class ReplyMappingExtensions
 {
     public static Reply ToReply(this ReplyFormDto replyFormDto, string userId, int commentId)

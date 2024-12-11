@@ -1,8 +1,10 @@
 ﻿namespace StirCraftApp.Domain.Constants;
+
+/// <summary>
+/// Constants for entity constraints
+/// </summary>
 public static class EntityConstraints
 {
-    //not sure if those will stay in domain...
-
     //Category
     public const int CategoryMinLength = 3;
     public const int CategoryMaxLength = 100;

@@ -17,11 +17,34 @@ using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
 
 namespace StirCraftApp.Api.Controllers;
-[Route("api/[controller]")]
-[ApiController]
-public class RecipesController(IRecipeService recipeService, ICookService cookService, ICommentService commentService, IReplyService replyService, UserManager<AppUser> userManager) : BaseApiController
+
+/// <summary>
+/// Manages CRUD operations for recipes, user actions such as rating and liking, and nested resources like comments and replies.
+/// </summary>
+/// <remarks>
+/// This controller offers a wide range of endpoints for both anonymous and authorized users.
+/// Key features include recipe CRUD, user interactions (favorites and ratings), and comment/reply management.
+/// Includes caching and cache invalidation for optimized performance.
+/// Routing is configured to use the "api/recipes/" path and default behavior is set to authorize all actions by BaseApiController configurations 
+/// unless overriden.
+/// </remarks>
+public class RecipesController(IRecipeService recipeService,
+    ICookService cookService,
+    ICommentService commentService,
+    IReplyService replyService,
+    UserManager<AppUser> userManager)
+    : BaseApiController
 {
     #region Recipe CRUD
+
+    /// <summary>
+    /// Retrieves a paginated list of recipes with optional filters and sorting.
+    /// </summary>
+    /// <param name="specParams">Query parameters for filtering, sorting, and pagination.</param>
+    /// <returns>A 200 OK response with a paginated list of recipes as <see cref="PaginatedResult{SummaryRecipeDto}"/>.</returns>
+    /// <remarks>
+    /// Accessible anonymously and uses caching for improved performance.
+    /// </remarks>
     [AllowAnonymous]
     [HttpGet]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
@@ -35,6 +58,14 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipes);
     }
 
+    /// <summary>
+    /// Retrieves the top N recipes based on likes.
+    /// </summary>
+    /// <param name="count">The number of top recipes to retrieve.</param>
+    /// <returns>A 200 OK response with a list of recipes as <see cref="IEnumerable{BriefRecipeDto}"/>.</returns>
+    /// <remarks>
+    /// Accessible anonymously and uses caching for performance optimization.
+    /// </remarks>
     [AllowAnonymous]
     [HttpGet("top/{count}")]
     [ProducesResponseType(typeof(IEnumerable<BriefRecipeDto>), StatusCodes.Status200OK)]
@@ -47,6 +78,11 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipes);
     }
 
+    /// <summary>
+    /// Retrieves detailed information about a specific recipe by ID.
+    /// </summary>
+    /// <param name="id">The unique identifier of the recipe.</param>
+    /// <returns>A 200 OK response with the recipe details as <see cref="DetailedRecipeDto"/>.</returns>
     [AllowAnonymous]
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(DetailedRecipeDto), StatusCodes.Status200OK)]
@@ -60,6 +96,12 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipe);
     }
 
+    /// <summary>
+    /// Retrieves recipes created by a specific cook, with pagination support.
+    /// </summary>
+    /// <param name="id">The unique identifier of the cook.</param>
+    /// <param name="pagingParams">Pagination parameters.</param>
+    /// <returns>A 200 OK response with a paginated list of recipes as <see cref="PaginatedResult{CookRecipeSummaryDto}"/>.</returns>
     [AllowAnonymous]
     [HttpGet("cook/{id}")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
@@ -73,7 +115,13 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(cookRecipes);
     }
 
-
+    /// <summary>
+    /// Retrieves the list of possible difficulty levels for recipes.
+    /// </summary>
+    /// <returns>A 200 OK response with an array of difficulty level names.</returns>
+    /// <remarks>
+    /// Useful for front-end dropdowns or validation.
+    /// </remarks>
     [AllowAnonymous]
     [HttpGet("difficultyLevels")]
     [ProducesResponseType(typeof(string[]), StatusCodes.Status200OK)]
@@ -84,6 +132,14 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
     }
 
 
+    /// <summary>
+    /// Allows a cook to create a new recipe.
+    /// </summary>
+    /// <param name="createRecipeDto">Data transfer object containing recipe details.</param>
+    /// <returns>A 201 Created response with the newly created recipe's details.</returns>
+    /// <remarks>
+    /// Restricted to authenticated cooks and invalidates relevant cache entries upon success.
+    /// </remarks>
     [Authorize(Roles = CookRoleName)]
     [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern)]
     [HttpPost]
@@ -97,6 +153,15 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return CreatedAtAction(nameof(GetRecipe), new { id = createdRecipe.Id }, createdRecipe);
     }
 
+    /// <summary>
+    /// Updates an existing recipe.
+    /// </summary>
+    /// <param name="id">The ID of the recipe to update.</param>
+    /// <param name="updateRecipeDto">Data transfer object containing updated recipe details.</param>
+    /// <returns>A 204 No Content response if the update succeeds.</returns>
+    /// <remarks>
+    /// Restricted to authenticated cooks and invalidates relevant cache entries upon success.
+    /// </remarks>
     [Authorize(Roles = CookRoleName)]
     [InvalidateCache(CookOwnRecipesCachePattern, RecipeAdminCachePattern)]
     [HttpPut("{id}")]
@@ -108,6 +173,15 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return NoContent();
     }
 
+
+    /// <summary>
+    /// Deletes a recipe by ID.
+    /// </summary>
+    /// <param name="id">The unique identifier of the recipe to delete.</param>
+    /// <returns>A 204 No Content response if the deletion succeeds.</returns>
+    /// <remarks>
+    /// Restricted to authenticated cooks and invalidates relevant cache entries upon success.
+    /// </remarks>
     [Authorize(Roles = CookRoleName)]
     [InvalidateCache(CookOwnRecipesCachePattern, RecipesCachePattern)]
     [HttpDelete("{id}")]
@@ -122,6 +196,14 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
     #region User Recipe Actions
 
+    /// <summary>
+    /// Toggles the favorite status of a recipe for the current user.
+    /// </summary>
+    /// <param name="id">The ID of the recipe to toggle.</param>
+    /// <returns>A 200 OK response with the updated favorite status.</returns>
+    /// <remarks>
+    /// Restricted to authenticated users and invalidates relevant cache entries.
+    /// </remarks>
     [Authorize(Roles = UserRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/toggle-favorite")]
@@ -133,6 +215,14 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(dto);
     }
 
+    /// <summary>
+    /// Retrieves a paginated list of the user's favorite recipes.
+    /// </summary>
+    /// <param name="pagingParams">Pagination parameters.</param>
+    /// <returns>A 200 OK response with the user's favorite recipes as <see cref="PaginatedResult{BriefRecipeDto}"/>.</returns>
+    /// <remarks>
+    /// Restricted to authenticated users and uses caching for performance.
+    /// </remarks>
     [Authorize(Roles = UserRoleName)]
     [HttpGet("user-favorites")]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
@@ -148,6 +238,15 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         return Ok(recipes);
     }
 
+    /// <summary>
+    /// Rates a recipe and returns the updated average rating.
+    /// </summary>
+    /// <param name="id">The ID of the recipe to rate.</param>
+    /// <param name="value">The rating value (e.g., 1 to 5).</param>
+    /// <returns>A 200 OK response with the updated average rating.</returns>
+    /// <remarks>
+    /// Restricted to authenticated users and invalidates relevant cache entries.
+    /// </remarks>
     [Authorize(Roles = UserRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/rate/{value}")]
@@ -164,6 +263,15 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
     #region Comments CRUD
 
+    /// <summary>
+    /// Posts a comment on a recipe.
+    /// </summary>
+    /// <param name="id">The ID of the recipe to comment on.</param>
+    /// <param name="commentFormDto">Data transfer object containing the comment's content.</param>
+    /// <returns>A 204 No Content response upon successful creation.</returns>
+    /// <remarks>
+    /// Restricted to authenticated users or cooks and invalidates relevant cache entries.
+    /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/comments")]
@@ -173,33 +281,49 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
         var userId = User.GetId();
 
         await commentService
-             .AddCommentAsync(userId!, id, commentFormDto);
+             .AddCommentAsync(id, commentFormDto, userId!);
         return NoContent();
     }
 
+    /// <summary>
+    /// Edits a comment by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the recipe associated with this comment.</param>
+    /// <param name="commentId">The ID of the comment to edit.</param>
+    /// <param name="commentEditFormDto">Data transfer object containing updated comment details.</param>
+    /// <returns>A 204 No Content response upon successful update.</returns>
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpPut("{id}/comments/{commentId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> EditComment(int commentId, EditFormCommentDto commentEditFormDto)
+    public async Task<IActionResult> EditComment(int id, int commentId, EditFormCommentDto commentEditFormDto)
     {
         var userId = User.GetId();
 
         await commentService
-            .EditCommentAsync(userId!, commentId, commentEditFormDto);
+            .EditCommentAsync(id, commentId, commentEditFormDto, userId!);
         return NoContent();
     }
 
+    /// <summary>
+    /// Deletes a comment by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the recipe associated with this comment.</param>
+    /// <param name="commentId">The ID of the comment to delete.</param>
+    /// <returns>A 204 No Content response upon successful deletion.</returns>
+    /// <remarks>
+    /// Invalidates relevant cache entries upon success.
+    /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpDelete("{id}/comments/{commentId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> DeleteComment(int commentId)
+    public async Task<IActionResult> DeleteComment(int id, int commentId)
     {
         var userId = User.GetId();
 
         await commentService
-            .DeleteCommentAsync(userId!, commentId);
+            .DeleteCommentAsync(id, commentId, userId!);
         return NoContent();
     }
 
@@ -207,43 +331,71 @@ public class RecipesController(IRecipeService recipeService, ICookService cookSe
 
     #region Reply CRUD
 
+    /// <summary>
+    /// Posts a reply to a specific comment.
+    /// </summary>
+    /// <param name="id">The ID of the recipe associated with this comment and reply.</param>
+    /// <param name="replyFormDto">Data transfer object containing reply details.</param>
+    /// <param name="commentId">The ID of the comment to reply to.</param>
+    /// <returns>A 204 No Content response upon successful creation.</returns>
+    /// <remarks>
+    /// Restricted to authenticated users or cooks and invalidates relevant cache entries.
+    /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpPost("{id}/comments/{commentId}/replies")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> PostReply(ReplyFormDto replyFormDto, int commentId)
+    public async Task<IActionResult> PostReply(int id, ReplyFormDto replyFormDto, int commentId)
     {
         var userId = User.GetId();
 
         await replyService
-            .AddReplyAsync(userId!, commentId, replyFormDto);
+            .AddReplyAsync(id, commentId, replyFormDto, userId!);
         return NoContent();
     }
 
+    /// <summary>
+    /// Edits a reply by its ID.
+    /// </summary>
+    /// <param name="id">The id of the recipe associated with the comment and reply.</param>
+    /// <param name="commentId">The id of the comment to which the reply belongs to.</param>
+    /// <param name="replyId">The ID of the reply to edit.</param>
+    /// <param name="replyEditForm">Data transfer object containing updated reply details.</param>
+    /// <returns>A 204 No Content response upon successful update.</returns>
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpPut("{id}/comments/{commentId}/replies/{replyId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> EditReply(int replyId, ReplyEditFormDto replyEditForm)
+    public async Task<IActionResult> EditReply(int id, int commentId, int replyId, ReplyEditFormDto replyEditForm)
     {
         var userId = User.GetId();
 
         await replyService
-            .EditReplyAsync(userId!, replyId, replyEditForm);
+            .EditReplyAsync(id, commentId, replyId, replyEditForm, userId!);
 
         return NoContent();
     }
 
+    /// <summary>
+    /// Deletes a reply by its ID.
+    /// </summary>
+    /// <param name="id">The id of the recipe associated with the comment and reply.</param>
+    /// <param name="commentId">The id of the comment to which the reply belongs to.</param>
+    /// <param name="replyId">The ID of the reply to delete.</param>
+    /// <returns>A 204 No Content response upon successful deletion.</returns>
+    /// <remarks>
+    /// Invalidates relevant cache entries upon success.
+    /// </remarks>
     [Authorize(Roles = UserAndCookRoleName)]
     [InvalidateCache(RecipesCachePattern)]
     [HttpDelete("{id}/comments/{commentId}/replies/{replyId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> DeleteReply(int replyId)
+    public async Task<IActionResult> DeleteReply(int id, int commentId, int replyId)
     {
         var userId = User.GetId();
 
         await replyService
-            .DeleteReplyAsync(userId!, replyId);
+            .DeleteReplyAsync(id, commentId, replyId, userId!);
         return NoContent();
     }
 

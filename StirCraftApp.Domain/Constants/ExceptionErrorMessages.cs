@@ -1,4 +1,8 @@
 ﻿namespace StirCraftApp.Domain.Constants;
+
+/// <summary>
+/// Constants for custom exception messages
+/// </summary>
 public static class ExceptionErrorMessages
 {
     public const string ResourceNotFound = "{0} with id {1} not found.";

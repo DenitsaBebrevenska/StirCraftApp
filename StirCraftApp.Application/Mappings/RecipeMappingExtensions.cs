@@ -10,6 +10,9 @@ using StirCraftApp.Domain.JoinedTables;
 
 namespace StirCraftApp.Application.Mappings;
 
+/// <summary>
+/// This class contains extension methods for mapping Recipe entities to Recipe DTOs
+/// </summary>
 public static class RecipeMappingExtensions
 {
     public static async Task<BriefRecipeDto> ToBriefRecipeDtoAsync(this Recipe recipe, UserManager<AppUser> userManager)

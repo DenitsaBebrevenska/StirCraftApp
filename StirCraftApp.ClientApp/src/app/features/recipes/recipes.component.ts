@@ -126,4 +126,9 @@ export class RecipesComponent implements OnInit {
         }
       });
   }
+
+  clearInputField() {
+    this.recipesParams.searchName = '';
+    this.getRecipes();
+  }
 }

@@ -15,12 +15,29 @@ using static StirCraftApp.Domain.Constants.CachingValues;
 using static StirCraftApp.Domain.Constants.RoleConstants;
 
 namespace StirCraftApp.Api.Controllers;
-[Route("api/[controller]")]
-[ApiController]
 
+/// <summary>
+/// Provides endpoints for managing cook-related operations, including profile management, becoming a cook, 
+/// and handling cook-specific recipes.
+/// </summary>
+/// <remarks>
+/// This controller requires authentication and provides role-specific endpoints for users with the "Cook" role.
+/// Become cook method is available to users with the "User" role and allows them to apply to become a cook.
+/// Routing is configured to use the "api/cook/" path by BaseApiController configurations.
+/// </remarks>
 public class CookController(IRecipeService recipeService, ICookService cookService, UserManager<AppUser> userManager) : BaseApiController
 {
     #region Cook About Management
+
+    /// <summary>
+    /// Retrieves the about field of the authenticated cook.
+    /// </summary>
+    /// <returns>
+    /// Returns a 200 OK status with the cook's about data as a <see cref="CookAboutDto"/> object.
+    /// </returns>
+    /// <remarks>
+    /// Only accessible by users with the "Cook" role.
+    /// </remarks>
     [Authorize(Roles = CookRoleName)]
     [HttpGet("about")]
     [ProducesResponseType(typeof(CookAboutDto), StatusCodes.Status200OK)]
@@ -32,6 +49,16 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok(about);
     }
 
+    /// <summary>
+    /// Updates the about field of the authenticated cook.
+    /// </summary>
+    /// <param name="aboutDto">The updated about data for the cook.</param>
+    /// <returns>
+    /// Returns a 204 No Content status upon successful update.
+    /// </returns>
+    /// <remarks>
+    /// Only accessible by users with the "Cook" role.
+    /// </remarks>
     [Authorize(Roles = CookRoleName)]
     [HttpPut("about")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -42,7 +69,18 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return NoContent();
     }
     #endregion
+
     #region Become Cook
+    /// <summary>
+    /// Promotes an authenticated user to a cook role.
+    /// </summary>
+    /// <param name="aboutDto">Initial profile information for the cook.</param>
+    /// <returns>
+    /// Returns a 204 No Content status upon successful role update.
+    /// </returns>
+    /// <remarks>
+    /// Only accessible by users with the "User" role.
+    /// </remarks>
     [Authorize(Roles = UserRoleName)]
     [InvalidateCache(CooksCachePattern)]
     [HttpPost("become")]
@@ -57,6 +95,16 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
     #endregion
 
     #region Cook Own Recipes
+    /// <summary>
+    /// Retrieves a paginated list of recipes created by the authenticated cook.
+    /// </summary>
+    /// <param name="pagingParams">Pagination parameters for the request.</param>
+    /// <returns>
+    /// Returns a 200 OK status with a paginated list of recipes as <see cref="PaginatedResult{RecipeOwnDto}"/>.
+    /// </returns>
+    /// <remarks>
+    /// Only accessible by users with the "Cook" role. Results are cached for performance.
+    /// </remarks>
     [Authorize(Roles = CookRoleName)]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     [HttpGet("recipes")]
@@ -72,6 +120,16 @@ public class CookController(IRecipeService recipeService, ICookService cookServi
         return Ok(cookRecipes);
     }
 
+    /// <summary>
+    /// Retrieves detailed information about a specific recipe created by the authenticated cook.
+    /// </summary>
+    /// <param name="id">The ID of the recipe to retrieve.</param>
+    /// <returns>
+    /// Returns a 200 OK status with the recipe's details as a <see cref="DetailedRecipeAdminNotesDto"/> object.
+    /// </returns>
+    /// <remarks>
+    /// Only accessible by users with the "Cook" role. Results are cached for performance.
+    /// </remarks>
     [Authorize(Roles = CookRoleName)]
     [Cache(QuickSlidingSeconds, QuickAbsoluteSeconds)]
     [HttpGet("recipes/{id}")]

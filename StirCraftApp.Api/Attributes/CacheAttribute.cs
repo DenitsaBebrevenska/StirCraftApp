@@ -5,6 +5,19 @@ using System.Text;
 
 namespace StirCraftApp.Api.Attributes;
 
+/// <summary>
+/// An attribute that provides caching functionality.
+/// </summary>
+/// <remarks>
+/// This attribute caches the response of an action using a sliding and absolute expiration policy.
+/// It utilizes an implementation of <see cref="IResponseCacheService"/> to store and retrieve cached responses.
+/// </remarks>
+/// <param name="slidingTimeSeconds">
+/// The sliding expiration time in seconds, which resets the expiration timer each time the cache entry is accessed.
+/// </param>
+/// <param name="absoluteTimeSeconds">
+/// The absolute expiration time in seconds, which defines the maximum time the cache entry can exist.
+/// </param>
 [AttributeUsage(AttributeTargets.All)]
 public class CacheAttribute(int slidingTimeSeconds, int absoluteTimeSeconds) : Attribute, IActionFilter
 {
