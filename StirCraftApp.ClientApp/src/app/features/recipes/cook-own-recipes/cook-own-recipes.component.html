@@ -1,53 +1,59 @@
-@if(recipes) { @for (recipe of recipes.data; track $index) {
-<mat-card appearance="raised" class="recipe-card flex-col gap-2">
-  <mat-card-header class="flex-col gap-1">
-    @if(recipe.isAdminApproved == false){
-    <p class="font-bold italic text-red-500">
-      This recipe is pending admin approval!
-    </p>
-    } @else {
-    <p class="font-bold italic text-green-500">Admin Approved!</p>
-    }
-    <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
-  </mat-card-header>
-  <div class="image-wrapper">
-    <img
-      [src]="recipe.mainImageUrl || 'default-image.jpg'"
-      alt="Recipe Image"
-    />
-  </div>
-  <mat-card-content>
-    <p class="font-light">Rating: {{ recipe.rating }}</p>
-    <p class="font-light">Likes: {{ recipe.likes }}</p>
-  </mat-card-content>
-  <div>
-    <mat-card-actions class="flex-row gap-2">
-      <button
-        mat-raised-button
-        color="primary"
-        routerLink="/cook/recipes/{{ recipe.id }}"
-      >
-        View Recipe
-      </button>
-      <button
-        mat-raised-button
-        color="accent"
-        routerLink="{{ recipe.id }}/edit"
-      >
-        Edit Recipe
-      </button>
-      <button
-        mat-raised-button
-        color="warn"
-        (click)="openDialog(recipe.id, recipe.name)"
-      >
-        Delete Recipe
-      </button>
-    </mat-card-actions>
-  </div>
-</mat-card>
-} }
-
+<div class="my-10 mx-20 flex gap-10 justify-center flex-wrap">
+  @if(recipes) { @for (recipe of recipes.data; track $index) {
+  <mat-card appearance="raised" class="recipe-card flex-col gap-3">
+    <mat-card-header class="flex-col gap-1">
+      @if(recipe.isAdminApproved == false){
+      <p class="font-bold italic text-red-500">
+        This recipe is pending admin approval!
+      </p>
+      } @else {
+      <p class="font-bold italic text-green-500">Admin Approved!</p>
+      }
+      <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
+    </mat-card-header>
+    <div class="image-wrapper overflow-hidden w-full h-80">
+      <img
+        class="object-cover w-full h-auto"
+        [src]="recipe.mainImageUrl || 'default-image.jpg'"
+        alt="Recipe Image"
+      />
+    </div>
+    <mat-card-content>
+      <p class="font-bold">
+        Rating: <span class="font-light italic">{{ recipe.rating }}</span>
+      </p>
+      <p class="font-bold">
+        Likes: <span class="font-light italic">{{ recipe.likes }}</span>
+      </p>
+    </mat-card-content>
+    <div>
+      <mat-card-actions class="flex-row gap-2">
+        <button
+          class="block text-center bg-green-300 py-2 px-4 rounded hover:bg-green-400"
+          mat-raised-button
+          routerLink="/cook/recipes/{{ recipe.id }}"
+        >
+          View Recipe
+        </button>
+        <button
+          class="block text-center bg-orange-300 py-2 px-4 rounded hover:bg-orange-400"
+          mat-raised-button
+          routerLink="{{ recipe.id }}/edit"
+        >
+          Edit Recipe
+        </button>
+        <button
+          mat-raised-button
+          class="block text-center bg-red-300 py-2 px-4 rounded hover:bg-red-400"
+          (click)="openDialog(recipe.id, recipe.name)"
+        >
+          Delete Recipe
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+  } }
+</div>
 <div>
   <mat-paginator
     class="page-paginator"

@@ -1,5 +1,5 @@
 @if (recipe) {
-<section class="p-10 bg-transparent rounded-lg shadow-md">
+<section class="p-10 bg-transparent">
   <article class="flex flex-col items-center">
     <!-- Recipe Title and Cook Info -->
     <div class="text-center">
@@ -29,26 +29,14 @@
       <p class="text-lg"><strong>Likes:</strong> {{ recipe.likes }} ❤️</p>
     </div>
 
-    <!-- Categories -->
-    <div class="mb-6">
-      <h3 class="text-xl font-semibold text-primary mb-2">Categories:</h3>
-      <ul class="flex flex-wrap gap-2 list-disc">
-        @for (category of recipe.categories; track $index) {
-        <li class="bg-primary py-1 px-3 rounded-md text-lg">
-          {{ category.name }}
-        </li>
-        }
-      </ul>
-    </div>
-
-    <!-- Ingredients and preparation -->
-    <div class="flex gap-5">
-      <div class="mb-6 w-auto">
+    <!-- Ingredients, preparation and categories -->
+    <div class="flex gap-5 justify-center">
+      <div class="mb-6 w-auto px-3">
         <h3 class="text-xl font-semibold text-primary mb-2">Ingredients:</h3>
         <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-md">
           @for (ingredient of recipe.ingredients; track $index) {
           <li class="mb-1">
-            {{ ingredient.ingredientName }}
+            🥢 {{ ingredient.ingredientName }}
             @if(ingredient.quantity){
             <span>: {{ ingredient.quantity }} </span>
             @if(ingredient.measurementUnitId){
@@ -59,7 +47,7 @@
         </ul>
       </div>
 
-      <div class="mb-6 w-1/2">
+      <div class="mb-6 max-w-md px-3">
         <h3 class="text-xl font-semibold text-primary mb-2">
           Preparation Steps:
         </h3>
@@ -67,12 +55,23 @@
           {{ recipe.preparationSteps }}
         </p>
       </div>
+
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-primary mb-2">Categories:</h3>
+        <ul class="list-inside bg-white p-4 rounded-lg shadow-md">
+          @for (category of recipe.categories; track $index) {
+          <li class="bg-primary py-1 px-3 rounded-md">
+            🍏 {{ category.name }}
+          </li>
+          }
+        </ul>
+      </div>
     </div>
   </article>
   <!-- Admin notes -->
-  <div class="text-center">
+  <div class="text-center bg-white rounded-md shadow-lg w-1/2 m-auto mt-10">
     <h1 class="text-4xl font-bold text-primary mb-2">Admin Notes:</h1>
-    <p class="text-sm text-gray-600">{{ recipe.adminNotes }}</p>
+    <p class="text-xl text-gray-800">{{ recipe.adminNotes }}</p>
   </div>
 </section>
 

@@ -82,17 +82,18 @@
     </div>
     }
     <button
-      mat-flat-button
+      color="primary"
+      class="mb-4"
+      mat-raised-button
       [disabled]="editRecipeForm.invalid"
       type="submit"
-      class="w-full py-2"
     >
       Edit Recipe
     </button>
   </form>
 
-  <h2>Admin Notes:</h2>
-  <p>
+  <h2 class="font-bold">Admin Notes:</h2>
+  <p class="text-red-500 font-semibold italic">
     {{ recipe?.adminNotes }}
   </p>
 </mat-card>

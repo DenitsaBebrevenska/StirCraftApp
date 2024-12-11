@@ -19,6 +19,7 @@ import { MeasurementUnitParams } from '../../../shared/models/measurementUnit/me
 import { CookService } from '../../../core/services/cook.service';
 import { RecipeOwnDetailed } from '../../../shared/models/recipe/recipeOwnDetailed';
 import { catchError, tap, throwError } from 'rxjs';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-update-recipe',
@@ -30,7 +31,8 @@ import { catchError, tap, throwError } from 'rxjs';
     FormsModule,
     TextAreaComponent,
     MatCard,
-    MatIcon
+    MatIcon,
+    MatButton
   ],
   templateUrl: './update-recipe.component.html',
   styleUrl: './update-recipe.component.scss'
