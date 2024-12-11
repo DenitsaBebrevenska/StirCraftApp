@@ -152,12 +152,19 @@ a dependency on Microsoft.Extensions.Identity.Stores is introduced. While the pr
 kept its domain "pure", the trade off for keeping it that way were not worth it.
 
 -- Domain Layer - Contains entities, contracts, constants, enums, specifications 
+
 -- Infrastructure Layer - Contains Seed data as json files and a json seed helper, context configurations, specification evaluator, actual implementation of 
+
 Unit of work and Repositoty, entity configurations 
+
 -- Application Layer - Contains service contracts, actual service implementations, paginated result class, 
+
 DTOs, custom exceptions, mapping extensions (personal preference not to use AutoMapper) 
+
 -- Api Layer - Contains controllers, custom attributes, service collection extensions 
+
 -- Client App - Angular project with its belonging structure 
+
 
 ---
 
