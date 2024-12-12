@@ -206,7 +206,7 @@ Cooks earn points for:
 - Uploading recipes. Points are given when the recipe is approved by admin.
 - Getting likes on their recipes.
 
-Removing a recipe or it getting removed from user`s favorite will result in points loss.
+Deleting a recipe or it getting removed from user`s favorite will result in points loss.
 
 Ranks:
 
