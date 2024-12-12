@@ -193,7 +193,8 @@ Initial data is seeded using JSON files located in `StirCraftApp.Infrastructure/
 
 ### Database Diagram
 
-![diagram](https://github.com/user-attachments/assets/1018f46a-4c01-4014-b5e5-a2808d8d0592)
+
+![digram](https://github.com/user-attachments/assets/c9ef7595-328b-421f-8478-1ee1b43ff817)
 
 
 ---
