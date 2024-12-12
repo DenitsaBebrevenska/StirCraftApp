@@ -182,7 +182,7 @@ The database uses **Entity Framework Core** with the following entities:
 - **RecipeImage:** Image URL pointing to recipe photo.
 - **RecipeRating:** Rating by user for a recipe.
 - **MeasurementUnit:** Stores units for ingredient quantities.
-- **RecipeIngredient:** A culinary ingnredient with its measurement unit used in a recipe.
+- **RecipeIngredient:** A culinary ingredient with its measurement unit used in a recipe.
 - **CookingRank:** Implements gamified user ranks.
 
 Soft deletion is implemented for entities using an `ISoftDeletable` interface.
