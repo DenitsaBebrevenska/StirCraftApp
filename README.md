@@ -147,7 +147,7 @@ StirCraftApp/
 ```
 
 The attempted structure of the project follows principles of Clean Architecture.
-However the assignment calls for the usage of ASP.Net Identity and there for in the domain layer
+However the assignment calls for the usage of ASP.Net Identity and therefore in the domain layer
 a dependency on Microsoft.Extensions.Identity.Stores is introduced. While the project initially
 kept its domain "pure", the trade off for keeping it that way were not worth it.
 
