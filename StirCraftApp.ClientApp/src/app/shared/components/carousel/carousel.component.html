@@ -2,7 +2,7 @@
   @for (recipe of carouselRecipes; track $index) {
   <div
     class="carousel-slide"
-    [class.active]="currentSlide === carouselRecipes.indexOf(recipe)"
+    [class.active]="$index === currentSlide"
     [style.backgroundImage]="'url(' + recipe.mainImageUrl + ')'"
   >
     <div class="carousel-caption text-3xl italic">

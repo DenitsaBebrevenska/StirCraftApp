@@ -70,10 +70,10 @@ export class IngredientsService {
   }
 
   updateIngredient(id: number, ingredient: IngredientDetailed) {
-    return this.http.put(this.baseUrl + 'admin/ingredients/update/' + id, ingredient);
+    return this.http.put(this.baseUrl + 'admin/ingredients/' + id, ingredient);
   }
 
   deleteIngredient(id: number) {
-    return this.http.delete(this.baseUrl + 'admin/ingredients/delete/' + id);
+    return this.http.delete(this.baseUrl + 'admin/ingredients/' + id);
   }
 }
