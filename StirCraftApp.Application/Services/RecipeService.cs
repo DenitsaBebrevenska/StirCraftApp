@@ -235,7 +235,10 @@ public class RecipeService(IUnitOfWork unit, ICookingRankService cookingRankServ
 
         var recipe = await EnsureRecipeExistsAsync(recipeId);
 
-        var ratingFound = recipe.RecipeRatings.FirstOrDefault(rr => rr.UserId == userId);
+        var ratingFound = unit.Repository<RecipeRating>()
+            .GetAllAsync(null)
+            .Result
+            .FirstOrDefault(rr => rr.RecipeId == recipe.Id && rr.UserId == userId);
 
         if (ratingFound != null)
         {
