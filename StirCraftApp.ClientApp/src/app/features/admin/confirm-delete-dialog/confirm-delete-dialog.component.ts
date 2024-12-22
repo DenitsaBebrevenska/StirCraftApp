@@ -4,11 +4,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
 import { IngredientsService } from '../../../core/services/ingredients.service';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-confirm-delete-dialog',
   standalone: true,
-  imports: [],
+  imports: [
+    MatButton
+  ],
   templateUrl: './confirm-delete-dialog.component.html',
   styleUrl: './confirm-delete-dialog.component.scss'
 })
@@ -19,7 +22,8 @@ export class ConfirmDeleteDialogComponent {
   private router = inject(Router);
   data = inject(MAT_DIALOG_DATA);
 
-  approveDeletion(){    this.dialogReference.close(true);
+  approveDeletion() {
+    this.dialogReference.close(true);
     this.ingredientsService.deleteIngredient(this.data.id).subscribe({
       next: () => {
         this.snack.success('Ingredient deleted successfully');
@@ -32,7 +36,7 @@ export class ConfirmDeleteDialogComponent {
     });
   }
 
-  cancelDeletion(){
+  cancelDeletion() {
     this.dialogReference.close(true);
   }
 }

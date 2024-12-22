@@ -7,6 +7,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextInputComponent } from '../../../shared/components/text-input/text-input.component';
 import { SelectOptionComponent } from '../../../shared/components/select-option/select-option.component';
 import { SnackbarService } from '../../../core/services/snackbar.service';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit-ingredient',
@@ -14,6 +15,7 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
   imports: [
     ReactiveFormsModule,
     MatCard,
+    MatButton,
     TextInputComponent,
     SelectOptionComponent,
   ],

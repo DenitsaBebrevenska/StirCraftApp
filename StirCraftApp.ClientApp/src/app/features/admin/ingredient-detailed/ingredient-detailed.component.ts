@@ -6,6 +6,7 @@ import { IngredientsService } from '../../../core/services/ingredients.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import { MatButton } from '@angular/material/button';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-d
   imports: [
     MatCard,
     MatIcon,
+    MatButton,
     RouterLink
   ],
   templateUrl: './ingredient-detailed.component.html',

@@ -1,12 +1,12 @@
-<div class="flex flex-col gap-5">
+<div class="flex-col pt-10 m-0">
   <div class="flex px-10">
     <form
-      class="relative flex items-center w-full max-w-md mx-4"
+      class="relative flex w-full max-w-md"
       #searchForm="ngForm"
       (ngSubmit)="onSearchChange()"
     >
       <input
-        type="search"
+        type="text"
         class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg"
         placeholder="Search by name"
         name="searchName"
@@ -20,9 +20,12 @@
         <mat-icon>search</mat-icon>
       </button>
     </form>
+    <button class="pl-1" mat-icon-button (click)="clearInputField()">
+      <mat-icon>clear icon</mat-icon>
+    </button>
   </div>
 
-  <div class="flex space-x-4">
+  <mat-card class="flex space-x-4 max-w-xs my-10 mx-10">
     <mat-selection-list
       class="flex"
       [multiple]="false"
@@ -38,20 +41,18 @@
       </mat-list-option>
       }
     </mat-selection-list>
-  </div>
+  </mat-card>
 
-  <ul>
+  <ul class="flex flex-col gap-4 px-20 pb-10">
     @for (ingredient of ingredients?.data; track ingredient.id) {
     <li>
-      <a routerLink="/admin/ingredients/{{ ingredient.id }}">
-        <div class="flex items-center gap-2">
-          <a
-            class="text-lg font-semibold"
-            routerLink="/admin/ingredients/{{ ingredient.id }}"
-            >{{ ingredient.name }}</a
-          >
-        </div>
-      </a>
+      <div class="flex items-center gap-2">
+        <a
+          (click)="onClickIngredientName(ingredient.id)"
+          class="text-lg font-semibold hover:cursor-pointer"
+          >🥕 {{ ingredient.name }}
+        </a>
+      </div>
     </li>
     }
   </ul>

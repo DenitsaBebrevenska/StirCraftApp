@@ -11,16 +11,16 @@ button.match-input-height {
     height: var(--mat-form-field-container-height) !important;
 }
 
-.mdc-button.mat-success, .mat-mdc-raised-button.mat-success,
- .mat-mdc-flat-button.mat-success, .mat-mdc-icon-button.mat-success, 
-  .mat-mdc-fab.mat-success, .mat-mdc-mini-fab.mat-success, .mat-mdc-stroked-button.mat-success {
-    --mdc-theme-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500);
-    --mdc-theme-on-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500-contrast);
-}
-.mat-mdc-stroked-button.mat-success {
-    --mdc-theme-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500);
-    --mdc-theme-on-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500-contrast);
-}
+// .mdc-button.mat-success, .mat-mdc-raised-button.mat-success,
+//  .mat-mdc-flat-button.mat-success, .mat-mdc-icon-button.mat-success, 
+//   .mat-mdc-fab.mat-success, .mat-mdc-mini-fab.mat-success, .mat-mdc-stroked-button.mat-success {
+//     --mdc-theme-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500);
+//     --mdc-theme-on-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500-contrast);
+// }
+// .mat-mdc-stroked-button.mat-success {
+//     --mdc-theme-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500);
+//     --mdc-theme-on-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500-contrast);
+// }
 
 .mdc-notched-outline__notch {
     border-right-style: none !important
