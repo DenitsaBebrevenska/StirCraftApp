@@ -11,6 +11,7 @@ import { IngredientAdminParams } from '../../../shared/models/ingredient/igredie
 import { IngredientAdminShort } from '../../../shared/models/ingredient/ingredientAdminShort';
 import { MatCard } from '@angular/material/card';
 import { IngredientParams } from '../../../shared/models/ingredient/ingredientParams';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-admin-panel-ingredients',
@@ -21,7 +22,9 @@ import { IngredientParams } from '../../../shared/models/ingredient/ingredientPa
     FormsModule,
     MatSelectionList,
     MatListOption,
-    MatCard
+    MatCard,
+    RouterLink,
+    MatButton
   ],
   templateUrl: './admin-panel-ingredients.component.html',
   styleUrl: './admin-panel-ingredients.component.scss'
