@@ -4,6 +4,7 @@
     class="carousel-slide"
     [class.active]="$index === currentSlide"
     [style.backgroundImage]="'url(' + recipe.mainImageUrl + ')'"
+    (click)="navigateToRecipe(recipe.id)"
   >
     <div class="carousel-caption text-3xl italic">
       <h1>{{ recipe.name }}</h1>

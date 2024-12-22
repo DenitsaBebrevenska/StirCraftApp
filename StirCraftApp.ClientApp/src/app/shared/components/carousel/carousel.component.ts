@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { BriefRecipe } from '../../models/briefRecipe';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-carousel',
@@ -15,24 +15,28 @@ import { RouterLink } from '@angular/router';
 
 export class CarouselComponent {
   @Input() carouselRecipes: BriefRecipe[] = [];
-
-  currentSlide = 1;
+  private router = inject(Router);
+  currentSlide = 0;
 
   nextSlide() {
 
-    if (this.currentSlide === this.carouselRecipes.length) {
-      this.currentSlide = 1;
+    if (this.currentSlide === this.carouselRecipes.length - 1) {
+      this.currentSlide = 0;
     } else {
       this.currentSlide++;
     }
   }
 
   previousSlide() {
-    if (this.currentSlide === 1) {
-      this.currentSlide = this.carouselRecipes.length;
+    if (this.currentSlide === 0) {
+      this.currentSlide = this.carouselRecipes.length - 1;
     } else {
       this.currentSlide--;
     }
 
+  }
+
+  navigateToRecipe(id: number) {
+    this.router.navigate(['/recipes', id]);
   }
 }
