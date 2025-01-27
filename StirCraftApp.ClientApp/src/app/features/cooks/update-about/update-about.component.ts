@@ -8,11 +8,13 @@ import { CookService } from '../../../core/services/cook.service';
 import { AboutCook } from '../../../shared/models/cook/aboutCook';
 import { TextInputComponent } from '../../../shared/components/text-input/text-input.component';
 import { TextAreaComponent } from "../../../shared/components/text-area/text-area.component";
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-update-about',
   standalone: true,
   imports: [
+    MatButton,
     ReactiveFormsModule,
     TextAreaComponent
   ],
