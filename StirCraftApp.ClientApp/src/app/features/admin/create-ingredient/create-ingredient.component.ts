@@ -7,12 +7,14 @@ import { MatCard } from '@angular/material/card';
 import { TextInputComponent } from '../../../shared/components/text-input/text-input.component';
 import { SelectOptionComponent } from "../../../shared/components/select-option/select-option.component";
 import { IngredientCreateForm } from '../../../shared/models/ingredient/ingredientCreateForm';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-create-ingredient',
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    MatButton,
     MatCard,
     TextInputComponent,
     SelectOptionComponent
