@@ -62,7 +62,7 @@ export class IngredientsService {
   }
 
   createIngredient(ingredient: IngredientCreateForm) {
-    return this.http.post(this.baseUrl + 'admin/ingredients/create', ingredient);
+    return this.http.post(this.baseUrl + 'admin/ingredients', ingredient);
   }
 
   suggestIngredient(ingredient: IngredientSuggest) {
