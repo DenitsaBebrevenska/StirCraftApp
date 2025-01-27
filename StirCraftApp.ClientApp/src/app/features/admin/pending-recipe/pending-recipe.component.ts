@@ -7,11 +7,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { RecipeAdminNotes } from '../../../shared/models/recipe/recipeAdminNotes';
 import { TextAreaComponent } from '../../../shared/components/text-area/text-area.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-pending-recipe',
   standalone: true,
   imports: [
+    MatButton,
     ReactiveFormsModule,
     TextAreaComponent
   ],

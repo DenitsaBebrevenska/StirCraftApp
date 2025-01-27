@@ -29,55 +29,61 @@
       <p class="text-lg"><strong>Likes:</strong> {{ recipe.likes }} ❤️</p>
     </div>
 
-    <!-- Categories -->
-    <div class="mb-6">
-      <h3 class="text-xl font-semibold text-primary mb-2">Categories:</h3>
-      <ul class="flex flex-wrap gap-2 list-disc">
-        @for (category of recipe.categories; track $index) {
-        <li class="bg-primary py-1 px-3 rounded-md text-lg">
-          {{ category.name }}
-        </li>
-        }
-      </ul>
-    </div>
-
-    <!-- Ingredients and preparation -->
-    <div class="flex gap-5">
-      <div class="mb-6 w-auto">
-        <h3 class="text-xl font-semibold text-primary mb-2">Ingredients:</h3>
-        <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-md">
-          @for (ingredient of recipe.ingredients; track $index) {
-          <li class="mb-1">
-            {{ ingredient.ingredientName }}
-            @if(ingredient.quantity){
-            <span>: {{ ingredient.quantity }} </span>
-            @if(ingredient.measurementUnitId){
-            <span>{{ ingredient.measurementAbbreviation }}</span>
-            }}
+    <div class="w-full flex-col">
+      <!-- Categories -->
+      <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+        <h3 class="text-xl font-semibold text-primary mb-2">Categories:</h3>
+        <ul class="flex-wrap gap-2 list-none">
+          @for (category of recipe.categories; track $index) {
+          <li class="bg-primary py-1 px-3 rounded-md">
+            {{ category.name }}
           </li>
           }
         </ul>
       </div>
 
-      <div class="mb-6 w-1/2">
-        <h3 class="text-xl font-semibold text-primary mb-2">
-          Preparation Steps:
-        </h3>
-        <p class="bg-white p-4 rounded-lg shadow-md leading-relaxed">
-          {{ recipe.preparationSteps }}
-        </p>
+      <!-- Ingredients and preparation -->
+      <div class="flex gap-5">
+        <div class="mb-6 w-1/2">
+          <h3 class="text-xl font-semibold text-primary mb-2">Ingredients:</h3>
+          <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-md">
+            @for (ingredient of recipe.ingredients; track $index) {
+            <li class="mb-1">
+              {{ ingredient.ingredientName }}
+              @if(ingredient.quantity){
+              <span>: {{ ingredient.quantity }} </span>
+              @if(ingredient.measurementUnitId){
+              <span>{{ ingredient.measurementAbbreviation }}</span>
+              }}
+            </li>
+            }
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <h3 class="text-xl font-semibold text-primary mb-2">
+            Preparation Steps:
+          </h3>
+          <p class="bg-white p-4 rounded-lg shadow-md leading-relaxed">
+            {{ recipe.preparationSteps }}
+          </p>
+        </div>
       </div>
     </div>
   </article>
   <!-- Admin notes -->
-  <form [formGroup]="notesForm" (ngSubmit)="onSubmit()">
-    <div class="text-center">
+  <form
+    class="bg-white p-4 rounded-lg shadow-md"
+    [formGroup]="notesForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="text-center mb-5">
       <h1 class="text-4xl font-bold text-primary mb-2">Admin Notes</h1>
       <p>Place here any notes or corrections you want the creator to make</p>
     </div>
     <app-text-area
       label="Admin Notes"
-      rows="'50'"
+      rows="'30'"
       formControlName="notes"
     ></app-text-area>
     <button mat-raised-button color="primary" type="submit" class="mt-4">
@@ -85,7 +91,7 @@
     </button>
   </form>
 
-  <div>
+  <div class="flex justify-center scale-125">
     <button
       mat-raised-button
       color="primary"
