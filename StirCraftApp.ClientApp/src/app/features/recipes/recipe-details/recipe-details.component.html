@@ -100,8 +100,8 @@
     <div class="flex-col w-3/4">
       <h4 class="text-2xl font-semibold text-primary mb-4">Comments:</h4>
       <ul class="space-y-4">
+        @if (user?.role === "User" || user?.role === "Cook") {
         <li class="bg-gray-50 rounded-lg shadow-md p-8 justify-items-center">
-          @if (user?.role === "User" || user?.role === "Cook") {
           <form
             [formGroup]="commentForm"
             (ngSubmit)="onCommentSubmit()"
@@ -133,9 +133,8 @@
               Post Comment
             </button>
           </form>
-          }
         </li>
-        @for (comment of recipe.comments; track comment.id) {
+        } @for (comment of recipe.comments; track comment.id) {
         @if(editingCommentId !== comment.id) {
         <li class="bg-white p-4 rounded-lg shadow-md">
           <h5 class="text-lg font-medium text-secondary">
