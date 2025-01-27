@@ -1,0 +1,20 @@
+.recipe-card{
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 30vw;
+    height: 30vw;
+}
+
+.recipe-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.image-wrapper{
+    margin: 0 auto;
+    width: 60%;
+    height: 60%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.3);
+}

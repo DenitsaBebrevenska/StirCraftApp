@@ -1,22 +1,23 @@
-@if(recipes) { @for (recipe of recipes.data; track $index) {
-<mat-card
-  routerLink="/admin/recipes/pending-approval/{{ recipe.id }}"
-  appearance="raised"
-  class="recipe-card flex-col gap-2"
->
-  <mat-card-header class="flex-col gap-1">
-    <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
-    <h3 class="text-sm">By: {{ recipe.cookName }}</h3>
-  </mat-card-header>
-  <div class="w-72 h-auto">
-    <img
-      [src]="recipe.mainImageUrl || 'default-image.jpg'"
-      alt="Recipe Image"
-      class="object-cover"
-    />
-  </div>
-</mat-card>
-} }
+<div class="my-10 mx-20 flex gap-10 justify-center flex-wrap">
+  @if(recipes) { @for (recipe of recipes.data; track $index) {
+  <mat-card
+    routerLink="/admin/recipes/pending-approval/{{ recipe.id }}"
+    appearance="raised"
+    class="recipe-card flex-col gap-4"
+  >
+    <mat-card-header class="flex-col gap-2 pb-4">
+      <h2 class="font-bold text-2xl">{{ recipe.name }}</h2>
+      <h3 class="text-sm">By: {{ recipe.cookName }}</h3>
+    </mat-card-header>
+    <div class="image-wrapper">
+      <img
+        [src]="recipe.mainImageUrl || 'default-image.jpg'"
+        alt="Recipe Image"
+      />
+    </div>
+  </mat-card>
+  } }
+</div>
 
 <div>
   <mat-paginator
