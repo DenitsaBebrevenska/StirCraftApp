@@ -181,21 +181,21 @@
             @for (reply of comment.replies; track reply.id) { @if
             (editingReplyId !== reply.id) {
             <li
-              class="bg-gray-50 p-3 rounded-md flex justify-between items-center"
+              class="bg-gray-50 p-3 rounded-md flex-wrap justify-between items-center"
             >
               <div>
-                <p class="text-sm text-gray-700 break-words whitespace-normal">
+                <p class="break-words whitespace-normal text-sm text-gray-700">
                   <strong>{{ reply.userDisplayName }}</strong
                   >: {{ reply.body }}
                 </p>
                 @if(reply.updatedOn){
                 <p class="text-sm text-gray-600">
-                  Last updated on: {{ reply.updatedOn }}
+                  Last updated on: {{ reply.updatedOn | timepipe }}
                 </p>
                 }
               </div>
               @if(user?.displayName === comment.userDisplayName) {
-              <div class="flex space-x-2">
+              <div class="flex space-x-2 pt-2">
                 <button
                   mat-icon-button
                   (click)="startReplyEditing(reply, comment.id)"
