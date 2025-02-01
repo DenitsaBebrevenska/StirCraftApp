@@ -5,13 +5,15 @@ import { Router } from '@angular/router';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Avatar } from '../../../shared/models/user/avatar';
 import { TextInputComponent } from "../../../shared/components/text-input/text-input.component";
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-avatar-change',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    TextInputComponent
+    TextInputComponent,
+    MatButton
   ],
   templateUrl: './avatar-change.component.html',
   styleUrl: './avatar-change.component.scss'
