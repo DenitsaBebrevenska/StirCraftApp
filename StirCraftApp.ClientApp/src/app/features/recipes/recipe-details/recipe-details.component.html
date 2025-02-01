@@ -142,11 +142,11 @@
           </h5>
           <p class="text-sm text-gray-600">By: {{ comment.userDisplayName }}</p>
           <p class="text-sm text-gray-600">
-            Posted on: {{ comment.createdOn }}
+            Posted on: {{ comment.createdOn | timepipe }}
           </p>
           @if(comment.updatedOn){
           <p class="text-sm text-gray-600">
-            Last updated on: {{ comment.updatedOn }}
+            Last updated on: {{ comment.updatedOn | timepipe }}
           </p>
           }
           <p class="mt-2">{{ comment.body }}</p>

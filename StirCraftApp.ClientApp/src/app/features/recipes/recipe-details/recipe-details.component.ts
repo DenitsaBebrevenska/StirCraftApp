@@ -20,6 +20,7 @@ import { RecipeDeleteReplyDialogComponent } from '../recipe-delete-reply-dialog/
 import { UserInfo } from '../../../shared/models/user/userInfo';
 import { AccountService } from '../../../core/services/account.service';
 import { EMPTY, switchMap } from 'rxjs';
+import { TimepipePipe } from '../../../core/pipes/timepipe.pipe';
 
 @Component({
   selector: 'app-recipe-details',
@@ -30,7 +31,8 @@ import { EMPTY, switchMap } from 'rxjs';
     MatCard,
     TextInputComponent,
     TextAreaComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TimepipePipe
   ],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.scss'
