@@ -2,25 +2,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-$customTheme: mat.define-theme();
-
 @include mat.core();
+
+$myapp-theme-primary: mat.m2-define-palette(mat.$m2-teal-palette);
+$myapp-theme-accent: mat.m2-define-palette(mat.$m2-cyan-palette);
+$myapp-theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$myapp-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $myapp-theme-primary,
+    accent: $myapp-theme-accent,
+    warn: $myapp-theme-warn,
+  )
+));
+
+@include mat.all-component-themes($myapp-theme);
 
 button.match-input-height {
     height: var(--mat-form-field-container-height) !important;
 }
-
-// .mdc-button.mat-success, .mat-mdc-raised-button.mat-success,
-//  .mat-mdc-flat-button.mat-success, .mat-mdc-icon-button.mat-success, 
-//   .mat-mdc-fab.mat-success, .mat-mdc-mini-fab.mat-success, .mat-mdc-stroked-button.mat-success {
-//     --mdc-theme-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500);
-//     --mdc-theme-on-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500-contrast);
-// }
-// .mat-mdc-stroked-button.mat-success {
-//     --mdc-theme-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500);
-//     --mdc-theme-on-primary: mat.get-color-from-palette($customTheme, mat.$mat-green, 500-contrast);
-// }
 
 .mdc-notched-outline__notch {
     border-right-style: none !important
