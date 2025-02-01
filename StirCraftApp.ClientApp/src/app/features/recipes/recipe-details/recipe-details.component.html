@@ -113,7 +113,7 @@
               </h2>
             </div>
             <app-text-input label="Title" formControlName="title" />
-            <app-text-area label="Comment" rows="'5'" formControlName="body" />
+            <app-text-area label="Comment" rows="5" formControlName="body" />
             @if (commentValidationErrors) {
             <div class="mb-3 p-4 bg-red-100 text-red-600">
               <ul class="list-disc px-3">
@@ -149,7 +149,7 @@
             Last updated on: {{ comment.updatedOn | timepipe }}
           </p>
           }
-          <p class="mt-2">{{ comment.body }}</p>
+          <p class="mt-2 break-words whitespace-normal">{{ comment.body }}</p>
 
           <div class="flex space-x-2 mt-2">
             @if(user?.displayName === comment.userDisplayName) {
@@ -184,7 +184,7 @@
               class="bg-gray-50 p-3 rounded-md flex justify-between items-center"
             >
               <div>
-                <p class="text-sm text-gray-700">
+                <p class="text-sm text-gray-700 break-words whitespace-normal">
                   <strong>{{ reply.userDisplayName }}</strong
                   >: {{ reply.body }}
                 </p>
@@ -221,11 +221,12 @@
                 <app-text-area
                   label="Edit Reply"
                   formControlName="body"
-                  rows="'3'"
+                  rows="5"
                 />
                 <div class="flex space-x-2 mt-2">
                   <button
                     mat-raised-button
+                    color="primary"
                     type="submit"
                     [disabled]="replyEditForm.invalid"
                   >
@@ -233,6 +234,7 @@
                   </button>
                   <button
                     mat-raised-button
+                    color="warn"
                     type="button"
                     (click)="cancelReplyEditing()"
                   >
@@ -251,7 +253,7 @@
                 <app-text-area
                   label="Your Reply"
                   formControlName="body"
-                  rows="'3'"
+                  rows="5"
                 />
                 @if (replyValidationErrors) {
                 <div class="mb-3 p-4 bg-red-100 text-red-600">
@@ -295,11 +297,7 @@
               <div class="text-center mb-6">
                 <h2 class="text-xl font-semibold">Edit Comment Body</h2>
               </div>
-              <app-text-area
-                label="Comment"
-                rows="'10'"
-                formControlName="body"
-              />
+              <app-text-area label="Comment" rows="5" formControlName="body" />
               <div class="flex space-x-2 mt-2">
                 <button mat-raised-button (click)="saveComment()">Save</button>
                 <button mat-raised-button (click)="cancelCommentEditing()">

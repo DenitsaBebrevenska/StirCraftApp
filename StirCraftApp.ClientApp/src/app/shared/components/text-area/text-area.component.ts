@@ -1,5 +1,6 @@
 import { Component, Input, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -20,24 +21,24 @@ export class TextAreaComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() rows = '';
   @Input() required = false;
-  
+
   constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;
-   }
+  }
 
-   writeValue(obj: any): void {
-   
+  writeValue(obj: any): void {
+
   }
-  
+
   registerOnChange(fn: any): void {
-    
+
   }
-  
+
   registerOnTouched(fn: any): void {
-  
+
   }
-  
-  get control(){
+
+  get control() {
     return this.controlDir.control as FormControl;
   }
 }
