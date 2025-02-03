@@ -187,7 +187,10 @@ export class RecipeDetailsComponent implements OnInit {
           this.commentForm.reset();
           this.loadRecipe();
         },
-        error: errors => this.commentValidationErrors = errors
+        error: errors => {
+          this.commentValidationErrors = errors;
+          this.snackBar.error('Failed to add comment');
+        }
       });
     }
 
